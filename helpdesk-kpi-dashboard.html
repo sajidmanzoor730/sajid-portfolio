@@ -15,7 +15,33 @@
 <div class="step"><strong>3. SQL analysis.</strong><br>Used SQL for deduplication with ROW_NUMBER, SLA-policy JOINs, monthly trend analysis with LAG, and agent ranking within teams using RANK.</div>
 <div class="step"><strong>4. KPI reporting.</strong><br>Calculated SLA adherence, SLA breach rates, average CSAT and repeat-ticket rate, then presented the results through Streamlit and a Power BI report.</div>
 <h2>Data cleaning & validation</h2>
-<div class="visual"><img src="https://sajidmanzoor730.github.io/sajid-portfolio/assets/images/helpdesk-data-quality.svg" alt="Helpdesk data quality before-and-after analysis showing 5,100 raw rows, 5,000 unique tickets and 95.6 percent data quality"></div><div class="card"><p>The raw export was intentionally imperfect so the project demonstrates the part of analytics work that happens before a dashboard is built.</p><ul><li><strong>Duplicates:</strong> identified repeated ticket records and reduced 5,100 raw rows to 5,000 unique tickets.</li><li><strong>Missing values:</strong> checked blank Category and Agent fields and applied the documented cleaning approach.</li><li><strong>Date validation:</strong> checked Created_At and Resolved_At fields before using resolution-time and SLA metrics.</li><li><strong>Consistency checks:</strong> reviewed status, priority, SLA and resolution fields before KPI calculation.</li></ul></div>
+<div class="visual"><svg style="display:block;width:100%;height:auto;border-radius:10px;" xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+<rect width="1200" height="700" fill="#f8fafc"/>
+<style>
+text{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#172033} .title{font-size:28px;font-weight:800;fill:#10233f}
+.sub{font-size:14px;fill:#64748b}.label{font-size:12px;font-weight:700;fill:#64748b}.value{font-size:26px;font-weight:800;fill:#10233f}
+.card{fill:#fff;stroke:#e2e8f0}.blue{fill:#2563eb}.navy{fill:#10233f}.line{stroke:#e2e8f0}.small{font-size:11px;fill:#64748b}.body{font-size:13px}.section{font-size:18px;font-weight:800;fill:#10233f}.bigvalue{font-size:34px;font-weight:800;fill:#10233f}
+</style>
+<text x="48" y="52" class="title">Data Cleaning & Quality</text>
+
+<text x="48" y="78" class="sub">Data profiling and validation summary</text>
+<rect x="48" y="110" width="1104" height="100" rx="12" class="card"/>
+<text x="72" y="143" class="label">RAW DATA</text><text x="72" y="181" class="value">5,100 rows</text>
+<line x1="320" y1="160" x2="560" y2="160" stroke="#2563eb" stroke-width="4"/><polygon points="560,160 544,151 544,169" fill="#2563eb"/>
+<text x="360" y="145" class="small">cleaning + validation</text>
+<text x="650" y="143" class="label">CLEAN DATA</text><text x="650" y="181" class="value">5,000 unique tickets</text>
+<rect x="48" y="235" width="520" height="380" rx="12" class="card"/>
+<text x="72" y="270" class="section">Issues identified</text>
+<circle cx="82" cy="315" r="5" fill="#2563eb"/><text x="100" y="320" class="body">100 duplicate ticket rows</text><circle cx="82" cy="363" r="5" fill="#2563eb"/><text x="100" y="368" class="body">76 blank Category values</text><circle cx="82" cy="411" r="5" fill="#2563eb"/><text x="100" y="416" class="body">49 blank Agent values</text><circle cx="82" cy="459" r="5" fill="#2563eb"/><text x="100" y="464" class="body">Date fields checked</text><circle cx="82" cy="507" r="5" fill="#2563eb"/><text x="100" y="512" class="body">Priority / SLA fields validated</text>
+<rect x="600" y="235" width="552" height="380" rx="12" class="card"/>
+<text x="624" y="270" class="section">Quality outcome</text>
+<circle cx="860" cy="410" r="118" fill="none" stroke="#e2e8f0" stroke-width="24"/>
+<circle cx="860" cy="410" r="118" fill="none" stroke="#2563eb" stroke-width="24" stroke-linecap="round" stroke-dasharray="709 32" transform="rotate(-90 860 410)"/>
+<text x="860" y="404" text-anchor="middle" class="bigvalue">95.6%</text>
+<text x="860" y="430" text-anchor="middle" class="small">data quality</text>
+<text x="860" y="500" text-anchor="middle" class="sub">Duplicate removal + field checks</text>
+
+</svg></div><div class="card"><p>The raw export was intentionally imperfect so the project demonstrates the part of analytics work that happens before a dashboard is built.</p><ul><li><strong>Duplicates:</strong> identified repeated ticket records and reduced 5,100 raw rows to 5,000 unique tickets.</li><li><strong>Missing values:</strong> checked blank Category and Agent fields and applied the documented cleaning approach.</li><li><strong>Date validation:</strong> checked Created_At and Resolved_At fields before using resolution-time and SLA metrics.</li><li><strong>Consistency checks:</strong> reviewed status, priority, SLA and resolution fields before KPI calculation.</li></ul></div>
 <h2>KPI dashboard</h2>
 <div class="visual"><img src="https://raw.githubusercontent.com/sajidmanzoor730/sajid-portfolio/main/assets/images/helpdesk-kpi-dashboard.svg" alt="Helpdesk KPI dashboard showing ticket volume, SLA adherence, SLA breach, CSAT, repeat tickets, priority and team performance"></div>
 <h2>Detailed performance analysis</h2>
