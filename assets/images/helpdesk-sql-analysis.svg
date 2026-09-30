@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
 <rect width="1200" height="700" fill="#f8fafc"/>
 <style>
-text{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#172033} .title{font-size:28px;font-weight:800;fill:#10233f}
+text{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#172033} .code{font-family:monospace;fill:#fff} .title{font-size:28px;font-weight:800;fill:#10233f}
 .sub{font-size:14px;fill:#64748b}.label{font-size:12px;font-weight:700;fill:#64748b}.value{font-size:26px;font-weight:800;fill:#10233f}
 .card{fill:#fff;stroke:#e2e8f0}.blue{fill:#2563eb}.navy{fill:#10233f}.line{stroke:#e2e8f0}.small{font-size:11px;fill:#64748b}.body{font-size:13px}.section{font-size:18px;font-weight:800;fill:#10233f}.bigvalue{font-size:34px;font-weight:800;fill:#10233f}
 </style>
@@ -9,17 +9,17 @@ text{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#172033} .title{font-size:
 
 <text x="48" y="78" class="sub">Analytical SQL patterns and representative results</text>
 <rect x="48" y="105" width="650" height="510" rx="12" fill="#10233f"/>
-<text x="72" y="140" fill="#fff" font-family="monospace" font-size="13">-- deduplicate ticket records</text>
-<text x="72" y="166" fill="#fff" font-family="monospace" font-size="13">ROW_NUMBER() OVER (PARTITION BY Ticket_ID</text>
-<text x="72" y="188" fill="#fff" font-family="monospace" font-size="13">ORDER BY Created_At) AS rn</text>
-<text x="72" y="238" fill="#fff" font-family="monospace" font-size="13">-- compare monthly performance</text>
-<text x="72" y="264" fill="#fff" font-family="monospace" font-size="13">LAG(sla_pct) OVER (ORDER BY month)</text>
-<text x="72" y="314" fill="#fff" font-family="monospace" font-size="13">-- rank agents within each team</text>
-<text x="72" y="340" fill="#fff" font-family="monospace" font-size="13">RANK() OVER (PARTITION BY Team</text>
-<text x="72" y="362" fill="#fff" font-family="monospace" font-size="13">ORDER BY sla_pct DESC, mttr_hours ASC)</text>
-<text x="72" y="412" fill="#fff" font-family="monospace" font-size="13">-- enrich tickets with SLA policy</text>
-<text x="72" y="438" fill="#fff" font-family="monospace" font-size="13">JOIN sla_policy p ON p.Priority = t.Priority</text>
-<text x="72" y="505" fill="#fff" font-family="monospace" font-size="13">GROUP BY • CASE • CTE • aggregation</text>
+<text x="72" y="140" class="code" font-size="13">-- deduplicate ticket records</text>
+<text x="72" y="166" class="code" font-size="13">ROW_NUMBER() OVER (PARTITION BY Ticket_ID</text>
+<text x="72" y="188" class="code" font-size="13">ORDER BY Created_At) AS rn</text>
+<text x="72" y="238" class="code" font-size="13">-- compare monthly performance</text>
+<text x="72" y="264" class="code" font-size="13">LAG(sla_pct) OVER (ORDER BY month)</text>
+<text x="72" y="314" class="code" font-size="13">-- rank agents within each team</text>
+<text x="72" y="340" class="code" font-size="13">RANK() OVER (PARTITION BY Team</text>
+<text x="72" y="362" class="code" font-size="13">ORDER BY sla_pct DESC, mttr_hours ASC)</text>
+<text x="72" y="412" class="code" font-size="13">-- enrich tickets with SLA policy</text>
+<text x="72" y="438" class="code" font-size="13">JOIN sla_policy p ON p.Priority = t.Priority</text>
+<text x="72" y="505" class="code" font-size="13">GROUP BY • CASE • CTE • aggregation</text>
 <rect x="730" y="105" width="422" height="510" rx="12" class="card"/>
 <text x="754" y="140" class="section">Priority result</text>
 <text x="754" y="174" class="label">Priority</text><text x="870" y="174" class="label">Tickets</text><text x="970" y="174" class="label">Breach</text>
