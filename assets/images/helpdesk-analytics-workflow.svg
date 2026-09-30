@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
 <rect width="1200" height="700" fill="#f8fafc"/>
 <style>
-.title{font-family:Inter,Segoe UI,Arial,sans-serif;font-size:28px;font-weight:800;fill:#10233f}
-.sub{font-family:Inter,Segoe UI,Arial,sans-serif;font-size:14px;fill:#64748b}.label{font-family:Inter,Segoe UI,Arial,sans-serif;font-size:12px;font-weight:700;fill:#64748b}.value{font-family:Inter,Segoe UI,Arial,sans-serif;font-size:26px;font-weight:800;fill:#10233f}
-.card{fill:#fff;stroke:#e2e8f0}.blue{fill:#2563eb}.navy{fill:#10233f}.line{stroke:#e2e8f0}.small{font-family:Inter,Segoe UI,Arial,sans-serif;font-size:11px;fill:#64748b}.body{font-family:Inter,Segoe UI,Arial,sans-serif;font-size:13px}.section{font-family:Inter,Segoe UI,Arial,sans-serif;font-size:14px;font-weight:800;fill:#10233f}.bigvalue{font-family:Inter,Segoe UI,Arial,sans-serif;font-size:34px;font-weight:800;fill:#10233f}
+text{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#172033} .title{font-size:28px;font-weight:800;fill:#10233f}
+.sub{font-size:14px;fill:#64748b}.label{font-size:12px;font-weight:700;fill:#64748b}.value{font-size:26px;font-weight:800;fill:#10233f}
+.card{fill:#fff;stroke:#e2e8f0}.blue{fill:#2563eb}.navy{fill:#10233f}.line{stroke:#e2e8f0}.small{font-size:11px;fill:#64748b}.body{font-size:13px}.section{font-size:14px;font-weight:800;fill:#10233f}.bigvalue{font-size:34px;font-weight:800;fill:#10233f}
 </style>
 <text x="48" y="52" class="title">Analytics Workflow</text>
 
