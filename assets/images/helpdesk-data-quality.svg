@@ -3,7 +3,7 @@
 <style>
 text{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#172033} .title{font-size:28px;font-weight:800;fill:#10233f}
 .sub{font-size:14px;fill:#64748b}.label{font-size:12px;font-weight:700;fill:#64748b}.value{font-size:26px;font-weight:800;fill:#10233f}
-.card{fill:#fff;stroke:#e2e8f0}.blue{fill:#2563eb}.navy{fill:#10233f}.line{stroke:#e2e8f0}.small{font-size:11px;fill:#64748b}.body{font-size:13px}
+.card{fill:#fff;stroke:#e2e8f0}.blue{fill:#2563eb}.navy{fill:#10233f}.line{stroke:#e2e8f0}.small{font-size:11px;fill:#64748b}.body{font-size:13px}.section{font-size:18px;font-weight:800;fill:#10233f}.bigvalue{font-size:34px;font-weight:800;fill:#10233f}
 </style>
 <text x="48" y="52" class="title">Data Cleaning & Quality</text>
 
@@ -14,13 +14,13 @@ text{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#172033} .title{font-size:
 <text x="360" y="145" class="small">cleaning + validation</text>
 <text x="650" y="143" class="label">CLEAN DATA</text><text x="650" y="181" class="value">5,000 unique tickets</text>
 <rect x="48" y="235" width="520" height="380" rx="12" class="card"/>
-<text x="72" y="270" class="value" font-size="20">Issues identified</text>
+<text x="72" y="270" class="section">Issues identified</text>
 <circle cx="82" cy="315" r="5" fill="#2563eb"/><text x="100" y="320" class="body">100 duplicate ticket rows</text><circle cx="82" cy="363" r="5" fill="#2563eb"/><text x="100" y="368" class="body">76 blank Category values</text><circle cx="82" cy="411" r="5" fill="#2563eb"/><text x="100" y="416" class="body">49 blank Agent values</text><circle cx="82" cy="459" r="5" fill="#2563eb"/><text x="100" y="464" class="body">Date fields checked</text><circle cx="82" cy="507" r="5" fill="#2563eb"/><text x="100" y="512" class="body">Priority / SLA fields validated</text>
 <rect x="600" y="235" width="552" height="380" rx="12" class="card"/>
-<text x="624" y="270" class="value" font-size="20">Quality outcome</text>
+<text x="624" y="270" class="section">Quality outcome</text>
 <circle cx="860" cy="410" r="118" fill="none" stroke="#e2e8f0" stroke-width="24"/>
 <circle cx="860" cy="410" r="118" fill="none" stroke="#2563eb" stroke-width="24" stroke-linecap="round" stroke-dasharray="709 32" transform="rotate(-90 860 410)"/>
-<text x="860" y="404" text-anchor="middle" class="value" font-size="34">95.6%</text>
+<text x="860" y="404" text-anchor="middle" class="bigvalue">95.6%</text>
 <text x="860" y="430" text-anchor="middle" class="small">data quality</text>
 <text x="860" y="500" text-anchor="middle" class="sub">Duplicate removal + field checks</text>
 
