@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Power BI semantic model and reporting specification for the Helpdesk Ticket KPI Dashboard by Sajid Manzoor.">
+<title>Sajid Manzoor | Power BI Model & Reporting</title>
+<style>
+:root{--navy:#10233f;--blue:#2563eb;--sky:#eff6ff;--text:#172033;--muted:#64748b;--line:#e2e8f0}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#f8fafc;color:var(--text);line-height:1.7}
+.wrap{width:min(1040px,calc(100% - 40px));margin:auto}a{text-decoration:none;color:var(--blue)}
+nav{height:72px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.navin{height:100%;display:flex;align-items:center;justify-content:space-between}.brand{font-size:19px;font-weight:800;color:var(--navy)}
+.links{display:flex;gap:22px}.links a{color:var(--text);font-size:14px;font-weight:650}
+main{padding:68px 0}.eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:var(--blue)}
+h1{font-size:clamp(40px,6vw,62px);line-height:1.05;letter-spacing:-.05em;color:var(--navy);margin:12px 0 18px}
+h2{color:var(--navy);font-size:25px;margin:38px 0 12px}.lead{font-size:19px;color:var(--muted);max-width:820px}
+.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:25px;margin-top:20px;box-shadow:0 6px 22px rgba(15,35,63,.04)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px}.item strong{color:var(--navy);display:block;margin-bottom:5px}
+.tag{display:inline-block;background:var(--sky);color:#1e40af;border-radius:99px;padding:6px 10px;font-size:12px;margin:3px}
+.diagram{overflow-x:auto;padding:22px;background:#fff;border:1px solid var(--line);border-radius:15px;margin-top:20px}
+.flow{display:flex;gap:10px;align-items:center;min-width:780px}.box{border:1px solid #bfdbfe;background:var(--sky);border-radius:10px;padding:15px 18px;text-align:center;min-width:145px;font-weight:750;color:var(--navy)}.arrow{font-size:22px;color:var(--blue)}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:13px 15px;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--sky);color:var(--navy)}tr:last-child td{border-bottom:0}
+code{background:#f1f5f9;padding:2px 6px;border-radius:5px;font-family:Consolas,monospace;font-size:.9em}.note{padding:16px 18px;background:#eff6ff;border:1px solid #dbeafe;border-radius:12px;margin-top:20px}
+.btn{display:inline-block;padding:11px 17px;border-radius:8px;font-size:14px;font-weight:750;margin:20px 8px 0 0}.primary{background:var(--navy);color:#fff}.secondary{background:#fff;border:1px solid var(--line);color:var(--navy)}
+footer{background:#fff;border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:14px}
+@media(max-width:760px){.wrap{width:min(100% - 28px,1040px)}.links{display:none}.grid{grid-template-columns:1fr}main{padding:50px 0}}
+</style>
+</head>
+<body>
+<nav><div class="wrap navin"><a class="brand" href="index.html">Sajid Manzoor</a><div class="links"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="skills.html">Skills</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></div></div></nav>
+<main><div class="wrap">
+<div class="eyebrow">BI / Semantic Modeling</div>
+<h1>Power BI Model & Reporting Specification</h1>
+<p class="lead">A documented BI layer for the Helpdesk Ticket KPI Dashboard, showing how cleaned operational data can be organized into a reporting model, reusable measures and business-focused report pages.</p>
+<a class="btn primary" href="helpdesk-kpi-dashboard.html">← Back to case study</a>
+<a class="btn secondary" href="https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard" target="_blank" rel="noopener">View GitHub repository →</a>
+
+<h2>1. Reporting architecture</h2>
+<div class="diagram"><div class="flow">
+<div class="box">Raw Excel / CSV</div><div class="arrow">→</div><div class="box">Python ETL</div><div class="arrow">→</div><div class="box">Curated Tickets</div><div class="arrow">→</div><div class="box">SQL Analytical Layer</div><div class="arrow">→</div><div class="box">Power BI</div>
+</div></div>
+
+<h2>2. Semantic model</h2>
+<p>The model uses a star-schema approach. <strong>FactTickets</strong> is the central fact table, supported by dimensions for date, agent, category and priority.</p>
+<div class="grid">
+<div class="item"><strong>FactTickets</strong>Ticket-level measures and fields such as Ticket_ID, Created_Date, Resolved_At, Priority, Agent_ID, Category_ID, SLA_Met, Resolution_Hours, CSAT and Repeat_Flag.</div>
+<div class="item"><strong>DimDate</strong>Date, month, week, day and other calendar attributes used for time-based reporting.</div>
+<div class="item"><strong>DimAgent</strong>Agent ID, agent name, team and related support attributes.</div>
+<div class="item"><strong>DimCategory / DimPriority</strong>Reusable category and priority dimensions for filtering and grouping operational KPIs.</div>
+</div>
+
+<h2>3. Relationship design</h2>
+<div class="card"><ul>
+<li><code>DimDate[Date]</code> → <code>FactTickets[Created_Date]</code></li>
+<li><code>DimAgent[Agent_ID]</code> → <code>FactTickets[Agent_ID]</code></li>
+<li><code>DimCategory[Category_ID]</code> → <code>FactTickets[Category_ID]</code></li>
+<li><code>DimPriority[Priority]</code> → <code>FactTickets[Priority]</code></li>
+</ul><p>Relationships are designed as one-to-many, single-direction filters from dimensions into the fact table.</p></div>
+
+<h2>4. Core BI measures</h2>
+<table><thead><tr><th>Measure</th><th>Business purpose</th></tr></thead><tbody>
+<tr><td><strong>Tickets</strong></td><td>Total ticket volume in the selected filter context.</td></tr>
+<tr><td><strong>Resolved Tickets</strong></td><td>Number of tickets with a valid resolution timestamp.</td></tr>
+<tr><td><strong>SLA Adherence %</strong></td><td>Share of applicable tickets resolved within SLA.</td></tr>
+<tr><td><strong>SLA Breaches</strong></td><td>Count of tickets that exceeded the applicable SLA target.</td></tr>
+<tr><td><strong>Average Resolution Hours</strong></td><td>Average elapsed resolution time for resolved tickets.</td></tr>
+<tr><td><strong>Average CSAT</strong></td><td>Average customer satisfaction score across available responses.</td></tr>
+<tr><td><strong>Repeat Ticket Rate %</strong></td><td>Share of tickets flagged as repeat cases.</td></tr>
+<tr><td><strong>P1 SLA Breach %</strong></td><td>Focused exception KPI for the highest-priority tickets.</td></tr>
+</tbody></table>
+
+<h2>5. Recommended report pages</h2>
+<div class="grid">
+<div class="item"><strong>Executive Overview</strong>Ticket volume, SLA adherence, average resolution time, CSAT and repeat-ticket rate with date and priority slicers.</div>
+<div class="item"><strong>SLA & Operations</strong>SLA performance by priority, team and month, with breach-focused exception analysis.</div>
+<div class="item"><strong>Demand & Workload</strong>Ticket volume by category, hour, day and month to identify workload patterns.</div>
+<div class="item"><strong>Team Performance</strong>Agent and team-level resolution, SLA and CSAT views with appropriate volume thresholds.</div>
+</div>
+
+<h2>6. Data-quality controls</h2>
+<div class="card"><ul>
+<li>Duplicate Ticket_ID detection before reporting.</li>
+<li>Created and resolved timestamp validation.</li>
+<li>Priority and SLA-value validation.</li>
+<li>Missing-value review for category and agent fields.</li>
+<li>Curated row-count reconciliation against the ETL output.</li>
+</ul></div>
+
+<h2>7. Business question → BI output</h2>
+<table><thead><tr><th>Business question</th><th>BI output</th></tr></thead><tbody>
+<tr><td>Are tickets being resolved within SLA?</td><td>SLA Adherence %, SLA Breaches and trend visuals.</td></tr>
+<tr><td>Which priorities need investigation?</td><td>Priority-level SLA breach and resolution analysis.</td></tr>
+<tr><td>Is performance changing over time?</td><td>Monthly ticket, SLA and CSAT trends.</td></tr>
+<tr><td>Where is workload concentrated?</td><td>Category, hour and day workload views.</td></tr>
+<tr><td>How is the team performing?</td><td>Agent/team performance with volume context.</td></tr>
+</tbody></table>
+
+<h2>8. Performance considerations</h2>
+<div class="card"><ul><li>Keep the model at a clear ticket-level grain.</li><li>Prefer reusable measures over repeated calculated logic in visuals.</li><li>Use dimensions for filtering rather than duplicating descriptive fields unnecessarily.</li><li>Keep transformations in the ETL/curation layer where practical.</li><li>Validate filter context and measure results against SQL checks before publishing.</li></ul></div>
+
+<div class="note"><strong>Project scope:</strong> This page documents the BI model and reporting design for a portfolio demonstration. It does not claim an enterprise Power BI deployment, production data warehouse, OLAP cube, or live scheduled refresh infrastructure.</div>
+</div></main>
+<footer><div class="wrap">© 2026 Sajid Manzoor · Data Analytics & Business Operations</div></footer>
+</body></html>
