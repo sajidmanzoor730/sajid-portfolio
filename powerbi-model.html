@@ -42,12 +42,12 @@ footer{background:#fff;border-top:1px solid var(--line);padding:32px 0;color:var
 </div></div>
 
 <h2>2. Semantic model</h2>
-<p>The model uses a star-schema approach. <strong>FactTickets</strong> is the central fact table, supported by dimensions for date, agent, category and priority.</p>
+<p>The model uses a star-schema approach. <strong>FactTickets</strong> is the central fact table, supported by dimensions for date, agent, category, priority, channel, customer segment and region.</p>
 <div class="grid">
 <div class="item"><strong>FactTickets</strong>Ticket-level measures and fields such as Ticket_ID, Created_Date, Resolved_At, Priority, Agent_ID, Category_ID, SLA_Met, Resolution_Hours, CSAT and Repeat_Flag.</div>
 <div class="item"><strong>DimDate</strong>Date, month, week, day and other calendar attributes used for time-based reporting.</div>
 <div class="item"><strong>DimAgent</strong>Agent ID, agent name, team and related support attributes.</div>
-<div class="item"><strong>DimCategory / DimPriority</strong>Reusable category and priority dimensions for filtering and grouping operational KPIs.</div>
+<div class="item"><strong>DimCategory / DimPriority</strong>Reusable category and priority dimensions for filtering and grouping operational KPIs.</div><div class="item"><strong>DimChannel / DimSegment / DimRegion</strong>Additional dimensions for channel, customer segment and geographic analysis.</div>
 </div>
 
 <h2>3. Relationship design</h2>
@@ -55,7 +55,7 @@ footer{background:#fff;border-top:1px solid var(--line);padding:32px 0;color:var
 <li><code>DimDate[Date]</code> → <code>FactTickets[Created_Date]</code></li>
 <li><code>DimAgent[Agent_ID]</code> → <code>FactTickets[Agent_ID]</code></li>
 <li><code>DimCategory[Category_ID]</code> → <code>FactTickets[Category_ID]</code></li>
-<li><code>DimPriority[Priority]</code> → <code>FactTickets[Priority]</code></li>
+<li><code>DimPriority[Priority]</code> → <code>FactTickets[Priority]</code></li><li><code>DimChannel[Channel]</code> → <code>FactTickets[Channel]</code></li><li><code>DimSegment[Segment]</code> → <code>FactTickets[Customer_Segment]</code></li><li><code>DimRegion[Region]</code> → <code>FactTickets[Region]</code></li>
 </ul><p>Relationships are designed as one-to-many, single-direction filters from dimensions into the fact table.</p></div>
 
 <h2>4. Core BI measures</h2>
@@ -67,14 +67,14 @@ footer{background:#fff;border-top:1px solid var(--line);padding:32px 0;color:var
 <tr><td><strong>Average Resolution Hours</strong></td><td>Average elapsed resolution time for resolved tickets.</td></tr>
 <tr><td><strong>Average CSAT</strong></td><td>Average customer satisfaction score across available responses.</td></tr>
 <tr><td><strong>Repeat Ticket Rate %</strong></td><td>Share of tickets flagged as repeat cases.</td></tr>
-<tr><td><strong>P1 SLA Breach %</strong></td><td>Focused exception KPI for the highest-priority tickets.</td></tr>
+<tr><td><strong>P1 SLA Breach %</strong></td><td>Focused exception KPI for the highest-priority tickets.</td></tr><tr><td><strong>Average First Response Minutes</strong></td><td>Measures responsiveness before resolution.</td></tr><tr><td><strong>Escalation Rate %</strong></td><td>Shows the share of resolved/closed tickets escalated during handling.</td></tr>
 </tbody></table>
 
 <h2>5. Recommended report pages</h2>
 <div class="grid">
 <div class="item"><strong>Executive Overview</strong>Ticket volume, SLA adherence, average resolution time, CSAT and repeat-ticket rate with date and priority slicers.</div>
 <div class="item"><strong>SLA & Operations</strong>SLA performance by priority, team and month, with breach-focused exception analysis.</div>
-<div class="item"><strong>Demand & Workload</strong>Ticket volume by category, hour, day and month to identify workload patterns.</div>
+<div class="item"><strong>Demand & Workload</strong>Ticket volume by category, channel, customer segment, hour, day and month to identify workload patterns.</div>
 <div class="item"><strong>Team Performance</strong>Agent and team-level resolution, SLA and CSAT views with appropriate volume thresholds.</div>
 </div>
 
