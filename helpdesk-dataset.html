@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Interactive dataset preview for the Helpdesk Ticket KPI Dashboard by Sajid Manzoor.">
+<title>Sajid Manzoor | Helpdesk Dataset Preview</title>
+<style>
+:root{--navy:#10233f;--blue:#2563eb;--sky:#eff6ff;--text:#172033;--muted:#64748b;--line:#e2e8f0}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#f8fafc;color:var(--text);line-height:1.55}
+.wrap{width:min(1180px,calc(100% - 32px));margin:auto}nav{height:72px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}.navin{height:100%;display:flex;align-items:center;justify-content:space-between}.brand{font-size:19px;font-weight:800;color:var(--navy);text-decoration:none}.links{display:flex;gap:20px}.links a{color:var(--text);text-decoration:none;font-size:14px;font-weight:650}.links a:hover{color:var(--blue)}
+main{padding:52px 0}.eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:var(--blue)}h1{font-size:clamp(36px,5vw,54px);line-height:1.05;letter-spacing:-.04em;color:var(--navy);margin:10px 0 14px}.lead{font-size:18px;color:var(--muted);max-width:850px}.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:20px;margin-top:22px;box-shadow:0 6px 22px rgba(15,35,63,.04)}
+.buttons{margin:20px 0}.btn{display:inline-block;padding:10px 15px;border-radius:8px;font-size:14px;font-weight:750;margin:0 8px 8px 0;text-decoration:none}.primary{background:var(--navy);color:#fff}.secondary{background:#fff;border:1px solid var(--line);color:var(--navy)}
+.controls{display:grid;grid-template-columns:1fr 180px 180px;gap:10px;margin-bottom:15px}.controls input,.controls select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff;color:var(--text)}
+.status{font-size:13px;color:var(--muted);margin:8px 0 14px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:10px;max-height:650px}table{border-collapse:collapse;width:100%;min-width:1700px;background:#fff;font-size:12px}th{position:sticky;top:0;background:var(--navy);color:#fff;text-align:left;padding:10px 9px;white-space:nowrap;z-index:2}td{padding:9px;border-bottom:1px solid #edf0f4;white-space:nowrap}tr:nth-child(even) td{background:#fafcff}footer{background:#fff;border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:14px}
+@media(max-width:760px){.links{display:none}.controls{grid-template-columns:1fr}.wrap{width:min(100% - 24px,1180px)}main{padding:38px 0}}
+</style>
+</head>
+<body>
+<nav><div class="wrap navin"><a class="brand" href="index.html">Sajid Manzoor</a><div class="links"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="skills.html">Skills</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></div></div></nav>
+<main><div class="wrap">
+<div class="eyebrow">Data Analytics · Dataset</div>
+<h1>Helpdesk Ticket Dataset</h1>
+<p class="lead">A browsable preview of the synthetic helpdesk export used in the Helpdesk Ticket KPI Dashboard case study. Search and filter the records without leaving the portfolio.</p>
+<div class="buttons">
+<a class="btn primary" href="helpdesk-kpi-dashboard.html">← Back to case study</a>
+<a class="btn secondary" href="https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard/blob/main/Helpdesk_Tickets_Dataset_Raw.csv" target="_blank" rel="noopener">Open source CSV →</a>
+<a class="btn secondary" href="https://raw.githubusercontent.com/sajidmanzoor730/helpdesk-kpi-dashboard/main/Helpdesk_Tickets_Dataset_Raw.csv" target="_blank" rel="noopener">Download CSV →</a>
+</div>
+<div class="card">
+<strong>Dataset notes</strong>
+<ul>
+<li>3,672 raw rows, including controlled duplicate records.</li>
+<li>3,600 unique tickets after cleaning.</li>
+<li>March–August 2026 synthetic demonstration data.</li>
+<li>Designed to demonstrate data cleaning, KPI analysis, SQL and dashboard reporting.</li>
+</ul>
+</div>
+<div class="card">
+<div class="controls">
+<input id="search" type="search" placeholder="Search ticket ID, category, agent, team, root cause...">
+<select id="priority"><option value="">All priorities</option></select>
+<select id="category"><option value="">All categories</option></select>
+</div>
+<div id="status" class="status">Loading dataset…</div>
+<div class="table-wrap"><table><thead id="head"></thead><tbody id="body"></tbody></table></div>
+</div>
+</div></main>
+<footer><div class="wrap">© 2026 Sajid Manzoor · Data Analytics & Business Operations</div></footer>
+<script>
+const csvUrl="https://raw.githubusercontent.com/sajidmanzoor730/helpdesk-kpi-dashboard/main/Helpdesk_Tickets_Dataset_Raw.csv";
+let rows=[],headers=[];
+function parseCSV(text){
+ const out=[];let row=[],cell="",quoted=false;
+ for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];
+  if(c=='"'){if(quoted&&n=='"'){cell+='"';i++}else quoted=!quoted}
+  else if(c==','&&!quoted){row.push(cell);cell=""}
+  else if((c=='\n'||c=='\r')&&!quoted){if(c=='\r'&&n=='\n')i++;row.push(cell);if(row.some(v=>v!==""))out.push(row);row=[];cell=""}
+  else cell+=c;
+ }
+ if(cell!==""||row.length){row.push(cell);if(row.some(v=>v!==""))out.push(row)}
+ return out;
+}
+function esc(v){return String(v??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function render(){
+ const q=document.getElementById("search").value.toLowerCase().trim(),p=document.getElementById("priority").value,c=document.getElementById("category").value;
+ const filtered=rows.filter(r=>(!p||r.Priority===p)&&(!c||r.Category===c)&&(!q||Object.values(r).join(" ").toLowerCase().includes(q)));
+ document.getElementById("status").textContent="Showing "+Math.min(filtered.length,250)+" of "+filtered.length+" matching rows · "+rows.length+" raw rows loaded";
+ document.getElementById("body").innerHTML=filtered.slice(0,250).map(r=>"<tr>"+headers.map(h=>"<td>"+esc(r[h])+"</td>").join("")+"</tr>").join("");
+}
+fetch(csvUrl).then(r=>{if(!r.ok)throw new Error("Dataset could not be loaded");return r.text()}).then(text=>{
+ const parsed=parseCSV(text);headers=parsed.shift();rows=parsed.map(a=>Object.fromEntries(headers.map((h,i)=>[h,a[i]??""])));
+ document.getElementById("head").innerHTML="<tr>"+headers.map(h=>"<th>"+esc(h)+"</th>").join("")+"</tr>";
+ const priorities=[...new Set(rows.map(r=>r.Priority).filter(Boolean))].sort();
+ const categories=[...new Set(rows.map(r=>r.Category).filter(Boolean))].sort();
+ document.getElementById("priority").innerHTML='<option value="">All priorities</option>'+priorities.map(x=>'<option>'+esc(x)+'</option>').join("");
+ document.getElementById("category").innerHTML='<option value="">All categories</option>'+categories.map(x=>'<option>'+esc(x)+'</option>').join("");
+ render();
+}).catch(e=>{document.getElementById("status").textContent="The dataset could not be loaded in the browser. Use the Open source CSV button above.";console.error(e)});
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("priority").addEventListener("change",render);
+document.getElementById("category").addEventListener("change",render);
+</script>
+</body></html>
