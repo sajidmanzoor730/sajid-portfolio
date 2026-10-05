@@ -1,1 +1,1071 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Executive Operations Dashboard | Sajid Manzoor</title><link rel="stylesheet" href="project.css"></head><body><nav><div class="wrap navin"><a class="brand" href="index.html">Sajid Manzoor</a><div class="links"><a href="projects.html">Projects</a><a href="experience.html">Experience</a><a href="skills.html">Skills</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></div></div></nav><main><div class="wrap"><a class="back" href="projects.html">← Back to Projects</a><div class="eyebrow">Operations Dashboard</div><h1>Executive Operations Dashboard</h1><p class="lead">A practical dashboard for meetings, priorities, owners, deadlines, action items and follow-ups.</p><div class="notice"><strong>Data note:</strong> The records below are structured portfolio demonstration data, not confidential employer or customer data. The layout is designed to show how an operations manager could monitor work at a glance.</div><div class="grid"><div class="card metric"><strong>24</strong><span class="muted">tracked activities</span></div><div class="card metric"><strong>9</strong><span class="muted">open action items</span></div><div class="card metric"><strong>7</strong><span class="muted">completed this week</span></div><div class="card metric"><strong>3</strong><span class="muted">items requiring follow-up</span></div></div><section><h2>Live-style activity view</h2><div class="table-wrap"><table><thead><tr><th>Date</th><th>Activity</th><th>Owner</th><th>Priority</th><th>Status</th><th>Due</th></tr></thead><tbody><tr><td>19 Sep</td><td>Client onboarding review</td><td>Operations</td><td>High</td><td>In progress</td><td>19 Sep</td></tr><tr><td>19 Sep</td><td>Weekly KPI pack</td><td>Reporting</td><td>High</td><td>Completed</td><td>19 Sep</td></tr><tr><td>18 Sep</td><td>CRM cleanup follow-up</td><td>Sales Ops</td><td>Medium</td><td>Waiting</td><td>20 Sep</td></tr><tr><td>18 Sep</td><td>Vendor invoice review</td><td>Finance Ops</td><td>High</td><td>In progress</td><td>20 Sep</td></tr><tr><td>17 Sep</td><td>Team access audit</td><td>IT Ops</td><td>Medium</td><td>Completed</td><td>17 Sep</td></tr></tbody></table></div></section></div></main><footer class="footer"><div class="wrap">© 2026 Sajid Manzoor · Operations & Growth</div></footer></body></html>
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="Executive Operations Dashboard by Sajid Manzoor — operational reporting, workload visibility, priorities, ownership, deadlines and follow-up analysis."
+  >
+
+  <title>
+    Executive Operations Dashboard | Sajid Manzoor
+  </title>
+
+  <link rel="stylesheet" href="project.css">
+
+
+  <style>
+
+    /* =================================
+       EXECUTIVE DASHBOARD
+    ================================= */
+
+    .dashboard-intro{
+      margin-top:38px;
+      margin-bottom:42px;
+    }
+
+
+    .dashboard-intro h2{
+      margin-top:0;
+      margin-bottom:8px;
+    }
+
+
+    .dashboard-intro p{
+      max-width:780px;
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+
+    /* =================================
+       PROJECT OVERVIEW
+    ================================= */
+
+    .overview-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:16px;
+      margin-bottom:48px;
+    }
+
+
+    .overview-card{
+      padding:21px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:15px;
+      box-shadow:0 3px 15px rgba(15,35,63,.03);
+    }
+
+
+    .overview-card strong{
+      display:block;
+      margin-bottom:7px;
+      color:var(--navy);
+      font-size:15px;
+    }
+
+
+    .overview-card span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+    }
+
+
+    /* =================================
+       ANALYTICS SECTIONS
+    ================================= */
+
+    .analysis-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+
+    .analysis-card{
+      padding:23px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:15px;
+      box-shadow:0 3px 15px rgba(15,35,63,.03);
+    }
+
+
+    .analysis-card.full{
+      grid-column:1 / -1;
+    }
+
+
+    .analysis-card h3{
+      margin:0 0 7px;
+      color:var(--navy);
+      font-size:18px;
+      line-height:1.3;
+    }
+
+
+    .analysis-card > p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+
+    /* =================================
+       KPI FRAMEWORK
+    ================================= */
+
+    .kpi-list{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+
+
+    .kpi-item{
+      padding:16px;
+      background:#f8fafc;
+      border:1px solid var(--line);
+      border-radius:11px;
+    }
+
+
+    .kpi-item strong{
+      display:block;
+      margin-bottom:5px;
+      color:var(--navy);
+      font-size:13px;
+    }
+
+
+    .kpi-item span{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+
+    /* =================================
+       ANALYTICAL DIMENSIONS
+    ================================= */
+
+    .dimension-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+
+    .dimension{
+      padding:7px 10px;
+      background:var(--sky);
+      border:1px solid #dbeafe;
+      border-radius:999px;
+      color:#1e40af;
+      font-size:11px;
+      font-weight:750;
+    }
+
+
+    /* =================================
+       WORKFLOW
+    ================================= */
+
+    .workflow{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:12px;
+    }
+
+
+    .workflow-step{
+      position:relative;
+      padding:17px;
+      border:1px solid var(--line);
+      border-radius:11px;
+      background:#fff;
+    }
+
+
+    .workflow-number{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:27px;
+      height:27px;
+      margin-bottom:11px;
+      border-radius:50%;
+      background:var(--sky);
+      color:var(--blue);
+      font-size:11px;
+      font-weight:800;
+    }
+
+
+    .workflow-step strong{
+      display:block;
+      margin-bottom:5px;
+      color:var(--navy);
+      font-size:13px;
+    }
+
+
+    .workflow-step span{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+
+    /* =================================
+       BUSINESS QUESTIONS
+    ================================= */
+
+    .question-list{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin:0;
+      padding:0;
+      list-style:none;
+    }
+
+
+    .question-list li{
+      padding:14px 15px;
+      background:#f8fafc;
+      border:1px solid var(--line);
+      border-radius:10px;
+      color:#475569;
+      font-size:13px;
+      line-height:1.5;
+    }
+
+
+    .question-list li::before{
+      content:"→";
+      margin-right:8px;
+      color:var(--blue);
+      font-weight:800;
+    }
+
+
+    /* =================================
+       REPORTING STRUCTURE
+    ================================= */
+
+    .reporting-table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:13px;
+    }
+
+
+    .reporting-table th{
+      padding:11px 13px;
+      background:#f8fafc;
+      color:#475569;
+      text-align:left;
+      font-size:10px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      border-bottom:1px solid var(--line);
+    }
+
+
+    .reporting-table td{
+      padding:12px 13px;
+      color:#475569;
+      border-bottom:1px solid #eef2f7;
+      vertical-align:top;
+    }
+
+
+    .reporting-table tr:last-child td{
+      border-bottom:0;
+    }
+
+
+    .reporting-table strong{
+      color:var(--navy);
+    }
+
+
+    /* =================================
+       ANALYST APPROACH
+    ================================= */
+
+    .approach-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+    }
+
+
+    .approach-card{
+      padding:17px;
+      border:1px solid var(--line);
+      border-radius:11px;
+    }
+
+
+    .approach-card strong{
+      display:block;
+      margin-bottom:6px;
+      color:var(--navy);
+      font-size:13px;
+    }
+
+
+    .approach-card span{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+
+    /* =================================
+       TOOLS
+    ================================= */
+
+    .tool-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+
+    .tool{
+      padding:7px 10px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      color:#475569;
+      background:#fff;
+      font-size:12px;
+      font-weight:650;
+    }
+
+
+    /* =================================
+       PROJECT OUTPUT
+    ================================= */
+
+    .output-list{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:11px;
+      margin:0;
+      padding:0;
+      list-style:none;
+    }
+
+
+    .output-list li{
+      padding:15px;
+      border:1px solid var(--line);
+      border-radius:11px;
+      color:#475569;
+      font-size:13px;
+    }
+
+
+    .output-list strong{
+      display:block;
+      margin-bottom:4px;
+      color:var(--navy);
+    }
+
+
+    /* =================================
+       NEXT STAGE
+    ================================= */
+
+    .next-stage{
+      margin-top:18px;
+      padding:21px;
+      background:var(--sky);
+      border:1px solid #dbeafe;
+      border-radius:14px;
+    }
+
+
+    .next-stage strong{
+      display:block;
+      margin-bottom:6px;
+      color:var(--navy);
+      font-size:14px;
+    }
+
+
+    .next-stage p{
+      margin:0;
+      color:#475569;
+      font-size:13px;
+      line-height:1.6;
+    }
+
+
+    /* =================================
+       LINKS
+    ================================= */
+
+    .bottom-links{
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-top:26px;
+    }
+
+
+    /* =================================
+       RESPONSIVE
+    ================================= */
+
+    @media(max-width:900px){
+
+      .overview-grid{
+        grid-template-columns:1fr;
+      }
+
+      .analysis-grid{
+        grid-template-columns:1fr;
+      }
+
+      .analysis-card.full{
+        grid-column:auto;
+      }
+
+      .workflow{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+
+      .approach-grid{
+        grid-template-columns:1fr;
+      }
+
+    }
+
+
+    @media(max-width:700px){
+
+      .dashboard-intro{
+        margin-top:30px;
+        margin-bottom:35px;
+      }
+
+      .kpi-list{
+        grid-template-columns:1fr;
+      }
+
+      .question-list{
+        grid-template-columns:1fr;
+      }
+
+      .output-list{
+        grid-template-columns:1fr;
+      }
+
+      .workflow{
+        grid-template-columns:1fr;
+      }
+
+      .analysis-card{
+        padding:19px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =================================
+       NAVIGATION
+  ================================= -->
+
+  <nav>
+
+    <div class="wrap navin">
+
+      <a
+        class="brand"
+        href="index.html"
+      >
+        Sajid Manzoor
+      </a>
+
+
+      <div class="links">
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="experience.html">
+          Experience
+        </a>
+
+        <a href="projects.html">
+          Projects
+        </a>
+
+        <a href="skills.html">
+          Skills
+        </a>
+
+        <a href="resume.html">
+          Resume
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+
+  <!-- =================================
+       MAIN
+  ================================= -->
+
+  <main>
+
+    <div class="wrap">
+
+
+      <a
+        class="back"
+        href="projects.html"
+      >
+        ← Back to Projects
+      </a>
+
+
+      <div class="eyebrow">
+        Operations Analytics
+      </div>
+
+
+      <h1>
+        Executive Operations Dashboard
+      </h1>
+
+
+      <p class="lead">
+        A structured reporting framework for giving operations teams
+        a clear view of workload, priorities, ownership, deadlines,
+        follow-ups and performance indicators.
+      </p>
+
+
+      <!-- =================================
+           INTRO
+      ================================= -->
+
+      <section class="dashboard-intro">
+
+        <h2>
+          Project Overview
+        </h2>
+
+        <p>
+          This project focuses on the analytical layer behind an
+          executive operations dashboard. The goal is to turn
+          day-to-day operational records into a concise reporting
+          view that supports prioritisation, accountability and
+          management review.
+        </p>
+
+      </section>
+
+
+      <!-- =================================
+           OVERVIEW CARDS
+      ================================= -->
+
+      <div class="overview-grid">
+
+
+        <div class="overview-card">
+
+          <strong>
+            Business Purpose
+          </strong>
+
+          <span>
+            Consolidate operational activity into a structured
+            reporting view that makes priorities, ownership and
+            outstanding work easier to monitor.
+          </span>
+
+        </div>
+
+
+        <div class="overview-card">
+
+          <strong>
+            Analyst Focus
+          </strong>
+
+          <span>
+            Data preparation, KPI definition, workload analysis,
+            status monitoring, exception identification and
+            management reporting.
+          </span>
+
+        </div>
+
+
+        <div class="overview-card">
+
+          <strong>
+            Reporting Outcome
+          </strong>
+
+          <span>
+            A repeatable dashboard structure that connects
+            operational records with measurable performance
+            indicators and follow-up actions.
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- =================================
+           BUSINESS QUESTIONS
+      ================================= -->
+
+      <div class="analysis-grid">
+
+
+        <section class="analysis-card full">
+
+          <h3>
+            Business Questions
+          </h3>
+
+          <p>
+            The dashboard is designed around questions that an
+            operations or business team would regularly need to answer.
+          </p>
+
+
+          <ul class="question-list">
+
+            <li>
+              What work is currently open or in progress?
+            </li>
+
+            <li>
+              Which priorities require immediate attention?
+            </li>
+
+            <li>
+              Which activities are approaching their due dates?
+            </li>
+
+            <li>
+              Which owners or teams have outstanding actions?
+            </li>
+
+            <li>
+              Where are recurring delays or follow-up requirements appearing?
+            </li>
+
+            <li>
+              How is operational workload changing over time?
+            </li>
+
+            <li>
+              Which KPIs should be reviewed in weekly management meetings?
+            </li>
+
+            <li>
+              Which exceptions should be escalated for further investigation?
+            </li>
+
+          </ul>
+
+        </section>
+
+
+        <!-- =================================
+             KPI FRAMEWORK
+        ================================= -->
+
+        <section class="analysis-card">
+
+          <h3>
+            KPI Framework
+          </h3>
+
+          <p>
+            Core measures that can be calculated from the underlying
+            operational records.
+          </p>
+
+
+          <div class="kpi-list">
+
+            <div class="kpi-item">
+
+              <strong>
+                Workload
+              </strong>
+
+              <span>
+                Total records, activities or items handled during
+                the selected reporting period.
+              </span>
+
+            </div>
+
+
+            <div class="kpi-item">
+
+              <strong>
+                Completion Rate
+              </strong>
+
+              <span>
+                Share of operational records completed within the
+                reporting period.
+              </span>
+
+            </div>
+
+
+            <div class="kpi-item">
+
+              <strong>
+                Aging
+              </strong>
+
+              <span>
+                Time elapsed between record creation and current
+                status or completion.
+              </span>
+
+            </div>
+
+
+            <div class="kpi-item">
+
+              <strong>
+                SLA Achievement
+              </strong>
+
+              <span>
+                Share of applicable records completed within the
+                defined service target.
+              </span>
+
+            </div>
+
+
+            <div class="kpi-item">
+
+              <strong>
+                Open Actions
+              </strong>
+
+              <span>
+                Outstanding work requiring completion,
+                follow-up or escalation.
+              </span>
+
+            </div>
+
+
+            <div class="kpi-item">
+
+              <strong>
+                Follow-up Rate
+              </strong>
+
+              <span>
+                Share of records requiring additional action after
+                the initial activity.
+              </span>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================
+             ANALYTICAL DIMENSIONS
+        ================================= -->
+
+        <section class="analysis-card">
+
+          <h3>
+            Analytical Dimensions
+          </h3>
+
+          <p>
+            Dimensions used to segment operational performance and
+            identify meaningful differences between groups.
+          </p>
+
+
+          <div class="dimension-list">
+
+            <span class="dimension">
+              Team
+            </span>
+
+            <span class="dimension">
+              Owner
+            </span>
+
+            <span class="dimension">
+              Priority
+            </span>
+
+            <span class="dimension">
+              Status
+            </span>
+
+            <span class="dimension">
+              Category
+            </span>
+
+            <span class="dimension">
+              Region
+            </span>
+
+            <span class="dimension">
+              Channel
+            </span>
+
+            <span class="dimension">
+              Date
+            </span>
+
+            <span class="dimension">
+              Week
+            </span>
+
+            <span class="dimension">
+              Month
+            </span>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================
+             ANALYST WORKFLOW
+        ================================= -->
+
+        <section class="analysis-card full">
+
+          <h3>
+            Analyst Workflow
+          </h3>
+
+          <p>
+            The reporting process follows a repeatable analytics workflow.
+          </p>
+
+
+          <div class="workflow">
+
+
+            <div class="workflow-step">
+
+              <div class="workflow-number">
+                01
+              </div>
+
+              <strong>
+                Collect
+              </strong>
+
+              <span>
+                Bring together operational records from the
+                relevant source systems or structured exports.
+              </span>
+
+            </div>
+
+
+            <div class="workflow-step">
+
+              <div class="workflow-number">
+                02
+              </div>
+
+              <strong>
+                Validate
+              </strong>
+
+              <span>
+                Check duplicates, missing fields, dates, status
+                values and other data-quality conditions.
+              </span>
+
+            </div>
+
+
+            <div class="workflow-step">
+
+              <div class="workflow-number">
+                03
+              </div>
+
+              <strong>
+                Analyse
+              </strong>
+
+              <span>
+                Calculate KPIs, segment workload and identify
+                trends, exceptions and recurring patterns.
+              </span>
+
+            </div>
+
+
+            <div class="workflow-step">
+
+              <div class="workflow-number">
+                04
+              </div>
+
+              <strong>
+                Report
+              </strong>
+
+              <span>
+                Present the results through dashboards and
+                concise management reporting.
+              </span>
+
+            </div>
+
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================
+             REPORTING STRUCTURE
+        ================================= -->
+
+        <section class="analysis-card full">
+
+          <h3>
+            Executive Reporting Structure
+          </h3>
+
+          <p>
+            A practical structure for a recurring weekly or monthly
+            operations review.
+          </p>
+
+
+          <div class="table-wrap">
+
+            <table class="reporting-table">
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    Reporting Area
+                  </th>
+
+                  <th>
+                    Measures
+                  </th>
+
+                  <th>
+                    Management Question
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody>
+
+                <tr>
+
+                  <td>
+                    <strong>
+                      Workload
+                    </strong>
+                  </td>
+
+                  <td>
+                    Volume, completed records, open records
+                  </td>
+
+                  <td>
+                    How much work is moving through the operation?
+                  </td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>
+                    <strong>
+                      Performance
+                    </strong>
+                  </td>
+
+                  <td>
+                    Completion, SLA, turnaround time
+                  </td>
+
+                  <td>
+                    Is work being completed within expected targets?
+                  </td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>
+                    <strong>
+             
