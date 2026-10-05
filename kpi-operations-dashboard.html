@@ -1,1 +1,892 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KPI Operations Dashboard | Sajid Manzoor</title><link rel="stylesheet" href="project.css"></head><body><nav><div class="wrap navin"><a class="brand" href="index.html">Sajid Manzoor</a><div class="links"><a href="projects.html">Projects</a><a href="experience.html">Experience</a><a href="skills.html">Skills</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></div></div></nav><main><div class="wrap"><a class="back" href="projects.html">← Back to Projects</a><div class="eyebrow">KPI Reporting</div><h1>KPI Operations Dashboard</h1><p class="lead">A reporting view for completion, QA accuracy, SLA achievement and operational status.</p><div class="notice"><strong>Data note:</strong> Portfolio demonstration dataset. Values are structured to demonstrate KPI reporting and are not claimed as employer performance figures.</div><div class="grid"><div class="card metric"><strong>94.6%</strong><span class="muted">completion rate</span></div><div class="card metric"><strong>98.2%</strong><span class="muted">QA accuracy</span></div><div class="card metric"><strong>96.8%</strong><span class="muted">SLA achievement</span></div><div class="card metric"><strong>1,248</strong><span class="muted">items processed</span></div></div><section><h2>Weekly KPI detail</h2><div class="table-wrap"><table><thead><tr><th>Week</th><th>Processed</th><th>Completed</th><th>QA Accuracy</th><th>SLA</th><th>Open</th></tr></thead><tbody><tr><td>Week 1</td><td>286</td><td>271</td><td>97.8%</td><td>95.4%</td><td>15</td></tr><tr><td>Week 2</td><td>302</td><td>287</td><td>98.1%</td><td>96.2%</td><td>15</td></tr><tr><td>Week 3</td><td>318</td><td>302</td><td>98.4%</td><td>97.1%</td><td>16</td></tr><tr><td>Week 4</td><td>342</td><td>318</td><td>98.5%</td><td>98.4%</td><td>24</td></tr></tbody></table></div></section></div></main><footer class="footer"><div class="wrap">© 2026 Sajid Manzoor · Operations & Growth</div></footer></body></html>
+<!doctype html>
+
+<html lang="en"><head><meta charset="utf-8"><meta
+name="viewport"
+content="width=device-width,initial-scale=1"
+
+«»
+
+<meta
+name="description"
+content="KPI Operations Dashboard case study by Sajid Manzoor covering KPI reporting, operational analytics, data quality, SLA tracking and dashboard design."
+
+«»
+
+<title>KPI Operations Dashboard | Sajid Manzoor</title><link rel="stylesheet" href="project.css"><style>
+
+.back{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  margin-bottom:30px;
+  font-size:14px;
+  font-weight:750;
+}
+
+.section-intro{
+  max-width:780px;
+  color:var(--muted);
+  font-size:15px;
+  margin-top:-8px;
+  margin-bottom:22px;
+}
+
+.full-card{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:28px;
+  margin-bottom:20px;
+  box-shadow:0 4px 18px rgba(15,35,63,.035);
+}
+
+.full-card h3{
+  margin:0 0 10px;
+  color:var(--navy);
+  font-size:20px;
+}
+
+.full-card p{
+  color:#475569;
+  font-size:14px;
+  margin:0 0 14px;
+}
+
+.full-card p:last-child{
+  margin-bottom:0;
+}
+
+.full-card ul{
+  margin:12px 0 0;
+  padding-left:20px;
+  color:#475569;
+  font-size:14px;
+}
+
+.full-card li{
+  margin:8px 0;
+}
+
+.kpi-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+  margin:24px 0 34px;
+}
+
+.kpi-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:24px;
+}
+
+.kpi-card h3{
+  margin:0 0 8px;
+  font-size:19px;
+  color:var(--navy);
+}
+
+.kpi-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.kpi-purpose{
+  margin-top:14px;
+  padding-top:14px;
+  border-top:1px solid var(--line);
+  color:#475569;
+  font-size:13px;
+}
+
+.workflow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:22px 0;
+}
+
+.workflow-step{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:20px;
+}
+
+.workflow-number{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:var(--sky);
+  color:#1e40af;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:12px;
+}
+
+.workflow-step h3{
+  margin:0 0 7px;
+  color:var(--navy);
+  font-size:16px;
+}
+
+.workflow-step p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.check-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin-top:18px;
+}
+
+.check{
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+}
+
+.check strong{
+  display:block;
+  color:var(--navy);
+  margin-bottom:5px;
+  font-size:14px;
+}
+
+.check span{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.tool-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:16px;
+}
+
+.tool{
+  display:inline-flex;
+  align-items:center;
+  padding:7px 11px;
+  border-radius:999px;
+  background:var(--sky);
+  border:1px solid #dbeafe;
+  color:#1e40af;
+  font-size:12px;
+  font-weight:750;
+}
+
+.question-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:18px;
+}
+
+.question{
+  padding:16px 18px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  color:#334155;
+  font-size:14px;
+  background:#fff;
+}
+
+.question strong{
+  color:var(--navy);
+}
+
+.scope{
+  background:var(--sky);
+  border:1px solid #dbeafe;
+  border-radius:14px;
+  padding:20px;
+  margin-top:22px;
+  color:#334155;
+  font-size:14px;
+}
+
+.scope strong{
+  color:var(--navy);
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+  margin-top:28px;
+}
+
+.action-link{
+  font-size:13px;
+  font-weight:750;
+}
+
+@media(max-width:760px){
+
+  .kpi-grid,
+  .check-grid,
+  .question-list{
+    grid-template-columns:1fr;
+  }
+
+  .workflow{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+@media(max-width:520px){
+
+  .workflow{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style></head><body><nav>  <div class="wrap navin"><a class="brand" href="index.html">
+  Sajid Manzoor
+</a>
+
+<div class="links">
+
+  <a href="index.html">Home</a>
+  <a href="experience.html">Experience</a>
+  <a href="projects.html">Projects</a>
+  <a href="skills.html">Skills</a>
+  <a href="resume.html">Resume</a>
+  <a href="contact.html">Contact</a>
+
+</div>
+
+  </div></nav><main><div class="wrap"><a class="back" href="projects.html">
+  ← Back to Projects
+</a><div class="eyebrow">
+  Operations Analytics · KPI Reporting
+</div><h1>
+  KPI Operations Dashboard
+</h1><p class="lead">
+  A practical operations analytics project focused on KPI reporting,
+  operational performance, SLA tracking, quality monitoring, and
+  structured decision support.
+</p><div class="actions"><a
+class="action-link"
+href="projects.html">
+← All Projects
+</a>
+
+</div><!-- OVERVIEW --><h2>
+  Project overview
+</h2><p class="section-intro">
+  This project demonstrates how operational data can be organized
+  into a structured KPI reporting workflow. The focus is not simply
+  on displaying numbers, but on defining meaningful metrics,
+  validating the underlying data, and presenting information in a
+  format that supports operational reviews.
+</p><div class="full-card">  <h3>
+    Business purpose
+  </h3>  <p>
+    Operations teams often work with large amounts of activity,
+    quality, status, and SLA information. Without a consistent
+    reporting structure, it can be difficult to understand whether
+    work is progressing as expected or where operational attention
+    is required.
+  </p>  <p>
+    The purpose of this dashboard is to provide a structured view
+    of operational KPIs and create a repeatable approach for
+    monitoring performance.
+  </p></div><!-- BUSINESS QUESTIONS --><h2>
+  Business questions
+</h2><p class="section-intro">
+  The dashboard is designed around practical questions that can
+  be asked during an operational or KPI review.
+</p><div class="question-list">  <div class="question">
+    <strong>Completion:</strong>
+    How much of the assigned operational work has been completed?
+  </div>  <div class="question">
+    <strong>Quality:</strong>
+    Is completed work meeting the required quality standard?
+  </div>  <div class="question">
+    <strong>SLA:</strong>
+    Is work being completed within the expected service level?
+  </div>  <div class="question">
+    <strong>Status:</strong>
+    What work remains open, pending, completed, or requires attention?
+  </div>  <div class="question">
+    <strong>Trend:</strong>
+    Is operational performance improving, declining, or remaining stable?
+  </div>  <div class="question">
+    <strong>Workload:</strong>
+    Where is operational activity concentrated?
+  </div></div><!-- KPI FRAMEWORK --><h2>
+  KPI framework
+</h2><p class="section-intro">
+  The dashboard uses a KPI framework that separates activity,
+  completion, quality, service level, and status indicators.
+  Actual values can be added once the underlying real dataset
+  is finalized.
+</p><div class="kpi-grid">  <div class="kpi-card"><h3>
+  Completion Rate
+</h3>
+
+<p>
+  Measures the proportion of assigned or received work that
+  has been completed during the reporting period.
+</p>
+
+<div class="kpi-purpose">
+  <strong>Purpose:</strong>
+  Monitor throughput and completion performance.
+</div>
+
+  </div>  <div class="kpi-card"><h3>
+  QA Accuracy
+</h3>
+
+<p>
+  Measures the quality of completed work against the applicable
+  review or quality criteria.
+</p>
+
+<div class="kpi-purpose">
+  <strong>Purpose:</strong>
+  Monitor quality and identify areas requiring review.
+</div>
+
+  </div>  <div class="kpi-card"><h3>
+  SLA Achievement
+</h3>
+
+<p>
+  Measures whether operational work is completed within the
+  defined service-level target.
+</p>
+
+<div class="kpi-purpose">
+  <strong>Purpose:</strong>
+  Monitor timeliness and identify SLA pressure.
+</div>
+
+  </div>  <div class="kpi-card"><h3>
+  Operational Status
+</h3>
+
+<p>
+  Tracks the distribution of work across relevant operational
+  states such as open, pending, completed, rejected, or escalated.
+</p>
+
+<div class="kpi-purpose">
+  <strong>Purpose:</strong>
+  Understand workload position and operational backlog.
+</div>
+
+  </div></div><!-- ANALYTICS WORKFLOW --><h2>
+  Analytics workflow
+</h2><p class="section-intro">
+  The project follows a repeatable workflow from source data
+  through validation, KPI calculation, and reporting.
+</p><div class="workflow">  <div class="workflow-step"><div class="workflow-number">
+  01
+</div>
+
+<h3>
+  Source data
+</h3>
+
+<p>
+  Review operational records, available fields,
+  definitions, and reporting requirements.
+</p>
+
+  </div>  <div class="workflow-step"><div class="workflow-number">
+  02
+</div>
+
+<h3>
+  Data preparation
+</h3>
+
+<p>
+  Clean, standardize, validate, and structure the
+  source data for analysis.
+</p>
+
+  </div>  <div class="workflow-step"><div class="workflow-number">
+  03
+</div>
+
+<h3>
+  KPI analysis
+</h3>
+
+<p>
+  Calculate operational metrics and compare performance
+  across relevant dimensions.
+</p>
+
+  </div>  <div class="workflow-step"><div class="workflow-number">
+  04
+</div>
+
+<h3>
+  Reporting
+</h3>
+
+<p>
+  Present KPIs through a clear dashboard designed
+  for operational decision-making.
+</p>
+
+  </div></div><!-- DATA QUALITY --><h2>
+  Data quality & validation
+</h2><p class="section-intro">
+  Reliable KPI reporting starts with reliable source data.
+  The project therefore treats data quality as part of the
+  analytical workflow rather than an afterthought.
+</p><div class="full-card">  <h3>
+    Validation checks
+  </h3>  <div class="check-grid"><div class="check">
+
+  <strong>Duplicate detection</strong>
+
+  <span>
+    Identify repeated records that could distort
+    operational counts or KPI calculations.
+  </span>
+
+</div>
+
+
+<div class="check">
+
+  <strong>Missing-value checks</strong>
+
+  <span>
+    Review important fields for blanks or incomplete
+    records before reporting.
+  </span>
+
+</div>
+
+
+<div class="check">
+
+  <strong>Status validation</strong>
+
+  <span>
+    Confirm that operational status values follow
+    the expected reporting definitions.
+  </span>
+
+</div>
+
+
+<div class="check">
+
+  <strong>Date validation</strong>
+
+  <span>
+    Check date and timestamp fields before using
+    them for SLA or trend analysis.
+  </span>
+
+</div>
+
+
+<div class="check">
+
+  <strong>KPI validation</strong>
+
+  <span>
+    Confirm that calculated KPIs use the correct
+    population, denominator, and business rules.
+  </span>
+
+</div>
+
+
+<div class="check">
+
+  <strong>Reconciliation</strong>
+
+  <span>
+    Compare dashboard totals against the prepared
+    analytical dataset to identify inconsistencies.
+  </span>
+
+</div>
+
+  </div></div><!-- REPORTING DESIGN --><h2>
+  Dashboard design
+</h2><div class="full-card">  <h3>
+    Designed for operational review
+  </h3>  <p>
+    The dashboard structure prioritizes the information an
+    operations or management team would typically need during
+    a KPI review.
+  </p>  <ul><li>
+  High-level KPI visibility for quick performance review.
+</li>
+
+<li>
+  Completion and workload monitoring.
+</li>
+
+<li>
+  Quality and accuracy monitoring.
+</li>
+
+<li>
+  SLA performance and potential service-level pressure.
+</li>
+
+<li>
+  Operational status and outstanding work.
+</li>
+
+<li>
+  Trend analysis for identifying changes over time.
+</li>
+
+<li>
+  Structured reporting that can support further investigation.
+</li>
+
+  </ul></div><!-- ANALYTICAL DIMENSIONS --><h2>
+  Analytical dimensions
+</h2><p class="section-intro">
+  KPIs become more useful when they can be analyzed across
+  relevant operational dimensions rather than viewed only as
+  overall totals.
+</p><div class="kpi-grid">  <div class="kpi-card"><h3>
+  Time
+</h3>
+
+<p>
+  Analyze performance by reporting period to identify
+  trends, changes, and recurring operational patterns.
+</p>
+
+  </div>  <div class="kpi-card"><h3>
+  Status
+</h3>
+
+<p>
+  Compare completed, open, pending, escalated, or other
+  operational states.
+</p>
+
+  </div>  <div class="kpi-card"><h3>
+  Quality
+</h3>
+
+<p>
+  Examine quality or accuracy results alongside workload
+  and completion activity.
+</p>
+
+  </div>  <div class="kpi-card"><h3>
+  SLA
+</h3>
+
+<p>
+  Compare service-level performance and identify where
+  timeliness requires additional attention.
+</p>
+
+  </div></div><!-- DATA MODEL --><h2>
+  Reporting structure
+</h2><div class="full-card">  <h3>
+    From operational records to KPIs
+  </h3>  <p>
+    The reporting structure separates the underlying operational
+    records from the calculated KPI layer. This makes the analysis
+    easier to validate and allows the same source data to support
+    multiple reporting views.
+  </p>  <p>
+    The intended structure is:
+  </p>  <div class="workflow"><div class="workflow-step">
+
+  <div class="workflow-number">
+    01
+  </div>
+
+  <h3>
+    Source records
+  </h3>
+
+  <p>
+    Raw operational activity and status information.
+  </p>
+
+</div>
+
+
+<div class="workflow-step">
+
+  <div class="workflow-number">
+    02
+  </div>
+
+  <h3>
+    Clean dataset
+  </h3>
+
+  <p>
+    Validated and standardized analytical records.
+  </p>
+
+</div>
+
+
+<div class="workflow-step">
+
+  <div class="workflow-number">
+    03
+  </div>
+
+  <h3>
+    KPI layer
+  </h3>
+
+  <p>
+    Defined calculations and business rules.
+  </p>
+
+</div>
+
+
+<div class="workflow-step">
+
+  <div class="workflow-number">
+    04
+  </div>
+
+  <h3>
+    Dashboard
+  </h3>
+
+  <p>
+    Business-readable reporting and analysis.
+  </p>
+
+</div>
+
+  </div></div><!-- ANALYST APPROACH --><h2>
+  Analyst approach
+</h2><div class="full-card">  <p>
+    The project follows a practical analyst mindset: first understand
+    what the data represents, then validate it, define the KPIs,
+    analyze the results, and only then present the information in
+    dashboard form.
+  </p>  <ul><li>
+  Understand the operational process and reporting requirements.
+</li>
+
+<li>
+  Identify the fields required for each KPI.
+</li>
+
+<li>
+  Validate source data before calculating metrics.
+</li>
+
+<li>
+  Define KPI formulas consistently.
+</li>
+
+<li>
+  Compare performance across meaningful dimensions.
+</li>
+
+<li>
+  Investigate unusual or unexpected patterns.
+</li>
+
+<li>
+  Present findings in a format that is easy for non-technical
+  stakeholders to understand.
+</li>
+
+  </ul></div><!-- BUSINESS INSIGHTS --><h2>
+  Business insight framework
+</h2><div class="full-card">  <p>
+    The dashboard is intended to help move operational reporting
+    from simple activity counts toward questions that support
+    decision-making.
+  </p>  <ul><li>
+  Where is operational workload increasing?
+</li>
+
+<li>
+  Which areas require additional quality attention?
+</li>
+
+<li>
+  Where are SLA targets under pressure?
+</li>
+
+<li>
+  Are completion and quality moving together?
+</li>
+
+<li>
+  Which operational statuses are creating backlog?
+</li>
+
+<li>
+  Are performance changes temporary or part of a longer trend?
+</li>
+
+  </ul>  <div class="scope"><strong>Data scope:</strong>
+This portfolio page intentionally does not display fabricated
+performance figures. Real KPI values, charts, and findings will
+be added after the underlying dataset and calculations are finalized.
+
+  </div></div><!-- TOOLS --><h2>
+  Tools &amp; technologies
+</h2><p class="section-intro">
+  Technologies used or relevant to the analytical workflow.
+</p><div class="tool-row"><span class="tool">Excel</span>
+<span class="tool">SQL</span>
+<span class="tool">Python</span>
+<span class="tool">Pandas</span>
+<span class="tool">Power BI</span>
+<span class="tool">KPI Reporting</span>
+<span class="tool">Data Quality</span>
+<span class="tool">Operational Analytics</span>
+<span class="tool">Dashboard Development</span>
+
+</div><!-- PROJECT OUTPUT --><h2>
+  Project output
+</h2><div class="full-card">  <h3>
+    What this project demonstrates
+  </h3>  <ul><li>
+  Designing an operational KPI reporting framework.
+</li>
+
+<li>
+  Translating operational requirements into measurable KPIs.
+</li>
+
+<li>
+  Structuring data-quality and validation checks.
+</li>
+
+<li>
+  Organizing operational information for dashboard reporting.
+</li>
+
+<li>
+  Thinking about KPIs in terms of business questions rather
+  than isolated numbers.
+</li>
+
+<li>
+  Building a reporting structure that can be updated when
+  new operational data becomes available.
+</li>
+
+  </ul></div><!-- RELATED PROJECTS --><h2>
+  Related analytics work
+</h2><div class="grid">  <article class="card"><div class="tags">
+
+  <span class="tag">Data Quality</span>
+  <span class="tag">Validation</span>
+
+</div>
+
+<h3>
+  BI Validation
+</h3>
+
+<p>
+  Validation and reconciliation practices for checking
+  reporting outputs before KPI results are presented.
+</p>
+
+<div class="actions">
+
+  <a
+    class="btn primary"
+    href="bi-validation.html">
+    View Project →
+  </a>
+
+</div>
+
+  </article>  <article class="card"><div class="tags">
+
+  <span class="tag">Power BI</span>
+  <span class="tag">BI</span>
+
+</div>
+
+<h3>
+  Power BI Model
+</h3>
+
+<p>
+  BI reporting structure covering data relationships,
+  KPI analysis, reusable reporting logic, and dashboard design.
+</p>
+
+<div class="actions">
+
+  <a
+    class="btn primary"
+    href="powerbi-model.html">
+    View Project →
+  </a>
+
+</div>
+
+  </article>  <article class="card"><div class="tags">
+
+  <span class="tag">Data Quality</span>
+  <span class="tag">Documentation</span>
+
+</div>
+
+<h3>
+  Helpdesk Data Dictionary
+</h3>
+
+<p>
+  Structured documentation for field definitions, business
+  meaning, expected values, and analytical rules.
+</p>
+
+<div class="actions">
+
+  <a
+    class="btn primary"
+    href="data-dictionary.html">
+    View Project →
+  </a>
+
+</div>
+
+  </article></div><!-- FINAL --><div class="full-card">  <h3>
+    Next stage
+  </h3>  <p>
+    The next stage of this project is to connect the dashboard
+    structure to the finalized operational dataset, calculate
+    verified KPIs, and add the resulting charts and findings.
+  </p>  <p>
+    Until those values are available, the project deliberately
+    avoids presenting invented numbers as business results.
+  </p></div></div></main><footer class="footer">  <div class="wrap">
+    © 2026 Sajid Manzoor · Data Analyst &amp; Business Operations
+  </div></footer></body></html>
