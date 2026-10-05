@@ -3,10 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Sajid Manzoor projects — Data Analytics, SQL, Python, Power BI, KPI reporting and operational analytics.">
+<meta name="description" content="Sajid Manzoor projects — Data Analytics, SQL, Python, Power BI, KPI reporting, data quality, operational analytics and automation.">
 <title>Sajid Manzoor | Projects</title>
-
-<style>:root{--navy:#10233f;--blue:#2563eb;--sky:#eff6ff;--text:#172033;--muted:#64748b;--line:#e2e8f0}*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#f8fafc;color:var(--text);line-height:1.6}a{text-decoration:none;color:var(--blue)}.wrap{width:min(1000px,calc(100% - 40px));margin:auto}nav{height:72px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0}.navin{height:100%;display:flex;align-items:center;justify-content:space-between}.brand{font-size:19px;font-weight:800;color:var(--navy)}.links{display:flex;gap:20px}.links a{color:var(--text);font-size:14px;font-weight:650}.links a:hover{color:var(--blue)}main{padding:55px 0}.intro{margin-bottom:30px}.eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:var(--blue)}h1{margin:8px 0 10px;font-size:38px;color:var(--navy);line-height:1.1}.lead{color:var(--muted);font-size:16px;max-width:760px}.project{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;margin:18px 0;box-shadow:0 6px 22px rgba(15,35,63,.04)}.project.featured{background:var(--sky);border-color:#dbeafe}.project h2{margin:0 0 5px;color:var(--navy);font-size:22px}.tech{color:var(--blue);font-size:13px;font-weight:700;margin-bottom:12px}.project p{font-size:14px;color:#475569}.project ul{margin:10px 0 0 20px;padding:0}.project li{font-size:14px;margin:6px 0}.repo{display:inline-block;margin-top:14px;font-size:14px;font-weight:700;color:var(--blue)}.footer{background:#fff;border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:14px}@media(max-width:760px){.wrap{width:min(100% - 28px,1000px)}.links{display:none}main{padding:45px 0}h1{font-size:30px}}</style>
+<link rel="stylesheet" href="project.css">
 </head>
 
 <body>
@@ -18,7 +17,7 @@
 
 <div class="links">
 <a href="index.html">Home</a>
-<a href="about.html">Experience</a>
+<a href="experience.html">Experience</a>
 <a href="projects.html">Projects</a>
 <a href="skills.html">Skills</a>
 <a href="resume.html">Resume</a>
@@ -33,163 +32,378 @@
 
 <div class="wrap">
 
-<div class="intro">
-
 <div class="eyebrow">Selected work</div>
 
-<h1>Data Analytics Projects</h1>
+<h1>Data Analytics &amp; Operations Projects</h1>
 
 <p class="lead">
-Practical projects focused on SQL analysis, Python data cleaning,
-KPI reporting, dashboards, data quality and operational problem-solving.
+A collection of practical projects covering data cleaning, SQL analysis,
+KPI reporting, Power BI, data quality, operational analytics,
+process documentation and automation.
 </p>
 
+
+<div class="notice">
+<strong>Portfolio focus:</strong>
+The projects at the top demonstrate my Data Analyst skills first.
+The remaining projects show supporting experience in operations,
+technical support, automation and process improvement.
 </div>
 
 
-<!-- HELP DESK -->
+<!-- ===================================================== -->
+<!-- DATA ANALYTICS -->
+<!-- ===================================================== -->
 
-<div class="project featured">
+<h2>Data Analytics &amp; BI</h2>
 
-<h2>Helpdesk KPI Dashboard</h2>
+<div class="grid">
 
-<div class="tech">
-Python • Pandas • SQL • Streamlit • Power BI
-</div>
+
+<div class="card">
+
+<span class="tag">Featured</span>
+<span class="tag">Python</span>
+<span class="tag">SQL</span>
+<span class="tag">Power BI</span>
+
+<h3>Helpdesk Ticket KPI Dashboard</h3>
+
+<p class="muted">
+End-to-end analytics case study covering data cleaning,
+validation, SQL analysis, KPI definition and dashboard reporting.
+</p>
 
 <p>
-An end-to-end helpdesk analytics project built on a synthetic
-support dataset designed to contain realistic data-quality issues.
+The project takes a synthetic helpdesk export through Python/Pandas
+cleaning, SQL analysis, KPI calculation, Streamlit reporting and
+Power BI modeling.
 </p>
 
-<ul>
+<p>
+<strong>Key work:</strong> duplicate detection, SLA analysis,
+CSAT, repeat-ticket analysis, monthly trends, SQL window functions,
+data-quality validation and business insights.
+</p>
 
-<li>
-Cleaned 5,100 raw records into 5,000 unique tickets by handling
-duplicates and validating the dataset.
-</li>
+<a class="btn primary" href="helpdesk-kpi-dashboard.html">
+View case study →
+</a>
 
-<li>
-Used SQL window functions including ROW_NUMBER() for duplicate
-detection and LAG() to compare resolution times across periods.
-</li>
-
-<li>
-Analyzed ticket volume, SLA performance, CSAT, repeat tickets
-and resolution times using SQL and Pandas.
-</li>
-
-<li>
-Built interactive Streamlit and Power BI dashboards to monitor
-support KPIs and trends.
-</li>
-
-<li>
-Documented the data-cleaning process, SQL queries, data model,
-assumptions and validation checks.
-</li>
-
-</ul>
-
-<a
-class="repo"
+<a class="btn secondary"
 href="https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard"
-target="_blank">
-View GitHub repository →
+target="_blank"
+rel="noopener">
+GitHub →
 </a>
 
 </div>
 
 
-<!-- VOIP -->
+<div class="card">
 
-<div class="project">
+<span class="tag">KPI Reporting</span>
+<span class="tag">Operations</span>
+<span class="tag">Dashboard</span>
 
-<h2>VoIP Support Automation</h2>
+<h3>KPI Operations Dashboard</h3>
 
-<div class="tech">
-Python • SQL • SIP/RTP • Wireshark
-</div>
-
-<p>
-A technical support analytics toolkit for investigating SIP/VoIP
-issues using packet evidence, structured data and SQL-based analysis.
+<p class="muted">
+A reporting view for completion, QA accuracy, SLA achievement
+and operational status.
 </p>
 
-<ul>
-
-<li>
-Extracted SIP and RTP information from network captures and
-converted relevant fields into structured records.
-</li>
-
-<li>
-Used Python to parse SIP logs and prepare data for analysis.
-</li>
-
-<li>
-Created SQL schemas and investigation queries for VoIP metrics
-and recurring issue analysis.
-</li>
-
-<li>
-Used packet evidence and structured metrics to support
-root-cause analysis and incident triage.
-</li>
-
-</ul>
-
-<a
-class="repo"
-href="https://github.com/sajidmanzoor730/voip-support-automation"
-target="_blank">
-View GitHub repository →
-</a>
-
-</div>
-
-
-<!-- CUSTOMER ONBOARDING -->
-
-<div class="project">
-
-<h2>Customer Onboarding Lab</h2>
-
-<div class="tech">
-Python • Linux • Bash • Log Analysis
-</div>
-
 <p>
-A simulated customer onboarding and health-check environment
-focused on troubleshooting, operational analysis and repeatable
-support workflows.
+Built around operational KPIs that help teams monitor performance,
+quality, service levels and current operational status.
 </p>
 
-<ul>
-
-<li>
-Analyzed logs and configuration data to identify common
-customer setup and onboarding issues.
-</li>
-
-<li>
-Used Python and Bash to create repeatable checks and
-troubleshooting workflows.
-</li>
-
-<li>
-Documented troubleshooting steps and runbook-style procedures
-for recurring operational issues.
-</li>
-
-</ul>
-
-<a
-class="repo"
-href="https://github.com/sajidmanzoor730/customer-onboarding-lab"
-target="_blank">
-View GitHub repository →
+<a class="btn primary" href="kpi-operations-dashboard.html">
+View project →
 </a>
+
+</div>
+
+
+<div class="card">
+
+<span class="tag">Business Intelligence</span>
+<span class="tag">Power BI</span>
+<span class="tag">Data Modeling</span>
+
+<h3>Power BI Model &amp; Reporting</h3>
+
+<p class="muted">
+A documented BI layer for the Helpdesk KPI Dashboard.
+</p>
+
+<p>
+Covers a star-schema approach, fact and dimension tables,
+relationships, reusable measures, reporting pages and
+data-quality controls.
+</p>
+
+<a class="btn primary" href="powerbi-model.html">
+View BI model →
+</a>
+
+<a class="btn secondary"
+href="https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard"
+target="_blank"
+rel="noopener">
+GitHub →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<span class="tag">Data Quality</span>
+<span class="tag">BI Validation</span>
+<span class="tag">SQL</span>
+
+<h3>BI Validation &amp; Monitoring</h3>
+
+<p class="muted">
+Practical controls for checking whether an operational reporting
+layer is producing trustworthy KPIs.
+</p>
+
+<p>
+Includes source-to-report reconciliation, data-quality gates,
+refresh checks and KPI validation against analytical baselines.
+</p>
+
+<a class="btn primary" href="bi-validation.html">
+View project →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<span class="tag">Data Quality</span>
+<span class="tag">CRM</span>
+<span class="tag">Operations</span>
+
+<h3>CRM Data Quality &amp; Cleanup</h3>
+
+<p class="muted">
+A record-level data-quality workflow covering duplicates,
+missing fields, normalization, enrichment and follow-up.
+</p>
+
+<p>
+Reviewed 120 synthetic CRM records, identified duplicate candidates,
+missing-field issues and normalization problems, then documented
+the required cleanup actions.
+</p>
+
+<a class="btn primary" href="crm-data-quality-cleanup.html">
+View project →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<span class="tag">Data Documentation</span>
+<span class="tag">Data Quality</span>
+
+<h3>Helpdesk Data Dictionary</h3>
+
+<p class="muted">
+Field definitions and validation rules for the Helpdesk KPI
+Dashboard dataset.
+</p>
+
+<p>
+Documents ticket fields, KPI inputs, derived fields and
+data-quality behavior so the analytical dataset has clear
+business definitions.
+</p>
+
+<a class="btn primary" href="data-dictionary.html">
+View data dictionary →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<span class="tag">Dataset</span>
+<span class="tag">Python</span>
+<span class="tag">SQL</span>
+
+<h3>Helpdesk Ticket Dataset</h3>
+
+<p class="muted">
+A browsable synthetic helpdesk dataset created for the
+Helpdesk KPI Dashboard case study.
+</p>
+
+<p>
+Includes controlled duplicate records and realistic operational
+fields for demonstrating data cleaning, KPI analysis and
+dashboard reporting.
+</p>
+
+<a class="btn primary" href="helpdesk-dataset.html">
+Explore dataset →
+</a>
+
+<a class="btn secondary"
+href="https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard"
+target="_blank"
+rel="noopener">
+GitHub →
+</a>
+
+</div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- OPERATIONS ANALYTICS -->
+<!-- ===================================================== -->
+
+<h2>Operations &amp; Business Analytics</h2>
+
+<div class="grid">
+
+
+<div class="card">
+
+<span class="tag">Operations</span>
+<span class="tag">Dashboard</span>
+<span class="tag">KPI</span>
+
+<h3>Executive Operations Dashboard</h3>
+
+<p class="muted">
+A practical dashboard for monitoring meetings, priorities,
+owners, deadlines, action items and follow-ups.
+</p>
+
+<p>
+Uses structured demonstration data to show how an operations
+team could monitor current work and outstanding actions at a glance.
+</p>
+
+<a class="btn primary" href="executive-operations-dashboard.html">
+View project →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<span class="tag">Pipeline</span>
+<span class="tag">Operations</span>
+<span class="tag">Reporting</span>
+
+<h3>Lead Follow-up Pipeline</h3>
+
+<p class="muted">
+A structured pipeline for lead stages, owners, priorities,
+follow-up dates and next actions.
+</p>
+
+<p>
+Demonstrates how operational records can be organized around
+pipeline status, ownership, priorities and follow-up activity.
+</p>
+
+<a class="btn primary" href="lead-follow-up-pipeline.html">
+View project →
+</a>
+
+</div>
+
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- AUTOMATION & TECHNICAL OPERATIONS -->
+<!-- ===================================================== -->
+
+<h2>Automation &amp; Technical Operations</h2>
+
+<div class="grid">
+
+
+<div class="card">
+
+<span class="tag">Automation</span>
+<span class="tag">Python</span>
+<span class="tag">Bash</span>
+
+<h3>Python &amp; Bash Automation</h3>
+
+<p class="muted">
+Small repeatable utilities for system health checks,
+log inspection and routine command-line operations.
+</p>
+
+<p>
+Demonstrates repeatable health checks, log inspection,
+failure detection and preservation of evidence for investigation.
+</p>
+
+<a class="btn primary" href="python-bash-automation.html">
+View project →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<span class="tag">Process Documentation</span>
+<span class="tag">Operations</span>
+<span class="tag">SOP</span>
+
+<h3>Operations SOP &amp; Runbook</h3>
+
+<p class="muted">
+A repeatable operational playbook covering onboarding,
+access management, recurring checks, escalation and handoffs.
+</p>
+
+<p>
+Shows how recurring operational work can be converted into
+clear procedures, ownership steps, evidence requirements
+and escalation workflows.
+</p>
+
+<a class="btn primary" href="operations-sop-runbook.html">
+View project →
+</a>
+
+</div>
+
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- PROJECT ECOSYSTEM -->
+<!-- ===================================================== -->
+
+<div class="notice">
+
+<strong>Helpdesk analytics project ecosystem:</strong>
+
+The Helpdesk KPI Dashboard connects the dataset, data dictionary,
+SQL analysis, Power BI semantic model and BI validation work into
+one end-to-end analytics case study.
 
 </div>
 
