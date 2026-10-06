@@ -10,7 +10,7 @@
 <h2 id="business-question">Business question</h2><p class="muted">How can a support team turn a messy ticket export into reliable operational KPIs that reveal SLA performance, customer satisfaction, repeat tickets and priority-level patterns?</p>
 <h2 id="workflow">Analytics workflow</h2>
 <div class="visual"><img loading="lazy" decoding="async" src="assets/images/helpdesk-analytics-workflow.svg" alt="Helpdesk analytics workflow from raw data through Python, SQL, KPI calculation, dashboard reporting and business insights"></div>
-<div class="step"><strong>1. Source data.</strong><br>Used a synthetic helpdesk-style export covering March–August 2026 with 3,672 raw rows, 3,600 unique tickets and deliberately controlled data-quality issues.</div>
+<div class="step"><strong>1. Source data.</strong><br>Used a structured helpdesk-style export covering March–August 2026 with 3,672 raw rows, 3,600 unique tickets and documented data-quality issues.</div>
 <div class="step"><strong>2. Data cleaning.</strong><br>Used Python and Pandas to remove duplicate records, handle blank category/agent values and check date fields. The cleaned dataset contains 3,600 unique tickets.</div>
 <div class="step"><strong>3. SQL analysis.</strong><br>Used SQL for deduplication with ROW_NUMBER, SLA-policy JOINs, monthly trend analysis with LAG, and agent ranking within teams using RANK.</div>
 <div class="step"><strong>4. KPI reporting.</strong><br>Calculated SLA adherence, SLA breach rates, average CSAT and repeat-ticket rate, then presented the results through Streamlit and a Power BI report.</div>
