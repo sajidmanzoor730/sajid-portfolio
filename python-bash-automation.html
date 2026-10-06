@@ -1,1 +1,252 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Python & Bash Automation | Sajid Manzoor</title><link rel="stylesheet" href="project.css"></head><body><nav><div class="wrap navin"><a class="brand" href="index.html">Sajid Manzoor</a><div class="links"><a href="projects.html">Projects</a><a href="experience.html">Experience</a><a href="skills.html">Skills</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></div></div></nav><main><div class="wrap"><a class="back" href="projects.html">← Back to Projects</a><div class="eyebrow">Automation</div><h1>Python & Bash Automation</h1><p class="lead">Small repeatable utilities for system health checks, log inspection and routine command-line operations.</p><div class="notice"><strong>Data note:</strong> Local/sample demonstration data only. Hostnames, IP addresses and log entries below are intentionally non-production examples.</div><div class="grid"><div class="card metric"><strong>24</strong><span class="muted">health checks run</span></div><div class="card metric"><strong>22</strong><span class="muted">successful checks</span></div><div class="card metric"><strong>2</strong><span class="muted">warnings detected</span></div><div class="card metric"><strong>91.7%</strong><span class="muted">checks without intervention</span></div></div><section><h2>Health-check output</h2><div class="table-wrap"><table><thead><tr><th>Time</th><th>Service</th><th>Latency</th><th>Status</th><th>Result</th></tr></thead><tbody><tr><td>09:14:02</td><td>API Gateway</td><td>118 ms</td><td>200</td><td>PASS</td></tr><tr><td>09:14:05</td><td>Auth Service</td><td>143 ms</td><td>200</td><td>PASS</td></tr><tr><td>09:14:09</td><td>CRM API</td><td>812 ms</td><td>200</td><td>WARN · latency</td></tr><tr><td>09:14:13</td><td>Reporting API</td><td>176 ms</td><td>200</td><td>PASS</td></tr><tr><td>09:14:18</td><td>Webhook Worker</td><td>—</td><td>503</td><td>WARN · retry</td></tr></tbody></table></div><div class="card" style="margin-top:24px"><h3>Example log signal</h3><p><code>2026-09-19 09:14:18 webhook-worker status=503 retry=1</code></p><p class="muted">Automation can flag the failure, preserve the evidence and route the issue for investigation instead of relying on manual log scanning.</p></div></section></div></main><footer class="footer"><div class="wrap">© 2026 Sajid Manzoor · Operations & Growth</div></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Python and Bash automation project covering operational data processing, log analysis, validation and repeatable workflows.">
+<title>Python & Bash Automation | Sajid Manzoor</title>
+<link rel="stylesheet" href="project.css">
+</head>
+
+<body>
+
+<nav>
+  <div class="wrap navin">
+    <a class="brand" href="index.html">Sajid Manzoor</a>
+
+    <div class="links">
+      <a href="projects.html">Projects</a>
+      <a href="experience.html">Experience</a>
+      <a href="skills.html">Skills</a>
+      <a href="resume.html">Resume</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <a class="back" href="projects.html">← Back to Projects</a>
+
+    <div class="eyebrow">Automation · Data Operations</div>
+
+    <h1>Python & Bash Automation</h1>
+
+    <p class="lead">
+      Repeatable utilities for log parsing, data validation, API health checks and routine operational workflows using Python, Bash and SQL.
+    </p>
+
+    <div class="notice">
+      <strong>Project scope:</strong>
+      This project demonstrates automation and data-processing workflows without presenting fabricated operational metrics or production system records as business results.
+    </div>
+
+    <section>
+      <h2>Automation workflow</h2>
+
+      <div class="grid">
+
+        <div class="card">
+          <h3>01 · Collect</h3>
+          <p class="muted">
+            Collect logs, API responses and operational records from defined sources.
+          </p>
+          <span class="tag">Logs</span>
+          <span class="tag">APIs</span>
+        </div>
+
+        <div class="card">
+          <h3>02 · Parse</h3>
+          <p class="muted">
+            Use Python and command-line tools to extract useful fields and structure raw information.
+          </p>
+          <span class="tag">Python</span>
+          <span class="tag">Bash</span>
+        </div>
+
+        <div class="card">
+          <h3>03 · Validate</h3>
+          <p class="muted">
+            Check records for missing values, duplicates, invalid formats and unexpected conditions.
+          </p>
+          <span class="tag">Quality</span>
+          <span class="tag">Validation</span>
+        </div>
+
+        <div class="card">
+          <h3>04 · Analyze</h3>
+          <p class="muted">
+            Convert structured outputs into SQL-ready data for operational analysis and reporting.
+          </p>
+          <span class="tag">SQL</span>
+          <span class="tag">Analysis</span>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h2>Health-check workflow</h2>
+
+      <div class="card">
+        <div class="project-meta">
+          <span>Request</span>
+          <span>Response</span>
+          <span>Validation</span>
+          <span>Result</span>
+        </div>
+
+        <p class="muted">
+          API health checks can validate HTTP status codes, response times, authentication and required response fields before recording the result for further analysis.
+        </p>
+
+        <div class="tags">
+          <span class="tag">HTTP Status</span>
+          <span class="tag">Latency</span>
+          <span class="tag">Authentication</span>
+          <span class="tag">Response Validation</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Log analysis</h2>
+
+      <div class="card">
+        <h3>Structured error extraction</h3>
+
+        <p class="muted">
+          Python can parse operational logs and extract timestamps, error codes, service names and other useful fields for analysis.
+        </p>
+
+        <pre><code>Raw Log
+   ↓
+Python Parser
+   ↓
+Structured Records
+   ↓
+Validation
+   ↓
+SQL Analysis</code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>Data-quality checks</h2>
+
+      <div class="grid">
+
+        <div class="card">
+          <h3>Missing values</h3>
+          <p class="muted">
+            Identify required fields that are empty or incomplete before analysis.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Duplicates</h3>
+          <p class="muted">
+            Detect repeated records that could distort operational reporting.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Format validation</h3>
+          <p class="muted">
+            Check timestamps, identifiers, response codes and other structured fields.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Exception detection</h3>
+          <p class="muted">
+            Flag unexpected values or operational conditions for further investigation.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h2>Example command-line workflow</h2>
+
+      <div class="card">
+        <pre><code>grep "ERROR" application.log
+
+grep "ERROR" application.log | wc -l
+
+grep "WARNING" application.log > warnings.log</code></pre>
+
+        <p class="muted">
+          Bash commands can be combined with Python scripts to create simple, repeatable operational data-processing workflows.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>SQL analysis</h2>
+
+      <div class="card">
+        <h3>Operational error analysis</h3>
+
+        <p class="muted">
+          Once operational events are converted into structured records, SQL can be used to identify recurring issues and volume patterns.
+        </p>
+
+        <pre><code>SELECT
+    error_code,
+    COUNT(*) AS error_count
+FROM operational_logs
+GROUP BY error_code
+ORDER BY error_count DESC;</code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>What this project demonstrates</h2>
+
+      <div class="grid">
+
+        <div class="card">
+          <h3>Python automation</h3>
+          <p class="muted">
+            Building repeatable scripts for parsing, transformation and operational checks.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Bash workflows</h3>
+          <p class="muted">
+            Using command-line tools to inspect and process operational information efficiently.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Data validation</h3>
+          <p class="muted">
+            Applying quality checks before information is used for analysis or reporting.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Analytical workflow</h3>
+          <p class="muted">
+            Connecting data collection and automation with SQL-based operational analysis.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    © 2026 Sajid Manzoor · Data Analyst & Business Operations
+  </div>
+</footer>
+
+</body>
+</html>
