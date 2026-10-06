@@ -1,366 +1,504 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sajid Manzoor | Data Analyst Resume</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta
+  name="description"
+  content="Sajid Manzoor — Data Analyst resume covering SQL, Python, Power BI, Excel, KPI reporting, data quality and operational analytics."
+>
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f5f7fb;
-      color: #1f2937;
-      line-height: 1.6;
-    }
+<title>Sajid Manzoor | Data Analyst Resume</title>
 
-    .container {
-      max-width: 1050px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
+<style>
+:root{
+  --navy:#10233f;
+  --blue:#2563eb;
+  --sky:#eff6ff;
+  --text:#172033;
+  --muted:#64748b;
+  --line:#e2e8f0;
+  --bg:#f5f7fb;
+  --white:#fff
+}
 
-    .resume {
-      background: #ffffff;
-      padding: 45px 50px;
-      border-radius: 14px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    }
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0
+}
 
-    header {
-      text-align: center;
-      margin-bottom: 35px;
-    }
+body{
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6
+}
 
-    header h1 {
-      font-size: 38px;
-      color: #111827;
-      margin-bottom: 8px;
-    }
+.container{
+  max-width:1050px;
+  margin:40px auto;
+  padding:0 20px
+}
 
-    header .headline {
-      font-size: 18px;
-      font-weight: 600;
-      color: #2563eb;
-      margin-bottom: 12px;
-    }
+.resume{
+  background:var(--white);
+  padding:45px 50px;
+  border-radius:14px;
+  box-shadow:0 8px 30px rgba(0,0,0,.08)
+}
 
-    .contact {
-      font-size: 14px;
-      color: #4b5563;
-    }
+header{
+  text-align:center;
+  margin-bottom:35px
+}
 
-    .contact a {
-      color: #2563eb;
-      text-decoration: none;
-    }
+header h1{
+  font-size:38px;
+  color:var(--navy);
+  margin-bottom:8px;
+  letter-spacing:-.03em
+}
 
-    section {
-      margin-bottom: 32px;
-    }
+header .headline{
+  font-size:18px;
+  font-weight:700;
+  color:var(--blue);
+  margin-bottom:12px
+}
 
-    section h2 {
-      font-size: 20px;
-      color: #111827;
-      border-bottom: 2px solid #2563eb;
-      padding-bottom: 6px;
-      margin-bottom: 16px;
-    }
+.contact{
+  font-size:14px;
+  color:var(--muted)
+}
 
-    .summary {
-      font-size: 15px;
-      color: #374151;
-    }
+.contact a{
+  color:var(--blue);
+  text-decoration:none
+}
 
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
+.contact a:hover{
+  text-decoration:underline
+}
 
-    .skill-box {
-      background: #f8fafc;
-      padding: 14px 16px;
-      border-radius: 8px;
-      border-left: 4px solid #2563eb;
-    }
+section{
+  margin-bottom:32px
+}
 
-    .skill-box strong {
-      display: block;
-      color: #111827;
-      margin-bottom: 4px;
-    }
+section h2{
+  font-size:20px;
+  color:var(--navy);
+  border-bottom:2px solid var(--blue);
+  padding-bottom:6px;
+  margin-bottom:16px;
+  letter-spacing:-.01em
+}
 
-    .experience-item {
-      margin-bottom: 24px;
-    }
+.summary{
+  font-size:15px;
+  color:#374151
+}
 
-    .experience-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 8px;
-    }
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px
+}
 
-    .experience-header h3 {
-      font-size: 17px;
-      color: #111827;
-    }
+.skill-box{
+  background:#f8fafc;
+  padding:14px 16px;
+  border-radius:8px;
+  border-left:4px solid var(--blue);
+  font-size:14px;
+  color:#374151
+}
 
-    .company {
-      color: #2563eb;
-      font-weight: 600;
-    }
+.skill-box strong{
+  display:block;
+  color:var(--navy);
+  margin-bottom:4px
+}
 
-    .date {
-      color: #6b7280;
-      font-size: 14px;
-      white-space: nowrap;
-    }
+.experience-item{
+  margin-bottom:26px
+}
 
-    ul {
-      padding-left: 20px;
-    }
+.experience-item:last-child{
+  margin-bottom:0
+}
 
-    li {
-      margin-bottom: 7px;
-      font-size: 14.5px;
-    }
+.experience-header{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:8px
+}
 
-    .projects {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
-    }
+.experience-header h3{
+  font-size:17px;
+  color:var(--navy)
+}
 
-    .project-card {
-      background: #eef6ff;
-      border: 1px solid #d7e8fb;
-      border-radius: 10px;
-      padding: 20px;
-    }
+.company{
+  color:var(--blue);
+  font-weight:650;
+  font-size:14px
+}
 
-    .project-card h3 {
-      font-size: 18px;
-      color: #111827;
-      margin-bottom: 5px;
-    }
+.date{
+  color:var(--muted);
+  font-size:14px;
+  white-space:nowrap
+}
 
-    .tech {
-      color: #2563eb;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
+ul{
+  padding-left:20px
+}
 
-    .project-card p {
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
+li{
+  margin-bottom:7px;
+  font-size:14.5px
+}
 
-    .github-link {
-      display: inline-block;
-      margin-top: 8px;
-      color: #2563eb;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-    }
+.projects{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:18px
+}
 
-    .github-link:hover {
-      text-decoration: underline;
-    }
+.project-card{
+  background:var(--sky);
+  border:1px solid #d7e8fb;
+  border-radius:10px;
+  padding:20px
+}
 
-    .education-item,
-    .certification-item {
-      margin-bottom: 12px;
-    }
+.project-card h3{
+  font-size:18px;
+  color:var(--navy);
+  margin-bottom:5px
+}
 
-    .education-item strong,
-    .certification-item strong {
-      color: #111827;
-    }
+.tech{
+  color:var(--blue);
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:10px
+}
 
-    .additional-skills {
-      font-size: 14px;
-      color: #374151;
-    }
+.project-card p{
+  font-size:14px;
+  color:#374151;
+  margin-bottom:8px
+}
 
-    .profile-button {
-      text-align: center;
-      margin-top: 30px;
-    }
+.project-card ul{
+  margin-bottom:8px
+}
 
-    .profile-button a {
-      display: inline-block;
-      background: #2563eb;
-      color: white;
-      text-decoration: none;
-      padding: 10px 20px;
-      border-radius: 7px;
-      font-weight: 600;
-      font-size: 14px;
-    }
+.github-link{
+  display:inline-block;
+  margin-top:8px;
+  color:var(--blue);
+  font-size:14px;
+  font-weight:700;
+  text-decoration:none
+}
 
-    @media (max-width: 700px) {
-      .resume {
-        padding: 30px 22px;
-      }
+.github-link:hover{
+  text-decoration:underline
+}
 
-      header h1 {
-        font-size: 30px;
-      }
+.education-item,
+.certification-item{
+  margin-bottom:12px;
+  font-size:14px;
+  color:#374151
+}
 
-      .skills-grid {
-        grid-template-columns: 1fr;
-      }
+.education-item strong,
+.certification-item strong{
+  color:var(--navy)
+}
 
-      .experience-header {
-        flex-direction: column;
-        gap: 2px;
-      }
+.additional-skills{
+  font-size:14px;
+  color:#374151
+}
 
-      .date {
-        white-space: normal;
-      }
-    }
+.profile-button{
+  text-align:center;
+  margin-top:30px
+}
 
-    @media print {
-      body {
-        background: white;
-      }
+.profile-button a{
+  display:inline-block;
+  background:var(--navy);
+  color:white;
+  text-decoration:none;
+  padding:10px 20px;
+  border-radius:7px;
+  font-weight:650;
+  font-size:14px
+}
 
-      .container {
-        margin: 0;
-        max-width: none;
-      }
+.profile-button a:hover{
+  background:#1d3557
+}
 
-      .resume {
-        box-shadow: none;
-        border-radius: 0;
-      }
-    }
-  </style>
+@media(max-width:700px){
+
+  .container{
+    margin:20px auto;
+    padding:0 12px
+  }
+
+  .resume{
+    padding:30px 22px
+  }
+
+  header h1{
+    font-size:30px
+  }
+
+  .skills-grid{
+    grid-template-columns:1fr
+  }
+
+  .experience-header{
+    flex-direction:column;
+    gap:2px
+  }
+
+  .date{
+    white-space:normal
+  }
+
+  .contact{
+    line-height:1.9
+  }
+}
+
+@media print{
+
+  body{
+    background:white
+  }
+
+  .container{
+    margin:0;
+    max-width:none;
+    padding:0
+  }
+
+  .resume{
+    box-shadow:none;
+    border-radius:0
+  }
+
+  .profile-button{
+    display:none
+  }
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
+
   <div class="resume">
 
     <header>
-      <h1>SAJID MANZOOR</h1>
+
+      <h1>
+        SAJID MANZOOR
+      </h1>
 
       <div class="headline">
         Data Analyst | SQL • Power BI • Python • Excel • KPI Reporting
       </div>
 
       <div class="contact">
+
         Jammu &amp; Kashmir, India |
         +91 91499 79829 |
+
         <a href="mailto:sajidmanzoor730@gmail.com">
           sajidmanzoor730@gmail.com
         </a> |
-        <a href="https://www.linkedin.com/in/sajid-manzoor-730zz" target="_blank">
+
+        <a
+          href="https://www.linkedin.com/in/sajid-manzoor-730zz"
+          target="_blank"
+          rel="noopener">
           LinkedIn
         </a> |
-        <a href="https://github.com/sajidmanzoor730" target="_blank">
+
+        <a
+          href="https://github.com/sajidmanzoor730"
+          target="_blank"
+          rel="noopener">
           GitHub
         </a>
+
       </div>
+
     </header>
 
 
     <section>
-      <h2>SUMMARY</h2>
+
+      <h2>
+        SUMMARY
+      </h2>
 
       <p class="summary">
+
         Data Analyst with 4+ years of experience in operations reporting,
         data quality, KPI tracking, and business analysis. Uses SQL, Python,
         Excel, and Power BI to clean and reconcile data, build reports and
         dashboards, investigate operational issues, and identify trends in
         business data.
+
         <br><br>
+
         Hands-on background with operational and staffing datasets, monitoring
         SLAs and performance metrics, and turning day-to-day data into clear
         reports for decision-making. Also builds end-to-end analytics projects
         using Python, Pandas, SQL, Streamlit, and Power BI.
+
       </p>
+
     </section>
 
 
     <section>
-      <h2>SKILLS</h2>
+
+      <h2>
+        SKILLS
+      </h2>
 
       <div class="skills-grid">
 
+
         <div class="skill-box">
-          <strong>Data Analysis</strong>
+
+          <strong>
+            Data Analysis
+          </strong>
+
           Data Cleaning, Data Validation, Data Reconciliation,
           Exploratory Data Analysis, Trend Analysis, KPI Analysis,
           Root-Cause Analysis
+
         </div>
 
+
         <div class="skill-box">
-          <strong>SQL</strong>
+
+          <strong>
+            SQL
+          </strong>
+
           JOINs, GROUP BY, Aggregations, CTEs, Window Functions
           (ROW_NUMBER, RANK, LAG), Filtering
+
         </div>
 
-        <div class="skill-box">
-          <strong>Python</strong>
-          Pandas, NumPy, Data Transformation, Automation
-        </div>
 
         <div class="skill-box">
-          <strong>BI &amp; Reporting</strong>
-          Power BI, Excel (PivotTables, VLOOKUP, XLOOKUP,
-          Conditional Formatting), Streamlit, KPI Dashboards,
-          SLA Reporting
+
+          <strong>
+            Python
+          </strong>
+
+          Python, Pandas, NumPy, Data Transformation, Automation
+
         </div>
 
+
         <div class="skill-box">
-          <strong>Data Quality</strong>
+
+          <strong>
+            BI &amp; Reporting
+          </strong>
+
+          Power BI, DAX, Data Modeling, Excel, PivotTables,
+          VLOOKUP, XLOOKUP, Conditional Formatting,
+          Streamlit, KPI Dashboards, SLA Reporting
+
+        </div>
+
+
+        <div class="skill-box">
+
+          <strong>
+            Data Quality
+          </strong>
+
           Duplicate Detection, Missing-Value Checks,
-          Reconciliation, Data Dictionary, Documentation
+          Data Reconciliation, Data Validation,
+          Data Dictionary, Documentation
+
         </div>
 
+
         <div class="skill-box">
-          <strong>Tools</strong>
+
+          <strong>
+            Tools
+          </strong>
+
           ServiceNow, JIRA, GitHub, Notion, Confluence,
           Google Sheets
+
         </div>
 
+
       </div>
+
     </section>
 
 
     <section>
-      <h2>PROFESSIONAL EXPERIENCE</h2>
+
+      <h2>
+        PROFESSIONAL EXPERIENCE
+      </h2>
+
 
       <div class="experience-item">
 
         <div class="experience-header">
+
           <div>
-            <h3>Operations Analyst (Network and Data Operations)</h3>
-            <div class="company">A2N Technologies Pvt Ltd | Jammu &amp; Kashmir</div>
+
+            <h3>
+              Operations Analyst (Network and Data Operations)
+            </h3>
+
+            <div class="company">
+              A2N Technologies Pvt Ltd | Jammu &amp; Kashmir
+            </div>
+
           </div>
 
           <div class="date">
             Oct 2023 – Present
           </div>
+
         </div>
 
+
         <ul>
+
           <li>
-            Analyzed operational data across 100+ IP surveillance deployments
-            and maintained accurate records for 150+ client infrastructure
-            records in ServiceNow and JIRA.
+            Analyzed operational data across 100+ IP surveillance
+            deployments and maintained accurate records for 150+ client
+            infrastructure records in ServiceNow and JIRA.
           </li>
 
           <li>
@@ -377,8 +515,8 @@
 
           <li>
             Reviewed 40+ operational tickets each week to identify recurring
-            downtime patterns and root causes, contributing to a 30% reduction
-            in escalations.
+            downtime patterns and root causes, contributing to a 30%
+            reduction in escalations.
           </li>
 
           <li>
@@ -386,6 +524,7 @@
             highlighting SLA performance, operational trends, and recurring
             infrastructure issues.
           </li>
+
         </ul>
 
       </div>
@@ -394,17 +533,28 @@
       <div class="experience-item">
 
         <div class="experience-header">
+
           <div>
-            <h3>Staffing Operations Analyst</h3>
-            <div class="company">Global Management Services | Delhi</div>
+
+            <h3>
+              Staffing Operations Analyst
+            </h3>
+
+            <div class="company">
+              Global Management Services | Delhi
+            </div>
+
           </div>
 
           <div class="date">
             Jun 2022 – Aug 2023
           </div>
+
         </div>
 
+
         <ul>
+
           <li>
             Analyzed staffing data covering 150+ active client requirements
             and 500+ candidate records, keeping records accurate and
@@ -437,6 +587,7 @@
             historical ticket data and helped improve processes through SOPs
             and runbooks.
           </li>
+
         </ul>
 
       </div>
@@ -445,124 +596,196 @@
 
 
     <section>
-      <h2>PROJECTS</h2>
+
+      <h2>
+        PROJECTS
+      </h2>
 
       <div class="projects">
 
 
-        <!-- HELP DESK -->
         <div class="project-card">
 
-          <h3>Helpdesk KPI Dashboard</h3>
+          <h3>
+            Helpdesk Ticket KPI Dashboard
+          </h3>
 
           <div class="tech">
-            Python • Pandas • SQL • Streamlit • Power BI
+            Python • Pandas • SQL • Power BI • Streamlit
           </div>
 
           <ul>
+
             <li>
-              Built an end-to-end helpdesk analytics project on a synthetic
-              support dataset designed to contain realistic data-quality
-              issues.
+              Built an end-to-end helpdesk analytics project covering
+              data cleaning, KPI analysis, SQL analysis and dashboard
+              reporting.
             </li>
 
             <li>
-              Cleaned 5,100 raw records into 5,000 unique tickets by handling
-              duplicates and validating the data.
+              Worked with 3,672 raw ticket rows and 3,600 unique tickets,
+              including documented duplicate and missing-value issues.
             </li>
 
             <li>
-              Used SQL window functions such as ROW_NUMBER() to remove
-              duplicate tickets and LAG() to compare resolution times across
-              periods.
+              Used SQL window functions including ROW_NUMBER() and LAG()
+              for duplicate handling and period comparisons.
             </li>
 
             <li>
               Analyzed ticket volume, SLA performance, CSAT, repeat tickets,
-              and resolution times with SQL and Pandas.
+              resolution times and operational trends.
             </li>
 
             <li>
-              Built interactive Streamlit and Power BI dashboards to monitor
-              support KPIs and trends.
+              Built interactive Streamlit and Power BI reporting views
+              and documented the data model, KPI definitions and
+              validation process.
             </li>
 
-            <li>
-              Documented the cleaning process, SQL queries, data model,
-              assumptions, and validation checks.
-            </li>
           </ul>
 
           <a
             class="github-link"
             href="https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard"
-            target="_blank">
+            target="_blank"
+            rel="noopener">
             View GitHub repository →
           </a>
 
         </div>
 
 
-        <!-- VOIP -->
         <div class="project-card">
 
-          <h3>VoIP Support Automation</h3>
+          <h3>
+            BI Validation &amp; Monitoring
+          </h3>
 
           <div class="tech">
-            Python • SQL • SIP/RTP
+            Power BI • SQL • Python • Data Quality
           </div>
 
           <ul>
+
             <li>
-              Built a workflow to extract VoIP/SIP data from network captures
-              and convert it into structured records for SQL analysis.
+              Built a BI validation framework for operational KPI reporting,
+              covering raw-data quality, transformation rules, SQL
+              reconciliation and dashboard validation.
             </li>
 
             <li>
-              Used Python and SQL to identify recurring VoIP issues and
-              support root-cause analysis.
+              Designed a structured operational dataset with intentional
+              data-quality issues to demonstrate realistic validation
+              workflows.
             </li>
+
+            <li>
+              Defined business rules for duplicates, missing values,
+              invalid categories, SLA logic, QA results, rework and
+              derived fields.
+            </li>
+
+            <li>
+              Designed a Power BI reporting structure covering executive
+              KPIs, operational performance, data quality and KPI
+              reconciliation.
+            </li>
+
+            <li>
+              Documented the validation framework, cleaning rules,
+              analytical workflow and reconciliation approach.
+            </li>
+
           </ul>
 
           <a
             class="github-link"
-            href="https://github.com/sajidmanzoor730/voip-support-automation"
-            target="_blank">
+            href="https://github.com/sajidmanzoor730/bi-validation"
+            target="_blank"
+            rel="noopener">
             View GitHub repository →
           </a>
 
         </div>
 
 
-        <!-- CUSTOMER ONBOARDING -->
         <div class="project-card">
 
-          <h3>Customer Onboarding Lab</h3>
+          <h3>
+            KPI Operations Dashboard
+          </h3>
 
           <div class="tech">
-            Python • Linux • Bash • Log Analysis
+            Excel • Operational Analytics • KPI Reporting • Data Quality
           </div>
 
           <ul>
+
             <li>
-              Built a simulated onboarding and health-check environment;
-              analyzed logs and configs to find common setup issues.
+              Built an operational KPI dashboard for monitoring completion,
+              SLA achievement, QA coverage, data validity, rework and
+              workload.
             </li>
 
             <li>
-              Created repeatable troubleshooting steps and runbook-style
-              documentation.
+              Designed the dashboard around structured operational records
+              with filters for team, priority and region.
             </li>
+
+            <li>
+              Used calculated metrics, trend analysis and operational
+              breakdowns to support performance monitoring.
+            </li>
+
           </ul>
 
           <a
             class="github-link"
-            href="https://github.com/sajidmanzoor730/customer-onboarding-lab"
-            target="_blank">
-            View GitHub repository →
+            href="kpi-operations-dashboard.html">
+            View project →
           </a>
 
         </div>
+
+
+        <div class="project-card">
+
+          <h3>
+            Power BI Model &amp; Reporting
+          </h3>
+
+          <div class="tech">
+            Power BI • DAX • Data Modeling • KPI Reporting
+          </div>
+
+          <ul>
+
+            <li>
+              Designed a documented BI model for the Helpdesk KPI
+              Dashboard using fact and dimension tables.
+            </li>
+
+            <li>
+              Defined reusable KPI measures and reporting views for
+              operational performance analysis.
+            </li>
+
+            <li>
+              Documented relationship design, data-quality controls,
+              business questions and reporting architecture.
+            </li>
+
+          </ul>
+
+          <a
+            class="github-link"
+            href="powerbi-model.html">
+            View project →
+          </a>
+
+        </div>
+
 
       </div>
 
@@ -570,51 +793,82 @@
 
 
     <section>
-      <h2>EDUCATION</h2>
+
+      <h2>
+        EDUCATION
+      </h2>
 
       <div class="education-item">
-        <strong>Bachelor of Computer Applications (BCA)</strong>
+
+        <strong>
+          Bachelor of Computer Applications (BCA)
+        </strong>
+
         <br>
+
         2018 – 2021
+
         <br>
-        Amar Singh College (affiliated to Cluster University Srinagar)
+
+        Amar Singh College
+        (affiliated to Cluster University Srinagar)
+
       </div>
 
     </section>
 
 
     <section>
-      <h2>CERTIFICATIONS</h2>
+
+      <h2>
+        CERTIFICATIONS
+      </h2>
 
       <div class="certification-item">
-        <strong>Cisco Certified Network Associate (CCNA)</strong>
+
+        <strong>
+          Cisco Certified Network Associate (CCNA)
+        </strong>
+
       </div>
 
       <div class="certification-item">
-        <strong>AWS Certified Cloud Practitioner</strong>
+
+        <strong>
+          AWS Certified Cloud Practitioner
+        </strong>
+
       </div>
 
     </section>
 
 
     <section>
-      <h2>ADDITIONAL TECHNICAL SKILLS</h2>
+
+      <h2>
+        ADDITIONAL TECHNICAL SKILLS
+      </h2>
 
       <p class="additional-skills">
         Linux • Bash • Git • REST APIs • JSON • Networking Fundamentals
       </p>
+
     </section>
 
 
     <div class="profile-button">
+
       <a
         href="https://github.com/sajidmanzoor730"
-        target="_blank">
+        target="_blank"
+        rel="noopener">
         View GitHub Profile
       </a>
+
     </div>
 
   </div>
+
 </div>
 
 </body>
