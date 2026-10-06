@@ -1,761 +1,128 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-
-<meta
-  name="description"
-  content="Sajid Manzoor — Data Analyst portfolio covering SQL, Python, Power BI, KPI reporting, data quality, dashboards and operational analytics."
->
-
-<title>Sajid Manzoor | Data Analyst Portfolio</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Sajid Manzoor — Data Analyst portfolio covering SQL, Python, Power BI, KPI reporting, data quality and operational analytics.">
+<title>Sajid Manzoor — Data Analyst</title>
 <style>
-:root{
-  --navy:#10233f;
-  --blue:#2563eb;
-  --sky:#eff6ff;
-  --text:#172033;
-  --muted:#64748b;
-  --line:#e2e8f0;
-  --bg:#f8fafc;
-  --white:#fff;
-  --green:#0f766e
-}
-
-*{box-sizing:border-box}
-
-html{scroll-behavior:smooth}
-
-body{
-  margin:0;
-  font-family:Inter,Segoe UI,Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.65
-}
-
-a{text-decoration:none}
-
-.wrap{
-  width:min(1120px,calc(100% - 40px));
-  margin:auto
-}
-
-nav{
-  height:72px;
-  background:rgba(255,255,255,.97);
-  border-bottom:1px solid var(--line);
-  position:sticky;
-  top:0;
-  z-index:20
-}
-
-.navin{
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between
-}
-
-.brand{
-  font-size:19px;
-  font-weight:800;
-  color:var(--navy)
-}
-
-.links{
-  display:flex;
-  gap:22px
-}
-
-.links a{
-  color:var(--text);
-  font-size:14px;
-  font-weight:650
-}
-
-.links a:hover{
-  color:var(--blue)
-}
-
-.hero{
-  background:linear-gradient(
-    135deg,
-    #fff 0%,
-    #f8fbff 58%,
-    #eef5ff 100%
-  );
-  padding:92px 0 86px;
-  border-bottom:1px solid var(--line)
-}
-
-.eyebrow{
-  font-size:13px;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  font-weight:800;
-  color:var(--blue)
-}
-
-h1{
-  font-size:clamp(44px,7vw,74px);
-  line-height:1.01;
-  letter-spacing:-.055em;
-  max-width:920px;
-  margin:14px 0 20px;
-  color:var(--navy)
-}
-
-h2{
-  font-size:36px;
-  line-height:1.15;
-  letter-spacing:-.035em;
-  margin:0 0 12px;
-  color:var(--navy)
-}
-
-h3{
-  color:var(--navy);
-  margin:0 0 8px
-}
-
-.hero p,
-.lead{
-  font-size:19px;
-  color:var(--muted);
-  max-width:800px
-}
-
-.buttons{
-  margin-top:24px
-}
-
-.btn{
-  display:inline-block;
-  padding:12px 19px;
-  border-radius:9px;
-  font-size:14px;
-  font-weight:750;
-  margin:0 8px 8px 0
-}
-
-.primary{
-  background:var(--navy);
-  color:#fff
-}
-
-.secondary{
-  background:#fff;
-  color:var(--navy);
-  border:1px solid var(--line)
-}
-
-section{
-  padding:76px 0
-}
-
-.white{
-  background:#fff
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:18px;
-  margin-top:30px
-}
-
-.card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:24px;
-  box-shadow:0 5px 20px rgba(15,35,63,.035)
-}
-
-.card:hover{
-  transform:translateY(-2px);
-  box-shadow:0 10px 28px rgba(15,35,63,.07);
-  transition:.18s ease
-}
-
-.muted{
-  color:var(--muted)
-}
-
-.tag{
-  display:inline-block;
-  background:var(--sky);
-  color:#1e40af;
-  border-radius:99px;
-  padding:5px 9px;
-  font-size:12px;
-  margin:3px
-}
-
-.card a{
-  color:var(--blue);
-  font-weight:750
-}
-
-.capabilities{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-  margin-top:30px
-}
-
-.cap{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:22px
-}
-
-.cap strong{
-  display:block;
-  color:var(--navy);
-  margin-bottom:5px
-}
-
-.cap span{
-  font-size:14px;
-  color:var(--muted)
-}
-
-.notice{
-  margin-top:28px;
-  padding:16px 18px;
-  background:var(--sky);
-  border:1px solid #dbeafe;
-  border-radius:12px;
-  color:#334155
-}
-
-.proof{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
-  margin-top:30px
-}
-
-.proof .card{
-  min-height:150px
-}
-
-.label{
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  font-weight:800;
-  color:var(--blue)
-}
-
-.contact{
-  background:var(--navy);
-  color:#fff;
-  border-radius:20px;
-  padding:44px
-}
-
-.contact h2{
-  color:#fff
-}
-
-.contact p{
-  color:#cbd5e1
-}
-
-.contact .primary{
-  background:#fff;
-  color:var(--navy)
-}
-
-.footer{
-  background:#fff;
-  border-top:1px solid var(--line);
-  padding:34px 0;
-  color:var(--muted);
-  font-size:14px
-}
-
-@media(max-width:820px){
-  .capabilities{
-    grid-template-columns:repeat(2,1fr)
-  }
-
-  .proof{
-    grid-template-columns:1fr 1fr
-  }
-}
-
-@media(max-width:760px){
-  .wrap{
-    width:min(100% - 28px,1120px)
-  }
-
-  .links{
-    display:none
-  }
-
-  .hero{
-    padding:62px 0
-  }
-
-  .grid,
-  .proof{
-    grid-template-columns:1fr
-  }
-
-  section{
-    padding:58px 0
-  }
-
-  h2{
-    font-size:31px
-  }
-
-  .capabilities{
-    grid-template-columns:1fr
-  }
-
-  .contact{
-    padding:30px
-  }
-}
+:root{--ink:#111827;--muted:#667085;--paper:#f6f4ef;--white:#fff;--line:#dedbd3;--accent:#3157d5;--dark:#15181f}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+a{text-decoration:none;color:inherit}.wrap{width:min(1180px,calc(100% - 48px));margin:auto}
+.nav{position:sticky;top:0;z-index:50;background:rgba(246,244,239,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(222,219,211,.75)}
+.navin{height:78px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:18px;font-weight:850;letter-spacing:-.04em}.logo span{color:var(--accent)}
+.menu{display:flex;align-items:center;gap:28px;font-size:13px;font-weight:650}.menu a{color:#3f4652}.menu a:hover{color:var(--accent)}
+.navcta{padding:10px 15px;border:1px solid var(--ink);border-radius:999px;color:var(--ink)!important}
+.hero{padding:82px 0 105px}.heroGrid{display:grid;grid-template-columns:1.18fr .82fr;gap:70px;align-items:center}
+.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.16em;font-weight:800;color:var(--accent);margin-bottom:18px}
+h1{font-size:clamp(54px,7.2vw,94px);line-height:.94;letter-spacing:-.075em;margin:0;max-width:820px;font-weight:850}
+h1 em{font-style:normal;color:var(--accent)}
+.heroText{font-size:18px;line-height:1.65;color:var(--muted);max-width:650px;margin:28px 0}
+.actions{display:flex;gap:12px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 19px;border-radius:999px;font-size:13px;font-weight:800}
+.btnDark{background:var(--dark);color:#fff}.btnLight{border:1px solid #cfcac0;background:transparent}
+.profile{position:relative;min-height:470px}.profileCard{position:absolute;inset:0 0 25px 28px;background:var(--dark);border-radius:28px;padding:30px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.profileCard:after{content:"";position:absolute;width:230px;height:230px;border-radius:50%;right:-80px;top:-70px;background:#3157d5;opacity:.85}
+.monogram{position:relative;z-index:2;width:82px;height:82px;border:1px solid rgba(255,255,255,.28);border-radius:50%;display:grid;place-items:center;font-size:28px;font-weight:850}
+.profileBottom{position:relative;z-index:2}.profileName{font-size:28px;font-weight:800;letter-spacing:-.04em}.profileRole{color:#b9bfcb;margin-top:4px}.availability{display:inline-flex;margin-top:18px;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:7px 11px;font-size:11px;color:#dce2eb}
+.number{position:absolute;bottom:0;left:0;background:var(--white);border:1px solid var(--line);border-radius:18px;padding:18px 22px;z-index:3;box-shadow:0 15px 35px rgba(17,24,39,.08)}
+.number strong{display:block;font-size:25px;letter-spacing:-.05em}.number span{font-size:11px;color:var(--muted)}
+section{padding:92px 0}.sectionTop{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:35px}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);font-weight:850;margin-bottom:8px}
+h2{font-size:clamp(36px,5vw,58px);line-height:1;letter-spacing:-.06em;margin:0;font-weight:850}
+.sectionIntro{max-width:460px;color:var(--muted);margin:0}
+.projectGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.project{background:#fff;border:1px solid var(--line);border-radius:22px;padding:27px;min-height:315px;display:flex;flex-direction:column;transition:.2s ease}
+.project:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(17,24,39,.07)}
+.projectNum{display:flex;justify-content:space-between;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#8b9099;font-weight:800}
+.project h3{font-size:28px;line-height:1.05;letter-spacing:-.045em;margin:42px 0 10px}.project p{color:var(--muted);font-size:14px;max-width:570px}
+.tags{margin-top:auto;padding-top:18px;display:flex;gap:7px;flex-wrap:wrap}.tag{font-size:11px;border:1px solid var(--line);border-radius:999px;padding:6px 9px;color:#525866}
+.projectLink{margin-top:20px;color:var(--accent);font-size:13px;font-weight:850}
+.darkSection{background:var(--dark);color:#fff}.darkSection h2{color:#fff}.darkSection .sectionIntro{color:#aeb5c0}
+.process{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #343944;margin-top:45px}
+.step{padding:25px 22px 0 0;border-right:1px solid #343944;margin-right:22px}.step:last-child{border:0}
+.stepNo{font-size:11px;color:#8e97a6;font-weight:800;letter-spacing:.12em}.step h3{font-size:19px;margin:18px 0 8px}.step p{color:#aeb5c0;font-size:13px}
+.skills{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:35px}
+.skill{background:var(--paper);padding:25px;min-height:135px}.skill strong{display:block;font-size:16px;margin-bottom:8px}.skill span{font-size:13px;color:var(--muted)}
+.contactBox{background:var(--accent);color:#fff;border-radius:28px;padding:50px;display:flex;justify-content:space-between;gap:35px;align-items:end}.contactBox h2{max-width:650px}.contactBox p{color:#dfe5ff;max-width:500px}.contactBox .btnDark{background:#fff;color:#111827}
+footer{border-top:1px solid var(--line);padding:28px 0;font-size:12px;color:var(--muted)}.foot{display:flex;justify-content:space-between}
+@media(max-width:850px){.heroGrid{grid-template-columns:1fr}.profile{max-width:520px;height:430px}.projectGrid{grid-template-columns:1fr}.process{grid-template-columns:1fr 1fr}.skills{grid-template-columns:1fr 1fr}.contactBox{display:block}}
+@media(max-width:650px){.wrap{width:min(100% - 28px,1180px)}.menu a:not(.navcta){display:none}.hero{padding:55px 0 75px}.profile{min-height:360px}.profileCard{inset:0 0 20px 0}.number{left:12px}.sectionTop{display:block}.sectionIntro{margin-top:18px}.process,.skills{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid #343944;margin:0;padding:22px 0}.contactBox{padding:32px}.foot{display:block}.foot span{display:block;margin-top:8px}}
 </style>
 </head>
-
 <body>
-
-<nav>
-  <div class="wrap navin">
-
-    <a class="brand" href="index.html">
-      Sajid Manzoor
-    </a>
-
-    <div class="links">
-      <a href="index.html">Home</a>
-      <a href="projects.html">Projects</a>
-      <a href="experience.html">Experience</a>
-      <a href="skills.html">Skills</a>
-      <a href="resume.html">Resume</a>
-      <a href="contact.html">Contact</a>
-    </div>
-
-  </div>
+<header class="nav">
+<div class="wrap navin">
+<a class="logo" href="index.html">Sajid<span>.</span></a>
+<nav class="menu" aria-label="Primary navigation">
+<a href="index.html">Home</a><a href="#work">Work</a><a href="#approach">Approach</a><a href="resume.html">Resume</a><a class="navcta" href="contact.html">Let's talk ↗</a>
 </nav>
-
+</div>
+</header>
 
 <main>
-
 <section class="hero">
-
-  <div class="wrap">
-
-    <div class="eyebrow">
-      Data Analyst • SQL • Python • Power BI
-    </div>
-
-    <h1>
-      Turning operational data into clear, useful insights.
-    </h1>
-
-    <p>
-      I’m Sajid Manzoor. I work across SQL, Python, Pandas, Power BI,
-      data quality, KPI reporting, and operational analytics to turn
-      structured data into reliable reporting and useful business insights.
-    </p>
-
-    <div class="buttons">
-
-      <a
-        class="btn primary"
-        href="projects.html">
-        Explore analytics projects →
-      </a>
-
-      <a
-        class="btn secondary"
-        href="resume.html">
-        View resume
-      </a>
-
-    </div>
-
-  </div>
-
+<div class="wrap heroGrid">
+<div>
+<div class="kicker">Data Analyst · Operations · BI</div>
+<h1>Making data <em>useful</em> for better decisions.</h1>
+<p class="heroText">I'm Sajid Manzoor. I work with SQL, Python, Power BI and data-quality workflows to turn operational data into clear reporting, reliable KPIs and practical business insights.</p>
+<div class="actions"><a class="btn btnDark" href="#work">View selected work ↘</a><a class="btn btnLight" href="resume.html">View resume ↗</a></div>
+</div>
+<div class="profile">
+<div class="profileCard">
+<div class="monogram">SM</div>
+<div class="profileBottom"><div class="profileName">Sajid Manzoor</div><div class="profileRole">Data Analyst &amp; Business Operations</div><div class="availability">Available for remote opportunities</div></div>
+</div>
+<div class="number"><strong>04+</strong><span>featured analytics projects</span></div>
+</div>
+</div>
 </section>
 
+<section id="work">
+<div class="wrap">
+<div class="sectionTop"><div><div class="eyebrow">Selected work</div><h2>Projects with a purpose.</h2></div><p class="sectionIntro">A small selection of practical work covering dashboards, BI validation, KPI reporting and operational analytics.</p></div>
+<div class="projectGrid">
+<article class="project"><div class="projectNum"><span>01 / Analytics</span><span>Dashboard</span></div><h3>Helpdesk Ticket KPI Dashboard</h3><p>Helpdesk analytics covering data cleaning, SQL analysis, SLA performance, CSAT, repeat tickets, resolution trends and reporting.</p><div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">SQL</span><span class="tag">Power BI</span></div><a class="projectLink" href="helpdesk-kpi-dashboard.html">View project →</a></article>
+<article class="project"><div class="projectNum"><span>02 / BI</span><span>Validation</span></div><h3>BI Validation &amp; Monitoring</h3><p>Data-quality checks, SQL reconciliation, KPI validation, refresh review and investigation workflows for reliable BI reporting.</p><div class="tags"><span class="tag">Power BI</span><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Data Quality</span></div><a class="projectLink" href="bi-validation.html">View project →</a></article>
+<article class="project"><div class="projectNum"><span>03 / Operations</span><span>KPI</span></div><h3>KPI Operations Dashboard</h3><p>Operational reporting covering completion, SLA achievement, QA coverage, data validity, rework, workload and performance trends.</p><div class="tags"><span class="tag">Excel</span><span class="tag">KPI</span><span class="tag">Reporting</span></div><a class="projectLink" href="kpi-operations-dashboard.html">View project →</a></article>
+<article class="project"><div class="projectNum"><span>04 / BI</span><span>Modeling</span></div><h3>Power BI Model &amp; Reporting</h3><p>Documented BI model covering dimensional structure, relationships, reusable measures, KPI definitions and data-quality controls.</p><div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Data Modeling</span></div><a class="projectLink" href="powerbi-model.html">View project →</a></article>
+</div>
+</div>
+</section>
+
+<section class="darkSection" id="approach">
+<div class="wrap">
+<div class="sectionTop"><div><div class="eyebrow">How I work</div><h2>From messy data to a clear answer.</h2></div><p class="sectionIntro">The goal isn't just a dashboard. It's a result that can be checked, understood and used.</p></div>
+<div class="process">
+<div class="step"><div class="stepNo">01 — INSPECT</div><h3>Understand</h3><p>Review fields, missing values, duplicates, definitions and assumptions before calculating metrics.</p></div>
+<div class="step"><div class="stepNo">02 — TRANSFORM</div><h3>Clean &amp; structure</h3><p>Use Python, Pandas and SQL to clean, transform, reconcile and prepare repeatable workflows.</p></div>
+<div class="step"><div class="stepNo">03 — VALIDATE</div><h3>Check the numbers</h3><p>Reconcile KPIs across source data, analytical layers and dashboards before reporting.</p></div>
+<div class="step"><div class="stepNo">04 — COMMUNICATE</div><h3>Make it useful</h3><p>Present validated metrics through focused dashboards and concise business findings.</p></div>
+</div>
+</div>
+</section>
 
 <section>
-
-  <div class="wrap">
-
-    <h2>
-      Analytics capabilities
-    </h2>
-
-    <p class="lead">
-      A practical workflow from source data and data-quality checks
-      to validated metrics, dashboards, and decision-ready reporting.
-    </p>
-
-
-    <div class="capabilities">
-
-      <div class="cap">
-
-        <strong>
-          Python &amp; Pandas
-        </strong>
-
-        <span>
-          Cleaning, transformation, validation, exploratory analysis
-          and repeatable data-processing workflows.
-        </span>
-
-      </div>
-
-
-      <div class="cap">
-
-        <strong>
-          SQL
-        </strong>
-
-        <span>
-          Joins, aggregations, CTEs, window functions,
-          deduplication, reconciliation and KPI analysis.
-        </span>
-
-      </div>
-
-
-      <div class="cap">
-
-        <strong>
-          Power BI &amp; Dashboards
-        </strong>
-
-        <span>
-          Data modeling, KPI measures, validation, reporting pages
-          and focused visual analysis for operational questions.
-        </span>
-
-      </div>
-
-
-      <div class="cap">
-
-        <strong>
-          Data Quality
-        </strong>
-
-        <span>
-          Duplicate detection, missing-value checks, validation,
-          reconciliation, issue classification and documentation.
-        </span>
-
-      </div>
-
-    </div>
-
-  </div>
-
+<div class="wrap">
+<div class="sectionTop"><div><div class="eyebrow">Toolkit</div><h2>What I work with.</h2></div><p class="sectionIntro">A practical mix of analytics, reporting and data-quality skills.</p></div>
+<div class="skills">
+<div class="skill"><strong>Python &amp; Pandas</strong><span>Cleaning, transformation, validation and exploratory analysis.</span></div>
+<div class="skill"><strong>SQL</strong><span>Joins, aggregations, CTEs, windows, deduplication and KPI analysis.</span></div>
+<div class="skill"><strong>Power BI</strong><span>Data modeling, measures, validation and focused reporting views.</span></div>
+<div class="skill"><strong>Data Quality</strong><span>Duplicates, missing values, reconciliation and issue classification.</span></div>
+</div>
+</div>
 </section>
-
-
-<section class="white">
-
-  <div class="wrap">
-
-    <h2>
-      Featured analytics projects
-    </h2>
-
-    <p class="lead">
-      Practical projects showing how I clean data, validate KPIs,
-      analyze operational performance, and build reporting solutions.
-    </p>
-
-
-    <div class="grid">
-
-
-      <div class="card">
-
-        <div class="label">
-          End-to-end analytics
-        </div>
-
-        <h3>
-          Helpdesk Ticket KPI Dashboard
-        </h3>
-
-        <p class="muted">
-          End-to-end helpdesk analytics covering data cleaning,
-          SQL analysis, KPI calculations, SLA performance, CSAT,
-          repeat tickets, resolution trends and interactive reporting.
-        </p>
-
-        <span class="tag">Python</span>
-        <span class="tag">Pandas</span>
-        <span class="tag">SQL</span>
-        <span class="tag">Power BI</span>
-        <span class="tag">Streamlit</span>
-
-        <br><br>
-
-        <a href="helpdesk-kpi-dashboard.html">
-          View project →
-        </a>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="label">
-          BI validation
-        </div>
-
-        <h3>
-          BI Validation &amp; Monitoring
-        </h3>
-
-        <p class="muted">
-          End-to-end BI validation project covering data-quality
-          checks, SQL reconciliation, KPI validation, Power BI
-          reporting, refresh review, and investigation workflows.
-        </p>
-
-        <span class="tag">Power BI</span>
-        <span class="tag">SQL</span>
-        <span class="tag">Python</span>
-        <span class="tag">Data Quality</span>
-
-        <br><br>
-
-        <a href="bi-validation.html">
-          View project →
-        </a>
-
-        &nbsp;&nbsp;
-
-        <a
-          href="https://github.com/sajidmanzoor730/bi-validation"
-          target="_blank"
-          rel="noopener">
-          GitHub →
-        </a>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="label">
-          Operational analytics
-        </div>
-
-        <h3>
-          KPI Operations Dashboard
-        </h3>
-
-        <p class="muted">
-          Operational KPI dashboard covering completion,
-          SLA achievement, QA coverage, data validity,
-          rework, workload and performance trends.
-        </p>
-
-        <span class="tag">Excel</span>
-        <span class="tag">KPI</span>
-        <span class="tag">Reporting</span>
-        <span class="tag">Data Quality</span>
-
-        <br><br>
-
-        <a href="kpi-operations-dashboard.html">
-          View project →
-        </a>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="label">
-          Power BI modeling
-        </div>
-
-        <h3>
-          Power BI Model &amp; Reporting
-        </h3>
-
-        <p class="muted">
-          Documented BI model covering dimensional structure,
-          relationships, reusable measures, KPI definitions,
-          data-quality controls and business-focused report views.
-        </p>
-
-        <span class="tag">Power BI</span>
-        <span class="tag">DAX</span>
-        <span class="tag">Data Modeling</span>
-
-        <br><br>
-
-        <a href="powerbi-model.html">
-          View project →
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
 
 <section>
-
-  <div class="wrap">
-
-    <h2>
-      Working approach
-    </h2>
-
-
-    <div class="proof">
-
-
-      <div class="card">
-
-        <div class="label">
-          01 · Inspect
-        </div>
-
-        <h3>
-          Understand the source data
-        </h3>
-
-        <p class="muted">
-          Review fields, missing values, duplicates, dates,
-          definitions and assumptions before calculating metrics.
-        </p>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="label">
-          02 · Transform
-        </div>
-
-        <h3>
-          Build a repeatable data process
-        </h3>
-
-        <p class="muted">
-          Use Python, Pandas and SQL to clean, validate,
-          transform, reconcile and analyze the data.
-        </p>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="label">
-          03 · Validate
-        </div>
-
-        <h3>
-          Check the numbers
-        </h3>
-
-        <p class="muted">
-          Reconcile KPIs across the source data, analytical
-          layer and dashboard before using them for reporting.
-        </p>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="label">
-          04 · Communicate
-        </div>
-
-        <h3>
-          Present the result clearly
-        </h3>
-
-        <p class="muted">
-          Turn validated metrics into focused dashboards
-          and concise findings that answer business questions.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
+<div class="wrap">
+<div class="contactBox"><div><div class="eyebrow">Get in touch</div><h2>Have a data or operations problem worth solving?</h2><p>I'm interested in Data Analyst and analytics-focused operations roles where I can investigate business questions, build reliable reporting and improve data quality.</p></div><a class="btn btnDark" href="contact.html">Let's talk ↗</a></div>
+</div>
 </section>
-
-
-<section>
-
-  <div class="wrap">
-
-    <div class="contact">
-
-      <h2>
-        Looking for practical analytics support?
-      </h2>
-
-      <p>
-        I’m interested in Data Analyst and analytics-focused
-        operations roles where I can work with structured data,
-        investigate business questions, build reliable reports,
-        validate KPIs, and improve data quality.
-      </p>
-
-      <a
-        class="btn primary"
-        href="contact.html">
-        Contact me →
-      </a>
-
-      <a
-        class="btn secondary"
-        href="projects.html">
-        See all projects
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-
 </main>
 
-
-<footer class="footer">
-
-  <div class="wrap">
-    © 2026 Sajid Manzoor · Data Analyst &amp; Business Operations
-  </div>
-
-</footer>
-
-
+<footer><div class="wrap foot"><span>© 2026 Sajid Manzoor</span><span>Data Analyst · Business Operations</span></div></footer>
 </body>
 </html>
