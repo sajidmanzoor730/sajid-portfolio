@@ -51,8 +51,8 @@ a{
 
 .resume{
   background:var(--white);
-  box-shadow:0 12px 40px rgba(15,35,63,.10);
   border:1px solid #e1e7ef;
+  box-shadow:0 12px 40px rgba(15,35,63,.10);
 }
 
 /* HEADER */
@@ -87,7 +87,7 @@ a{
 }
 
 .contact{
-  max-width:430px;
+  max-width:440px;
   text-align:right;
   color:var(--muted);
   font-size:13px;
@@ -143,7 +143,7 @@ section:last-child{
 
 .summary{
   margin:0;
-  max-width:960px;
+  max-width:970px;
   color:#354052;
   font-size:14.5px;
   line-height:1.7;
@@ -283,7 +283,7 @@ section:last-child{
   text-decoration:underline;
 }
 
-/* BOTTOM GRID */
+/* BOTTOM */
 
 .bottom-grid{
   display:grid;
@@ -305,7 +305,24 @@ section:last-child{
   color:var(--navy);
 }
 
-/* FOOTER ACTION */
+/* TECHNICAL FOUNDATION */
+
+.foundation{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px 35px;
+}
+
+.foundation-item{
+  color:#465366;
+  font-size:13px;
+}
+
+.foundation-item strong{
+  color:var(--navy);
+}
+
+/* ACTIONS */
 
 .actions{
   display:flex;
@@ -387,7 +404,8 @@ section:last-child{
     grid-template-columns:1fr;
   }
 
-  .bottom-grid{
+  .bottom-grid,
+  .foundation{
     grid-template-columns:1fr;
     gap:28px;
   }
@@ -418,13 +436,13 @@ section:last-child{
 
   @page{
     size:A4;
-    margin:11mm 12mm;
+    margin:10mm 11mm;
   }
 
   body{
     background:#fff;
     color:#172033;
-    font-size:11px;
+    font-size:10.5px;
   }
 
   .page{
@@ -438,107 +456,121 @@ section:last-child{
   }
 
   .header{
-    padding:0 0 14px;
+    padding:0 0 12px;
     border-bottom:2px solid #10233f;
   }
 
   .identity h1{
-    font-size:28px;
+    font-size:27px;
   }
 
   .role{
-    font-size:13px;
+    font-size:12.5px;
+    margin-top:6px;
   }
 
   .contact{
-    font-size:10px;
-    line-height:1.55;
-  }
-
-  .content{
-    padding:15px 0 0;
-  }
-
-  section{
-    margin-bottom:15px;
-  }
-
-  .section-title{
-    font-size:10px;
-    margin-bottom:7px;
-  }
-
-  .summary{
-    font-size:10.5px;
+    font-size:9.2px;
     line-height:1.5;
   }
 
+  .content{
+    padding:12px 0 0;
+  }
+
+  section{
+    margin-bottom:12px;
+  }
+
+  .section-title{
+    font-size:9px;
+    margin-bottom:6px;
+    letter-spacing:.11em;
+  }
+
+  .summary{
+    font-size:9.7px;
+    line-height:1.45;
+  }
+
   .skills{
-    column-gap:25px;
-    row-gap:5px;
+    column-gap:22px;
+    row-gap:4px;
   }
 
   .skill-row{
-    grid-template-columns:95px 1fr;
-    gap:7px;
-    padding-bottom:5px;
+    grid-template-columns:87px 1fr;
+    gap:6px;
+    padding-bottom:4px;
   }
 
   .skill-row strong,
   .skill-row span{
-    font-size:9.5px;
+    font-size:8.7px;
   }
 
   .job{
-    margin-bottom:13px;
+    margin-bottom:10px;
   }
 
   .job-head{
-    margin-bottom:4px;
+    margin-bottom:3px;
   }
 
   .job-title{
-    font-size:11.5px;
+    font-size:10.8px;
   }
 
   .company,
   .date{
-    font-size:9.5px;
+    font-size:8.8px;
   }
 
   .job ul,
   .project ul{
-    margin-top:4px;
+    margin-top:3px;
   }
 
   .job li,
   .project li{
-    font-size:9.5px;
-    line-height:1.4;
-    margin-bottom:3px;
+    font-size:8.8px;
+    line-height:1.32;
+    margin-bottom:2px;
   }
 
   .project{
-    padding-bottom:9px;
-    margin-bottom:9px;
+    padding-bottom:7px;
+    margin-bottom:7px;
   }
 
   .project-title{
-    font-size:11px;
+    font-size:10.5px;
   }
 
   .tech{
-    font-size:9px;
+    font-size:8.3px;
   }
 
   .project-link{
-    font-size:9px;
-    margin-top:3px;
+    font-size:8.3px;
+    margin-top:2px;
+  }
+
+  .bottom-grid{
+    gap:25px;
   }
 
   .info-item{
-    font-size:9.5px;
-    margin-bottom:6px;
+    font-size:8.8px;
+    margin-bottom:4px;
+  }
+
+  .foundation{
+    gap:5px 25px;
+  }
+
+  .foundation-item{
+    font-size:8.7px;
   }
 
   .actions{
@@ -553,7 +585,8 @@ section:last-child{
   section,
   .job,
   .project,
-  .skill-row{
+  .skill-row,
+  .foundation-item{
     break-inside:avoid;
   }
 }
@@ -571,13 +604,11 @@ section:last-child{
       <div class="header-top">
 
         <div class="identity">
-
           <h1>SAJID MANZOOR</h1>
 
           <div class="role">
             Data Analyst | SQL • Power BI • Python • Excel • KPI Reporting
           </div>
-
         </div>
 
         <div class="contact">
@@ -619,33 +650,32 @@ section:last-child{
 
     <div class="content">
 
+      <!-- SUMMARY -->
 
       <section>
 
-        <h2 class="section-title">
-          Summary
-        </h2>
+        <h2 class="section-title">Summary</h2>
 
         <p class="summary">
-          Data Analyst with 4+ years of experience in operations reporting,
-          data quality, KPI tracking, and business analysis. Uses SQL, Python,
-          Excel, and Power BI to clean and reconcile data, build reports and
-          dashboards, investigate operational issues, and identify trends in
-          business data. Hands-on background with operational and staffing
-          datasets, monitoring SLAs and performance metrics, and turning
-          day-to-day data into clear reports for decision-making. Also builds
-          end-to-end analytics projects using Python, Pandas, SQL, Streamlit,
-          and Power BI.
+          Data Analyst with 4+ years of experience across operations analytics,
+          reporting, data quality, KPI tracking, and business analysis.
+          Hands-on with SQL, Python, Pandas, Excel, and Power BI for cleaning
+          and reconciling data, analyzing operational performance, building KPI
+          reports and dashboards, and investigating recurring issues.
+          Experienced with operational and staffing datasets, SLA monitoring,
+          data validation, and translating day-to-day data into clear reporting
+          for decision-making. Builds end-to-end analytics projects covering
+          Python, Pandas, SQL, Power BI, Streamlit, and data-quality validation.
         </p>
 
       </section>
 
 
+      <!-- SKILLS -->
+
       <section>
 
-        <h2 class="section-title">
-          Skills
-        </h2>
+        <h2 class="section-title">Core Skills</h2>
 
         <div class="skills">
 
@@ -653,41 +683,42 @@ section:last-child{
             <strong>Data Analysis</strong>
             <span>
               Data Cleaning, Data Validation, Data Reconciliation,
-              Exploratory Data Analysis, Trend Analysis, KPI Analysis,
-              Root-Cause Analysis
+              Data Profiling, Exploratory Data Analysis, Trend Analysis,
+              KPI Analysis, Root-Cause Analysis
             </span>
           </div>
 
           <div class="skill-row">
             <strong>SQL</strong>
             <span>
-              JOINs, GROUP BY, Aggregations, CTEs, Window Functions
-              (ROW_NUMBER, RANK, LAG), Filtering
+              JOINs, GROUP BY, Aggregations, CTEs, Window Functions,
+              ROW_NUMBER, RANK, LAG, Filtering, KPI Queries
             </span>
           </div>
 
           <div class="skill-row">
             <strong>Python</strong>
             <span>
-              Python, Pandas, NumPy, Data Transformation, Automation
+              Python, Pandas, NumPy, Data Transformation, Automation,
+              CSV/Excel Processing, Analytical Workflows
             </span>
           </div>
 
           <div class="skill-row">
             <strong>BI &amp; Reporting</strong>
             <span>
-              Power BI, DAX, Data Modeling, Excel, PivotTables,
-              VLOOKUP, XLOOKUP, Conditional Formatting, Streamlit,
-              KPI Dashboards, SLA Reporting
+              Power BI, DAX, Data Modeling, KPI Dashboards,
+              Excel, PivotTables, VLOOKUP, XLOOKUP,
+              Conditional Formatting, Streamlit, SLA Reporting
             </span>
           </div>
 
           <div class="skill-row">
             <strong>Data Quality</strong>
             <span>
-              Duplicate Detection, Missing-Value Checks,
-              Data Reconciliation, Data Validation, Data Dictionary,
-              Documentation
+              Duplicate Detection, Missing-Value Checks, Reconciliation,
+              Issue Classification, Data Dictionary, Validation Rules,
+              ETL Concepts, Documentation
             </span>
           </div>
 
@@ -703,11 +734,11 @@ section:last-child{
       </section>
 
 
+      <!-- EXPERIENCE -->
+
       <section>
 
-        <h2 class="section-title">
-          Professional Experience
-        </h2>
+        <h2 class="section-title">Professional Experience</h2>
 
 
         <article class="job">
@@ -735,9 +766,9 @@ section:last-child{
           <ul>
 
             <li>
-              Analyzed operational data across 100+ IP surveillance
-              deployments and maintained accurate records for 150+ client
-              infrastructure records in ServiceNow and JIRA.
+              Analyzed operational data across 100+ IP surveillance deployments
+              and maintained accurate records for 150+ client infrastructure
+              records in ServiceNow and JIRA.
             </li>
 
             <li>
@@ -754,8 +785,8 @@ section:last-child{
 
             <li>
               Reviewed 40+ operational tickets each week to identify recurring
-              downtime patterns and root causes, contributing to a 30%
-              reduction in escalations.
+              downtime patterns and root causes, contributing to a 30% reduction
+              in escalations.
             </li>
 
             <li>
@@ -833,11 +864,11 @@ section:last-child{
       </section>
 
 
+      <!-- PROJECTS -->
+
       <section>
 
-        <h2 class="section-title">
-          Selected Analytics Projects
-        </h2>
+        <h2 class="section-title">Selected Analytics Projects</h2>
 
 
         <article class="project">
@@ -857,9 +888,8 @@ section:last-child{
           <ul>
 
             <li>
-              Built an end-to-end helpdesk analytics project covering
-              data cleaning, KPI analysis, SQL analysis and dashboard
-              reporting.
+              Built an end-to-end helpdesk analytics project covering data
+              cleaning, KPI analysis, SQL analysis, and dashboard reporting.
             </li>
 
             <li>
@@ -874,12 +904,13 @@ section:last-child{
 
             <li>
               Analyzed ticket volume, SLA performance, CSAT, repeat tickets,
-              resolution times and operational trends.
+              resolution times, and operational trends.
             </li>
 
             <li>
               Built interactive Streamlit and Power BI reporting views and
-              documented the data model, KPI definitions and validation process.
+              documented the data model, KPI definitions, cleaning process,
+              and validation approach.
             </li>
 
           </ul>
@@ -914,28 +945,28 @@ section:last-child{
             <li>
               Built a BI validation framework for operational KPI reporting,
               covering raw-data quality, transformation rules, SQL
-              reconciliation and dashboard validation.
+              reconciliation, and dashboard validation.
             </li>
 
             <li>
               Designed a structured operational dataset with intentional
-              data-quality issues to demonstrate realistic validation workflows.
+              data-quality issues to demonstrate realistic validation
+              workflows.
             </li>
 
             <li>
-              Defined business rules for duplicates, missing values,
-              invalid categories, SLA logic, QA results, rework and
-              derived fields.
+              Defined business rules for duplicates, missing values, invalid
+              categories, SLA logic, QA results, rework, and derived fields.
             </li>
 
             <li>
               Designed a Power BI reporting structure covering executive KPIs,
-              operational performance, data quality and KPI reconciliation.
+              operational performance, data quality, and KPI reconciliation.
             </li>
 
             <li>
-              Documented the validation framework, cleaning rules,
-              analytical workflow and reconciliation approach.
+              Documented cleaning rules, analytical workflow, validation
+              framework, and reconciliation approach.
             </li>
 
           </ul>
@@ -969,17 +1000,17 @@ section:last-child{
 
             <li>
               Built an operational KPI dashboard for monitoring completion,
-              SLA achievement, QA coverage, data validity, rework and workload.
+              SLA achievement, QA coverage, data validity, rework, and workload.
             </li>
 
             <li>
-              Designed the dashboard around structured operational records
-              with filters for team, priority and region.
+              Structured operational records with filters for team, priority,
+              and region and calculated performance metrics and trends.
             </li>
 
             <li>
-              Used calculated metrics, trend analysis and operational
-              breakdowns to support performance monitoring.
+              Used operational breakdowns and KPI views to support performance
+              monitoring and identify areas requiring investigation.
             </li>
 
           </ul>
@@ -1015,13 +1046,13 @@ section:last-child{
             </li>
 
             <li>
-              Defined reusable KPI measures and reporting views for
-              operational performance analysis.
+              Defined reusable KPI measures and reporting views for operational
+              performance analysis.
             </li>
 
             <li>
-              Documented relationship design, data-quality controls,
-              business questions and reporting architecture.
+              Documented relationship design, data-quality controls, business
+              questions, and reporting architecture.
             </li>
 
           </ul>
@@ -1037,43 +1068,4 @@ section:last-child{
       </section>
 
 
-      <div class="bottom-grid">
-
-        <section>
-
-          <h2 class="section-title">
-            Education
-          </h2>
-
-          <div class="info-item">
-
-            <strong>
-              Bachelor of Computer Applications (BCA)
-            </strong>
-
-            <br>
-
-            2018 – 2021
-
-            <br>
-
-            Amar Singh College
-            (affiliated to Cluster University Srinagar)
-
-          </div>
-
-        </section>
-
-
-        <section>
-
-          <h2 class="section-title">
-            Certifications
-          </h2>
-
-          <div class="info-item">
-            <strong>Cisco Certified Network Associate (CCNA)</strong>
-          </div>
-
-          <div class="info-item">
-        
+      <!-- EDUCATION / CERTIFICATIONS -->
