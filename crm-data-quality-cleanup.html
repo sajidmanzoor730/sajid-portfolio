@@ -3,10 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <meta name="description" content="CRM Data Quality & Cleanup by Sajid Manzoor — duplicates, missing fields, normalization, enrichment and follow-up measured before and after cleanup.">
+
 <title>CRM Data Quality & Cleanup | Sajid Manzoor</title>
+
 <link rel="stylesheet" href="project.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
 .dq{margin-top:26px}
 .dq-bar{margin-bottom:20px;padding:15px 17px;background:#fff;border:1px solid var(--line,#e2e8f0);border-radius:14px;box-shadow:0 3px 14px rgba(15,35,63,.025)}
@@ -37,251 +41,1497 @@
 .dq tbody tr:last-child td{border-bottom:0}
 .dq tbody tr:hover{background:#f8fafc}
 .pill{display:inline-block;border-radius:999px;padding:3px 8px;font-size:10px;font-weight:800}
-.good{background:#ecfdf5;color:#047857}.warn{background:#fffbeb;color:#a16207}.bad{background:#fef2f2;color:#b91c1c}
+.good{background:#ecfdf5;color:#047857}
+.warn{background:#fffbeb;color:#a16207}
+.bad{background:#fef2f2;color:#b91c1c}
 .dq-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;color:var(--muted,#64748b);font-size:12px}
 .dq-links{display:flex;gap:20px;flex-wrap:wrap;margin:22px 0 10px;font-size:14px;font-weight:650}
-@media(max-width:950px){.dq-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.dq-grid{grid-template-columns:1fr}.dq-panel.full{grid-column:auto}.dq-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:480px){.dq-kpis,.dq-filters{grid-template-columns:1fr}.dq-chart{height:250px}.dq-panel{padding:18px}}
+
+@media(max-width:950px){
+  .dq-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dq-grid{grid-template-columns:1fr}
+  .dq-panel.full{grid-column:auto}
+  .dq-filters{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:480px){
+  .dq-kpis,.dq-filters{grid-template-columns:1fr}
+  .dq-chart{height:250px}
+  .dq-panel{padding:18px}
+}
 </style>
 </head>
+
 <body>
 
-<nav><div class="wrap navin"><a class="brand" href="index.html">Sajid Manzoor</a><div class="links"><a href="projects.html">Projects</a><a href="experience.html">Experience</a><a href="skills.html">Skills</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></div></div></nav>
+<nav>
+  <div class="wrap navin">
+    <a class="brand" href="index.html">Sajid Manzoor</a>
+
+    <div class="links">
+      <a href="projects.html">Projects</a>
+      <a href="experience.html">Experience</a>
+      <a href="skills.html">Skills</a>
+      <a href="resume.html">Resume</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
 
 <main>
 <div class="wrap">
-<a class="back" href="projects.html">← Back to Projects</a>
-<div class="eyebrow">CRM Data Quality</div>
-<h1>CRM Data Quality &amp; Cleanup</h1>
-<p class="lead">A record-level cleanup workflow covering duplicates, missing fields, normalization, enrichment and follow-up, measured on the raw file before cleanup and the clean file after it.</p>
 
-<div class="notice"><strong>Data note:</strong> This page runs on the CRM Data Quality Dataset: 3,090 raw CRM rows cleaned into 3,000 unique records. Contact details use reserved example email domains and reserved phone ranges, so no real customer information is exposed. All figures below are calculated live from the two CSV files.</div>
+<a class="back" href="projects.html">← Back to Projects</a>
+
+<div class="eyebrow">CRM Data Quality</div>
+
+<h1>CRM Data Quality &amp; Cleanup</h1>
+
+<p class="lead">
+  A record-level cleanup workflow covering duplicates, missing fields,
+  normalization, enrichment and follow-up, measured on the raw file
+  before cleanup and the clean file after it.
+</p>
+
+<div class="notice">
+  <strong>Data note:</strong>
+  This dashboard analyzes a structured CRM dataset focused on
+  data quality, record completeness, duplicate detection,
+  normalization, and follow-up tracking.
+</div>
 
 <section class="dq">
+
 <div id="errorBox" class="dq-error"></div>
 
 <div class="dq-bar">
-<div class="dq-status"><span class="dq-dot"></span><span id="status">Loading CRM dataset...</span></div>
+
+<div class="dq-status">
+  <span class="dq-dot"></span>
+  <span id="status">Loading CRM dataset...</span>
+</div>
+
 <div class="dq-filters">
+
 <select id="fCountry" class="dq-sel" aria-label="Country"></select>
+
 <select id="fOwner" class="dq-sel" aria-label="Owner"></select>
+
 <select id="fIndustry" class="dq-sel" aria-label="Industry"></select>
+
 <select id="fIssue" class="dq-sel" aria-label="Issue type"></select>
+
 <select id="fStatus" class="dq-sel" aria-label="Review status"></select>
-<button id="resetBtn" class="dq-btn" type="button">Reset</button>
+
+<button id="resetBtn" class="dq-btn" type="button">
+  Reset
+</button>
+
 </div>
 </div>
 
-<div id="loading" class="dq-loading">Loading dashboard data...</div>
+<div id="loading" class="dq-loading">
+  Loading dashboard data...
+</div>
 
 <div id="content" class="hidden">
 
 <div class="dq-kpis">
-<div class="dq-kpi"><div class="dq-kl">Raw Rows</div><div class="dq-kv" id="kRaw">—</div><div class="dq-kn">Rows before cleanup</div></div>
-<div class="dq-kpi"><div class="dq-kl">Clean Records</div><div class="dq-kv" id="kClean">—</div><div class="dq-kn">Unique records in current view</div></div>
-<div class="dq-kpi"><div class="dq-kl">Duplicates Removed</div><div class="dq-kv" id="kDup">—</div><div class="dq-kn">Raw rows minus clean records</div></div>
-<div class="dq-kpi"><div class="dq-kl">Issue Rate</div><div class="dq-kv" id="kIssue">—</div><div class="dq-kn" id="kIssueN">Records with a detected issue</div></div>
-<div class="dq-kpi"><div class="dq-kl">Resolution Rate</div><div class="dq-kv" id="kRes">—</div><div class="dq-kn">Issues merged, standardized or enriched</div></div>
-<div class="dq-kpi"><div class="dq-kl">Ready Rate</div><div class="dq-kv" id="kReady">—</div><div class="dq-kn">Records ready after review</div></div>
-<div class="dq-kpi"><div class="dq-kl">Follow-up Required</div><div class="dq-kv" id="kFollow">—</div><div class="dq-kn">Records needing owner follow-up</div></div>
-<div class="dq-kpi"><div class="dq-kl">Avg Completeness</div><div class="dq-kv" id="kComp">—</div><div class="dq-kn">Score across 8 core fields</div></div>
+
+<div class="dq-kpi">
+  <div class="dq-kl">Raw Rows</div>
+  <div class="dq-kv" id="kRaw">—</div>
+  <div class="dq-kn">Rows before cleanup</div>
 </div>
+
+<div class="dq-kpi">
+  <div class="dq-kl">Clean Records</div>
+  <div class="dq-kv" id="kClean">—</div>
+  <div class="dq-kn">Unique records in current view</div>
+</div>
+
+<div class="dq-kpi">
+  <div class="dq-kl">Duplicates Removed</div>
+  <div class="dq-kv" id="kDup">—</div>
+  <div class="dq-kn">Raw rows minus clean records</div>
+</div>
+
+<div class="dq-kpi">
+  <div class="dq-kl">Issue Rate</div>
+  <div class="dq-kv" id="kIssue">—</div>
+  <div class="dq-kn" id="kIssueN">
+    Records with a detected issue
+  </div>
+</div>
+
+<div class="dq-kpi">
+  <div class="dq-kl">Resolution Rate</div>
+  <div class="dq-kv" id="kRes">—</div>
+  <div class="dq-kn">
+    Issues merged, standardized or enriched
+  </div>
+</div>
+
+<div class="dq-kpi">
+  <div class="dq-kl">Ready Rate</div>
+  <div class="dq-kv" id="kReady">—</div>
+  <div class="dq-kn">
+    Records ready after review
+  </div>
+</div>
+
+<div class="dq-kpi">
+  <div class="dq-kl">Follow-up Required</div>
+  <div class="dq-kv" id="kFollow">—</div>
+  <div class="dq-kn">
+    Records needing owner follow-up
+  </div>
+</div>
+
+<div class="dq-kpi">
+  <div class="dq-kl">Avg Completeness</div>
+  <div class="dq-kv" id="kComp">—</div>
+  <div class="dq-kn">
+    Score across 8 core fields
+  </div>
+</div>
+
+</div>
+
 
 <div class="dq-grid">
-<div class="dq-panel full"><h3>Before vs After Cleanup</h3><p class="sub">Problem rows detected in the raw file compared with the clean file. Uses the Country and Owner filters only.</p><div class="dq-chart"><canvas id="cBefore"></canvas></div></div>
-<div class="dq-panel"><h3>Issues by Type</h3><p class="sub">Primary issue found in each clean record.</p><div class="dq-chart"><canvas id="cIssue"></canvas></div></div>
-<div class="dq-panel"><h3>Action Taken</h3><p class="sub">How records were handled during cleanup.</p><div class="dq-chart"><canvas id="cAction"></canvas></div></div>
-<div class="dq-panel"><h3>Review Status by Owner</h3><p class="sub">Ready records versus those needing follow-up.</p><div class="dq-chart"><canvas id="cOwner"></canvas></div></div>
-<div class="dq-panel"><h3>Monthly Record Volume</h3><p class="sub">Records created and records with issues, by month.</p><div class="dq-chart"><canvas id="cMonth"></canvas></div></div>
+
+<div class="dq-panel full">
+
+<h3>Before vs After Cleanup</h3>
+
+<p class="sub">
+  Problem rows detected in the raw file compared with the clean file.
+  Uses the Country and Owner filters only.
+</p>
+
+<div class="dq-chart">
+  <canvas id="cBefore"></canvas>
 </div>
 
-<div class="dq-panel full" style="margin-bottom:18px"><h3>Issue Summary</h3><p class="sub">Resolution outcome for each issue type.</p>
-<div class="table-wrap"><table><thead><tr><th>Issue Type</th><th>Records</th><th>Share</th><th>Resolved</th><th>Needs Follow-up</th><th>Resolution Rate</th></tr></thead><tbody id="tIssue"></tbody></table></div></div>
+</div>
 
-<div class="dq-panel full" style="margin-bottom:18px"><h3>Quality by Industry</h3><p class="sub">Issue rate and readiness by industry.</p>
-<div class="table-wrap"><table><thead><tr><th>Industry</th><th>Records</th><th>Issue Rate</th><th>Ready Rate</th><th>Follow-up</th><th>Avg Completeness</th></tr></thead><tbody id="tIndustry"></tbody></table></div></div>
 
-<div class="dq-panel full" style="margin-bottom:18px"><h3>Quality by Owner</h3><p class="sub">Issue rate and readiness by owning team.</p>
-<div class="table-wrap"><table><thead><tr><th>Owner</th><th>Records</th><th>Issue Rate</th><th>Ready Rate</th><th>Follow-up</th><th>Avg Completeness</th></tr></thead><tbody id="tOwner"></tbody></table></div></div>
+<div class="dq-panel">
 
-<div class="dq-panel full" style="margin-bottom:18px"><h3>Record-level Review</h3><p class="sub">Most recent records with a detected issue in the current view.</p>
-<div class="table-wrap"><table><thead><tr><th>Record</th><th>Company</th><th>Email</th><th>Phone</th><th>Issue</th><th>Action</th><th>Status</th></tr></thead><tbody id="tRecords"></tbody></table></div>
-<div class="dq-foot"><span id="recCount"></span><button id="moreBtn" class="dq-btn" type="button">Show more</button></div></div>
+<h3>Issues by Type</h3>
+
+<p class="sub">
+  Primary issue found in each clean record.
+</p>
+
+<div class="dq-chart">
+  <canvas id="cIssue"></canvas>
+</div>
 
 </div>
+
+
+<div class="dq-panel">
+
+<h3>Action Taken</h3>
+
+<p class="sub">
+  How records were handled during cleanup.
+</p>
+
+<div class="dq-chart">
+  <canvas id="cAction"></canvas>
+</div>
+
+</div>
+
+
+<div class="dq-panel">
+
+<h3>Review Status by Owner</h3>
+
+<p class="sub">
+  Ready records versus those needing follow-up.
+</p>
+
+<div class="dq-chart">
+  <canvas id="cOwner"></canvas>
+</div>
+
+</div>
+
+
+<div class="dq-panel">
+
+<h3>Monthly Record Volume</h3>
+
+<p class="sub">
+  Records created and records with issues, by month.
+</p>
+
+<div class="dq-chart">
+  <canvas id="cMonth"></canvas>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="dq-panel full" style="margin-bottom:18px">
+
+<h3>Issue Summary</h3>
+
+<p class="sub">
+  Resolution outcome for each issue type.
+</p>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Issue Type</th>
+<th>Records</th>
+<th>Share</th>
+<th>Resolved</th>
+<th>Needs Follow-up</th>
+<th>Resolution Rate</th>
+</tr>
+</thead>
+
+<tbody id="tIssue"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<div class="dq-panel full" style="margin-bottom:18px">
+
+<h3>Quality by Industry</h3>
+
+<p class="sub">
+  Issue rate and readiness by industry.
+</p>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Industry</th>
+<th>Records</th>
+<th>Issue Rate</th>
+<th>Ready Rate</th>
+<th>Follow-up</th>
+<th>Avg Completeness</th>
+</tr>
+</thead>
+
+<tbody id="tIndustry"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<div class="dq-panel full" style="margin-bottom:18px">
+
+<h3>Quality by Owner</h3>
+
+<p class="sub">
+  Issue rate and readiness by owning team.
+</p>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Owner</th>
+<th>Records</th>
+<th>Issue Rate</th>
+<th>Ready Rate</th>
+<th>Follow-up</th>
+<th>Avg Completeness</th>
+</tr>
+</thead>
+
+<tbody id="tOwner"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<div class="dq-panel full" style="margin-bottom:18px">
+
+<h3>Record-level Review</h3>
+
+<p class="sub">
+  Most recent records with a detected issue in the current view.
+</p>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Record</th>
+<th>Company</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Issue</th>
+<th>Action</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody id="tRecords"></tbody>
+
+</table>
+
+</div>
+
+<div class="dq-foot">
+
+<span id="recCount"></span>
+
+<button id="moreBtn" class="dq-btn" type="button">
+  Show more
+</button>
+
+</div>
+
+</div>
+
+</div>
+
 
 <div class="dq-links">
-<a href="data/CRM_Data_Quality_Dataset_Clean.csv" download>Clean dataset (CSV)</a>
-<a href="data/CRM_Data_Quality_Dataset_Raw.csv" download>Raw dataset (CSV)</a>
-<a href="projects.html">← Back to Projects</a>
+
+<a href="data/CRM_Data_Quality_Dataset_Clean.csv" download>
+  Clean dataset (CSV)
+</a>
+
+<a href="data/CRM_Data_Quality_Dataset_Raw.csv" download>
+  Raw dataset (CSV)
+</a>
+
+<a href="projects.html">
+  ← Back to Projects
+</a>
+
 </div>
+
 </section>
+
 </div>
 </main>
 
-<footer class="footer"><div class="wrap">© 2026 Sajid Manzoor · Data Analytics &amp; Business Operations</div></footer>
+
+<footer class="footer">
+
+<div class="wrap">
+  © 2026 Sajid Manzoor · Data Analytics &amp; Business Operations
+</div>
+
+</footer>
+
 
 <script>
-const CLEAN_URL="data/CRM_Data_Quality_Dataset_Clean.csv",RAW_URL="data/CRM_Data_Quality_Dataset_Raw.csv";
-const EMAIL_RE=/^[^\s@.]+(?:\.[^\s@.]+)*@[^\s@.]+(?:\.[^\s@.]+)+$/,PHONE_RE=/^\+\d{1,3}( \d{2,4}){2,3}$/;
-const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-const ISSUES=["Duplicate Email","Duplicate Company","Phone Format","Company Casing","Missing Phone","Missing Email","Invalid Email","Missing Industry"];
-const ACTIONS=["No Action Needed","Merged","Standardized","Enriched","Owner Follow-up"];
-const RESOLVED=["Merged","Standardized","Enriched"];
-const BLUE="#2563eb",NAVY="#0f233f",AMBER="#f59e0b",RED="#ef4444",GREEN="#22c55e",SLATE="#94a3b8",TEAL="#0f766e";
-const FILTERS=[["fCountry","Country","All Countries",1],["fOwner","Owner","All Owners",1],["fIndustry","Industry","All Industries",0],["fIssue","Issue_Type","All Issue Types",0],["fStatus","Review_Status","All Statuses",0]];
-let RAW=[],CLEAN=[],VIEW=[],MONTHS=[],charts={},limit=15;
+
+const CLEAN_URL="data/CRM_Data_Quality_Dataset_Clean.csv",
+      RAW_URL="data/CRM_Data_Quality_Dataset_Raw.csv";
+
+const EMAIL_RE=/^[^\s@.]+(?:\.[^\s@.]+)*@[^\s@.]+(?:\.[^\s@.]+)+$/,
+      PHONE_RE=/^\+\d{1,3}( \d{2,4}){2,3}$/;
+
+const MON=[
+  "Jan","Feb","Mar","Apr","May","Jun",
+  "Jul","Aug","Sep","Oct","Nov","Dec"
+];
+
+const ISSUES=[
+  "Duplicate Email",
+  "Duplicate Company",
+  "Phone Format",
+  "Company Casing",
+  "Missing Phone",
+  "Missing Email",
+  "Invalid Email",
+  "Missing Industry"
+];
+
+const ACTIONS=[
+  "No Action Needed",
+  "Merged",
+  "Standardized",
+  "Enriched",
+  "Owner Follow-up"
+];
+
+const RESOLVED=[
+  "Merged",
+  "Standardized",
+  "Enriched"
+];
+
+const BLUE="#2563eb",
+      NAVY="#0f233f",
+      AMBER="#f59e0b",
+      RED="#ef4444",
+      GREEN="#22c55e",
+      SLATE="#94a3b8",
+      TEAL="#0f766e";
+
+const FILTERS=[
+  ["fCountry","Country","All Countries",1],
+  ["fOwner","Owner","All Owners",1],
+  ["fIndustry","Industry","All Industries",0],
+  ["fIssue","Issue_Type","All Issue Types",0],
+  ["fStatus","Review_Status","All Statuses",0]
+];
+
+let RAW=[],
+    CLEAN=[],
+    VIEW=[],
+    MONTHS=[],
+    charts={},
+    limit=15;
+
 const $=id=>document.getElementById(id);
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+const esc=s=>String(s).replace(
+  /[&<>"']/g,
+  c=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c])
+);
+
 const sum=a=>a.reduce((s,x)=>s+x,0);
+
 const pct=(a,b)=>b?(a/b*100).toFixed(1)+"%":"—";
+
 const int=v=>v.toLocaleString("en-US");
 
+
 function parseCSV(t){
+
   t=t.replace(/^\uFEFF/,"");
-  const rows=[];let row=[],f="",q=false;
+
+  const rows=[];
+  let row=[],
+      f="",
+      q=false;
+
   for(let i=0;i<t.length;i++){
+
     const c=t[i];
-    if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
-    else if(c==='"')q=true;
-    else if(c===","){row.push(f);f=""}
-    else if(c==="\n"){row.push(f);rows.push(row);row=[];f=""}
-    else if(c!=="\r")f+=c;
+
+    if(q){
+
+      if(c==='"'){
+
+        if(t[i+1]==='"'){
+          f+='"';
+          i++;
+        }else{
+          q=false;
+        }
+
+      }else{
+        f+=c;
+      }
+
+    }else if(c==='"'){
+
+      q=true;
+
+    }else if(c===","){
+
+      row.push(f);
+      f="";
+
+    }else if(c==="\n"){
+
+      row.push(f);
+      rows.push(row);
+      row=[];
+      f="";
+
+    }else if(c!=="\r"){
+
+      f+=c;
+
+    }
+
   }
-  if(f.length||row.length){row.push(f);rows.push(row)}
+
+  if(f.length||row.length){
+    row.push(f);
+    rows.push(row);
+  }
+
   const head=rows.shift().map(h=>h.trim());
-  return rows.filter(r=>r.length>1).map(r=>{const o={};head.forEach((h,i)=>o[h]=r[i]||"");return o});
+
+  return rows
+    .filter(r=>r.length>1)
+    .map(r=>{
+      const o={};
+      head.forEach((h,i)=>o[h]=r[i]||"");
+      return o;
+    });
+
 }
+
+
 async function load(url){
+
   const res=await fetch(url);
-  if(!res.ok)throw new Error("Could not load "+url+" (HTTP "+res.status+").");
-  const rows=parseCSV(await res.text());
-  if(!rows.length)throw new Error(url+" is empty.");
-  return rows;
-}
-const normCo=c=>c.toLowerCase().replace(/[.,]/g,"").replace(/\s+/g," ").trim().replace(/ (inc|llc|ltd)$/,"");
-function quality(rs){
-  const seenE=new Set(),seenC=new Set();
-  const q={n:rs.length,dup:0,missEmail:0,badEmail:0,missPhone:0,badPhone:0,missInd:0,casing:0};
-  rs.slice().sort((a,b)=>a.Record_ID.localeCompare(b.Record_ID)).forEach(r=>{
-    const e=r.Email.trim().toLowerCase(),c=normCo(r.Company_Name);
-    if((e&&seenE.has(e))||seenC.has(c))q.dup++;
-    if(e)seenE.add(e);seenC.add(c);
-    if(!r.Email.trim())q.missEmail++;else if(!EMAIL_RE.test(r.Email))q.badEmail++;
-    if(!r.Phone.trim())q.missPhone++;else if(!PHONE_RE.test(r.Phone))q.badPhone++;
-    if(!r.Industry.trim())q.missInd++;
-    const n=r.Company_Name;
-    if(n!==n.trim().replace(/\s+/g," ")||n===n.toUpperCase()||n===n.toLowerCase())q.casing++;
-  });
-  return q;
-}
-function summary(rs){
-  const n=rs.length,issues=rs.filter(r=>r.Issue_Type!=="None"),res=issues.filter(r=>RESOLVED.includes(r.Action_Taken));
-  return{n,issues:issues.length,resolved:res.length,ready:rs.filter(r=>r.Review_Status==="Ready").length,
-    follow:rs.filter(r=>r.Follow_Up_Required==="Yes").length,
-    comp:n?sum(rs.map(r=>+r.Completeness_Score||0))/n:null};
-}
-function group(rs,key,order){
-  const m={};rs.forEach(r=>{const k=r[key]||"Unassigned";(m[k]=m[k]||[]).push(r)});
-  const keys=order?order.filter(k=>m[k]):Object.keys(m).sort((a,b)=>m[b].length-m[a].length);
-  return keys.map(k=>({key:k,rows:m[k]}));
-}
-function setupFilters(){
-  FILTERS.forEach(([id,key,label])=>{
-    let vals=[...new Set(CLEAN.map(r=>r[key]).filter(v=>v!==""))];
-    vals=key==="Issue_Type"?ISSUES.concat("None").filter(v=>vals.includes(v)):vals.sort();
-    $(id).innerHTML='<option value="All">'+label+'</option>'+vals.map(v=>'<option value="'+esc(v)+'">'+esc(v)+'</option>').join("");
-    $(id).addEventListener("change",()=>{limit=15;render()});
-  });
-  $("resetBtn").onclick=()=>{FILTERS.forEach(([id])=>$(id).value="All");limit=15;render()};
-  $("moreBtn").onclick=()=>{limit+=15;renderRecords()};
-}
-function pick(shared){return FILTERS.filter(f=>!shared||f[3]).map(([id,key])=>[key,$(id).value]).filter(x=>x[1]!=="All")}
-function filt(rows,sel){return rows.filter(r=>sel.every(([k,v])=>r[k]===v))}
-function setChart(id,type,labels,datasets,opts){
-  const data={labels,datasets};
-  if(charts[id]){charts[id].data=data;charts[id].options=Object.assign(base(),opts||{});charts[id].update();return}
-  charts[id]=new Chart($(id),{type,data,options:Object.assign(base(),opts||{})});
-}
-function base(){return{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom",labels:{boxWidth:12,font:{size:11}}}}}}
-function pill(t,c){return'<span class="pill '+c+'">'+esc(t)+'</span>'}
-function cell(v){return v?esc(v):'<span class="muted">Missing</span>'}
-function renderKPIs(rawS,cleanS,s){
-  const rq=quality(rawS);
-  $("kRaw").textContent=int(rq.n);$("kClean").textContent=int(s.n);
-  $("kDup").textContent=int(Math.max(rawS.length-cleanS.length,0));
-  $("kIssue").textContent=pct(s.issues,s.n);$("kIssueN").textContent=int(s.issues)+" records with a detected issue";
-  $("kRes").textContent=pct(s.resolved,s.issues);$("kReady").textContent=pct(s.ready,s.n);
-  $("kFollow").textContent=int(s.follow);$("kComp").textContent=s.comp==null?"—":s.comp.toFixed(1);
-}
-function renderCharts(rawS,cleanS){
-  const a=quality(rawS),b=quality(cleanS);
-  setChart("cBefore","bar",["Duplicate rows","Missing email","Malformed email","Missing phone","Non-standard phone","Missing industry","Company casing"],[
-    {label:"Raw file (before)",data:[a.dup,a.missEmail,a.badEmail,a.missPhone,a.badPhone,a.missInd,a.casing],backgroundColor:RED,borderRadius:4},
-    {label:"Clean file (after)",data:[b.dup,b.missEmail,b.badEmail,b.missPhone,b.badPhone,b.missInd,b.casing],backgroundColor:GREEN,borderRadius:4}],
-    {scales:{y:{beginAtZero:true}}});
-  const ig=ISSUES.map(k=>VIEW.filter(r=>r.Issue_Type===k).length);
-  setChart("cIssue","bar",ISSUES,[{label:"Records",data:ig,backgroundColor:BLUE,borderRadius:4}],{indexAxis:"y",plugins:{legend:{display:false}},scales:{x:{beginAtZero:true}}});
-  setChart("cAction","doughnut",ACTIONS,[{data:ACTIONS.map(k=>VIEW.filter(r=>r.Action_Taken===k).length),backgroundColor:[SLATE,NAVY,BLUE,TEAL,AMBER]}],{cutout:"60%"});
-  const ow=group(VIEW,"Owner");
-  setChart("cOwner","bar",ow.map(g=>g.key),[
-    {label:"Ready",data:ow.map(g=>g.rows.filter(r=>r.Review_Status==="Ready").length),backgroundColor:GREEN},
-    {label:"Needs follow-up",data:ow.map(g=>g.rows.filter(r=>r.Review_Status!=="Ready").length),backgroundColor:AMBER}],
-    {scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true}}});
-  const ml=MONTHS.map(m=>{const p=m.split("-");return MON[+p[1]-1]+" "+p[0]});
-  const mv=MONTHS.map(m=>VIEW.filter(r=>r.Created_Date.slice(0,7)===m));
-  setChart("cMonth","bar",ml,[
-    {type:"bar",label:"Records",data:mv.map(x=>x.length),backgroundColor:BLUE,borderRadius:4},
-    {type:"line",label:"With issues",data:mv.map(x=>x.filter(r=>r.Issue_Type!=="None").length),borderColor:AMBER,backgroundColor:AMBER,tension:.3}],
-    {scales:{y:{beginAtZero:true}}});
-}
-function qualityRows(body,key){
-  const g=group(VIEW,key);
-  $(body).innerHTML=g.length?g.map(x=>{const s=summary(x.rows);
-    return"<tr><td><strong>"+esc(x.key)+"</strong></td><td>"+int(s.n)+"</td><td>"+pct(s.issues,s.n)+"</td><td>"+pill(pct(s.ready,s.n),s.ready/s.n>=.9?"good":s.ready/s.n>=.8?"warn":"bad")+"</td><td>"+int(s.follow)+"</td><td>"+(s.comp==null?"—":s.comp.toFixed(1))+"</td></tr>"}).join("")
-    :'<tr><td colspan="6">No records match the selected filters.</td></tr>';
-}
-function renderIssueTable(){
-  const g=group(VIEW,"Issue_Type",ISSUES.concat("None"));
-  $("tIssue").innerHTML=g.length?g.map(x=>{
-    const n=x.rows.length,res=x.rows.filter(r=>RESOLVED.includes(r.Action_Taken)).length,fu=x.rows.filter(r=>r.Review_Status!=="Ready").length;
-    const none=x.key==="None";
-    return"<tr><td><strong>"+esc(x.key==="None"?"No issue":x.key)+"</strong></td><td>"+int(n)+"</td><td>"+pct(n,VIEW.length)+"</td><td>"+(none?"—":int(res))+"</td><td>"+(none?"—":int(fu))+"</td><td>"+(none?"—":pill(pct(res,n),res/n>=.9?"good":res/n>=.5?"warn":"bad"))+"</td></tr>"}).join("")
-    :'<tr><td colspan="6">No records match the selected filters.</td></tr>';
-}
-function renderRecords(){
-  const rs=VIEW.filter(r=>r.Issue_Type!=="None").sort((a,b)=>b.Created_Date.localeCompare(a.Created_Date)||b.Record_ID.localeCompare(a.Record_ID));
-  const shown=rs.slice(0,limit);
-  $("tRecords").innerHTML=shown.length?shown.map(r=>"<tr><td><strong>"+esc(r.Record_ID)+"</strong></td><td>"+cell(r.Company_Name)+"</td><td>"+cell(r.Email)+"</td><td>"+cell(r.Phone)+"</td><td>"+esc(r.Issue_Type)+"</td><td>"+esc(r.Action_Taken)+"</td><td>"+pill(r.Review_Status,r.Review_Status==="Ready"?"good":"warn")+"</td></tr>").join("")
-    :'<tr><td colspan="7">No records with issues match the selected filters.</td></tr>';
-  $("recCount").textContent="Showing "+int(shown.length)+" of "+int(rs.length)+" records with issues";
-  $("moreBtn").classList.toggle("hidden",shown.length>=rs.length);
-}
-function render(){
-  const shared=pick(true);
-  const rawS=filt(RAW,shared),cleanS=filt(CLEAN,shared);
-  VIEW=filt(CLEAN,pick(false));
-  renderKPIs(rawS,cleanS,summary(VIEW));
-  renderCharts(rawS,cleanS);
-  renderIssueTable();qualityRows("tIndustry","Industry");qualityRows("tOwner","Owner");
-  renderRecords();
-  $("status").textContent="CRM Data Quality Dataset · "+int(VIEW.length)+" of "+int(CLEAN.length)+" clean records shown";
-}
-async function init(){
-  try{
-    if(typeof Chart==="undefined")throw new Error("Chart.js could not be loaded.");
-    [CLEAN,RAW]=await Promise.all([load(CLEAN_URL),load(RAW_URL)]);
-    MONTHS=[...new Set(CLEAN.map(r=>r.Created_Date.slice(0,7)))].sort();
-    setupFilters();
-    $("loading").classList.add("hidden");$("content").classList.remove("hidden");
-    render();
-  }catch(e){
-    $("loading").classList.add("hidden");$("status").textContent="Dataset unavailable";
-    const b=$("errorBox");b.style.display="block";
-    b.textContent="Dashboard data could not be loaded. "+e.message+" Check that both CSV files are in the data folder and view the page through GitHub Pages (not by opening the file directly).";
+
+  if(!res.ok){
+    throw new Error(
+      "Could not load "+url+" (HTTP "+res.status+")."
+    );
   }
+
+  const rows=parseCSV(await res.text());
+
+  if(!rows.length){
+    throw new Error(url+" is empty.");
+  }
+
+  return rows;
+
 }
+
+
+const normCo=c=>
+  c
+  .toLowerCase()
+  .replace(/[.,]/g,"")
+  .replace(/\s+/g," ")
+  .trim()
+  .replace(/ (inc|llc|ltd)$/,"");
+
+
+function quality(rs){
+
+  const seenE=new Set(),
+        seenC=new Set();
+
+  const q={
+    n:rs.length,
+    dup:0,
+    missEmail:0,
+    badEmail:0,
+    missPhone:0,
+    badPhone:0,
+    missInd:0,
+    casing:0
+  };
+
+  rs
+    .slice()
+    .sort((a,b)=>a.Record_ID.localeCompare(b.Record_ID))
+    .forEach(r=>{
+
+      const e=r.Email.trim().toLowerCase(),
+            c=normCo(r.Company_Name);
+
+      if((e&&seenE.has(e))||seenC.has(c)){
+        q.dup++;
+      }
+
+      if(e){
+        seenE.add(e);
+      }
+
+      seenC.add(c);
+
+      if(!r.Email.trim()){
+        q.missEmail++;
+      }else if(!EMAIL_RE.test(r.Email)){
+        q.badEmail++;
+      }
+
+      if(!r.Phone.trim()){
+        q.missPhone++;
+      }else if(!PHONE_RE.test(r.Phone)){
+        q.badPhone++;
+      }
+
+      if(!r.Industry.trim()){
+        q.missInd++;
+      }
+
+      const n=r.Company_Name;
+
+      if(
+        n!==n.trim().replace(/\s+/g," ") ||
+        n===n.toUpperCase() ||
+        n===n.toLowerCase()
+      ){
+        q.casing++;
+      }
+
+    });
+
+  return q;
+
+}
+
+
+function summary(rs){
+
+  const n=rs.length,
+        issues=rs.filter(
+          r=>r.Issue_Type!=="None"
+        ),
+        res=issues.filter(
+          r=>RESOLVED.includes(r.Action_Taken)
+        );
+
+  return{
+    n,
+    issues:issues.length,
+    resolved:res.length,
+    ready:rs.filter(
+      r=>r.Review_Status==="Ready"
+    ).length,
+    follow:rs.filter(
+      r=>r.Follow_Up_Required==="Yes"
+    ).length,
+    comp:n
+      ?sum(
+        rs.map(
+          r=>+r.Completeness_Score||0
+        )
+      )/n
+      :null
+  };
+
+}
+
+
+function group(rs,key,order){
+
+  const m={};
+
+  rs.forEach(r=>{
+
+    const k=r[key]||"Unassigned";
+
+    (m[k]=m[k]||[]).push(r);
+
+  });
+
+  const keys=order
+    ?order.filter(k=>m[k])
+    :Object.keys(m).sort(
+      (a,b)=>m[b].length-m[a].length
+    );
+
+  return keys.map(
+    k=>({
+      key:k,
+      rows:m[k]
+    })
+  );
+
+}
+
+
+function setupFilters(){
+
+  FILTERS.forEach(
+    ([id,key,label])=>{
+
+      let vals=[
+        ...new Set(
+          CLEAN
+          .map(r=>r[key])
+          .filter(v=>v!=="")
+        )
+      ];
+
+      vals=key==="Issue_Type"
+        ?ISSUES
+          .concat("None")
+          .filter(v=>vals.includes(v))
+        :vals.sort();
+
+      $(id).innerHTML=
+        '<option value="All">'+
+        label+
+        '</option>'+
+        vals
+        .map(
+          v=>
+          '<option value="'+
+          esc(v)+
+          '">'+
+          esc(v)+
+          '</option>'
+        )
+        .join("");
+
+      $(id).addEventListener(
+        "change",
+        ()=>{
+          limit=15;
+          render();
+        }
+      );
+
+    }
+  );
+
+  $("resetBtn").onclick=()=>{
+    FILTERS.forEach(
+      ([id])=>{
+        $(id).value="All";
+      }
+    );
+
+    limit=15;
+    render();
+  };
+
+  $("moreBtn").onclick=()=>{
+    limit+=15;
+    renderRecords();
+  };
+
+}
+
+
+function pick(shared){
+
+  return FILTERS
+    .filter(
+      f=>!shared||f[3]
+    )
+    .map(
+      ([id,key])=>[
+        key,
+        $(id).value
+      ]
+    )
+    .filter(
+      x=>x[1]!=="All"
+    );
+
+}
+
+
+function filt(rows,sel){
+
+  return rows.filter(
+    r=>sel.every(
+      ([k,v])=>r[k]===v
+    )
+  );
+
+}
+
+
+function setChart(
+  id,
+  type,
+  labels,
+  datasets,
+  opts
+){
+
+  const data={
+    labels,
+    datasets
+  };
+
+  if(charts[id]){
+
+    charts[id].data=data;
+
+    charts[id].options=
+      Object.assign(
+        base(),
+        opts||{}
+      );
+
+    charts[id].update();
+
+    return;
+  }
+
+  charts[id]=new Chart(
+    $(id),
+    {
+      type,
+      data,
+      options:Object.assign(
+        base(),
+        opts||{}
+      )
+    }
+  );
+
+}
+
+
+function base(){
+
+  return{
+    responsive:true,
+    maintainAspectRatio:false,
+    plugins:{
+      legend:{
+        position:"bottom",
+        labels:{
+          boxWidth:12,
+          font:{
+            size:11
+          }
+        }
+      }
+    }
+  };
+
+}
+
+
+function pill(t,c){
+
+  return(
+    '<span class="pill '+
+    c+
+    '">'+
+    esc(t)+
+    '</span>'
+  );
+
+}
+
+
+function cell(v){
+
+  return v
+    ?esc(v)
+    :'<span class="muted">Missing</span>';
+
+}
+
+
+function renderKPIs(
+  rawS,
+  cleanS,
+  s
+){
+
+  const rq=quality(rawS);
+
+  $("kRaw").textContent=int(rq.n);
+
+  $("kClean").textContent=int(s.n);
+
+  $("kDup").textContent=
+    int(
+      Math.max(
+        rawS.length-cleanS.length,
+        0
+      )
+    );
+
+  $("kIssue").textContent=
+    pct(
+      s.issues,
+      s.n
+    );
+
+  $("kIssueN").textContent=
+    int(s.issues)+
+    " records with a detected issue";
+
+  $("kRes").textContent=
+    pct(
+      s.resolved,
+      s.issues
+    );
+
+  $("kReady").textContent=
+    pct(
+      s.ready,
+      s.n
+    );
+
+  $("kFollow").textContent=
+    int(s.follow);
+
+  $("kComp").textContent=
+    s.comp==null
+      ?"—"
+      :s.comp.toFixed(1);
+
+}
+  function renderCharts(rawS,cleanS){
+
+  const a=quality(rawS),
+        b=quality(cleanS);
+
+  setChart(
+    "cBefore",
+    "bar",
+    [
+      "Duplicate rows",
+      "Missing email",
+      "Malformed email",
+      "Missing phone",
+      "Non-standard phone",
+      "Missing industry",
+      "Company casing"
+    ],
+    [
+      {
+        label:"Raw file (before)",
+        data:[
+          a.dup,
+          a.missEmail,
+          a.badEmail,
+          a.missPhone,
+          a.badPhone,
+          a.missInd,
+          a.casing
+        ],
+        backgroundColor:RED,
+        borderRadius:4
+      },
+      {
+        label:"Clean file (after)",
+        data:[
+          b.dup,
+          b.missEmail,
+          b.badEmail,
+          b.missPhone,
+          b.badPhone,
+          b.missInd,
+          b.casing
+        ],
+        backgroundColor:GREEN,
+        borderRadius:4
+      }
+    ],
+    {
+      scales:{
+        y:{
+          beginAtZero:true
+        }
+      }
+    }
+  );
+
+
+  const ig=ISSUES.map(
+    k=>VIEW.filter(
+      r=>r.Issue_Type===k
+    ).length
+  );
+
+
+  setChart(
+    "cIssue",
+    "bar",
+    ISSUES,
+    [
+      {
+        label:"Records",
+        data:ig,
+        backgroundColor:BLUE,
+        borderRadius:4
+      }
+    ],
+    {
+      indexAxis:"y",
+      plugins:{
+        legend:{
+          display:false
+        }
+      },
+      scales:{
+        x:{
+          beginAtZero:true
+        }
+      }
+    }
+  );
+
+
+  setChart(
+    "cAction",
+    "doughnut",
+    ACTIONS,
+    [
+      {
+        data:ACTIONS.map(
+          k=>VIEW.filter(
+            r=>r.Action_Taken===k
+          ).length
+        ),
+        backgroundColor:[
+          SLATE,
+          NAVY,
+          BLUE,
+          TEAL,
+          AMBER
+        ]
+      }
+    ],
+    {
+      cutout:"60%"
+    }
+  );
+
+
+  const ow=group(
+    VIEW,
+    "Owner"
+  );
+
+
+  setChart(
+    "cOwner",
+    "bar",
+    ow.map(g=>g.key),
+    [
+      {
+        label:"Ready",
+        data:ow.map(
+          g=>g.rows.filter(
+            r=>r.Review_Status==="Ready"
+          ).length
+        ),
+        backgroundColor:GREEN
+      },
+      {
+        label:"Needs follow-up",
+        data:ow.map(
+          g=>g.rows.filter(
+            r=>r.Review_Status!=="Ready"
+          ).length
+        ),
+        backgroundColor:AMBER
+      }
+    ],
+    {
+      scales:{
+        x:{
+          stacked:true
+        },
+        y:{
+          stacked:true,
+          beginAtZero:true
+        }
+      }
+    }
+  );
+
+
+  const ml=MONTHS.map(
+    m=>{
+      const p=m.split("-");
+      return MON[+p[1]-1]+" "+p[0];
+    }
+  );
+
+
+  const mv=MONTHS.map(
+    m=>VIEW.filter(
+      r=>r.Created_Date.slice(0,7)===m
+    )
+  );
+
+
+  setChart(
+    "cMonth",
+    "bar",
+    ml,
+    [
+      {
+        type:"bar",
+        label:"Records",
+        data:mv.map(
+          x=>x.length
+        ),
+        backgroundColor:BLUE,
+        borderRadius:4
+      },
+      {
+        type:"line",
+        label:"With issues",
+        data:mv.map(
+          x=>x.filter(
+            r=>r.Issue_Type!=="None"
+          ).length
+        ),
+        borderColor:AMBER,
+        backgroundColor:AMBER,
+        tension:.3
+      }
+    ],
+    {
+      scales:{
+        y:{
+          beginAtZero:true
+        }
+      }
+    }
+  );
+
+}
+
+
+function qualityRows(body,key){
+
+  const g=group(
+    VIEW,
+    key
+  );
+
+  $(body).innerHTML=
+    g.length
+      ?g.map(
+        x=>{
+          const s=summary(x.rows);
+
+          return(
+            "<tr>"+
+            "<td><strong>"+
+            esc(x.key)+
+            "</strong></td>"+
+            "<td>"+
+            int(s.n)+
+            "</td>"+
+            "<td>"+
+            pct(s.issues,s.n)+
+            "</td>"+
+            "<td>"+
+            pill(
+              pct(s.ready,s.n),
+              s.ready/s.n>=.9
+                ?"good"
+                :s.ready/s.n>=.8
+                  ?"warn"
+                  :"bad"
+            )+
+            "</td>"+
+            "<td>"+
+            int(s.follow)+
+            "</td>"+
+            "<td>"+
+            (
+              s.comp==null
+                ?"—"
+                :s.comp.toFixed(1)
+            )+
+            "</td>"+
+            "</tr>"
+          );
+
+        }
+      ).join("")
+      :
+      '<tr><td colspan="6">No records match the selected filters.</td></tr>';
+
+}
+
+
+function renderIssueTable(){
+
+  const g=group(
+    VIEW,
+    "Issue_Type",
+    ISSUES.concat("None")
+  );
+
+  $("tIssue").innerHTML=
+    g.length
+      ?g.map(
+        x=>{
+
+          const n=x.rows.length;
+
+          const res=x.rows.filter(
+            r=>RESOLVED.includes(
+              r.Action_Taken
+            )
+          ).length;
+
+          const fu=x.rows.filter(
+            r=>r.Review_Status!=="Ready"
+          ).length;
+
+          const none=x.key==="None";
+
+          return(
+            "<tr>"+
+            "<td><strong>"+
+            esc(
+              x.key==="None"
+                ?"No issue"
+                :x.key
+            )+
+            "</strong></td>"+
+            "<td>"+
+            int(n)+
+            "</td>"+
+            "<td>"+
+            pct(n,VIEW.length)+
+            "</td>"+
+            "<td>"+
+            (
+              none
+                ?"—"
+                :int(res)
+            )+
+            "</td>"+
+            "<td>"+
+            (
+              none
+                ?"—"
+                :int(fu)
+            )+
+            "</td>"+
+            "<td>"+
+            (
+              none
+                ?"—"
+                :pill(
+                    pct(res,n),
+                    res/n>=.9
+                      ?"good"
+                      :res/n>=.5
+                        ?"warn"
+                        :"bad"
+                  )
+            )+
+            "</td>"+
+            "</tr>"
+          );
+
+        }
+      ).join("")
+      :
+      '<tr><td colspan="6">No records match the selected filters.</td></tr>';
+
+}
+
+
+function renderRecords(){
+
+  const rs=VIEW
+    .filter(
+      r=>r.Issue_Type!=="None"
+    )
+    .sort(
+      (a,b)=>
+        b.Created_Date.localeCompare(
+          a.Created_Date
+        )||
+        b.Record_ID.localeCompare(
+          a.Record_ID
+        )
+    );
+
+  const shown=rs.slice(
+    0,
+    limit
+  );
+
+
+  $("tRecords").innerHTML=
+    shown.length
+      ?shown.map(
+        r=>
+          "<tr>"+
+          "<td><strong>"+
+          esc(r.Record_ID)+
+          "</strong></td>"+
+          "<td>"+
+          cell(r.Company_Name)+
+          "</td>"+
+          "<td>"+
+          cell(r.Email)+
+          "</td>"+
+          "<td>"+
+          cell(r.Phone)+
+          "</td>"+
+          "<td>"+
+          esc(r.Issue_Type)+
+          "</td>"+
+          "<td>"+
+          esc(r.Action_Taken)+
+          "</td>"+
+          "<td>"+
+          pill(
+            r.Review_Status,
+            r.Review_Status==="Ready"
+              ?"good"
+              :"warn"
+          )+
+          "</td>"+
+          "</tr>"
+      ).join("")
+      :
+      '<tr><td colspan="7">No records with issues match the selected filters.</td></tr>';
+
+
+  $("recCount").textContent=
+    "Showing "+
+    int(shown.length)+
+    " of "+
+    int(rs.length)+
+    " records with issues";
+
+
+  $("moreBtn").classList.toggle(
+    "hidden",
+    shown.length>=rs.length
+  );
+
+}
+
+
+function render(){
+
+  const shared=pick(true);
+
+  const rawS=filt(
+    RAW,
+    shared
+  );
+
+  const cleanS=filt(
+    CLEAN,
+    shared
+  );
+
+  VIEW=filt(
+    CLEAN,
+    pick(false)
+  );
+
+  renderKPIs(
+    rawS,
+    cleanS,
+    summary(VIEW)
+  );
+
+  renderCharts(
+    rawS,
+    cleanS
+  );
+
+  renderIssueTable();
+
+  qualityRows(
+    "tIndustry",
+    "Industry"
+  );
+
+  qualityRows(
+    "tOwner",
+    "Owner"
+  );
+
+  renderRecords();
+
+  $("status").textContent=
+    "CRM Data Quality Dataset · "+
+    int(VIEW.length)+
+    " of "+
+    int(CLEAN.length)+
+    " clean records shown";
+
+}
+
+
+async function init(){
+
+  try{
+
+    if(typeof Chart==="undefined"){
+      throw new Error(
+        "Chart.js could not be loaded."
+      );
+    }
+
+    [CLEAN,RAW]=await Promise.all([
+      load(CLEAN_URL),
+      load(RAW_URL)
+    ]);
+
+    MONTHS=[
+      ...new Set(
+        CLEAN.map(
+          r=>r.Created_Date.slice(0,7)
+        )
+      )
+    ].sort();
+
+    setupFilters();
+
+    $("loading").classList.add(
+      "hidden"
+    );
+
+    $("content").classList.remove(
+      "hidden"
+    );
+
+    render();
+
+  }catch(e){
+
+    $("loading").classList.add(
+      "hidden"
+    );
+
+    $("status").textContent=
+      "Dataset unavailable";
+
+    const b=$("errorBox");
+
+    b.style.display="block";
+
+    b.textContent=
+      "Dashboard data could not be loaded. "+
+      e.message+
+      " Check that both CSV files are in the data folder and view the page through GitHub Pages (not by opening the file directly).";
+
+  }
+
+}
+
+
 init();
+
 </script>
+
 </body>
 </html>
