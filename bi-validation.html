@@ -1,1 +1,450 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sajid Manzoor | BI Validation & Monitoring</title><style>:root{--navy:#10233f;--blue:#2563eb;--sky:#eff6ff;--text:#172033;--muted:#64748b;--line:#e2e8f0}*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#f8fafc;color:var(--text);line-height:1.7}.wrap{width:min(1000px,calc(100% - 40px));margin:auto}nav{height:72px;background:#fff;border-bottom:1px solid var(--line)}.navin{height:100%;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:800;font-size:19px;color:var(--navy)}.links{display:flex;gap:20px}.links a{color:var(--text);font-size:14px;font-weight:650}main{padding:65px 0}h1{font-size:clamp(40px,6vw,62px);line-height:1.05;color:var(--navy);letter-spacing:-.05em}.eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:var(--blue)}.lead{font-size:19px;color:var(--muted);max-width:820px}.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:24px;margin-top:18px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.item{border:1px solid var(--line);border-radius:12px;padding:18px}.item strong{display:block;color:var(--navy);margin-bottom:5px}.check{font-size:24px;color:var(--blue);font-weight:800}.note{background:var(--sky);border:1px solid #dbeafe;padding:16px;border-radius:12px;margin-top:20px}.btn{display:inline-block;padding:11px 17px;border-radius:8px;font-weight:750;margin:20px 8px 0 0}.primary{background:var(--navy);color:#fff}.secondary{border:1px solid var(--line);color:var(--navy);background:#fff}@media(max-width:760px){.wrap{width:min(100% - 28px,1000px)}.links{display:none}.grid{grid-template-columns:1fr}}</style></head><body><nav><div class="wrap navin"><a class="brand" href="index.html">Sajid Manzoor</a><div class="links"><a href="projects.html">Projects</a><a href="skills.html">Skills</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></div></div></nav><main><div class="wrap"><div class="eyebrow">BI / Data Quality</div><h1>BI Validation & Monitoring</h1><p class="lead">Practical controls used to check whether an operational reporting layer is producing trustworthy KPIs. This page documents the portfolio implementation without claiming production monitoring infrastructure.</p><a class="btn primary" href="helpdesk-kpi-dashboard.html">← Back to Helpdesk case study</a><a class="btn secondary" href="powerbi-model.html">View Power BI model →</a><h2>Source-to-report reconciliation</h2><div class="grid"><div class="item"><span class="check">✓</span><strong>Ticket volume</strong>Compare unique Ticket_ID counts between ETL, SQL and BI.</div><div class="item"><span class="check">✓</span><strong>SLA adherence</strong>Reconcile the percentage against the SQL analytical baseline.</div><div class="item"><span class="check">✓</span><strong>Resolution & CSAT</strong>Check average resolution hours and CSAT against the curated dataset.</div><div class="item"><span class="check">✓</span><strong>Repeat & escalation</strong>Validate both rates before publishing KPI views.</div></div><h2>Data-quality gates</h2><div class="card"><ul><li>Ticket_ID must be unique after ETL.</li><li>Created_At must be populated.</li><li>Priority must be P1–P4.</li><li>Channel and status values must match the defined source lists.</li><li>Resolved_At cannot precede Created_At.</li><li>SLA_Breach must be Yes/No.</li><li>CSAT must be between 1 and 5 when present.</li><li>The curated dataset must contain records.</li></ul></div><h2>Refresh review</h2><div class="card"><p>A practical refresh review records:</p><ul><li>raw row count</li><li>curated row count</li><li>duplicates removed</li><li>rejected records</li><li>data-quality status</li><li>KPI reconciliation status</li></ul><p>The Streamlit dashboard exposes the ETL audit values so they can be inspected alongside the operational report.</p></div><h2>Investigation workflow</h2><div class="card"><ol><li>Check source and curated row counts.</li><li>Review duplicate and rejected-record counts.</li><li>Compare the changed KPI with the SQL baseline.</li><li>Break the metric down by date, priority, team and category.</li><li>Inspect the underlying exception records.</li><li>Document the cause before changing reporting logic.</li></ol></div><div class="note"><strong>Realistic scope:</strong> The project demonstrates these controls and the analytical workflow. It does not claim a live Power BI gateway, scheduled enterprise refresh, production warehouse, OLAP platform or alerting system.</div></div></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="BI validation and data-quality controls used to reconcile Helpdesk KPI reporting across data preparation, SQL analysis and dashboards.">
+<title>Sajid Manzoor | BI Validation & Monitoring</title>
+
+<style>
+:root{
+  --navy:#10233f;
+  --blue:#2563eb;
+  --blue-dark:#1d4ed8;
+  --sky:#eff6ff;
+  --text:#172033;
+  --muted:#64748b;
+  --line:#e2e8f0;
+  --white:#fff;
+  --bg:#f8fafc;
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
+}
+
+a{
+  text-decoration:none;
+  color:var(--blue);
+  transition:color .2s ease,transform .2s ease;
+}
+
+.wrap{
+  width:min(1120px,calc(100% - 40px));
+  margin:auto;
+}
+
+nav{
+  height:72px;
+  background:rgba(255,255,255,.97);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(10px);
+}
+
+.navin{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.brand{
+  font-size:19px;
+  font-weight:800;
+  color:var(--navy);
+}
+
+.links{
+  display:flex;
+  gap:23px;
+}
+
+.links a{
+  color:var(--text);
+  font-size:14px;
+  font-weight:650;
+}
+
+.links a:hover{
+  color:var(--blue);
+}
+
+main{
+  padding:72px 0 82px;
+}
+
+.eyebrow{
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  font-weight:800;
+  color:var(--blue);
+}
+
+h1{
+  font-size:clamp(40px,6vw,64px);
+  line-height:1.05;
+  letter-spacing:-.045em;
+  margin:12px 0 18px;
+  color:var(--navy);
+}
+
+h2{
+  font-size:30px;
+  line-height:1.2;
+  letter-spacing:-.025em;
+  margin:58px 0 22px;
+  color:var(--navy);
+}
+
+h3{
+  color:var(--navy);
+  margin:0 0 8px;
+  font-size:19px;
+}
+
+.lead{
+  font-size:18px;
+  color:var(--muted);
+  max-width:820px;
+  margin:0;
+}
+
+.notice{
+  margin:30px 0 42px;
+  padding:18px 20px;
+  background:var(--sky);
+  border:1px solid #dbeafe;
+  border-radius:14px;
+  color:#334155;
+  font-size:14px;
+}
+
+.notice strong{
+  color:var(--navy);
+}
+
+.actions{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-top:24px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  font-size:13px;
+  font-weight:750;
+  color:var(--blue);
+  transition:color .2s ease,transform .2s ease;
+}
+
+.btn:hover{
+  color:var(--blue-dark);
+  transform:translateX(2px);
+}
+
+.btn.secondary{
+  color:var(--muted);
+}
+
+.btn.secondary:hover{
+  color:var(--navy);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px;
+}
+
+.card{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:26px;
+  box-shadow:0 4px 18px rgba(15,35,63,.035);
+}
+
+.item{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:24px;
+  box-shadow:0 4px 18px rgba(15,35,63,.035);
+}
+
+.item:hover{
+  border-color:#cbd5e1;
+  box-shadow:0 10px 26px rgba(15,35,63,.06);
+}
+
+.check{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:28px;
+  height:28px;
+  margin-bottom:14px;
+  border-radius:50%;
+  background:var(--sky);
+  color:var(--blue);
+  font-size:16px;
+  font-weight:800;
+}
+
+.item strong{
+  display:block;
+  color:var(--navy);
+  margin-bottom:7px;
+  font-size:17px;
+}
+
+.item p{
+  margin:0;
+  color:#475569;
+  font-size:14px;
+}
+
+.card p{
+  margin:0 0 14px;
+  color:#475569;
+  font-size:14px;
+}
+
+.card p:last-child{
+  margin-bottom:0;
+}
+
+ul,
+ol{
+  margin:0;
+  padding-left:22px;
+  color:#475569;
+  font-size:14px;
+}
+
+li{
+  margin:8px 0;
+}
+
+.footer{
+  background:#fff;
+  border-top:1px solid var(--line);
+  padding:34px 0;
+  color:var(--muted);
+  font-size:14px;
+}
+
+@media(max-width:760px){
+  .wrap{
+    width:min(100% - 28px,1120px);
+  }
+
+  .links{
+    display:none;
+  }
+
+  main{
+    padding:50px 0 60px;
+  }
+
+  h1{
+    font-size:42px;
+  }
+
+  .lead{
+    font-size:16px;
+  }
+
+  h2{
+    font-size:26px;
+    margin-top:46px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  .notice{
+    margin-bottom:34px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="wrap navin">
+    <a class="brand" href="index.html">Sajid Manzoor</a>
+
+    <div class="links">
+      <a href="projects.html">Projects</a>
+      <a href="skills.html">Skills</a>
+      <a href="resume.html">Resume</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <div class="eyebrow">Data Analytics · BI Quality</div>
+
+    <h1>BI Validation & Monitoring</h1>
+
+    <p class="lead">
+      A practical validation framework for checking whether operational KPIs remain accurate and consistent from the source data through SQL analysis and dashboard reporting.
+    </p>
+
+    <div class="actions">
+      <a class="btn" href="helpdesk-kpi-dashboard.html">← Back to Helpdesk case study</a>
+      <a class="btn secondary" href="powerbi-model.html">View Power BI model →</a>
+    </div>
+
+    <div class="notice">
+      <strong>What this project demonstrates:</strong>
+      Source-to-report reconciliation, data-quality checks, KPI validation, refresh review and investigation workflows using the Helpdesk analytics project.
+    </div>
+
+    <h2>Source-to-report reconciliation</h2>
+
+    <div class="grid">
+
+      <div class="item">
+        <span class="check">✓</span>
+        <strong>Ticket volume</strong>
+        <p>Compare unique Ticket_ID counts across the cleaned dataset, SQL analysis and BI reporting layer.</p>
+      </div>
+
+      <div class="item">
+        <span class="check">✓</span>
+        <strong>SLA adherence</strong>
+        <p>Reconcile the reported SLA percentage against the SQL KPI calculation before publishing the dashboard.</p>
+      </div>
+
+      <div class="item">
+        <span class="check">✓</span>
+        <strong>Resolution & CSAT</strong>
+        <p>Compare average resolution time and CSAT results against the curated dataset used for analysis.</p>
+      </div>
+
+      <div class="item">
+        <span class="check">✓</span>
+        <strong>Repeat & escalation</strong>
+        <p>Validate repeat-ticket and escalation metrics before using them in KPI reporting.</p>
+      </div>
+
+    </div>
+
+    <h2>Data-quality gates</h2>
+
+    <div class="card">
+      <ul>
+        <li>Ticket_ID should be unique after the cleaning step.</li>
+        <li>Created_At should be populated for valid ticket records.</li>
+        <li>Priority should contain a defined P1–P4 value.</li>
+        <li>Channel and Status should match the defined source values.</li>
+        <li>Resolved_At should not occur before Created_At.</li>
+        <li>SLA_Breach should contain a valid Yes/No value.</li>
+        <li>CSAT should remain between 1 and 5 when provided.</li>
+        <li>The curated dataset should contain valid records before KPI calculations run.</li>
+      </ul>
+    </div>
+
+    <h2>Refresh review</h2>
+
+    <div class="card">
+      <p>
+        A refresh review checks the main data-quality and reconciliation indicators before relying on updated reporting.
+      </p>
+
+      <ul>
+        <li>Raw row count</li>
+        <li>Curated row count</li>
+        <li>Duplicate rows identified</li>
+        <li>Rejected or invalid records</li>
+        <li>Data-quality status</li>
+        <li>KPI reconciliation status</li>
+      </ul>
+
+      <p>
+        The Helpdesk analytics workflow exposes these checks so data preparation and reporting results can be reviewed together.
+      </p>
+    </div>
+
+    <h2>Investigation workflow</h2>
+
+    <div class="card">
+      <ol>
+        <li>Compare source and curated row counts.</li>
+        <li>Review duplicate and invalid-record counts.</li>
+        <li>Compare the affected KPI with the SQL baseline.</li>
+        <li>Break the metric down by date, priority, team and category.</li>
+        <li>Inspect the underlying records contributing to the difference.</li>
+        <li>Document the cause before changing the reporting logic.</li>
+      </ol>
+    </div>
+
+    <h2>Validation principles</h2>
+
+    <div class="grid">
+
+      <div class="item">
+        <span class="check">✓</span>
+        <strong>Reconcile before reporting</strong>
+        <p>Validate important metrics against the underlying analytical dataset instead of relying only on dashboard output.</p>
+      </div>
+
+      <div class="item">
+        <span class="check">✓</span>
+        <strong>Investigate differences</strong>
+        <p>Trace unexpected KPI changes back through filters, calculations and source records.</p>
+      </div>
+
+      <div class="item">
+        <span class="check">✓</span>
+        <strong>Document assumptions</strong>
+        <p>Keep KPI definitions, validation rules and data-quality decisions clear and reproducible.</p>
+      </div>
+
+      <div class="item">
+        <span class="check">✓</span>
+        <strong>Validate before publishing</strong>
+        <p>Use quality checks as part of the reporting workflow rather than treating validation as a final step.</p>
+      </div>
+
+    </div>
+
+    <div class="notice">
+      <strong>Project scope:</strong>
+      This portfolio project demonstrates BI validation and monitoring practices using the Helpdesk analytics workflow. It does not claim a live enterprise Power BI gateway, production data warehouse, scheduled enterprise refresh or automated alerting infrastructure.
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    © 2026 Sajid Manzoor · Data Analyst & Business Operations
+  </div>
+</footer>
+
+</body>
+</html>
