@@ -277,48 +277,21 @@ section:last-child{
   color:var(--blue);
   font-size:12.5px;
   font-weight:750;
+  word-break:break-all;
 }
 
 .project-link:hover{
   text-decoration:underline;
 }
 
-/* BOTTOM */
-
-.bottom-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:45px;
-}
+/* EDUCATION */
 
 .info-item{
-  margin-bottom:12px;
   color:#465366;
   font-size:13.5px;
 }
 
-.info-item:last-child{
-  margin-bottom:0;
-}
-
 .info-item strong{
-  color:var(--navy);
-}
-
-/* TECHNICAL FOUNDATION */
-
-.foundation{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px 35px;
-}
-
-.foundation-item{
-  color:#465366;
-  font-size:13px;
-}
-
-.foundation-item strong{
   color:var(--navy);
 }
 
@@ -339,11 +312,14 @@ section:last-child{
   border-radius:7px;
   font-size:13px;
   font-weight:750;
+  font-family:inherit;
+  cursor:pointer;
 }
 
 .action-primary{
   background:var(--navy);
   color:#fff;
+  border:1px solid var(--navy);
 }
 
 .action-secondary{
@@ -404,12 +380,6 @@ section:last-child{
     grid-template-columns:1fr;
   }
 
-  .bottom-grid,
-  .foundation{
-    grid-template-columns:1fr;
-    gap:28px;
-  }
-
   .job-head,
   .project-head{
     display:block;
@@ -427,6 +397,7 @@ section:last-child{
 
   .actions{
     padding:18px 24px;
+    flex-wrap:wrap;
   }
 }
 
@@ -556,25 +527,29 @@ section:last-child{
     margin-top:2px;
   }
 
-  .bottom-grid{
-    gap:25px;
-  }
-
   .info-item{
     font-size:8.8px;
-    margin-bottom:4px;
-  }
-
-  .foundation{
-    gap:5px 25px;
-  }
-
-  .foundation-item{
-    font-size:8.7px;
   }
 
   .actions{
     display:none;
+  }
+
+  /* Print colors: navy + dark gray only */
+  .role,
+  .company,
+  .tech,
+  .project-link{
+    color:#10233f;
+  }
+
+  .date,
+  .contact{
+    color:#334155;
+  }
+
+  .contact a{
+    color:#172033;
   }
 
   a{
@@ -585,8 +560,7 @@ section:last-child{
   section,
   .job,
   .project,
-  .skill-row,
-  .foundation-item{
+  .skill-row{
     break-inside:avoid;
   }
 }
@@ -638,6 +612,15 @@ section:last-child{
               target="_blank"
               rel="noopener">
               github.com/sajidmanzoor730
+            </a>
+          </div>
+
+          <div>
+            <a
+              href="https://sajidmanzoor730.github.io/sajid-portfolio/"
+              target="_blank"
+              rel="noopener">
+              sajidmanzoor730.github.io/sajid-portfolio
             </a>
           </div>
 
@@ -864,7 +847,7 @@ section:last-child{
       </section>
 
 
-<!-- EDUCATION / CERTIFICATIONS -->
+      <!-- EDUCATION -->
 
       <section>
 
@@ -877,8 +860,6 @@ section:last-child{
 
       </section>
 
-
-      
 
       <!-- PROJECTS -->
 
@@ -1037,8 +1018,10 @@ section:last-child{
 
           <a
             class="project-link"
-            href="kpi-operations-dashboard.html">
-            Portfolio project →
+            href="https://sajidmanzoor730.github.io/sajid-portfolio/kpi-operations-dashboard.html"
+            target="_blank"
+            rel="noopener">
+            https://sajidmanzoor730.github.io/sajid-portfolio/kpi-operations-dashboard.html
           </a>
 
         </article>
@@ -1079,10 +1062,34 @@ section:last-child{
 
           <a
             class="project-link"
-            href="powerbi-model.html">
-            Portfolio project →
+            href="https://sajidmanzoor730.github.io/sajid-portfolio/powerbi-model.html"
+            target="_blank"
+            rel="noopener">
+            https://sajidmanzoor730.github.io/sajid-portfolio/powerbi-model.html
           </a>
 
         </article>
 
       </section>
+
+    </div>
+
+
+    <div class="actions">
+
+      <button class="action action-primary" type="button" onclick="window.print()">
+        Download PDF
+      </button>
+
+      <a class="action action-secondary" href="index.html">
+        Back to portfolio
+      </a>
+
+    </div>
+
+  </main>
+
+</div>
+
+</body>
+</html>
