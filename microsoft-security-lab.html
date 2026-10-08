@@ -3,33 +3,157 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Sajid Manzoor — Microsoft Security Investigation project covering Defender for Endpoint, Microsoft Sentinel, KQL and security operations analytics.">
-<title>Sajid Manzoor | Microsoft Security Investigation Lab</title>
+<meta name="description" content="Microsoft Security investigation and analytics project covering Defender for Endpoint, Microsoft Sentinel, KQL, alert triage, MITRE ATT&CK and security operations KPIs.">
+<title>Sajid Manzoor | Microsoft Security Investigation</title>
 <link rel="stylesheet" href="project.css">
+<style>
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}.stat{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px}.stat strong{display:block;font-size:29px;color:#10233f;line-height:1.1}.stat span{font-size:13px;color:#64748b}.table-wrap{overflow-x:auto;margin-top:24px}.data-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden}.data-table th,.data-table td{padding:12px 14px;text-align:left;border-bottom:1px solid #e2e8f0;font-size:13px;white-space:nowrap}.data-table th{background:#f8fafc;color:#10233f;font-weight:800}.data-table tr:last-child td{border-bottom:0}.bar-row{display:grid;grid-template-columns:145px 1fr 42px;gap:12px;align-items:center;margin:14px 0}.bar{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:#2563eb;border-radius:99px}.code{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:20px;overflow:auto;font:13px/1.65 Consolas,Monaco,monospace;margin-top:20px}.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}.finding{padding:18px;border:1px solid #e2e8f0;border-radius:12px;background:#fff}.finding strong{color:#10233f}.step{display:grid;grid-template-columns:44px 1fr;gap:14px;margin:18px 0}.step-num{width:38px;height:38px;border-radius:50%;background:#eff6ff;color:#1e40af;display:grid;place-items:center;font-weight:800}.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}@media(max-width:850px){.stat-grid{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}}@media(max-width:600px){.stat-grid{grid-template-columns:1fr 1fr}.bar-row{grid-template-columns:105px 1fr 35px}.data-table th,.data-table td{padding:10px;font-size:12px}}
+</style>
 </head>
 <body>
 <nav><div class="wrap navin"><a class="brand" href="index.html">Sajid Manzoor</a><div class="links"><a href="index.html">Home</a><a href="experience.html">Experience</a><a href="projects.html">Projects</a><a href="skills.html">Skills</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></div></div></nav>
+
 <main><div class="wrap">
-<div class="eyebrow">Security analytics</div>
-<h1>Microsoft Security Investigation Lab</h1>
-<p class="lead">Security investigation and analytics work covering endpoint alert triage, Microsoft Sentinel, KQL investigation, MITRE ATT&amp;CK mapping, and operational metrics.</p>
-<section><article class="card featured">
+
+<div class="eyebrow">Security analytics · KQL · Incident investigation</div>
+<h1>Microsoft Security Investigation</h1>
+<p class="lead">A structured security-operations analysis covering endpoint alert triage, investigation, KQL querying, threat-technique mapping and operational KPI analysis.</p>
+
+<div class="stat-grid">
+<div class="stat"><strong>12</strong><span>Alerts investigated</span></div>
+<div class="stat"><strong>6</strong><span>High-severity alerts</span></div>
+<div class="stat"><strong>10</strong><span>Resolved investigations</span></div>
+<div class="stat"><strong>25.3 min</strong><span>Average MTTR</span></div>
+</div>
+
+<section>
+<article class="card featured">
 <div class="tags"><span class="tag">Microsoft Defender for Endpoint</span><span class="tag">Microsoft Sentinel</span><span class="tag">KQL</span><span class="tag">Power BI</span></div>
-<h3>Investigation Overview</h3>
-<p>Investigated malware, phishing, suspicious PowerShell, credential-access, and unusual network-connection alerts, then organized investigation results into structured security-operations metrics.</p>
-<div class="project-meta"><span>12 Alerts</span><span>6 High Severity</span><span>25.3 min Avg MTTR</span><span>10 Resolved</span></div>
-<div class="actions"><a class="btn primary" href="https://github.com/sajidmanzoor730/microsoft-security-lab" target="_blank" rel="noopener">GitHub →</a></div>
-</article></section>
-<section><div class="section-head"><div><h2>Security Operations Analysis</h2><p class="section-description">Alert-level analysis connecting technical investigation with measurable operational outcomes.</p></div></div>
-<div class="grid">
-<article class="card"><div class="tags"><span class="tag">Alert Triage</span><span class="tag">Investigation</span></div><h3>Endpoint Investigation</h3><p>Reviewed alert context, severity, affected devices, evidence, detection source and investigation status to prioritize security events.</p></article>
-<article class="card"><div class="tags"><span class="tag">KQL</span><span class="tag">Sentinel</span></div><h3>Security Query Analysis</h3><p>Wrote and tested KQL for severity filtering, aggregation, entity-level investigation and alert evidence analysis using Microsoft security telemetry concepts.</p></article>
-<article class="card"><div class="tags"><span class="tag">MITRE ATT&amp;CK</span><span class="tag">RCA</span></div><h3>Threat Technique Mapping</h3><p>Mapped investigation scenarios to ATT&amp;CK techniques and connected technical findings with response actions and root-cause thinking.</p></article>
-<article class="card"><div class="tags"><span class="tag">MTTR</span><span class="tag">Power BI</span></div><h3>Operational Metrics</h3><p>Analyzed severity distribution, alert categories, resolution status and mean time to resolution to turn investigation activity into operational KPIs.</p></article>
-</div></section>
-<section><div class="section-head"><div><h2>Key Results</h2><p class="section-description">Investigation metrics captured across the project dataset.</p></div></div>
-<div class="project-meta"><span>12 alerts investigated</span><span>6 high severity</span><span>6 medium severity</span><span>10 resolved</span><span>2 investigated</span><span>25.3 min average MTTR</span></div>
+<h2>Investigation objective</h2>
+<p>The objective was to build a repeatable workflow for moving from a security alert to an investigation result: understand alert context, prioritize severity, inspect associated evidence, query relevant telemetry, identify the likely technique, record the response action and measure resolution performance.</p>
+<div class="cta"><a class="btn primary" href="https://github.com/sajidmanzoor730/microsoft-security-lab" target="_blank" rel="noopener">View GitHub repository →</a><a class="btn secondary" href="projects.html">All projects →</a></div>
+</article>
 </section>
+
+<section>
+<h2>Investigation workflow</h2>
+<p class="lead">The analysis follows a simple incident-response sequence rather than treating the dashboard as the end product.</p>
+<div class="two">
+<div class="card"><div class="step"><div class="step-num">01</div><div><h3>Alert intake</h3><p>Review alert name, severity, source, affected device/entity and available evidence before deciding investigation priority.</p></div></div><div class="step"><div class="step-num">02</div><div><h3>Evidence review</h3><p>Correlate alert context with related entities and activity to understand what happened and whether additional investigation is required.</p></div></div></div>
+<div class="card"><div class="step"><div class="step-num">03</div><div><h3>KQL analysis</h3><p>Use filtering, projection, aggregation and entity-level queries to isolate relevant security activity and identify patterns.</p></div></div><div class="step"><div class="step-num">04</div><div><h3>Outcome & KPI</h3><p>Record investigation status and response action, then analyze severity, resolution rate and MTTR for operational reporting.</p></div></div></div>
+</div>
+</section>
+
+<section>
+<h2>Alert profile</h2>
+<p class="section-description">The investigation set covers common endpoint and identity-related security scenarios.</p>
+<div class="two">
+<div class="card">
+<h3>Severity distribution</h3>
+<div class="bar-row"><span>High</span><div class="bar"><i style="width:50%"></i></div><strong>6</strong></div>
+<div class="bar-row"><span>Medium</span><div class="bar"><i style="width:50%"></i></div><strong>6</strong></div>
+</div>
+<div class="card">
+<h3>Investigation status</h3>
+<div class="bar-row"><span>Resolved</span><div class="bar"><i style="width:83.3%"></i></div><strong>10</strong></div>
+<div class="bar-row"><span>Investigated</span><div class="bar"><i style="width:16.7%"></i></div><strong>2</strong></div>
+</div>
+</div>
+</section>
+
+<section>
+<h2>Investigation records</h2>
+<p class="section-description">Representative alert-level fields used to organize the investigation and KPI analysis.</p>
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Alert</th><th>Severity</th><th>Category</th><th>Detection</th><th>Technique</th><th>Status</th><th>MTTR</th></tr></thead>
+<tbody>
+<tr><td>SEC-001</td><td>High</td><td>Malware</td><td>Endpoint</td><td>T1204</td><td>Resolved</td><td>18 min</td></tr>
+<tr><td>SEC-002</td><td>High</td><td>Phishing</td><td>Email</td><td>T1566</td><td>Resolved</td><td>22 min</td></tr>
+<tr><td>SEC-003</td><td>High</td><td>PowerShell</td><td>Endpoint</td><td>T1059.001</td><td>Resolved</td><td>31 min</td></tr>
+<tr><td>SEC-004</td><td>High</td><td>Credential Access</td><td>Endpoint</td><td>T1003</td><td>Resolved</td><td>27 min</td></tr>
+<tr><td>SEC-005</td><td>High</td><td>Network Activity</td><td>Endpoint</td><td>T1071</td><td>Investigated</td><td>35 min</td></tr>
+<tr><td>SEC-006</td><td>High</td><td>Malware</td><td>Endpoint</td><td>T1204</td><td>Resolved</td><td>24 min</td></tr>
+<tr><td>SEC-007</td><td>Medium</td><td>Phishing</td><td>Email</td><td>T1566</td><td>Resolved</td><td>19 min</td></tr>
+<tr><td>SEC-008</td><td>Medium</td><td>PowerShell</td><td>Endpoint</td><td>T1059.001</td><td>Resolved</td><td>26 min</td></tr>
+<tr><td>SEC-009</td><td>Medium</td><td>Credential Access</td><td>Endpoint</td><td>T1003</td><td>Resolved</td><td>21 min</td></tr>
+<tr><td>SEC-010</td><td>Medium</td><td>Network Activity</td><td>Endpoint</td><td>T1071</td><td>Investigated</td><td>29 min</td></tr>
+<tr><td>SEC-011</td><td>Medium</td><td>Malware</td><td>Endpoint</td><td>T1204</td><td>Resolved</td><td>23 min</td></tr>
+<tr><td>SEC-012</td><td>Medium</td><td>Phishing</td><td>Email</td><td>T1566</td><td>Resolved</td><td>29 min</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section>
+<h2>KQL investigation</h2>
+<p class="section-description">Queries were used to filter, summarize and prioritize security events before interpreting the results.</p>
+<div class="card">
+<h3>Severity prioritization</h3>
+<pre class="code">SecurityAlert
+| where TimeGenerated &gt; ago(7d)
+| where AlertSeverity == "High"
+| project TimeGenerated, AlertSeverity, AlertName, ProviderName
+| order by TimeGenerated desc</pre>
+</div>
+<div class="card" style="margin-top:18px">
+<h3>Alert distribution</h3>
+<pre class="code">SecurityAlert
+| where TimeGenerated &gt; ago(7d)
+| summarize AlertCount = count() by AlertSeverity
+| order by AlertCount desc</pre>
+</div>
+<div class="card" style="margin-top:18px">
+<h3>Entity-level investigation</h3>
+<pre class="code">SecurityAlert
+| where TimeGenerated &gt; ago(7d)
+| summarize AlertCount = count() by CompromisedEntity
+| order by AlertCount desc</pre>
+</div>
+</section>
+
+<section>
+<h2>Threat technique mapping</h2>
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Scenario</th><th>MITRE ATT&amp;CK</th><th>Investigation focus</th><th>Response focus</th></tr></thead>
+<tbody>
+<tr><td>Phishing</td><td>T1566</td><td>Message/source context and affected user</td><td>Containment and review</td></tr>
+<tr><td>PowerShell</td><td>T1059.001</td><td>Command execution context</td><td>Process review and containment</td></tr>
+<tr><td>Credential access</td><td>T1003</td><td>Authentication and process evidence</td><td>Credential protection</td></tr>
+<tr><td>Network activity</td><td>T1071</td><td>Connection and destination context</td><td>Traffic review</td></tr>
+<tr><td>Malware</td><td>T1204</td><td>Execution and endpoint evidence</td><td>Endpoint remediation</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section>
+<h2>Key findings</h2>
+<div class="grid">
+<div class="finding"><strong>Severity required prioritization.</strong><p>Half of the investigated alerts were high severity, making severity-based triage an important first filter for investigation workload.</p></div>
+<div class="finding"><strong>Endpoint activity dominated investigation.</strong><p>Malware, PowerShell, credential-access and network scenarios required endpoint-focused evidence review.</p></div>
+<div class="finding"><strong>Investigation time became a KPI.</strong><p>MTTR was tracked alongside alert severity and resolution status to connect technical investigation with operational performance.</p></div>
+<div class="finding"><strong>Structured evidence improves repeatability.</strong><p>Capturing category, detection source, technique, status and response action makes later trend analysis easier.</p></div>
+</div>
+</section>
+
+<section>
+<h2>Technology stack</h2>
+<div class="tags">
+<span class="tag">Microsoft Defender for Endpoint</span><span class="tag">Microsoft Sentinel</span><span class="tag">KQL</span><span class="tag">MITRE ATT&amp;CK</span><span class="tag">Power BI</span><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Excel</span>
+</div>
+</section>
+
+<section>
+<article class="card featured">
+<h2>Project repository</h2>
+<p>The repository contains the investigation workflow, KQL examples, project documentation and supporting analysis.</p>
+<div class="cta"><a class="btn primary" href="https://github.com/sajidmanzoor730/microsoft-security-lab" target="_blank" rel="noopener">Open GitHub →</a><a class="btn secondary" href="projects.html">Back to projects →</a></div>
+</article>
+</section>
+
 </div></main>
 <footer class="footer"><div class="wrap">© 2026 Sajid Manzoor · Data Analyst &amp; Technical Operations</div></footer>
-</body></html>
+</body>
+</html>
