@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560">
+<rect width="1200" height="560" rx="28" fill="#fff"/>
+<text x="56" y="62" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#122033">HELPDESK KPI DASHBOARD</text>
+<text x="56" y="88" font-family="Arial, sans-serif" font-size="12" fill="#667085">3,600 unique tickets · operational KPI analysis</text>
+<g font-family="Arial, sans-serif">
+<rect x="56" y="122" width="250" height="112" rx="16" fill="#f7f9fc" stroke="#e7ebf2"/><text x="78" y="151" font-size="11" fill="#667085">SLA ADHERENCE</text><text x="78" y="198" font-size="34" font-weight="800" fill="#122033">90.5%</text>
+<rect x="326" y="122" width="250" height="112" rx="16" fill="#f7f9fc" stroke="#e7ebf2"/><text x="348" y="151" font-size="11" fill="#667085">CSAT</text><text x="348" y="198" font-size="34" font-weight="800" fill="#122033">3.77/5</text>
+<rect x="596" y="122" width="250" height="112" rx="16" fill="#f7f9fc" stroke="#e7ebf2"/><text x="618" y="151" font-size="11" fill="#667085">REPEAT TICKETS</text><text x="618" y="198" font-size="34" font-weight="800" fill="#122033">9.2%</text>
+<rect x="866" y="122" width="278" height="112" rx="16" fill="#f7f9fc" stroke="#e7ebf2"/><text x="888" y="151" font-size="11" fill="#667085">DATA QUALITY</text><text x="888" y="198" font-size="34" font-weight="800" fill="#122033">95.1%</text>
+<text x="56" y="286" font-size="12" font-weight="700" fill="#122033">SLA performance trend</text>
+<line x1="56" y1="462" x2="1144" y2="462" stroke="#e7ebf2"/>
+<g fill="#2563eb"><rect x="92" y="386" width="72" height="76" rx="8"/><rect x="220" y="350" width="72" height="112" rx="8"/><rect x="348" y="374" width="72" height="88" rx="8"/><rect x="476" y="322" width="72" height="140" rx="8"/><rect x="604" y="342" width="72" height="120" rx="8"/><rect x="732" y="300" width="72" height="162" rx="8"/><rect x="860" y="316" width="72" height="146" rx="8"/><rect x="988" y="278" width="72" height="184" rx="8"/></g>
+<g font-size="10" fill="#667085" text-anchor="middle"><text x="128" y="488">W1</text><text x="256" y="488">W2</text><text x="384" y="488">W3</text><text x="512" y="488">W4</text><text x="640" y="488">W5</text><text x="768" y="488">W6</text><text x="896" y="488">W7</text><text x="1024" y="488">W8</text></g>
+</g></svg>
