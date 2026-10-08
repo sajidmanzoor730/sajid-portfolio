@@ -60,25 +60,25 @@
 
 <section><h2>Alert inventory</h2><p class="section-description">Alert-level records used for triage, technique mapping and KPI analysis.</p>
 <div class="table-wrap"><table class="data-table"><thead><tr><th>Alert</th><th>Severity</th><th>Category</th><th>Source</th><th>Technique</th><th>Investigation action</th><th>Status</th><th>MTTR</th></tr></thead><tbody>
-<tr><td>SEC-001</td><td>High</td><td>Malware</td><td>Endpoint</td><td>T1204</td><td>Reviewed execution evidence</td><td>Resolved</td><td>18 min</td></tr>
-<tr><td>SEC-002</td><td>High</td><td>Phishing</td><td>Email</td><td>T1566</td><td>Reviewed message/user context</td><td>Resolved</td><td>22 min</td></tr>
-<tr><td>SEC-003</td><td>High</td><td>PowerShell</td><td>Endpoint</td><td>T1059.001</td><td>Reviewed process context</td><td>Resolved</td><td>31 min</td></tr>
-<tr><td>SEC-004</td><td>High</td><td>Credential Access</td><td>Endpoint</td><td>T1003</td><td>Reviewed process/account evidence</td><td>Resolved</td><td>27 min</td></tr>
-<tr><td>SEC-005</td><td>High</td><td>Network Activity</td><td>Endpoint</td><td>T1071</td><td>Reviewed connection context</td><td>Investigated</td><td>—</td></tr>
-<tr><td>SEC-006</td><td>High</td><td>Malware</td><td>Endpoint</td><td>T1204</td><td>Reviewed endpoint evidence</td><td>Resolved</td><td>24 min</td></tr>
-<tr><td>SEC-007</td><td>Medium</td><td>Phishing</td><td>Email</td><td>T1566</td><td>Reviewed message/user context</td><td>Resolved</td><td>19 min</td></tr>
-<tr><td>SEC-008</td><td>Medium</td><td>PowerShell</td><td>Endpoint</td><td>T1059.001</td><td>Reviewed process context</td><td>Resolved</td><td>26 min</td></tr>
-<tr><td>SEC-009</td><td>Medium</td><td>Credential Access</td><td>Endpoint</td><td>T1003</td><td>Reviewed account/process evidence</td><td>Resolved</td><td>21 min</td></tr>
-<tr><td>SEC-010</td><td>Medium</td><td>Network Activity</td><td>Endpoint</td><td>T1071</td><td>Reviewed connection context</td><td>Investigated</td><td>—</td></tr>
-<tr><td>SEC-011</td><td>Medium</td><td>Malware</td><td>Endpoint</td><td>T1204</td><td>Reviewed execution evidence</td><td>Resolved</td><td>23 min</td></tr>
-<tr><td>SEC-012</td><td>Medium</td><td>Phishing</td><td>Email</td><td>T1566</td><td>Reviewed message/user context</td><td>Resolved</td><td>29 min</td></tr>
+<tr><td>SEC-001</td><td>High</td><td>Malware</td><td>Endpoint</td><td>T1204.002</td><td>File quarantined and device reviewed</td><td>Resolved</td><td>20 min</td></tr>
+<tr><td>SEC-002</td><td>High</td><td>Execution</td><td>Endpoint</td><td>T1059.001</td><td>Process investigated and activity contained</td><td>Resolved</td><td>24 min</td></tr>
+<tr><td>SEC-003</td><td>Medium</td><td>Phishing</td><td>Email</td><td>T1566.002</td><td>URL blocked and message reviewed</td><td>Resolved</td><td>16 min</td></tr>
+<tr><td>SEC-004</td><td>High</td><td>Credential Access</td><td>Endpoint</td><td>T1056</td><td>Endpoint activity reviewed and credentials reset</td><td>Investigated</td><td>—</td></tr>
+<tr><td>SEC-005</td><td>High</td><td>Malware</td><td>Endpoint</td><td>T1204.002</td><td>File quarantined and scan completed</td><td>Resolved</td><td>27 min</td></tr>
+<tr><td>SEC-006</td><td>Medium</td><td>Malware</td><td>Endpoint</td><td>T1204.002</td><td>Download removed and device reviewed</td><td>Resolved</td><td>19 min</td></tr>
+<tr><td>SEC-007</td><td>High</td><td>Phishing</td><td>Email</td><td>T1566.001</td><td>Attachment blocked and mailbox reviewed</td><td>Resolved</td><td>23 min</td></tr>
+<tr><td>SEC-008</td><td>Medium</td><td>Execution</td><td>Endpoint</td><td>T1059.001</td><td>Command reviewed and process terminated</td><td>Investigated</td><td>—</td></tr>
+<tr><td>SEC-009</td><td>Medium</td><td>Command &amp; Control</td><td>Endpoint</td><td>T1071.001</td><td>Connection blocked and endpoint checked</td><td>Resolved</td><td>32 min</td></tr>
+<tr><td>SEC-010</td><td>High</td><td>Credential Access</td><td>Endpoint</td><td>T1003</td><td>Process contained and endpoint investigated</td><td>Resolved</td><td>38 min</td></tr>
+<tr><td>SEC-011</td><td>Medium</td><td>Command &amp; Control</td><td>Endpoint</td><td>T1071.001</td><td>Remote connection blocked</td><td>Resolved</td><td>22 min</td></tr>
+<tr><td>SEC-012</td><td>High</td><td>Malware</td><td>Endpoint</td><td>T1204.002</td><td>File quarantined and full scan completed</td><td>Resolved</td><td>32 min</td></tr>
 </tbody></table></div></section>
 
 <section><h2>Detailed investigation cases</h2><p class="section-description">Three representative investigations show how the project connects alert context, evidence review, technique mapping and outcome.</p>
 <div class="three">
 <article class="case"><div class="mini">Case 01 · High</div><h3>Suspicious PowerShell activity</h3><p><strong>Technique:</strong> T1059.001 — PowerShell.</p><p><strong>Focus:</strong> Review process context, affected endpoint and account activity, then determine whether the execution pattern required escalation.</p><div class="result"><strong>Outcome</strong>Investigation recorded as resolved after endpoint evidence review and response validation.</div></article>
 <article class="case"><div class="mini">Case 02 · High</div><h3>Credential-access activity</h3><p><strong>Technique:</strong> T1003 — OS Credential Dumping.</p><p><strong>Focus:</strong> Correlate account and process evidence, assess the affected entity and prioritize the alert based on severity.</p><div class="result"><strong>Outcome</strong>Investigation recorded as resolved with credential-protection and follow-up review as the response focus.</div></article>
-<article class="case"><div class="mini">Case 03 · Medium</div><h3>Unusual network activity</h3><p><strong>Technique:</strong> T1071 — Application Layer Protocol.</p><p><strong>Focus:</strong> Review connection context and destination information, then determine whether additional telemetry was needed.</p><div class="result"><strong>Outcome</strong>Investigation remained open for continued review rather than being marked resolved prematurely.</div></article>
+<article class="case"><div class="mini">Case 03 · High</div><h3>Unusual network activity</h3><p><strong>Technique:</strong> T1071 — Application Layer Protocol.</p><p><strong>Focus:</strong> Review connection context and destination information, then determine whether additional telemetry was needed.</p><div class="result"><strong>Outcome</strong>SEC-005 remained in <strong>Investigated</strong> status for continued review rather than being marked resolved prematurely.</div></article>
 </div></section>
 
 <section><h2>KQL investigation</h2><p class="section-description">Queries were used to filter, correlate, summarize and prioritize security events before interpreting the results.</p>
@@ -115,7 +115,7 @@
 
 <section><h2>Operational findings</h2><div class="grid">
 <div class="finding"><strong>Severity required prioritization.</strong><p>Half of the investigated alerts were high severity, making severity-based triage an important first filter for investigation workload.</p></div>
-<div class="finding"><strong>Resolution became measurable.</strong><p>10 of 12 investigations were resolved, while two remained under investigation rather than being forced into a closed state.</p></div>
+<div class="finding"><strong>Resolution became measurable.</strong><p>10 of 12 investigations were resolved, while two remained in <strong>Investigated</strong> status rather than being forced into a closed state.</p></div>
 <div class="finding"><strong>MTTR connected technical work to operations.</strong><p>The average resolution time across resolved investigations was 25.3 minutes, providing a practical service-operations KPI.</p></div>
 <div class="finding"><strong>Evidence structure supports repeatability.</strong><p>Capturing category, source, technique, investigation action and outcome creates a consistent record for later trend analysis.</p></div>
 </div></section>
