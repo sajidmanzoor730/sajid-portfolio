@@ -254,8 +254,14 @@ h1{
   }
 
   .links{
-    display:none
+    display:flex;
+    max-width:68vw;
+    gap:16px;
+    overflow-x:auto;
+    white-space:nowrap;
+    scrollbar-width:none
   }
+  .links::-webkit-scrollbar{display:none}
 
   main{
     padding:52px 0 60px
@@ -341,7 +347,7 @@ h1{
           </h2>
 
           <div class="company">
-            A2N Technologies Pvt Ltd · Jammu &amp; Kashmir
+            A2N Technologies Pvt Ltd · Mumbai, Maharashtra
           </div>
         </div>
 
@@ -355,15 +361,11 @@ h1{
       <ul>
 
         <li>
-          Analyzed operational data across 100+ IP surveillance
-          deployments and maintained accurate records for 150+
-          client infrastructure records in ServiceNow and JIRA.
+          Analyzed operational data across 100+ IP surveillance deployments and maintained structured records in ServiceNow and JIRA.
         </li>
 
         <li>
-          Built an Excel dashboard covering 200+ records to track
-          uptime, bandwidth and SLA performance, reducing regular
-          reporting time by 15%.
+          Built an Excel dashboard covering 200+ records to track uptime, bandwidth and SLA performance.
         </li>
 
         <li>
@@ -373,9 +375,7 @@ h1{
         </li>
 
         <li>
-          Reviewed 40+ operational tickets each week to identify
-          recurring downtime patterns and root causes, contributing
-          to a 30% reduction in escalations.
+          Reviewed 40+ operational tickets each week to identify recurring downtime patterns and root causes, supporting weekly RCA and escalation reporting.
         </li>
 
         <li>
@@ -526,7 +526,7 @@ h1{
 <footer class="footer">
 
   <div class="wrap">
-    © 2026 Sajid Manzoor · Data Analyst &amp; Business Operations
+    © 2026 Sajid Manzoor · Data Analyst · SQL · Power BI · Python
   </div>
 
 </footer>
