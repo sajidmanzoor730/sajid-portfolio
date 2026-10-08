@@ -215,7 +215,7 @@ h2{
 .card.featured{
   grid-column:span 2;
 
-  background:#fff;
+  background:linear-gradient(135deg,#ffffff 0%,#f7fbff 100%);
 
   border-color:#cbd5e1;
 
@@ -424,7 +424,8 @@ h2{
    FOOTER
 ========================= */
 
-.footer{
+ .footer{
+  margin-top:10px;
   background:#fff;
 
   border-top:1px solid var(--line);
@@ -447,9 +448,15 @@ h2{
     width:min(100% - 28px,1120px);
   }
 
-  .links{
-    display:none;
+   .links{
+    display:flex;
+    max-width:68vw;
+    gap:16px;
+    overflow-x:auto;
+    white-space:nowrap;
+    scrollbar-width:none;
   }
+  .links::-webkit-scrollbar{display:none;}
 
   main{
     padding:50px 0 60px;
