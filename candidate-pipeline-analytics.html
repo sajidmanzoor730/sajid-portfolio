@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Candidate sourcing and pipeline analytics project covering staffing requirements, candidate stages, aging, ownership, SLA/TAT and fulfillment reporting.">
+<title>Candidate Sourcing &amp; Pipeline Analytics | Sajid Manzoor</title>
+<link rel="stylesheet" href="project.css">
+<style>
+.pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}
+.metric{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:20px}
+.metric span{display:block;color:#64748b;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.metric strong{display:block;margin-top:9px;font-size:25px;color:#10233f}
+@media(max-width:760px){.pipeline{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.pipeline{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav><div class="wrap navin"><a class="brand" href="index.html">Sajid Manzoor</a><div class="links"><a href="projects.html">Projects</a><a href="experience.html">Experience</a><a href="skills.html">Skills</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></div></div></nav>
+<main><div class="wrap">
+<a class="back" href="projects.html">← Back to Projects</a>
+<div class="eyebrow">Technical Sourcing · Operations Analytics</div>
+<h1>Candidate Sourcing &amp; Pipeline Analytics</h1>
+<p class="lead">A structured analytics framework for technical staffing workflows, connecting client requirements, candidate stages, aging, ownership, follow-ups, SLA/TAT and fulfillment reporting.</p>
+
+<div class="notice"><strong>Why this project:</strong> My staffing operations experience involved active client requirements, candidate records, weekly staffing requests and pipeline tracking. This project translates that workflow into an analyst-friendly reporting model without presenting simulated records as workplace results.</div>
+
+<section><h2>What the analysis tracks</h2>
+<div class="pipeline">
+<div class="metric"><span>Requirements</span><strong>Open demand</strong></div>
+<div class="metric"><span>Candidate stage</span><strong>Pipeline flow</strong></div>
+<div class="metric"><span>Requirement aging</span><strong>Time in stage</strong></div>
+<div class="metric"><span>Fulfillment</span><strong>Outcome view</strong></div>
+</div></section>
+
+<section><h2>Core analytical views</h2><div class="grid">
+<div class="card"><h3>Requirement pipeline</h3><p>Track open roles by client, priority, owner, status and age so active demand is visible in one place.</p></div>
+<div class="card"><h3>Candidate funnel</h3><p>Follow candidates through sourced, screened, submitted, interviewed, selected and closed stages.</p></div>
+<div class="card"><h3>SLA &amp; TAT</h3><p>Compare request dates, target dates and completion dates to identify delayed requirements and recurring bottlenecks.</p></div>
+<div class="card"><h3>Fulfillment analysis</h3><p>Connect candidate movement to requirement outcomes and identify where the pipeline loses momentum.</p></div>
+</div></section>
+
+<section><h2>Data model</h2><div class="card"><ul>
+<li><strong>Requirement:</strong> requirement ID, client, role, priority, owner, opened date, target date and status.</li>
+<li><strong>Candidate:</strong> candidate ID, source, stage, submission date, interview status and outcome.</li>
+<li><strong>Activity:</strong> follow-up date, action, owner, activity type and timestamp.</li>
+<li><strong>Metrics:</strong> aging, SLA/TAT, stage conversion, fulfillment and workload.</li>
+</ul></div></section>
+
+<section><h2>Workplace relevance</h2><div class="card"><p>This project reflects the same analytical questions that matter in staffing operations: What is open? Where is each requirement in the pipeline? Which items are aging? Who owns the next action? Where are SLA or fulfillment delays appearing?</p><p>It demonstrates how operational staffing data can be structured for repeatable reporting and decision support rather than treated as a simple candidate list.</p></div></section>
+
+<section><h2>Skills demonstrated</h2><div class="tags"><span class="tag">Operations Analytics</span><span class="tag">Technical Sourcing</span><span class="tag">Pipeline Analysis</span><span class="tag">SLA/TAT</span><span class="tag">Data Quality</span><span class="tag">KPI Reporting</span><span class="tag">Excel</span><span class="tag">SQL</span></div></section>
+</div></main>
+<footer class="footer"><div class="wrap">© 2026 Sajid Manzoor · Data Analyst · Operations Analytics</div></footer>
+</body>
+</html>
