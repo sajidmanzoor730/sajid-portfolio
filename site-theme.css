@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;12..96,500;12..96,600&display=swap');
+
+:root{
+  --paper:#F2F5F7;
+  --surface:#FFFFFF;
+  --ink:#13213B;
+  --muted:#55627A;
+  --line:#D5DCE5;
+  --teal:#0B7F86;
+  --teal-soft:#DDF0F1;
+  --amber:#C9801A;
+  --display:"Bricolage Grotesque","Segoe UI",Helvetica,Arial,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0!important;
+  background:var(--paper)!important;
+  color:var(--ink)!important;
+  font-family:var(--body)!important;
+  line-height:1.65!important;
+}
+a{color:inherit}
+.wrap{width:min(1040px,calc(100% - 48px))!important;max-width:1040px!important;margin:auto}
+nav{
+  height:72px!important;
+  background:rgba(242,245,247,.92)!important;
+  border-bottom:1px solid var(--line)!important;
+  position:sticky!important;
+  top:0!important;
+  z-index:50!important;
+  backdrop-filter:blur(16px)!important;
+}
+.navin{height:100%;display:flex;align-items:center;justify-content:space-between}
+.brand{
+  font-family:var(--display)!important;
+  font-weight:700!important;
+  font-size:20px!important;
+  color:var(--ink)!important;
+}
+.links{display:flex;gap:22px!important}
+.links a{
+  color:var(--muted)!important;
+  font-size:14px!important;
+  font-weight:600!important;
+  text-decoration:none!important;
+}
+.links a:hover{color:var(--teal)!important}
+main{padding:72px 0!important}
+.eyebrow{
+  color:var(--teal)!important;
+  font-size:12px!important;
+  text-transform:uppercase!important;
+  letter-spacing:.12em!important;
+  font-weight:700!important;
+}
+h1,h2,h3,h4{
+  font-family:var(--display)!important;
+  color:var(--ink)!important;
+}
+h1{
+  font-size:clamp(42px,6vw,68px)!important;
+  line-height:.99!important;
+  letter-spacing:-.055em!important;
+}
+h2{font-size:30px!important;letter-spacing:-.035em!important}
+h3{font-size:20px!important}
+.lead,.lede{
+  color:var(--muted)!important;
+  font-size:19px!important;
+  max-width:820px;
+}
+section{border-top:1px solid var(--line)!important}
+.card,.panel,.metric,.stat,.finding,.case,.item,.toolbar,.dashboard-toolbar,.data-note,.notice,.dq-bar,.dq-loading,.dq-kpi,.kpi-card{
+  background:var(--surface)!important;
+  border-color:var(--line)!important;
+  box-shadow:0 8px 28px rgba(19,33,59,.045)!important;
+}
+.card,.panel,.metric,.stat,.finding,.case{border-radius:16px!important}
+button,.btn{
+  font-family:var(--body)!important;
+  border-radius:8px!important;
+}
+.btn,.primary{
+  background:var(--teal)!important;
+  border-color:var(--teal)!important;
+  color:#fff!important;
+}
+.secondary{
+  background:var(--surface)!important;
+  color:var(--ink)!important;
+  border-color:var(--line)!important;
+}
+a:not(.brand):not(.links a){color:var(--teal)}
+.back,.back-link{color:var(--teal)!important;font-weight:600!important}
+.tag{
+  background:var(--teal-soft)!important;
+  color:var(--teal)!important;
+  border-color:transparent!important;
+}
+table{border-color:var(--line)!important}
+th{background:#EEF3F5!important;color:var(--ink)!important}
+td{border-color:var(--line)!important}
+input,select,textarea,.filter,.dq-sel,.dq-btn{
+  background:var(--surface)!important;
+  color:var(--ink)!important;
+  border-color:var(--line)!important;
+}
+input:focus,select:focus,textarea:focus,.filter:focus,.dq-sel:focus,.dq-btn:focus{
+  border-color:var(--teal)!important;
+  box-shadow:0 0 0 3px rgba(11,127,134,.10)!important;
+}
+.code{
+  background:#13213B!important;
+  border:1px solid #253452!important;
+}
+.footer{
+  background:transparent!important;
+  border-top:1px solid var(--line)!important;
+  color:var(--muted)!important;
+}
+.hero{
+  background:
+    radial-gradient(circle at 85% 15%,var(--teal-soft),transparent 30%),
+    radial-gradient(circle at 8% 75%,#FFF1D6,transparent 23%)!important;
+}
+.contact{
+  background:var(--ink)!important;
+  border-radius:16px!important;
+}
+.contact .eyebrow{color:#7DD7D9!important}
+.project-row{
+  border-color:var(--line)!important;
+}
+.project-row .metric{background:transparent!important;border:0!important;box-shadow:none!important}
+@media(max-width:820px){
+  .wrap{width:min(100% - 28px,1040px)!important}
+  .links{gap:14px!important;overflow-x:auto}
+  main{padding:54px 0!important}
+  h1{font-size:clamp(40px,11vw,58px)!important}
+}
+@media(max-width:640px){
+  .links{display:none}
+  .wrap{width:min(100% - 28px,1040px)!important}
+  .details,.grid,.two,.three,.dashboard-grid,.kpi-grid,.dq-kpis,.metrics,.stat-grid{grid-template-columns:1fr!important}
+}
