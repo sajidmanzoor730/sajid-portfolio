@@ -20,65 +20,40 @@ main{padding:52px 0}.eyebrow{font-size:13px;text-transform:uppercase;letter-spac
 <nav><div class="wrap navin"><a class="brand" href="index.html">Sajid Manzoor</a><div class="links"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="skills.html">Skills</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></div></div></nav>
 <main><div class="wrap">
 <div class="eyebrow">Data Analytics · Dataset</div>
-<h1>Helpdesk Ticket Dataset</h1>
-<p class="lead">A browsable preview of the structured helpdesk export used in the Helpdesk Ticket KPI Dashboard case study. Search and filter the records without leaving the portfolio.</p>
+<h1>Public IT Helpdesk Dataset</h1>
+<p class="lead">Explore the official aggregated MCG HelpIT Tickets dataset published by Montgomery County Government. This page links to the source rather than displaying the old generated ticket-level demo file.</p>
 <div class="buttons">
 <a class="btn primary" href="helpdesk-kpi-dashboard.html">← Back to case study</a>
-<a class="btn secondary" href="https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard/blob/main/Helpdesk_Tickets_Dataset_Raw.csv" target="_blank" rel="noopener">Open source CSV →</a>
-<a class="btn secondary" href="https://raw.githubusercontent.com/sajidmanzoor730/helpdesk-kpi-dashboard/main/Helpdesk_Tickets_Dataset_Raw.csv" target="_blank" rel="noopener">Download CSV →</a>
+<a class="btn secondary" href="https://data.montgomerycountymd.gov/d/qzr8-h9x6" target="_blank" rel="noopener">Open official dataset →</a>
+<a class="btn secondary" href="https://data.montgomerycountymd.gov/api/v3/views/qzr8-h9x6/export.csv?accessType=DOWNLOAD" target="_blank" rel="noopener">Open source CSV →</a>
 </div>
 <div class="card">
 <strong>Dataset notes</strong>
 <ul>
-<li>3,672 raw rows, including controlled duplicate records.</li>
-<li>3,600 unique tickets after cleaning.</li>
-<li>March–August 2026 dataset used for KPI analysis and reporting.</li>
-<li>Designed to demonstrate data cleaning, KPI analysis, SQL and dashboard reporting.</li>
+<li>Published by Montgomery County Government, Maryland.</li>
+<li>Contains summary rows grouped by fiscal year, report section and item.</li>
+<li>Includes published counts and percentages where available.</li>
+<li>Does not expose individual ticket IDs, ticket-level timestamps, agent records, SLA targets or individual CSAT scores.</li>
+<li>The old generated ticket-level CSV is a legacy demonstration artifact and is not the live dashboard source.</li>
 </ul>
 </div>
 <div class="card">
-<div class="controls">
-<input id="search" type="search" placeholder="Search ticket ID, category, agent, team, root cause...">
-<select id="priority"><option value="">All priorities</option></select>
-<select id="category"><option value="">All categories</option></select>
+<h2>What you can analyze</h2>
+<ul>
+<li>Published request-type counts, such as Email Support and VPN.</li>
+<li>Contact counts by source.</li>
+<li>Published contact counts by department.</li>
+<li>Survey summary rows as reported by the source.</li>
+<li>Differences across fiscal years, where comparable rows are available.</li>
+</ul>
+<p><strong>Important:</strong> do not combine totals from different report sections because the sections may overlap. Survey summary counts are not the same as individual CSAT ratings.</p>
 </div>
-<div id="status" class="status">Loading dataset…</div>
-<div class="table-wrap"><table><thead id="head"></thead><tbody id="body"></tbody></table></div>
+<div class="card">
+<h2>Data provenance</h2>
+<p>Source: <a href="https://data.montgomerycountymd.gov/d/qzr8-h9x6" target="_blank" rel="noopener">MCG HelpIT Tickets — Montgomery County Open Data</a>.</p>
+<p>The live dashboard fetches the official source at runtime. If the source is unavailable, the dashboard reports an error instead of silently displaying generated data.</p>
 </div>
 </div></main>
 <footer><div class="wrap">© 2026 Sajid Manzoor · Data Analytics & Business Operations</div></footer>
-<script>
-const csvUrl="https://raw.githubusercontent.com/sajidmanzoor730/helpdesk-kpi-dashboard/main/Helpdesk_Tickets_Dataset_Raw.csv",localUrl="data/Helpdesk_Tickets_Dataset_Raw.csv"; /* local copy is used first if present */
-let rows=[],headers=[];
-function parseCSV(text){
- const out=[];let row=[],cell="",quoted=false;
- for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];
-  if(c=='"'){if(quoted&&n=='"'){cell+='"';i++}else quoted=!quoted}
-  else if(c==','&&!quoted){row.push(cell);cell=""}
-  else if((c=='\n'||c=='\r')&&!quoted){if(c=='\r'&&n=='\n')i++;row.push(cell);if(row.some(v=>v!==""))out.push(row);row=[];cell=""}
-  else cell+=c;
- }
- if(cell!==""||row.length){row.push(cell);if(row.some(v=>v!==""))out.push(row)}
- return out;
-}
-function esc(v){return String(v??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
-function render(){
- const q=document.getElementById("search").value.toLowerCase().trim(),p=document.getElementById("priority").value,c=document.getElementById("category").value;
- const filtered=rows.filter(r=>(!p||r.Priority===p)&&(!c||r.Category===c)&&(!q||Object.values(r).join(" ").toLowerCase().includes(q)));
- document.getElementById("status").textContent="Showing "+Math.min(filtered.length,250)+" of "+filtered.length+" matching rows · "+rows.length+" raw rows loaded";
- document.getElementById("body").innerHTML=filtered.slice(0,250).map(r=>"<tr>"+headers.map(h=>"<td>"+esc(r[h])+"</td>").join("")+"</tr>").join("");
-}
-fetch(localUrl).then(r=>{if(!r.ok)throw 0;return r.text()}).catch(()=>fetch(csvUrl).then(r=>{if(!r.ok)throw new Error("Dataset could not be loaded");return r.text()})).then(text=>{
- const parsed=parseCSV(text);headers=parsed.shift();rows=parsed.map(a=>Object.fromEntries(headers.map((h,i)=>[h,a[i]??""])));
- document.getElementById("head").innerHTML="<tr>"+headers.map(h=>"<th>"+esc(h)+"</th>").join("")+"</tr>";
- const priorities=[...new Set(rows.map(r=>r.Priority).filter(Boolean))].sort();
- const categories=[...new Set(rows.map(r=>r.Category).filter(Boolean))].sort();
- document.getElementById("priority").innerHTML='<option value="">All priorities</option>'+priorities.map(x=>'<option>'+esc(x)+'</option>').join("");
- document.getElementById("category").innerHTML='<option value="">All categories</option>'+categories.map(x=>'<option>'+esc(x)+'</option>').join("");
- render();
-}).catch(e=>{document.getElementById("status").textContent="The dataset could not be loaded in the browser. Use the Open source CSV button above.";console.error(e)});
-document.getElementById("search").addEventListener("input",render);
-document.getElementById("priority").addEventListener("change",render);
-document.getElementById("category").addEventListener("change",render);
-</script>
+
 <script src="modern.js"></script></body></html>
