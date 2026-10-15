@@ -29,8 +29,7 @@ body{
 a{
   text-decoration:none;
   color:var(--blue);
-  transition:
-    color .2s ease,
+  transition:color .2s ease,
     background .2s ease,
     border-color .2s ease,
     transform .2s ease;
@@ -48,7 +47,7 @@ a{
 
 nav{
   height:72px;
-  background:rgba(255,255,255,.97);
+  background:rgba(6,9,20,.9);
   border-bottom:1px solid var(--line);
   position:sticky;
   top:0;
@@ -125,9 +124,9 @@ h1{
   margin:30px 0 58px;
   padding:18px 20px;
   background:var(--sky);
-  border:1px solid #dbeafe;
+  border:1px solid rgba(160,180,255,.22);
   border-radius:14px;
-  color:#334155;
+  color:#C0CBEC;
   font-size:14px;
 }
 
@@ -193,18 +192,17 @@ h2{
   border-radius:16px;
   padding:26px;
   min-height:100%;
-  box-shadow:0 4px 18px rgba(15,35,63,.035);
+  box-shadow:0 4px 18px rgba(0,0,0,.4);
 
-  transition:
-    transform .2s ease,
+  transition:transform .2s ease,
     box-shadow .2s ease,
     border-color .2s ease;
 }
 
 .card:hover{
   transform:translateY(-3px);
-  border-color:#cbd5e1;
-  box-shadow:0 12px 30px rgba(15,35,63,.08);
+  border-color:rgba(160,180,255,.26);
+  box-shadow:0 12px 30px rgba(0,0,0,.4);
 }
 
 
@@ -215,20 +213,18 @@ h2{
 .card.featured{
   grid-column:span 2;
 
-  background:linear-gradient(135deg,#ffffff 0%,#f7fbff 100%);
+  background:linear-gradient(135deg,#0F1636 0%,#f7fbff 100%);
 
-  border-color:#cbd5e1;
+  border-color:rgba(160,180,255,.26);
 
   padding:32px;
 
-  box-shadow:
-    0 6px 24px rgba(15,35,63,.05);
+  box-shadow:0 6px 24px rgba(0,0,0,.4);
 }
 
 .card.featured:hover{
-  border-color:#bfdbfe;
-  box-shadow:
-    0 14px 34px rgba(15,35,63,.08);
+  border-color:rgba(160,180,255,.3);
+  box-shadow:0 14px 34px rgba(0,0,0,.4);
 }
 
 .card.featured h3{
@@ -256,9 +252,9 @@ h2{
   align-items:center;
 
   background:var(--sky);
-  color:#1e40af;
+  color:#A9BEFF;
 
-  border:1px solid #dbeafe;
+  border:1px solid rgba(160,180,255,.22);
   border-radius:999px;
 
   padding:5px 9px;
@@ -289,7 +285,7 @@ h2{
 
   font-size:14px;
 
-  color:#475569;
+  color:#B3BFE3;
 }
 
 .card .muted{
@@ -355,8 +351,7 @@ h2{
 
   letter-spacing:.01em;
 
-  transition:
-    color .2s ease,
+  transition:color .2s ease,
     transform .2s ease;
 }
 
@@ -409,8 +404,8 @@ h2{
 
   border-radius:999px;
 
-  background:#dbeafe;
-  color:#1e40af;
+  background:rgba(91,131,255,.22);
+  color:#A9BEFF;
 
   font-size:11px;
   font-weight:800;
@@ -426,7 +421,7 @@ h2{
 
  .footer{
   margin-top:10px;
-  background:#fff;
+  background:#0F1636;
 
   border-top:1px solid var(--line);
 

@@ -52,7 +52,7 @@ a{
 
 nav{
   height:72px;
-  background:rgba(255,255,255,.97);
+  background:rgba(6,9,20,.9);
   border-bottom:1px solid var(--line);
   position:sticky;
   top:0;
@@ -131,8 +131,7 @@ h1{
   align-items:center;
   font-size:13px;
   font-weight:750;
-  transition:
-    color .2s ease,
+  transition:color .2s ease,
     transform .2s ease;
 }
 
@@ -160,9 +159,9 @@ h1{
   margin:0 0 30px;
   padding:18px 20px;
   background:var(--sky);
-  border:1px solid #dbeafe;
+  border:1px solid rgba(160,180,255,.22);
   border-radius:14px;
-  color:#334155;
+  color:#C0CBEC;
   font-size:14px;
 }
 
@@ -199,7 +198,7 @@ h1{
   padding:0;
   margin-top:20px;
   overflow:hidden;
-  box-shadow:0 4px 18px rgba(15,35,63,.035);
+  box-shadow:0 4px 18px rgba(0,0,0,.4);
 }
 
 .table-wrap{
@@ -243,14 +242,14 @@ tbody tr:last-child td{
 }
 
 tbody tr:hover{
-  background:#f8fafc;
+  background:#0B1124;
 }
 
 /* CODE */
 
 code{
-  background:#f1f5f9;
-  color:#334155;
+  background:rgba(255,255,255,.045);
+  color:#C0CBEC;
   padding:3px 6px;
   border-radius:5px;
   font-size:12px;
@@ -270,7 +269,7 @@ code{
   border:1px solid var(--line);
   border-radius:16px;
   padding:24px;
-  box-shadow:0 4px 18px rgba(15,35,63,.035);
+  box-shadow:0 4px 18px rgba(0,0,0,.4);
 }
 
 .info-card h2{
@@ -282,14 +281,14 @@ code{
 
 .info-card p{
   margin:0;
-  color:#475569;
+  color:#B3BFE3;
   font-size:14px;
 }
 
 .info-card ul{
   margin:10px 0 0;
   padding-left:20px;
-  color:#475569;
+  color:#B3BFE3;
   font-size:14px;
 }
 
@@ -300,7 +299,7 @@ code{
 /* FOOTER */
 
 .footer{
-  background:#fff;
+  background:#0F1636;
   border-top:1px solid var(--line);
   padding:34px 0;
   color:var(--muted);
@@ -342,9 +341,9 @@ code{
   }
 }
 </style>
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="modern.css"><meta name="theme-color" content="#060914"></head>
 
-<body>
+<body><div class="bar" id="bar"></div><div class="spot" id="spot" aria-hidden="true"></div>
 
 <nav>
   <div class="wrap navin">
@@ -602,5 +601,5 @@ code{
   </div>
 </footer>
 
-</body>
+<script src="modern.js"></script></body>
 </html>

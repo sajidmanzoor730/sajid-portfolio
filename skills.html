@@ -51,7 +51,7 @@ a{
 
 nav{
   height:72px;
-  background:rgba(255,255,255,.97);
+  background:rgba(6,9,20,.9);
   border-bottom:1px solid var(--line);
   position:sticky;
   top:0;
@@ -126,14 +126,14 @@ h1{
   border:1px solid var(--line);
   border-radius:16px;
   padding:27px;
-  box-shadow:0 5px 20px rgba(15,35,63,.035);
+  box-shadow:0 5px 20px rgba(0,0,0,.4);
   transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease
 }
 
 .card:hover{
   transform:translateY(-2px);
-  border-color:#cbd5e1;
-  box-shadow:0 12px 30px rgba(15,35,63,.07)
+  border-color:rgba(160,180,255,.26);
+  box-shadow:0 12px 30px rgba(0,0,0,.4)
 }
 
 .card h2{
@@ -161,8 +161,8 @@ h1{
   display:inline-flex;
   align-items:center;
   background:var(--sky);
-  color:#1e40af;
-  border:1px solid #dbeafe;
+  color:#A9BEFF;
+  border:1px solid rgba(160,180,255,.22);
   border-radius:999px;
   padding:6px 9px;
   font-size:12px;
@@ -174,9 +174,9 @@ h1{
   margin-top:28px;
   padding:18px 20px;
   background:var(--sky);
-  border:1px solid #dbeafe;
+  border:1px solid rgba(160,180,255,.22);
   border-radius:14px;
-  color:#334155;
+  color:#C0CBEC;
   font-size:14px
 }
 
@@ -185,7 +185,7 @@ h1{
 }
 
 .footer{
-  background:#fff;
+  background:#0F1636;
   border-top:1px solid var(--line);
   padding:34px 0;
   color:var(--muted);
@@ -230,9 +230,9 @@ h1{
   }
 }
 </style>
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="modern.css"><meta name="theme-color" content="#060914"></head>
 
-<body>
+<body><div class="bar" id="bar"></div><div class="spot" id="spot" aria-hidden="true"></div>
 
 <nav>
   <div class="wrap navin">
@@ -461,5 +461,5 @@ h1{
 </footer>
 
 
-</body>
+<script src="modern.js"></script></body>
 </html>

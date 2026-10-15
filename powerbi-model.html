@@ -44,7 +44,7 @@ a{
 
 nav{
   height:72px;
-  background:rgba(255,255,255,.97);
+  background:rgba(6,9,20,.9);
   border-bottom:1px solid var(--line);
   position:sticky;
   top:0;
@@ -149,9 +149,9 @@ h2{
   margin:30px 0 42px;
   padding:18px 20px;
   background:var(--sky);
-  border:1px solid #dbeafe;
+  border:1px solid rgba(160,180,255,.22);
   border-radius:14px;
-  color:#334155;
+  color:#C0CBEC;
   font-size:14px;
 }
 
@@ -164,12 +164,12 @@ h2{
   border:1px solid var(--line);
   border-radius:16px;
   padding:26px;
-  box-shadow:0 4px 18px rgba(15,35,63,.035);
+  box-shadow:0 4px 18px rgba(0,0,0,.4);
 }
 
 .card p{
   margin:0 0 14px;
-  color:#475569;
+  color:#B3BFE3;
   font-size:14px;
 }
 
@@ -188,12 +188,12 @@ h2{
   border:1px solid var(--line);
   border-radius:16px;
   padding:24px;
-  box-shadow:0 4px 18px rgba(15,35,63,.035);
+  box-shadow:0 4px 18px rgba(0,0,0,.4);
 }
 
 .item:hover{
-  border-color:#cbd5e1;
-  box-shadow:0 10px 26px rgba(15,35,63,.06);
+  border-color:rgba(160,180,255,.26);
+  box-shadow:0 10px 26px rgba(0,0,0,.4);
 }
 
 .item strong{
@@ -205,7 +205,7 @@ h2{
 
 .item p{
   margin:0;
-  color:#475569;
+  color:#B3BFE3;
   font-size:14px;
 }
 
@@ -215,7 +215,7 @@ h2{
   background:var(--white);
   border:1px solid var(--line);
   border-radius:16px;
-  box-shadow:0 4px 18px rgba(15,35,63,.035);
+  box-shadow:0 4px 18px rgba(0,0,0,.4);
 }
 
 .flow{
@@ -226,7 +226,7 @@ h2{
 }
 
 .box{
-  border:1px solid #bfdbfe;
+  border:1px solid rgba(160,180,255,.3);
   background:var(--sky);
   border-radius:12px;
   padding:16px 18px;
@@ -250,7 +250,7 @@ table{
   border:1px solid var(--line);
   border-radius:16px;
   overflow:hidden;
-  box-shadow:0 4px 18px rgba(15,35,63,.035);
+  box-shadow:0 4px 18px rgba(0,0,0,.4);
 }
 
 th,
@@ -269,7 +269,7 @@ th{
 }
 
 td{
-  color:#475569;
+  color:#B3BFE3;
 }
 
 tr:last-child td{
@@ -277,18 +277,18 @@ tr:last-child td{
 }
 
 code{
-  background:#f1f5f9;
+  background:rgba(255,255,255,.045);
   padding:3px 6px;
   border-radius:5px;
   font-family:Consolas,monospace;
   font-size:.9em;
-  color:#334155;
+  color:#C0CBEC;
 }
 
 ul{
   margin:0;
   padding-left:22px;
-  color:#475569;
+  color:#B3BFE3;
   font-size:14px;
 }
 
@@ -297,7 +297,7 @@ li{
 }
 
 .footer{
-  background:#fff;
+  background:#0F1636;
   border-top:1px solid var(--line);
   padding:34px 0;
   color:var(--muted);
@@ -346,9 +346,9 @@ li{
   }
 }
 </style>
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="modern.css"><meta name="theme-color" content="#060914"><style>.sqlbox{margin-top:60px}.sqlbox h3.sqlh{margin:28px 0 10px;font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:#35D3C6!important}.sqlbox pre{margin:0 0 14px;padding:16px 18px;overflow-x:auto;font-size:12.5px;line-height:1.6;border:1px solid var(--line);border-radius:14px}.sqlbox pre code{background:none!important;padding:0;border:0}.sqlnote{color:#93A0C8;font-size:14px;max-width:760px}</style></head>
 
-<body>
+<body><div class="bar" id="bar"></div><div class="spot" id="spot" aria-hidden="true"></div>
 
 <nav>
   <div class="wrap navin">
@@ -613,7 +613,29 @@ li{
     </div>
 
   </div>
-</main>
+<div class="wrap sqlbox"><section><h2>DAX definitions</h2><p class="sqlnote"><strong>Status:</strong> these measures are written against the table and column names in the model above. They are definitions to paste into Power BI, not a tested report: no Power BI file is included on this site, and the SLA_Met and Repeat_Flag encodings (TRUE/FALSE here) must match the real column types.</p><pre><code>Tickets = DISTINCTCOUNT ( FactTickets[Ticket_ID] )
+
+Resolved Tickets =
+CALCULATE ( [Tickets], NOT ISBLANK ( FactTickets[Resolved_At] ) )
+
+SLA Breaches =
+CALCULATE ( [Tickets], FactTickets[SLA_Met] = FALSE () )
+
+SLA Adherence % =
+DIVIDE ( [Resolved Tickets] - [SLA Breaches], [Resolved Tickets] )
+
+Average Resolution Hours = AVERAGE ( FactTickets[Resolution_Hours] )
+
+Average CSAT = AVERAGE ( FactTickets[CSAT] )
+
+Repeat Ticket Rate % =
+DIVIDE ( CALCULATE ( [Tickets], FactTickets[Repeat_Flag] = TRUE () ), [Tickets] )
+
+P1 SLA Breach % =
+CALCULATE ( DIVIDE ( [SLA Breaches], [Resolved Tickets] ), DimPriority[Priority] = &quot;P1&quot; )
+
+SLA Adherence % (previous month) =
+CALCULATE ( [SLA Adherence %], DATEADD ( DimDate[Date], -1, MONTH ) )</code></pre></section></div></main>
 
 <footer class="footer">
   <div class="wrap">
@@ -621,5 +643,5 @@ li{
   </div>
 </footer>
 
-</body>
+<script src="modern.js"></script></body>
 </html>

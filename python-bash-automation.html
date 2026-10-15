@@ -6,9 +6,9 @@
 <meta name="description" content="Python and Bash automation project covering operational data processing, log analysis, validation and repeatable workflows.">
 <title>Python & Bash Automation | Sajid Manzoor</title>
 <link rel="stylesheet" href="project.css">
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="modern.css"><meta name="theme-color" content="#060914"><style>.scripts{margin-top:56px}.scr{margin:0 0 14px;border:1px solid var(--line);border-radius:14px;padding:4px 18px;background:var(--m-card)}.scr summary{cursor:pointer;padding:14px 0;line-height:1.5}.scr summary span{display:block;color:#93A0C8;font-size:13px;margin-top:2px}.scr h4{margin:14px 0 8px;color:#35D3C6;font-size:13px;text-transform:uppercase;letter-spacing:.06em}.scr pre{max-height:420px;overflow:auto;font-size:12.5px;line-height:1.55;padding:14px 16px;margin:0 0 14px}</style></head>
 
-<body>
+<body><div class="bar" id="bar"></div><div class="spot" id="spot" aria-hidden="true"></div>
 
 <nav>
   <div class="wrap navin">
@@ -34,7 +34,7 @@
     <h1>Python & Bash Automation</h1>
 
     <p class="lead">
-      Repeatable utilities for log parsing, data validation, API health checks and routine operational workflows using Python, Bash and SQL.
+      Working Python and Bash scripts for dataset cleaning, data validation and log summarising, with the code and real run output shown below.
     </p>
 
     <div class="notice">
@@ -50,7 +50,7 @@
         <div class="card">
           <h3>01 · Collect</h3>
           <p class="muted">
-            Collect logs, API responses and operational records from defined sources.
+            Read operational records and application logs from defined sources.
           </p>
           <span class="tag">Logs</span>
           <span class="tag">APIs</span>
@@ -240,7 +240,241 @@ ORDER BY error_count DESC;</code></pre>
     </section>
 
   </div>
-</main>
+<div class="wrap"><section class="scripts"><h2>The scripts</h2><p class="muted">These are the actual files, run against the datasets used elsewhere on this site. Outputs below were captured from real runs. The log is a generated sample, not production data.</p><details class="scr"><summary><b>scripts/clean_crm.py</b> <span>Cleans the raw CRM export with deterministic rules, then checks itself against the published clean file.</span></summary><h4>Source</h4><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Rule-based cleanup of the raw CRM export (pandas only).
+
+    python3 scripts/clean_crm.py                # writes output/crm_cleaned.csv + prints a report
+    python3 scripts/clean_crm.py --out my.csv
+
+Rules (deterministic only; anything that needs outside knowledge is flagged for the owner):
+  1. Company names: trim, collapse spaces, fix ALL-CAPS / lower-case
+  2. Phones: normalise to  +1 AAA BBB CCCC  (US/Canada) or  +44 AA BBBB CCCC  (UK)
+  3. Emails: lower-case, collapse &#x27;@@&#x27; and &#x27;..&#x27;, drop a trailing &#x27;.&#x27;, re-validate; if still invalid -&gt; blank + flag
+  4. Duplicates: keep the earliest Record_ID when a later row repeats an email or a company name
+  5. Missing email / phone / industry -&gt; flagged for owner follow-up (not guessed)
+At the end it compares the result with the published clean file (data/CRM_Data_Quality_Dataset_Clean.csv).
+&quot;&quot;&quot;
+import argparse
+import re
+from pathlib import Path
+
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parent.parent
+RAW = ROOT / &quot;data/CRM_Data_Quality_Dataset_Raw.csv&quot;
+PUBLISHED = ROOT / &quot;data/CRM_Data_Quality_Dataset_Clean.csv&quot;
+
+EMAIL_RE = re.compile(r&quot;^[^\s@.]+(?:\.[^\s@.]+)*@[^\s@.]+(?:\.[^\s@.]+)+$&quot;)
+SUFFIXES = {&quot;llc&quot;: &quot;LLC&quot;, &quot;inc&quot;: &quot;Inc&quot;, &quot;ltd&quot;: &quot;Ltd&quot;}
+
+
+def clean_company(name: str) -&gt; str:
+    name = re.sub(r&quot;\s+&quot;, &quot; &quot;, name).strip()
+    if name and (name == name.upper() or name == name.lower()):
+        name = name.title()
+    words = [SUFFIXES.get(w.lower().strip(&quot;.,&quot;), w) for w in name.split(&quot; &quot;)]
+    return &quot; &quot;.join(words)
+
+
+def company_key(name: str) -&gt; str:
+    key = re.sub(r&quot;[.,]&quot;, &quot;&quot;, name.lower())
+    return re.sub(r&quot; (inc|llc|ltd)$&quot;, &quot;&quot;, re.sub(r&quot;\s+&quot;, &quot; &quot;, key).strip())
+
+
+def clean_phone(phone: str, country: str) -&gt; str:
+    digits = re.sub(r&quot;\D&quot;, &quot;&quot;, phone)
+    if not digits:
+        return &quot;&quot;
+    if country == &quot;United Kingdom&quot;:
+        if digits.startswith(&quot;44&quot;):
+            digits = digits[2:]
+        elif digits.startswith(&quot;0&quot;):
+            digits = digits[1:]
+        return f&quot;+44 {digits[:2]} {digits[2:6]} {digits[6:]}&quot; if len(digits) == 10 else &quot;&quot;
+    if len(digits) == 11 and digits.startswith(&quot;1&quot;):
+        digits = digits[1:]
+    return f&quot;+1 {digits[:3]} {digits[3:6]} {digits[6:]}&quot; if len(digits) == 10 else &quot;&quot;
+
+
+def clean_email(email: str) -&gt; tuple[str, bool]:
+    &quot;&quot;&quot;Returns (email, was_invalid_and_unfixable).&quot;&quot;&quot;
+    e = email.strip().lower()
+    if not e:
+        return &quot;&quot;, False
+    e = re.sub(r&quot;@+&quot;, &quot;@&quot;, e)
+    e = re.sub(r&quot;\.{2,}&quot;, &quot;.&quot;, e).rstrip(&quot;.&quot;)
+    return (e, False) if EMAIL_RE.match(e) else (&quot;&quot;, True)
+
+
+def main() -&gt; None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument(&quot;--out&quot;, default=str(ROOT / &quot;output/crm_cleaned.csv&quot;))
+    args = ap.parse_args()
+
+    raw = pd.read_csv(RAW, dtype=str, keep_default_na=False).sort_values(&quot;Record_ID&quot;)
+    df = raw.copy()
+
+    df[&quot;Company_Name&quot;] = df[&quot;Company_Name&quot;].map(clean_company)
+    df[&quot;Phone&quot;] = [clean_phone(p, c) for p, c in zip(df[&quot;Phone&quot;], df[&quot;Country&quot;])]
+    fixed = df[&quot;Email&quot;].map(clean_email)
+    df[&quot;Email&quot;] = fixed.map(lambda t: t[0])
+    unfixable = fixed.map(lambda t: t[1])
+
+    # duplicates: a later row repeating an earlier email or company
+    seen_email, seen_co, drop = set(), set(), []
+    for rid, email, co in zip(df[&quot;Record_ID&quot;], df[&quot;Email&quot;], df[&quot;Company_Name&quot;]):
+        k = company_key(co)
+        drop.append(bool((email and email in seen_email) or k in seen_co))
+        if email:
+            seen_email.add(email)
+        seen_co.add(k)
+    df[&quot;_dup&quot;] = drop
+
+    out = df[~df[&quot;_dup&quot;]].copy()
+    out[&quot;Follow_Up_Reason&quot;] = &quot;&quot;
+    for col, label in ((&quot;Email&quot;, &quot;email&quot;), (&quot;Phone&quot;, &quot;phone&quot;), (&quot;Industry&quot;, &quot;industry&quot;)):
+        miss = out[col].str.strip() == &quot;&quot;
+        out.loc[miss, &quot;Follow_Up_Reason&quot;] += label + &quot; &quot;
+    out[&quot;Follow_Up_Reason&quot;] = out[&quot;Follow_Up_Reason&quot;].str.strip().str.replace(&quot; &quot;, &quot; + &quot;)
+    out = out.drop(columns=&quot;_dup&quot;)
+
+    Path(args.out).parent.mkdir(parents=True, exist_ok=True)
+    out.to_csv(args.out, index=False)
+
+    print(f&quot;Raw rows:                 {len(raw):,}&quot;)
+    print(f&quot;Duplicates removed:       {int(df[&#x27;_dup&#x27;].sum()):,}&quot;)
+    print(f&quot;Clean rows written:       {len(out):,}  -&gt;  {args.out}&quot;)
+    print(f&quot;Unfixable emails blanked: {int(unfixable[~df[&#x27;_dup&#x27;]].sum()):,}&quot;)
+    print(f&quot;Rows needing follow-up:   {int((out[&#x27;Follow_Up_Reason&#x27;] != &#x27;&#x27;).sum()):,}&quot;)
+
+    pub = pd.read_csv(PUBLISHED, dtype=str, keep_default_na=False).set_index(&quot;Record_ID&quot;)
+    mine = out.set_index(&quot;Record_ID&quot;)
+    same_ids = set(mine.index) == set(pub.index)
+    print(&quot;\nComparison with the published clean file&quot;)
+    print(f&quot;  Same set of Record_IDs kept:  {same_ids}&quot;)
+    common = mine.index.intersection(pub.index)
+    for col in (&quot;Company_Name&quot;, &quot;Phone&quot;, &quot;Email&quot;):
+        pct = (mine.loc[common, col] == pub.loc[common, col]).mean() * 100
+        print(f&quot;  {col:&lt;13} identical on {pct:5.1f}% of rows&quot;)
+    print(&quot;  (Remaining differences are values the published file filled by enrichment,&quot;)
+    print(&quot;   which a rule-based script correctly leaves blank and flags instead of guessing.)&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre><h4>Output when run</h4><pre><code>$ python3 scripts/clean_crm.py
+Raw rows:                 3,090
+Duplicates removed:       90
+Clean rows written:       3,000  -&gt;  /home/claude/site/output/crm_cleaned.csv
+Unfixable emails blanked: 66
+Rows needing follow-up:   576
+
+Comparison with the published clean file
+  Same set of Record_IDs kept:  True
+  Company_Name  identical on  99.9% of rows
+  Phone         identical on  96.6% of rows
+  Email         identical on  95.5% of rows
+  (Remaining differences are values the published file filled by enrichment,
+   which a rule-based script correctly leaves blank and flags instead of guessing.)</code></pre></details><details class="scr"><summary><b>scripts/validate_dataset.py</b> <span>Reusable data-quality report for any CSV. Exits with code 1 if the key column has duplicates.</span></summary><h4>Source</h4><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Reusable data-quality report for any CSV (pandas only).
+
+    python3 scripts/validate_dataset.py data/CRM_Data_Quality_Dataset_Raw.csv --key Record_ID
+    python3 scripts/validate_dataset.py data/CRM_Data_Quality_Dataset_Clean.csv --key Record_ID
+
+Checks: row count, duplicate keys, blank cells per column, and obviously malformed
+emails/phones when those columns exist. Exit code 1 if the key column has duplicates,
+so it can gate a pipeline step.
+&quot;&quot;&quot;
+import argparse
+import re
+import sys
+
+import pandas as pd
+
+EMAIL_RE = re.compile(r&quot;^[^\s@.]+(?:\.[^\s@.]+)*@[^\s@.]+(?:\.[^\s@.]+)+$&quot;)
+PHONE_RE = re.compile(r&quot;^\+\d{1,3}( \d{2,4}){2,3}$&quot;)
+
+
+def main() -&gt; int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument(&quot;csv&quot;)
+    ap.add_argument(&quot;--key&quot;, required=True, help=&quot;column that must be unique&quot;)
+    a = ap.parse_args()
+
+    df = pd.read_csv(a.csv, dtype=str, keep_default_na=False)
+    print(f&quot;File: {a.csv}\nRows: {len(df):,}   Columns: {len(df.columns)}&quot;)
+
+    dup = df[a.key].duplicated().sum()
+    print(f&quot;Duplicate {a.key}: {dup}&quot;)
+
+    blanks = (df.apply(lambda s: s.str.strip() == &quot;&quot;)).sum()
+    blanks = blanks[blanks &gt; 0].sort_values(ascending=False)
+    print(&quot;\nBlank cells by column:&quot; if len(blanks) else &quot;\nNo blank cells.&quot;)
+    for col, n in blanks.items():
+        print(f&quot;  {col:&lt;22}{n:&gt;6}  ({n / len(df) * 100:.1f}%)&quot;)
+
+    if &quot;Email&quot; in df:
+        e = df[&quot;Email&quot;][df[&quot;Email&quot;].str.strip() != &quot;&quot;]
+        print(f&quot;\nMalformed emails: {(~e.str.match(EMAIL_RE)).sum()}&quot;)
+    if &quot;Phone&quot; in df:
+        p = df[&quot;Phone&quot;][df[&quot;Phone&quot;].str.strip() != &quot;&quot;]
+        print(f&quot;Non-standard phones: {(~p.str.match(PHONE_RE)).sum()}&quot;)
+
+    return 1 if dup else 0
+
+
+if __name__ == &quot;__main__&quot;:
+    sys.exit(main())
+</code></pre><h4>Output when run</h4><pre><code>$ python3 scripts/validate_dataset.py data/CRM_Data_Quality_Dataset_Raw.csv --key Record_ID
+File: data/CRM_Data_Quality_Dataset_Raw.csv
+Rows: 3,090   Columns: 13
+Duplicate Record_ID: 0
+
+Blank cells by column:
+  Phone                    210  (6.8%)
+  Email                    180  (5.8%)
+  Industry                 120  (3.9%)
+
+Malformed emails: 120
+Non-standard phones: 210</code></pre></details><details class="scr"><summary><b>scripts/log_summary.sh</b> <span>Summarises an application log with awk and sort. Runs here on a generated 2,000-line sample log.</span></summary><h4>Source</h4><pre><code>#!/usr/bin/env bash
+# Summarise an application log: volume by level, top error messages, busiest hour.
+# Usage: ./scripts/log_summary.sh [logfile]      (default: data/sample_app.log)
+# Expected line format:  2026-09-14T08:15:02Z LEVEL service: message
+set -euo pipefail
+LOG=&quot;${1:-$(dirname &quot;$0&quot;)/../data/sample_app.log}&quot;
+[[ -r &quot;$LOG&quot; ]] || { echo &quot;Cannot read $LOG&quot; &gt;&amp;2; exit 1; }
+
+echo &quot;== Lines by level ==&quot;
+awk &#x27;{print $2}&#x27; &quot;$LOG&quot; | sort | uniq -c | sort -rn
+
+echo; echo &quot;== Top 5 error messages ==&quot;
+awk &#x27;$2==&quot;ERROR&quot;{ $1=$2=&quot;&quot;; print substr($0,3) }&#x27; &quot;$LOG&quot; | sort | uniq -c | sort -rn | head -5
+
+echo; echo &quot;== Busiest hours (UTC) ==&quot;
+cut -c12-13 &quot;$LOG&quot; | sort | uniq -c | sort -rn | head -3
+
+echo; echo &quot;== Error rate ==&quot;
+awk &#x27;{n++} $2==&quot;ERROR&quot;{e++} END{printf &quot;%d errors in %d lines (%.2f%%)\n&quot;, e, n, 100*e/n}&#x27; &quot;$LOG&quot;
+</code></pre><h4>Output when run</h4><pre><code>$ ./scripts/log_summary.sh
+== Lines by level ==
+   1606 INFO
+    226 WARN
+    168 ERROR
+
+== Top 5 error messages ==
+     16 billing: invalid token
+     16 auth: invalid token
+     14 auth: disk usage above 90%
+     12 billing: timeout calling payments API
+     12 auth: timeout calling payments API
+
+== Busiest hours (UTC) ==
+    159 14
+    159 10
+    158 13
+
+== Error rate ==
+168 errors in 2000 lines (8.40%)</code></pre></details></section></div></main>
 
 <footer class="footer">
   <div class="wrap">
@@ -248,5 +482,5 @@ ORDER BY error_count DESC;</code></pre>
   </div>
 </footer>
 
-</body>
+<script src="modern.js"></script></body>
 </html>

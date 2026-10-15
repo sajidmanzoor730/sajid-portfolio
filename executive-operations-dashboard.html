@@ -7,47 +7,72 @@
 <meta name="description" content="Executive Operations Dashboard by Sajid Manzoor — workload, completion, SLA, follow-up and overdue tracking from a structured operational dataset.">  
 <title>Executive Operations Dashboard | Sajid Manzoor</title>  
 <link rel="stylesheet" href="project.css">  
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>  
 <style>  
 .dashboard{margin-top:34px}  
 .back-link{display:inline-block;margin-bottom:14px;font-size:13px;font-weight:650}  
-.data-note{margin:0 0 22px;padding:14px 16px;background:#f8fafc;border:1px solid var(--line,#e2e8f0);border-radius:12px;color:var(--muted,#64748b);font-size:13px;line-height:1.6}  
-.toolbar{margin-bottom:20px;padding:15px 17px;background:#fff;border:1px solid var(--line,#e2e8f0);border-radius:14px;box-shadow:0 3px 14px rgba(15,35,63,.025)}  
-.data-status{display:flex;align-items:center;gap:9px;margin-bottom:12px;color:var(--muted,#64748b);font-size:13px;font-weight:650}  
+.data-note{margin:0 0 22px;padding:14px 16px;background:#0B1124;border:1px solid var(--line,rgba(160,180,255,.18));border-radius:12px;color:var(--muted,#93A0C8);font-size:13px;line-height:1.6}  
+.toolbar{margin-bottom:20px;padding:15px 17px;background:#0F1636;border:1px solid var(--line,rgba(160,180,255,.18));border-radius:14px;box-shadow:0 3px 14px rgba(0,0,0,.4)}  
+.data-status{display:flex;align-items:center;gap:9px;margin-bottom:12px;color:var(--muted,#93A0C8);font-size:13px;font-weight:650}  
 .dot{width:8px;height:8px;flex:none;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px #dcfce7}  
 .filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) auto;gap:9px}  
-.filter,.btn{border:1px solid var(--line,#e2e8f0);background:#fff;color:var(--text,#1e293b);border-radius:8px;padding:8px 11px;font:inherit;font-size:13px;cursor:pointer;outline:none}  
-.filter:focus,.btn:focus{border-color:var(--blue,#2563eb);box-shadow:0 0 0 3px rgba(37,99,235,.08)}  
-.btn:hover{background:#f8fafc}  
-.error{display:none;margin-bottom:20px;padding:16px 18px;background:#fff;border:1px solid #fecaca;border-radius:14px;color:#991b1b;font-size:14px}  
-.loading{padding:30px;background:#fff;border:1px solid var(--line,#e2e8f0);border-radius:15px;color:var(--muted,#64748b);text-align:center}  
+.filter,.btn{border:1px solid var(--line,rgba(160,180,255,.18));background:#0F1636;color:var(--text,#DCE5FF);border-radius:8px;padding:8px 11px;font:inherit;font-size:13px;cursor:pointer;outline:none}  
+.filter:focus,.btn:focus{border-color:var(--blue,#5B83FF);box-shadow:0 0 0 3px rgba(37,99,235,.08)}  
+.btn:hover{background:#0B1124}  
+.error{display:none;margin-bottom:20px;padding:16px 18px;background:#0F1636;border:1px solid rgba(239,68,68,.35);border-radius:14px;color:#FF9A9A;font-size:14px}  
+.loading{padding:30px;background:#0F1636;border:1px solid var(--line,rgba(160,180,255,.18));border-radius:15px;color:var(--muted,#93A0C8);text-align:center}  
 .hidden{display:none!important}  
 .kpi-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:20px}  
-.kpi-card{padding:18px 20px;background:#fff;border:1px solid var(--line,#e2e8f0);border-radius:14px;box-shadow:0 3px 15px rgba(15,35,63,.03)}  
-.kpi-label{margin-bottom:8px;color:var(--muted,#64748b);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em}  
-.kpi-value{color:var(--navy,#0f233f);font-size:28px;line-height:1.1;font-weight:800;letter-spacing:-.035em}  
-.kpi-note{margin-top:7px;color:var(--muted,#64748b);font-size:11px;line-height:1.4}  
+.kpi-card{padding:18px 20px;background:#0F1636;border:1px solid var(--line,rgba(160,180,255,.18));border-radius:14px;box-shadow:0 3px 15px rgba(0,0,0,.4)}  
+.kpi-label{margin-bottom:8px;color:var(--muted,#93A0C8);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em}  
+.kpi-value{color:var(--navy,#EAF0FF);font-size:28px;line-height:1.1;font-weight:800;letter-spacing:-.035em}  
+.kpi-note{margin-top:7px;color:var(--muted,#93A0C8);font-size:11px;line-height:1.4}  
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-bottom:18px}  
-.panel{min-width:0;padding:22px;background:#fff;border:1px solid var(--line,#e2e8f0);border-radius:15px;box-shadow:0 3px 15px rgba(15,35,63,.03)}  
+.panel{min-width:0;padding:22px;background:#0F1636;border:1px solid var(--line,rgba(160,180,255,.18));border-radius:15px;box-shadow:0 3px 15px rgba(0,0,0,.4)}  
 .panel.full{grid-column:1/-1}  
-.panel h3{margin:0 0 4px;color:var(--navy,#0f233f);font-size:18px;line-height:1.3}  
-.panel p.sub{margin:0 0 16px;color:var(--muted,#64748b);font-size:12px;line-height:1.5}  
+.panel h3{margin:0 0 4px;color:var(--navy,#EAF0FF);font-size:18px;line-height:1.3}  
+.panel p.sub{margin:0 0 16px;color:var(--muted,#93A0C8);font-size:12px;line-height:1.5}  
 .chart-wrap{position:relative;height:290px}  
-.table-wrap{width:100%;overflow-x:auto;border:1px solid #eef2f7;border-radius:10px}  
+.table-wrap{width:100%;overflow-x:auto;border:1px solid rgba(160,180,255,.14);border-radius:10px}  
 table{width:100%;min-width:760px;border-collapse:collapse;font-size:12px}  
-th{padding:11px 12px;background:#f8fafc;color:#475569;text-align:left;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--line,#e2e8f0);white-space:nowrap}  
-td{padding:10px 12px;color:#334155;border-bottom:1px solid #eef2f7;white-space:nowrap}  
+th{padding:11px 12px;background:#0B1124;color:#B3BFE3;text-align:left;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--line,rgba(160,180,255,.18));white-space:nowrap}  
+td{padding:10px 12px;color:#C0CBEC;border-bottom:1px solid rgba(160,180,255,.14);white-space:nowrap}  
 tbody tr:last-child td{border-bottom:0}  
-tbody tr:hover{background:#f8fafc}  
+tbody tr:hover{background:#0B1124}  
 .pill{display:inline-block;border-radius:999px;padding:3px 8px;font-size:10px;font-weight:800}  
-.good{background:#ecfdf5;color:#047857}.warn{background:#fffbeb;color:#a16207}.bad{background:#fef2f2;color:#b91c1c}  
-.table-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;color:var(--muted,#64748b);font-size:12px}  
+.good{background:rgba(61,220,151,.12);color:#3DDC97}.warn{background:rgba(255,181,71,.12);color:#FFD27A}.bad{background:rgba(239,68,68,.14);color:#FF9A9A}  
+.table-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;color:var(--muted,#93A0C8);font-size:12px}  
 .links-row{display:flex;gap:20px;flex-wrap:wrap;margin:22px 0 10px;font-size:14px;font-weight:650}  
 @media(max-width:950px){.kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr}.panel.full{grid-column:auto}.filters{grid-template-columns:repeat(2,minmax(0,1fr))}}  
 @media(max-width:480px){.kpi-grid{grid-template-columns:1fr}.filters{grid-template-columns:1fr}.chart-wrap{height:250px}.panel{padding:18px}}  
+.attn{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.attn-item{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border:1px solid rgba(160,180,255,.18);border-radius:14px}
+.attn-item .attn-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#93A0C8}
+.attn-item strong{font-size:18px;color:#EAF0FF;line-height:1.3}
+.attn-item span:last-child{font-size:13px;color:#93A0C8;line-height:1.5}
+@media (max-width:700px){.attn{grid-template-columns:1fr}}
+.findings{margin:8px 0 26px}
+.findings h2{margin:0 0 6px}
+.findings .f-sub{margin:0 0 16px;color:#93A0C8;font-size:13px;line-height:1.6}
+.finding-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.finding{padding:18px 20px}
+.finding .f-tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#93A0C8}
+.finding h3{margin:6px 0 8px;font-size:17px;line-height:1.35;color:#EAF0FF}
+.finding p{margin:0 0 10px;font-size:14px;line-height:1.6;color:#C0CBEC}
+.finding .f-action{margin:0;color:#A9BEFF}
+.defs-panel{margin:0 0 18px;padding:18px 20px}
+.defs-panel h3{margin:0 0 6px;font-size:18px;color:#EAF0FF}
+.defs-panel .f-sub{margin:0 0 14px;color:#93A0C8;font-size:13px}
+.defs{display:grid;grid-template-columns:minmax(120px,200px) 1fr;gap:8px 16px;margin:0 0 14px}
+.defs dt{font-weight:700;color:#EAF0FF;font-size:13px}
+.defs dd{margin:0;color:#C0CBEC;font-size:13px;line-height:1.55}
+.defs-panel details{border-top:1px solid rgba(160,180,255,.18);padding-top:12px}
+.defs-panel summary{cursor:pointer;font-weight:700;color:#A9BEFF;font-size:14px}
+.defs-panel pre{margin:12px 0 0;padding:14px;background:#080D22;border:1px solid rgba(160,180,255,.18);border-radius:12px;overflow-x:auto;font-size:12px;line-height:1.55;color:#DCE5FF}
+@media (max-width:700px){.finding-grid{grid-template-columns:1fr}.defs{grid-template-columns:1fr;gap:2px}.defs dt{margin-top:10px}}
 </style>  
-</head>  
-<body>  <nav>  
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="modern.css"><meta name="theme-color" content="#060914"><style>.sqlbox{margin-top:60px}.sqlbox h3.sqlh{margin:28px 0 10px;font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:#35D3C6!important}.sqlbox pre{margin:0 0 14px;padding:16px 18px;overflow-x:auto;font-size:12.5px;line-height:1.6;border:1px solid var(--line);border-radius:14px}.sqlbox pre code{background:none!important;padding:0;border:0}.sqlnote{color:#93A0C8;font-size:14px;max-width:760px}</style></head>  
+<body><div class="bar" id="bar"></div><div class="spot" id="spot" aria-hidden="true"></div>  <nav>  
 <div class="wrap navin">  
 <a class="brand" href="index.html">Sajid Manzoor</a>  
 <div class="links">  
@@ -62,9 +87,10 @@ tbody tr:hover{background:#f8fafc}
 </nav>  <main>  
 <div class="wrap">  
 <a class="back-link" href="projects.html">← Back to Projects</a>  
-<div class="eyebrow">Operations Dashboard</div>  
+<div class="eyebrow">Management View · Operations</div>  
 <h1>Executive Operations Dashboard</h1>  
-<p class="lead">An interactive dashboard for monitoring workload, priorities, deadlines, SLA performance, follow-ups and overdue work across operational teams.</p>  <p class="data-note"><strong>Data note:</strong> This dashboard runs on the Executive Operations Dataset, a structured operational dataset of 6,000 records covering January–September 2026. The raw file (6,060 rows) was de-duplicated on Record_ID to produce the clean file used here. It contains no confidential employer or customer data.</p>  <section class="dashboard">  
+<p class="lead">A management view of the open workload: what is overdue, how old it is, who owns it and which items are waiting on a decision.</p>  <p class="data-note"><strong>Data note:</strong> This dashboard runs on the Executive Operations Dataset, a structured operational dataset of 6,000 records covering January–September 2026. The raw file (6,060 rows) was de-duplicated on Record_ID to produce the clean file used here. It contains no confidential employer or customer data.</p>  <section class="findings" id="findings"><h2>Key findings</h2><p class="f-sub">Calculated on the full dataset, independent of the filters below. The data is synthetic, so these show the analysis approach, not real business results.</p><div class="finding-grid"><article class="finding"><span class="f-tag">Finding 1</span><h3>The backlog is old, and mostly late</h3><p>509 records are still active; 422 of them (82.9%) are past their due date. 193 (37.9%) have been open for more than 90 days, and the oldest is 272 days old.</p><p class="f-action"><strong>Action:</strong> Clear the records older than 90 days first, before taking on new work.</p></article><article class="finding"><span class="f-tag">Finding 2</span><h3>Overdue rate roughly doubled after June</h3><p>The monthly overdue rate stayed between 7.0% and 8.5% from January to June, then rose to 11.9% in July, 16.6% in August and 14.2% in September.</p><p class="f-action"><strong>Action:</strong> Find out what changed in July (capacity, intake volume or process) and track the rate monthly.</p></article><article class="finding"><span class="f-tag">Finding 3</span><h3>Complexity predicts SLA breaches</h3><p>High-complexity records breach SLA 44.7% of the time against 11.5% for low complexity, about 3.9 times as often.</p><p class="f-action"><strong>Action:</strong> Set due dates and staffing for high-complexity work separately instead of using one standard target.</p></article><article class="finding"><span class="f-tag">Finding 4</span><h3>Back Office is the weakest team</h3><p>Back Office breaches SLA 31.1% of the time against 21.9% for Operations, and also has the highest overdue rate (11.4%, against 8.5% for Customer Success).</p><p class="f-action"><strong>Action:</strong> Review Back Office capacity and process first.</p></article><article class="finding"><span class="f-tag">Finding 5</span><h3>Priority is not protecting urgent work</h3><p>49 of the 52 active P1 records (94.2%) are overdue, a higher share than active P4 records (74.5%).</p><p class="f-action"><strong>Action:</strong> Add a daily P1 review and an escalation path so urgent items are not left to age.</p></article></div></section>
+<section class="dashboard">  
 <div id="errorBox" class="error"></div>  <div class="toolbar">  
 <div class="data-status"><span class="dot"></span><span id="dataStatus">Loading operational dataset...</span></div>  
 <div class="filters">  
@@ -74,179 +100,206 @@ tbody tr:hover{background:#f8fafc}
 <select id="fCategory" class="filter" aria-label="Category"></select>  
 <button id="resetBtn" class="btn" type="button">Reset</button>  
 </div>  
-</div>  <div id="loading" class="loading">Loading dashboard data...</div>  <div id="content" class="hidden">  <div class="kpi-grid">  
-<div class="kpi-card"><div class="kpi-label">Total Records</div><div class="kpi-value" id="kRecords">—</div><div class="kpi-note">Records in current view</div></div>  
-<div class="kpi-card"><div class="kpi-label">Completion Rate</div><div class="kpi-value" id="kCompletion">—</div><div class="kpi-note">Completed and closed records</div></div>  
-<div class="kpi-card"><div class="kpi-label">SLA Achievement</div><div class="kpi-value" id="kSla">—</div><div class="kpi-note">Met ÷ (Met + Breached)</div></div>  
-<div class="kpi-card"><div class="kpi-label">Follow-up Rate</div><div class="kpi-value" id="kFollow">—</div><div class="kpi-note">Records requiring follow-up</div></div>  
-<div class="kpi-card"><div class="kpi-label">Overdue Rate</div><div class="kpi-value" id="kOverdue">—</div><div class="kpi-note">Past due date (open or completed late)</div></div>  
-<div class="kpi-card"><div class="kpi-label">Average Aging</div><div class="kpi-value" id="kAging">—</div><div class="kpi-note">Average aging of active records</div></div>
-<div class="kpi-card"><div class="kpi-label">Avg Resolution Time</div><div class="kpi-value" id="kRes">—</div><div class="kpi-note">Completed records only</div></div>  
-<div class="kpi-card"><div class="kpi-label">QA Performance</div><div class="kpi-value" id="kQa">—</div><div class="kpi-note">Average QA score (0–100)</div></div>  
-<div class="kpi-card"><div class="kpi-label">Items Processed</div><div class="kpi-value" id="kItems">—</div><div class="kpi-note">Total workload represented</div></div>  
-</div>  <div class="grid">  
-<div class="panel full"><h3>Monthly Operational Volume</h3><p class="sub">Records created and items processed by month.</p><div class="chart-wrap"><canvas id="cVolume"></canvas></div></div>  
-<div class="panel"><h3>Status Distribution</h3><p class="sub">Current workflow status of records.</p><div class="chart-wrap"><canvas id="cStatus"></canvas></div></div>  
-<div class="panel"><h3>Priority Distribution</h3><p class="sub">Records by priority level.</p><div class="chart-wrap"><canvas id="cPriority"></canvas></div></div>  
-<div class="panel"><h3>Workload by Team</h3><p class="sub">Records handled by each team.</p><div class="chart-wrap"><canvas id="cTeam"></canvas></div></div>  
-<div class="panel"><h3>Workload by Category</h3><p class="sub">Records by category of work.</p><div class="chart-wrap"><canvas id="cCategory"></canvas></div></div>  
-<div class="panel"><h3>SLA Performance</h3><p class="sub">Met, breached and still-open records.</p><div class="chart-wrap"><canvas id="cSla"></canvas></div></div>  
-<div class="panel"><h3>Follow-up &amp; Overdue Overview</h3><p class="sub">Follow-up and overdue rates by team.</p><div class="chart-wrap"><canvas id="cFollow"></canvas></div></div>  
-</div>  <div class="panel full" style="margin-bottom:18px"><h3>Team Performance</h3><p class="sub">Performance by team for the selected filters.</p>  
-<div class="table-wrap"><table><thead><tr id="hTeam"></tr></thead><tbody id="tTeam"></tbody></table></div></div>  <div class="panel full" style="margin-bottom:18px"><h3>Priority Performance</h3><p class="sub">Performance by priority level.</p>  
-<div class="table-wrap"><table><thead><tr id="hPriority"></tr></thead><tbody id="tPriority"></tbody></table></div></div>  <div class="panel full" style="margin-bottom:18px"><h3>Category Performance</h3><p class="sub">Performance by category of work.</p>  
-<div class="table-wrap"><table><thead><tr id="hCategory"></tr></thead><tbody id="tCategory"></tbody></table></div></div>  <div class="panel full" style="margin-bottom:18px"><h3>Operational Activity</h3><p class="sub">Most recent records in the current view.</p>  
-<div class="table-wrap"><table><thead><tr><th>Record</th><th>Created</th><th>Due</th><th>Team</th><th>Category</th><th>Priority</th><th>Status</th><th>SLA</th><th>Overdue</th></tr></thead><tbody id="tActivity"></tbody></table></div>  
-<div class="table-foot"><span id="activityCount"></span><button id="moreBtn" class="btn" type="button">Show more</button></div></div>  </div>  <div class="links-row">  
+</div>  <div id="loading" class="loading">Loading dashboard data...</div>  <div id="content" class="hidden">  <div class="kpi-grid">
+<div class="kpi-card"><div class="kpi-label">Active Workload</div><div class="kpi-value" id="kActive">—</div><div class="kpi-note">Open, in progress or pending</div></div>
+<div class="kpi-card"><div class="kpi-label">Active &amp; Overdue</div><div class="kpi-value" id="kActiveOverdue">—</div><div class="kpi-note">Active records past their due date</div></div>
+<div class="kpi-card"><div class="kpi-label">Average Age (Active)</div><div class="kpi-value" id="kAging">—</div><div class="kpi-note">Average aging of active records</div></div>
+<div class="kpi-card"><div class="kpi-label">Overdue Rate</div><div class="kpi-value" id="kOverdue">—</div><div class="kpi-note">Past due date (open or completed late)</div></div>
+<div class="kpi-card"><div class="kpi-label">SLA Breach Rate</div><div class="kpi-value" id="kBreach">—</div><div class="kpi-note">Breached ÷ (Met + Breached)</div></div>
+<div class="kpi-card"><div class="kpi-label">Follow-up Rate</div><div class="kpi-value" id="kFollow">—</div><div class="kpi-note">Records requiring follow-up</div></div>
+</div>
+<div class="panel full" style="margin-bottom:18px"><h3>Needs Attention</h3><p class="sub">What stands out in the current view.</p><div class="attn" id="attention"></div></div>
+<div class="grid">
+<div class="panel full"><h3>Overdue &amp; SLA Breach Trend</h3><p class="sub">Share of records overdue and share of SLA breached, by month.</p><div class="chart-wrap"><canvas id="cTrend"></canvas></div></div>
+<div class="panel"><h3>Active Workload by Priority</h3><p class="sub">Records still open, in progress or pending.</p><div class="chart-wrap"><canvas id="cActivePri"></canvas></div></div>
+<div class="panel"><h3>Aging of Active Records</h3><p class="sub">How long active records have been open.</p><div class="chart-wrap"><canvas id="cAging"></canvas></div></div>
+<div class="panel"><h3>What the Open Work Is Waiting On</h3><p class="sub">Active records by type of action required.</p><div class="chart-wrap"><canvas id="cAction"></canvas></div></div>
+<div class="panel"><h3>Follow-up &amp; Overdue by Team</h3><p class="sub">Follow-up and overdue rates by team.</p><div class="chart-wrap"><canvas id="cFollow"></canvas></div></div>
+</div>
+<div class="panel full" style="margin-bottom:18px"><h3>Ownership &amp; Accountability</h3><p class="sub">Who holds the active workload, and how much of it is late.</p>
+<div class="table-wrap"><table><thead><tr><th>Owner</th><th>Active</th><th>Active &amp; Overdue</th><th>SLA Breach</th><th>Follow-up</th><th>Avg Age</th><th>Oldest</th></tr></thead><tbody id="tOwner"></tbody></table></div></div>
+<div class="panel full" style="margin-bottom:18px"><h3>Watchlist: Oldest Active Records</h3><p class="sub">Active records, oldest first, for the current filters.</p>
+<div class="table-wrap"><table><thead><tr><th>Record</th><th>Owner</th><th>Category</th><th>Action</th><th>Priority</th><th>Status</th><th>Due</th><th>Age</th><th>Overdue</th></tr></thead><tbody id="tWatch"></tbody></table></div>
+<div class="table-foot"><span id="watchCount"></span><button id="moreBtn" class="btn" type="button">Show more</button></div></div>  </div>  <div class="card defs-panel" id="definitions"><h3>How the KPIs are defined</h3><p class="f-sub">Definitions used by the dashboard, plus SQL that reproduces the headline figures.</p><dl class="defs"><dt>Active workload</dt><dd>Records with Status Open, In Progress or Pending (SLA_Status = Open).</dd><dt>Active & overdue</dt><dd>Active records with Overdue_Flag = Yes.</dd><dt>Average age (active)</dt><dd>Average Aging_Days across active records only.</dd><dt>Overdue rate</dt><dd>Records with Overdue_Flag = Yes ÷ records (includes records completed late).</dd><dt>SLA breach rate</dt><dd>Breached ÷ (Met + Breached). Records still open are excluded.</dd><dt>Follow-up rate</dt><dd>Records with Follow_Up = Yes ÷ records.</dd></dl><details><summary>SQL to reproduce these numbers (SQLite syntax)</summary><pre><code>SELECT
+  SUM(CASE WHEN Status IN ('Open','In Progress','Pending') THEN 1 ELSE 0 END) AS active,
+  SUM(CASE WHEN Status IN ('Open','In Progress','Pending') AND Overdue_Flag = 'Yes' THEN 1 ELSE 0 END) AS active_overdue,
+  ROUND(AVG(CASE WHEN Status IN ('Open','In Progress','Pending') THEN Aging_Days END), 1) AS avg_age_active_days,
+  ROUND(100.0 * SUM(CASE WHEN Overdue_Flag = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 1) AS overdue_pct,
+  ROUND(100.0 * SUM(CASE WHEN SLA_Status = 'Breached' THEN 1 ELSE 0 END)
+        / SUM(CASE WHEN SLA_Status IN ('Met','Breached') THEN 1 ELSE 0 END), 1) AS sla_breach_pct,
+  ROUND(100.0 * SUM(CASE WHEN Follow_Up = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 1) AS follow_up_pct
+FROM executive_operations;</code></pre><pre><code>SELECT strftime('%Y-%m', Created_Date) AS month,
+  ROUND(100.0 * SUM(CASE WHEN Overdue_Flag = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 1) AS overdue_pct
+FROM executive_operations
+GROUP BY month
+ORDER BY month;</code></pre></details></div>
+<div class="links-row">  
 <a href="data/Executive_Operations_Dataset_Clean.csv" download>Clean dataset (CSV)</a>  
-<a href="data/Executive_Operations_Dataset_Raw.csv" download>Raw dataset (CSV)</a>  
+<a href="data/Executive_Operations_Dataset_Raw.csv" download>Raw dataset (CSV)</a>
+<a href="https://github.com/sajidmanzoor730/sajid-portfolio" target="_blank" rel="noopener">View code on GitHub</a>  
 <a href="projects.html">← Back to Projects</a>  
 </div>  
 </section>  
 </div>  
-</main>  <footer>  
+<div class="wrap sqlbox"><section><h2>SQL behind the findings</h2><p class="sqlnote">The backlog and overdue findings above come from these queries. The results below were produced by running these queries on the clean CSVs (SQLite). Reproduce them with <code>python3 sql/run_sql.py</code>.</p><h3 class="sqlh">exec active backlog</h3><pre><code>-- Finding: the backlog is old, and mostly late
+SELECT COUNT(*)                                             AS active_records,
+       SUM(Overdue_Flag = &#x27;Yes&#x27;)                            AS overdue,
+       ROUND(100.0 * SUM(Overdue_Flag = &#x27;Yes&#x27;) / COUNT(*), 1) AS overdue_pct,
+       SUM(Aging_Days &gt; 90)                                 AS open_over_90_days,
+       MAX(Aging_Days)                                      AS oldest_days
+FROM exec_ops
+WHERE Status NOT IN (&#x27;Completed&#x27;, &#x27;Closed&#x27;);</code></pre><div class="table-wrap"><table><thead><tr><th>active_records</th><th>overdue</th><th>overdue_pct</th><th>open_over_90_days</th><th>oldest_days</th></tr></thead><tbody><tr><td>509</td><td>422</td><td>82.9</td><td>193</td><td>272.0</td></tr></tbody></table></div><h3 class="sqlh">exec overdue by team</h3><pre><code>SELECT Team,
+       COUNT(*) AS records,
+       ROUND(100.0 * SUM(Overdue_Flag = &#x27;Yes&#x27;) / COUNT(*), 1) AS overdue_pct
+FROM exec_ops
+GROUP BY Team
+ORDER BY overdue_pct DESC;</code></pre><div class="table-wrap"><table><thead><tr><th>Team</th><th>records</th><th>overdue_pct</th></tr></thead><tbody><tr><td>Back Office</td><td>985</td><td>11.4</td></tr><tr><td>Network</td><td>1091</td><td>10.1</td></tr><tr><td>Quality</td><td>1064</td><td>10.0</td></tr><tr><td>Operations</td><td>1674</td><td>9.7</td></tr><tr><td>Customer Success</td><td>1186</td><td>8.5</td></tr></tbody></table></div><h3 class="sqlh">exec overdue by month</h3><pre><code>SELECT Month,
+       ROUND(100.0 * SUM(Overdue_Flag = &#x27;Yes&#x27;) / COUNT(*), 1) AS overdue_pct
+FROM exec_ops
+GROUP BY Month
+ORDER BY Month;</code></pre><div class="table-wrap"><table><thead><tr><th>Month</th><th>overdue_pct</th></tr></thead><tbody><tr><td>2026-01</td><td>7.5</td></tr><tr><td>2026-02</td><td>8.5</td></tr><tr><td>2026-03</td><td>7.7</td></tr><tr><td>2026-04</td><td>7.8</td></tr><tr><td>2026-05</td><td>7.0</td></tr><tr><td>2026-06</td><td>7.8</td></tr><tr><td>2026-07</td><td>11.9</td></tr><tr><td>2026-08</td><td>16.6</td></tr><tr><td>2026-09</td><td>14.2</td></tr></tbody></table></div></section></div></main>  <footer>  
 <div class="wrap">© 2026 Sajid Manzoor · Data Analytics &amp; Business Operations</div>  
-</footer>  <script>  
-const DATA_URL="data/Executive_Operations_Dataset_Clean.csv";  
-const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];  
-const STATUS_ORDER=["Open","In Progress","Pending","Completed","Closed"];  
-const PRIORITY_ORDER=["P1","P2","P3","P4"];  
-const STATUS_COL={"Open":"#64748b","In Progress":"#2563eb","Pending":"#f59e0b","Completed":"#22c55e","Closed":"#0f766e"};  
-const PRI_COL={P1:"#ef4444",P2:"#f59e0b",P3:"#2563eb",P4:"#94a3b8"};  
-const BLUE="#2563eb",NAVY="#0f233f",AMBER="#f59e0b",RED="#ef4444",GREEN="#22c55e",SLATE="#94a3b8";  
-const FILTERS=[["fTeam","Team","All Teams"],["fPriority","Priority","All Priorities"],["fStatus","Status","All Statuses"],["fCategory","Category","All Categories"]];  
-const COLS=["Records","Completion","SLA","Follow-up","Overdue","Avg Aging","Avg Resolution","QA","Items"];  
-let ALL=[],VIEW=[],MONTHS=[],charts={},limit=15;  
-const $=id=>document.getElementById(id);  
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));  
-const sum=a=>a.reduce((s,x)=>s+x,0);  
-const avg=a=>a.length?sum(a)/a.length:null;  
-const pct=v=>v==null?"—":(v*100).toFixed(1)+"%";  
-const dec=(v,u)=>v==null?"—":v.toFixed(1)+(u||"");  
-const int=v=>v==null?"—":Math.round(v).toLocaleString("en-US");  
-  
-function parseCSV(t){  
-  t=t.replace(/^\uFEFF/,"");  
-  const rows=[];let row=[],f="",q=false;  
-  for(let i=0;i<t.length;i++){  
-    const c=t[i];  
-    if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}  
-    else if(c==='"')q=true;  
-    else if(c===","){row.push(f);f=""}  
-    else if(c==="\n"){row.push(f);rows.push(row);row=[];f=""}  
-    else if(c!=="\r")f+=c;  
-  }  
-if(f.length||row.length){row.push(f);rows.push(row)}  
-  const head=rows.shift().map(h=>h.trim());  
-  return rows.filter(r=>r.length>1).map(r=>{const o={};head.forEach((h,i)=>o[h]=(r[i]||"").trim());return o});  
-}  
-function prep(r){  
-  r.Items_Processed=+r.Items_Processed||0;  
-  r.Aging_Days=+r.Aging_Days||0;  
-  r.Resolution_Hours=r.Resolution_Hours===""?null:+r.Resolution_Hours;  
-  r.QA_Score=r.QA_Score===""?null:+r.QA_Score;  
-  return r;  
-}  
-function stats(rs){  
-  const n=rs.length,c=f=>rs.filter(f).length;  
-  const done=c(r=>r.Status==="Completed"||r.Status==="Closed");  
-  const met=c(r=>r.SLA_Status==="Met"),br=c(r=>r.SLA_Status==="Breached"),op=c(r=>r.SLA_Status==="Open");  
-  const fu=c(r=>r.Follow_Up==="Yes"),od=c(r=>r.Overdue_Flag==="Yes");  
-  return{n,done,met,br,op,fu,od,  
-    completion:n?done/n:null,sla:(met+br)?met/(met+br):null,follow:n?fu/n:null,overdue:n?od/n:null,  
-    aging:avg(rs.map(r=>r.Aging_Days)),  
-    res:avg(rs.filter(r=>r.Resolution_Hours!=null).map(r=>r.Resolution_Hours)),  
-    qa:avg(rs.filter(r=>r.QA_Score!=null).map(r=>r.QA_Score)),  
-    items:sum(rs.map(r=>r.Items_Processed))};  
-}  
-function group(rs,key,order){  
-  const m={};rs.forEach(r=>(m[r[key]]=m[r[key]]||[]).push(r));  
-  let keys=Object.keys(m);  
-  keys=order?order.filter(k=>m[k]):keys.sort((a,b)=>m[b].length-m[a].length);  
-  return keys.map(k=>({key:k,rows:m[k],s:stats(m[k])}));  
-}  
-function uniq(key,order){  
-  const u=[...new Set(ALL.map(r=>r[key]))];  
-  return order?order.filter(x=>u.includes(x)):u.sort();  
-}  
-function setupFilters(){  
-  const orders={Priority:PRIORITY_ORDER,Status:STATUS_ORDER};  
-  FILTERS.forEach(([id,key,label])=>{  
-    $(id).innerHTML='<option value="All">'+label+'</option>'+uniq(key,orders[key]).map(v=>'<option value="'+esc(v)+'">'+esc(v)+'</option>').join("");  
-    $(id).addEventListener("change",()=>{limit=15;render()});  
-  });  
-  $("resetBtn").onclick=()=>{FILTERS.forEach(([id])=>$(id).value="All");limit=15;render()};  
-  $("moreBtn").onclick=()=>{limit+=15;renderActivity()};  
-}  
-function applyFilters(){  
-  const sel=FILTERS.map(([id,key])=>[key,$(id).value]).filter(x=>x[1]!=="All");  
-  return ALL.filter(r=>sel.every(([k,v])=>r[k]===v));  
-}  
-function setChart(id,type,labels,datasets,opts){  
-  const data={labels,datasets};  
-  if(charts[id]){charts[id].data=data;charts[id].update();return}  
-  charts[id]=new Chart($(id),{type,data,options:Object.assign({responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom",labels:{boxWidth:12,font:{size:11}}}}},opts||{})});  
-}  
-function pill(txt,cls){return'<span class="pill '+cls+'">'+esc(txt)+'</span>'}  
-function slaPill(v){return v==null?"—":pill(pct(v),v>=.8?"good":v>=.7?"warn":"bad")}  
-function odPill(v){return v==null?"—":pill(pct(v),v<=.08?"good":v<=.12?"warn":"bad")}  
-function renderKPIs(s){  
-  $("kRecords").textContent=int(s.n);$("kCompletion").textContent=pct(s.completion);  
-  $("kSla").textContent=pct(s.sla);$("kFollow").textContent=pct(s.follow);  
-  $("kOverdue").textContent=pct(s.overdue);$("kAging").textContent=dec(s.aging," days");  
-  $("kRes").textContent=dec(s.res," hrs");$("kQa").textContent=dec(s.qa);$("kItems").textContent=int(s.items);  
-}  
-function renderCharts(rs){  
-  const byM=MONTHS.map(m=>stats(rs.filter(r=>r.Month===m)));  
-  const ml=MONTHS.map(m=>{const p=m.split("-");return MON[+p[1]-1]+" "+p[0]});  
-  setChart("cVolume","bar",ml,[  
-    {type:"bar",label:"Records",data:byM.map(s=>s.n),backgroundColor:BLUE,borderRadius:4,yAxisID:"y"},  
-    {type:"line",label:"Items processed",data:byM.map(s=>s.items),borderColor:AMBER,backgroundColor:AMBER,tension:.3,yAxisID:"y1"}],  
-    {scales:{y:{beginAtZero:true,title:{display:true,text:"Records"}},y1:{beginAtZero:true,position:"right",grid:{drawOnChartArea:false},title:{display:true,text:"Items"}}}});  
-  const st=group(rs,"Status",STATUS_ORDER);  
-  setChart("cStatus","doughnut",st.map(g=>g.key),[{data:st.map(g=>g.rows.length),backgroundColor:st.map(g=>STATUS_COL[g.key])}],{cutout:"62%"});  
-  const pr=group(rs,"Priority",PRIORITY_ORDER);  
-  setChart("cPriority","bar",pr.map(g=>g.key),[{label:"Records",data:pr.map(g=>g.rows.length),backgroundColor:pr.map(g=>PRI_COL[g.key]),borderRadius:4}],{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}});  
-  const tm=group(rs,"Team"),ct=group(rs,"Category");  
-  setChart("cTeam","bar",tm.map(g=>g.key),[{label:"Records",data:tm.map(g=>g.rows.length),backgroundColor:BLUE,borderRadius:4}],{indexAxis:"y",plugins:{legend:{display:false}},scales:{x:{beginAtZero:true}}});  
-  setChart("cCategory","bar",ct.map(g=>g.key),[{label:"Records",data:ct.map(g=>g.rows.length),backgroundColor:NAVY,borderRadius:4}],{indexAxis:"y",plugins:{legend:{display:false}},scales:{x:{beginAtZero:true}}});  
-  const s=stats(rs);  
-  setChart("cSla","doughnut",["Met","Breached","Open"],[{data:[s.met,s.br,s.op],backgroundColor:[GREEN,RED,SLATE]}],{cutout:"62%"});  
-  setChart("cFollow","bar",tm.map(g=>g.key),[  
-    {label:"Follow-up rate (%)",data:tm.map(g=>+(g.s.follow*100).toFixed(1)),backgroundColor:BLUE,borderRadius:4},  
-    {label:"Overdue rate (%)",data:tm.map(g=>+(g.s.overdue*100).toFixed(1)),backgroundColor:RED,borderRadius:4}],  
-    {scales:{y:{beginAtZero:true,ticks:{callback:v=>v+"%"}}}});  
-}  
-function renderGroupTable(head,body,key,label,order){  
-  $(head).innerHTML="<th>"+label+"</th>"+COLS.map(c=>"<th>"+c+"</th>").join("");  
-  const g=group(VIEW,key,order);  
-  $(body).innerHTML=g.length?g.map(x=>{const s=x.s;  
-    return"<tr><td><strong>"+esc(x.key)+"</strong></td><td>"+int(s.n)+"</td><td>"+pct(s.completion)+"</td><td>"+slaPill(s.sla)+"</td><td>"+pct(s.follow)+"</td><td>"+odPill(s.overdue)+"</td><td>"+dec(s.aging," d")+"</td><td>"+dec(s.res," h")+"</td><td>"+dec(s.qa)+"</td><td>"+int(s.items)+"</td></tr>"}).join("")  
-    :'<tr><td colspan="10">No records match the selected filters.</td></tr>';  
-}  
-function renderActivity(){  
-  const rs=VIEW.slice().sort((a,b)=>b.Created_Date.localeCompare(a.Created_Date)||b.Record_ID.localeCompare(a.Record_ID));  
-  const shown=rs.slice(0,limit);  
-  const sc={Completed:"good",Closed:"good",Open:"warn","In Progress":"warn",Pending:"warn"};  
-  $("tActivity").innerHTML=shown.length?shown.map(r=>"<tr><td><strong>"+esc(r.Record_ID)+"</strong></td><td>"+esc(r.Created_Date)+"</td><td>"+esc(r.Due_Date)+"</td><td>"+esc(r.Team)+"</td><td>"+esc(r.Category)+"</td><td>"+esc(r.Priority)+"</td><td>"+pill(r.Status,sc[r.Status]||"warn")+"</td><td>"+pill(r.SLA_Status,r.SLA_Status==="Met"?"good":r.SLA_Status==="Breached"?"bad":"warn")+"</td><td>"+pill(r.Overdue_Flag,r.Overdue_Flag==="Yes"?"bad":"good")+"</td></tr>").join("")  
-    :'<tr><td colspan="9">No records match the selected filters.</td></tr>';  
-  $("activityCount").textContent="Showing "+shown.length.toLocaleString("en-US")+" of "+rs.length.toLocaleString("en-US")+" records";  
-  $("moreBtn").classList.toggle("hidden",shown.length>=rs.length);  
-}  
-function render(){  
-  VIEW=applyFilters();  
-  renderKPIs(stats(VIEW));  
-  renderCharts(VIEW);  
-  renderGroupTable("hTeam","tTeam","Team","Team");  
-  renderGroupTable("hPriority","tPriority","Priority","Priority",PRIORITY_ORDER);  
-  renderGroupTable("hCategory","tCategory","Category","Category");  
-  renderActivity();  
-  $("dataStatus").textContent="Executive Operations Dataset · "+VIEW.length.toLocaleString("en-US")+" of "+ALL.length.toLocaleString("en-US")+" records shown";  
-}  
-async function init(){  
-  try{  
-    if(typeof Chart==="undefined")throw new Error("Chart.js could not be loaded.");  
-    const res=await fetch(DATA_URL)
+</footer>  <script>
+const DATA_URL="data/Executive_Operations_Dataset_Clean.csv";
+const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const STATUS_ORDER=["Open","In Progress","Pending","Completed","Closed"];
+const PRIORITY_ORDER=["P1","P2","P3","P4"];
+const ACTIVE=["Open","In Progress","Pending"];
+const STATUS_COL={"Open":"#64748b","In Progress":"#5B83FF","Pending":"#f59e0b"};
+const BLUE="#5B83FF",AMBER="#f59e0b",RED="#ef4444",GREEN="#22c55e",SLATE="#94a3b8";
+const FILTERS=[["fTeam","Team","All Teams"],["fPriority","Priority","All Priorities"],["fStatus","Status","All Statuses"],["fCategory","Category","All Categories"]];
+let ALL=[],VIEW=[],MONTHS=[],charts={},limit=15;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const sum=a=>a.reduce((s,x)=>s+x,0);
+const avg=a=>a.length?sum(a)/a.length:null;
+const pct=v=>v==null?"—":(v*100).toFixed(1)+"%";
+const dec=(v,u)=>v==null?"—":v.toFixed(1)+(u||"");
+const int=v=>v==null?"—":Math.round(v).toLocaleString("en-US");
+const isActive=r=>ACTIVE.indexOf(r.Status)>-1;
+const isOverdue=r=>r.Overdue_Flag==="Yes";
+
+function parseCSV(t){
+  t=t.replace(/^\uFEFF/,"");
+  const rows=[];let row=[],f="",q=false;
+  for(let i=0;i<t.length;i++){
+    const c=t[i];
+    if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
+    else if(c==='"')q=true;
+    else if(c===","){row.push(f);f=""}
+    else if(c==="\n"){row.push(f);rows.push(row);row=[];f=""}
+    else if(c!=="\r")f+=c;
+  }
+  if(f.length||row.length){row.push(f);rows.push(row)}
+  const head=rows.shift().map(h=>h.trim());
+  return rows.filter(r=>r.length>1).map(r=>{const o={};head.forEach((h,i)=>o[h]=(r[i]||"").trim());return o});
+}
+function prep(r){r.Aging_Days=+r.Aging_Days||0;return r}
+function stats(rs){
+  const n=rs.length,c=f=>rs.filter(f).length,act=rs.filter(isActive);
+  const met=c(r=>r.SLA_Status==="Met"),br=c(r=>r.SLA_Status==="Breached"),fu=c(r=>r.Follow_Up==="Yes"),od=c(isOverdue);
+  const ages=act.map(r=>r.Aging_Days);
+  return{n,act,active:act.length,activeOverdue:act.filter(isOverdue).length,met,br,fu,od,
+    overdue:n?od/n:null,breach:(met+br)?br/(met+br):null,follow:n?fu/n:null,
+    aging:avg(ages),oldest:ages.length?Math.max.apply(null,ages):null};
+}
+function group(rs,key,order){
+  const m={};rs.forEach(r=>(m[r[key]]=m[r[key]]||[]).push(r));
+  let keys=Object.keys(m);
+  keys=order?order.filter(k=>m[k]):keys.sort((a,b)=>m[b].length-m[a].length);
+  return keys.map(k=>({key:k,rows:m[k],s:stats(m[k])}));
+}
+function uniq(key,order){
+  const u=[...new Set(ALL.map(r=>r[key]))];
+  return order?order.filter(x=>u.includes(x)):u.sort();
+}
+function setupFilters(){
+  const orders={Priority:PRIORITY_ORDER,Status:STATUS_ORDER};
+  FILTERS.forEach(([id,key,label])=>{
+    $(id).innerHTML='<option value="All">'+label+'</option>'+uniq(key,orders[key]).map(v=>'<option value="'+esc(v)+'">'+esc(v)+'</option>').join("");
+    $(id).addEventListener("change",()=>{limit=15;render()});
+  });
+  $("resetBtn").onclick=()=>{FILTERS.forEach(([id])=>$(id).value="All");limit=15;render()};
+  $("moreBtn").onclick=()=>{limit+=15;renderWatch()};
+}
+function applyFilters(){
+  const sel=FILTERS.map(([id,key])=>[key,$(id).value]).filter(x=>x[1]!=="All");
+  return ALL.filter(r=>sel.every(([k,v])=>r[k]===v));
+}
+function setChart(id,type,labels,datasets,opts){
+  const data={labels,datasets};
+  if(charts[id]){charts[id].data=data;charts[id].update();return}
+  charts[id]=new Chart($(id),{type,data,options:Object.assign({responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom",labels:{boxWidth:12,font:{size:11}}}}},opts||{})});
+}
+function pill(txt,cls){return'<span class="pill '+cls+'">'+esc(txt)+'</span>'}
+function renderKPIs(s){
+  $("kActive").textContent=int(s.active);$("kActiveOverdue").textContent=int(s.activeOverdue);
+  $("kAging").textContent=dec(s.aging," days");$("kOverdue").textContent=pct(s.overdue);
+  $("kBreach").textContent=pct(s.breach);$("kFollow").textContent=pct(s.follow);
+}
+function renderAttention(rs,s){
+  const box=$("attention");
+  if(!rs.length){box.innerHTML='<div class="attn-item"><strong>No records</strong><span>No records match the selected filters.</span></div>';return}
+  const act=s.act,items=[];
+  const teams=group(rs,"Team").filter(g=>g.s.n>0).sort((a,b)=>b.s.overdue-a.s.overdue);
+  if(teams.length>1)items.push(["Highest overdue rate",teams[0].key+" · "+pct(teams[0].s.overdue),teams[0].s.od+" of "+int(teams[0].s.n)+" records are past due."]);
+  if(act.length){
+    const old=act.filter(r=>r.Aging_Days>30).length;
+    items.push(["Aged backlog",old+" of "+act.length+" active records",pct(old/act.length)+" have been open for more than 30 days."]);
+    const p1=act.filter(r=>r.Priority==="P1"),p1od=p1.filter(isOverdue).length;
+    items.push(["Critical (P1) exposure",p1.length+" active P1 records",p1od+" of them are past due."]);
+    const dc=act.filter(r=>r.Action_Type==="Decision").length;
+    items.push(["Decisions waiting",dc+" decisions pending",pct(dc/act.length)+" of the active workload is waiting on a decision."]);
+  }else items.push(["Active workload","No active records","Everything in this view is completed or closed."]);
+  box.innerHTML=items.map(x=>'<div class="attn-item"><span class="attn-label">'+esc(x[0])+'</span><strong>'+esc(x[1])+'</strong><span>'+esc(x[2])+'</span></div>').join("");
+}
+function renderCharts(rs,s){
+  const byM=MONTHS.map(m=>stats(rs.filter(r=>r.Month===m)));
+  const ml=MONTHS.map(m=>{const p=m.split("-");return MON[+p[1]-1]+" "+p[0]});
+  const p1=v=>v==null?null:+(v*100).toFixed(1);
+  setChart("cTrend","line",ml,[
+    {label:"Overdue rate (%)",data:byM.map(x=>p1(x.overdue)),borderColor:RED,backgroundColor:RED,tension:.3},
+    {label:"SLA breach rate (%)",data:byM.map(x=>p1(x.breach)),borderColor:AMBER,backgroundColor:AMBER,tension:.3}],
+    {scales:{y:{beginAtZero:true,ticks:{callback:v=>v+"%"}}}});
+  const act=s.act;
+  setChart("cActivePri","bar",PRIORITY_ORDER,ACTIVE.map(st=>({label:st,data:PRIORITY_ORDER.map(p=>act.filter(r=>r.Priority===p&&r.Status===st).length),backgroundColor:STATUS_COL[st],borderRadius:3})),
+    {scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true}}});
+  const buckets=[["0–7 days",a=>a<=7],["8–14 days",a=>a>=8&&a<=14],["15–30 days",a=>a>=15&&a<=30],["31+ days",a=>a>30]];
+  setChart("cAging","bar",buckets.map(b=>b[0]),[{label:"Active records",data:buckets.map(b=>act.filter(r=>b[1](r.Aging_Days)).length),backgroundColor:[GREEN,BLUE,AMBER,RED],borderRadius:4}],
+    {plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}});
+  const at=group(act,"Action_Type");
+  setChart("cAction","doughnut",at.map(g=>g.key),[{data:at.map(g=>g.rows.length),backgroundColor:[BLUE,AMBER,GREEN,SLATE]}],{cutout:"62%"});
+  const tm=group(rs,"Team");
+  setChart("cFollow","bar",tm.map(g=>g.key),[
+    {label:"Follow-up rate (%)",data:tm.map(g=>p1(g.s.follow)),backgroundColor:BLUE,borderRadius:4},
+    {label:"Overdue rate (%)",data:tm.map(g=>p1(g.s.overdue)),backgroundColor:RED,borderRadius:4}],
+    {scales:{y:{beginAtZero:true,ticks:{callback:v=>v+"%"}}}});
+}
+function renderOwners(){
+  const g=group(VIEW,"Owner").sort((a,b)=>b.s.activeOverdue-a.s.activeOverdue||b.s.active-a.s.active);
+  $("tOwner").innerHTML=g.length?g.map(x=>{const s=x.s;
+    return"<tr><td><strong>"+esc(x.key)+"</strong></td><td>"+int(s.active)+"</td><td>"+int(s.activeOverdue)+"</td><td>"+pct(s.breach)+"</td><td>"+pct(s.follow)+"</td><td>"+dec(s.aging," d")+"</td><td>"+(s.oldest==null?"—":int(s.oldest)+" d")+"</td></tr>"}).join("")
+    :'<tr><td colspan="7">No records match the selected filters.</td></tr>';
+}
+function renderWatch(){
+  const rs=VIEW.filter(isActive).sort((a,b)=>b.Aging_Days-a.Aging_Days||a.Record_ID.localeCompare(b.Record_ID));
+  const shown=rs.slice(0,limit);
+  $("tWatch").innerHTML=shown.length?shown.map(r=>"<tr><td><strong>"+esc(r.Record_ID)+"</strong></td><td>"+esc(r.Owner)+"</td><td>"+esc(r.Category)+"</td><td>"+esc(r.Action_Type)+"</td><td>"+esc(r.Priority)+"</td><td>"+pill(r.Status,"warn")+"</td><td>"+esc(r.Due_Date)+"</td><td>"+int(r.Aging_Days)+" d</td><td>"+pill(r.Overdue_Flag,isOverdue(r)?"bad":"good")+"</td></tr>").join("")
+    :'<tr><td colspan="9">No active records match the selected filters.</td></tr>';
+  $("watchCount").textContent="Showing "+shown.length.toLocaleString("en-US")+" of "+rs.length.toLocaleString("en-US")+" active records";
+  $("moreBtn").classList.toggle("hidden",shown.length>=rs.length);
+}
+function render(){
+  VIEW=applyFilters();
+  const s=stats(VIEW);
+  renderKPIs(s);renderAttention(VIEW,s);renderCharts(VIEW,s);renderOwners();renderWatch();
+  $("dataStatus").textContent="Executive Operations Dataset · "+VIEW.length.toLocaleString("en-US")+" of "+ALL.length.toLocaleString("en-US")+" records shown";
+}
+async function init(){
+  try{
+    if(typeof Chart==="undefined")throw new Error("Chart.js could not be loaded.");
+    Chart.defaults.color="#93A0C8";Chart.defaults.borderColor="rgba(160,180,255,.15)";
+    const res=await fetch(DATA_URL);
     if(!res.ok)throw new Error("Could not load "+DATA_URL+" (HTTP "+res.status+").");
     ALL=parseCSV(await res.text()).map(prep);
     if(!ALL.length)throw new Error("The dataset file is empty.");
@@ -264,5 +317,5 @@ async function init(){
 }
 init();
 </script>
-</body>
+<script src="modern.js"></script></body>
 </html>

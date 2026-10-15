@@ -9,45 +9,54 @@
 <title>CRM Data Quality & Cleanup | Sajid Manzoor</title>
 
 <link rel="stylesheet" href="project.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 
 <style>
 .dq{margin-top:26px}
-.dq-bar{margin-bottom:20px;padding:15px 17px;background:#fff;border:1px solid var(--line,#e2e8f0);border-radius:14px;box-shadow:0 3px 14px rgba(15,35,63,.025)}
-.dq-status{display:flex;align-items:center;gap:9px;margin-bottom:12px;color:var(--muted,#64748b);font-size:13px;font-weight:650}
-.dq-dot{width:8px;height:8px;flex:none;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px #dcfce7}
+.dq-bar{margin-bottom:20px;padding:15px 17px;background:#0F1636;border:1px solid var(--line,rgba(160,180,255,.18));border-radius:14px;box-shadow:0 3px 14px rgba(0,0,0,.4)}
+.dq-status{display:flex;align-items:center;gap:9px;margin-bottom:12px;color:var(--muted,#93A0C8);font-size:13px;font-weight:650}
+.dq-dot{width:8px;height:8px;flex:none;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgba(61,220,151,.18)}
 .dq-filters{display:grid;grid-template-columns:repeat(5,minmax(0,1fr)) auto;gap:9px}
-.dq-sel,.dq-btn{border:1px solid var(--line,#e2e8f0);background:#fff;color:var(--text,#1e293b);border-radius:8px;padding:8px 11px;font:inherit;font-size:13px;cursor:pointer;outline:none}
-.dq-sel:focus,.dq-btn:focus{border-color:var(--blue,#2563eb);box-shadow:0 0 0 3px rgba(37,99,235,.08)}
-.dq-btn:hover{background:#f8fafc}
-.dq-error{display:none;margin-bottom:20px;padding:16px 18px;background:#fff;border:1px solid #fecaca;border-radius:14px;color:#991b1b;font-size:14px}
-.dq-loading{padding:30px;background:#fff;border:1px solid var(--line,#e2e8f0);border-radius:15px;color:var(--muted,#64748b);text-align:center}
+.dq-sel,.dq-btn{border:1px solid var(--line,rgba(160,180,255,.18));background:#0F1636;color:var(--text,#DCE5FF);border-radius:8px;padding:8px 11px;font:inherit;font-size:13px;cursor:pointer;outline:none}
+.dq-sel:focus,.dq-btn:focus{border-color:var(--blue,#5B83FF);box-shadow:0 0 0 3px rgba(37,99,235,.08)}
+.dq-btn:hover{background:#0B1124}
+.dq-error{display:none;margin-bottom:20px;padding:16px 18px;background:#0F1636;border:1px solid rgba(239,68,68,.35);border-radius:14px;color:#FF9A9A;font-size:14px}
+.dq-loading{padding:30px;background:#0F1636;border:1px solid var(--line,rgba(160,180,255,.18));border-radius:15px;color:var(--muted,#93A0C8);text-align:center}
 .hidden{display:none!important}
 .dq-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}
-.dq-kpi{padding:18px 20px;background:#fff;border:1px solid var(--line,#e2e8f0);border-radius:14px;box-shadow:0 3px 15px rgba(15,35,63,.03)}
-.dq-kl{margin-bottom:8px;color:var(--muted,#64748b);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em}
-.dq-kv{color:var(--navy,#0f233f);font-size:28px;line-height:1.1;font-weight:800;letter-spacing:-.035em}
-.dq-kn{margin-top:7px;color:var(--muted,#64748b);font-size:11px;line-height:1.4}
+.dq-kpi{padding:18px 20px;background:#0F1636;border:1px solid var(--line,rgba(160,180,255,.18));border-radius:14px;box-shadow:0 3px 15px rgba(0,0,0,.4)}
+.dq-kl{margin-bottom:8px;color:var(--muted,#93A0C8);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em}
+.dq-kv{color:var(--navy,#EAF0FF);font-size:28px;line-height:1.1;font-weight:800;letter-spacing:-.035em}
+.dq-kn{margin-top:7px;color:var(--muted,#93A0C8);font-size:11px;line-height:1.4}
 .dq-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-bottom:18px}
-.dq-panel{min-width:0;padding:22px;background:#fff;border:1px solid var(--line,#e2e8f0);border-radius:15px;box-shadow:0 3px 15px rgba(15,35,63,.03)}
+.dq-panel{min-width:0;padding:22px;background:#0F1636;border:1px solid var(--line,rgba(160,180,255,.18));border-radius:15px;box-shadow:0 3px 15px rgba(0,0,0,.4)}
 .dq-panel.full{grid-column:1/-1}
-.dq-panel h3{margin:0 0 4px;color:var(--navy,#0f233f);font-size:18px;line-height:1.3}
-.dq-panel p.sub{margin:0 0 16px;color:var(--muted,#64748b);font-size:12px;line-height:1.5}
-.dq-chart{position:relative;height:290px}
-.dq .table-wrap{width:100%;overflow-x:auto;border:1px solid #eef2f7;border-radius:10px}
+.dq-panel h3{margin:0 0 4px;color:var(--navy,#EAF0FF);font-size:18px;line-height:1.3}
+.dq-panel p.sub{margin:0 0 16px;color:var(--muted,#93A0C8);font-size:12px;line-height:1.5}
+.dq-chart{position:relative;height:300px}
+.dq-chart.tall{height:400px}
+.dq-chart.mid{height:330px}
+#kIssue,#kFollow{color:#FFB547}
+#kRes{color:#35D3C6}
+#kReady{color:#3DDC97}
+.dq .muted{color:#FF9A9A;font-style:italic}
+.dq-panel{transition:border-color .25s}
+.dq-panel:hover{border-color:rgba(160,180,255,.32)}
+.dq .table-wrap{width:100%;overflow-x:auto;border:1px solid rgba(160,180,255,.14);border-radius:10px}
 .dq table{width:100%;min-width:700px;border-collapse:collapse;font-size:12px}
-.dq th{padding:11px 12px;background:#f8fafc;color:#475569;text-align:left;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--line,#e2e8f0);white-space:nowrap}
-.dq td{padding:10px 12px;color:#334155;border-bottom:1px solid #eef2f7;white-space:nowrap}
+.dq th{padding:11px 12px;background:#0B1124;color:#B3BFE3;text-align:left;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--line,rgba(160,180,255,.18));white-space:nowrap}
+.dq td{padding:10px 12px;color:#C0CBEC;border-bottom:1px solid rgba(160,180,255,.14);white-space:nowrap}
 .dq tbody tr:last-child td{border-bottom:0}
-.dq tbody tr:hover{background:#f8fafc}
+.dq tbody tr:hover{background:#0B1124}
 .pill{display:inline-block;border-radius:999px;padding:3px 8px;font-size:10px;font-weight:800}
-.good{background:#ecfdf5;color:#047857}
-.warn{background:#fffbeb;color:#a16207}
-.bad{background:#fef2f2;color:#b91c1c}
-.dq-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;color:var(--muted,#64748b);font-size:12px}
+.good{background:rgba(61,220,151,.12);color:#3DDC97}
+.warn{background:rgba(255,181,71,.12);color:#FFD27A}
+.bad{background:rgba(239,68,68,.14);color:#FF9A9A}
+.dq-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;color:var(--muted,#93A0C8);font-size:12px}
 .dq-links{display:flex;gap:20px;flex-wrap:wrap;margin:22px 0 10px;font-size:14px;font-weight:650}
 
 @media(max-width:950px){
+  .dq-chart.tall{height:380px}
   .dq-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
   .dq-grid{grid-template-columns:1fr}
   .dq-panel.full{grid-column:auto}
@@ -56,13 +65,14 @@
 
 @media(max-width:480px){
   .dq-kpis,.dq-filters{grid-template-columns:1fr}
-  .dq-chart{height:250px}
+  .dq-chart,.dq-chart.mid{height:280px}
+  .dq-chart.tall{height:380px}
   .dq-panel{padding:18px}
 }
 </style>
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="modern.css"><meta name="theme-color" content="#060914"><style>.sqlbox{margin-top:60px}.sqlbox h3.sqlh{margin:28px 0 10px;font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:#35D3C6!important}.sqlbox pre{margin:0 0 14px;padding:16px 18px;overflow-x:auto;font-size:12.5px;line-height:1.6;border:1px solid var(--line);border-radius:14px}.sqlbox pre code{background:none!important;padding:0;border:0}.sqlnote{color:#93A0C8;font-size:14px;max-width:760px}</style></head>
 
-<body>
+<body><div class="bar" id="bar"></div><div class="spot" id="spot" aria-hidden="true"></div>
 
 <nav>
   <div class="wrap navin">
@@ -94,10 +104,7 @@
 </p>
 
 <div class="notice">
-  <strong>Data note:</strong>
-  This dashboard analyzes a structured CRM dataset focused on
-  data quality, record completeness, duplicate detection,
-  normalization, and follow-up tracking.
+  <strong>Data note:</strong> This dashboard analyzes a synthetic CRM dataset covering January–September 2026. The raw file has 3,090 rows; merging 90 duplicates produced the 3,000-record clean file. Emails use the reserved .example domain, so it contains no real customer or employer data. It focuses on data quality, record completeness, duplicate detection, normalization and follow-up tracking.
 </div>
 
 <section class="dq">
@@ -141,7 +148,7 @@
 <div class="dq-kpi">
   <div class="dq-kl">Raw Rows</div>
   <div class="dq-kv" id="kRaw">—</div>
-  <div class="dq-kn">Rows before cleanup</div>
+  <div class="dq-kn" id="kRawN">Rows before cleanup</div>
 </div>
 
 <div class="dq-kpi">
@@ -153,7 +160,7 @@
 <div class="dq-kpi">
   <div class="dq-kl">Duplicates Removed</div>
   <div class="dq-kv" id="kDup">—</div>
-  <div class="dq-kn">Raw rows minus clean records</div>
+  <div class="dq-kn" id="kDupN">Raw rows minus clean records</div>
 </div>
 
 <div class="dq-kpi">
@@ -210,8 +217,8 @@
   Uses the Country and Owner filters only.
 </p>
 
-<div class="dq-chart">
-  <canvas id="cBefore"></canvas>
+<div class="dq-chart tall">
+  <canvas id="cBefore" role="img" aria-label="Bar chart comparing problem rows in the raw file with the clean file"></canvas>
 </div>
 
 </div>
@@ -225,8 +232,8 @@
   Primary issue found in each clean record.
 </p>
 
-<div class="dq-chart">
-  <canvas id="cIssue"></canvas>
+<div class="dq-chart mid">
+  <canvas id="cIssue" role="img" aria-label="Bar chart of records by primary issue type"></canvas>
 </div>
 
 </div>
@@ -240,8 +247,8 @@
   How records were handled during cleanup.
 </p>
 
-<div class="dq-chart">
-  <canvas id="cAction"></canvas>
+<div class="dq-chart mid">
+  <canvas id="cAction" role="img" aria-label="Doughnut chart of cleanup actions taken"></canvas>
 </div>
 
 </div>
@@ -256,7 +263,7 @@
 </p>
 
 <div class="dq-chart">
-  <canvas id="cOwner"></canvas>
+  <canvas id="cOwner" role="img" aria-label="Stacked bar chart of ready versus follow-up records by owner"></canvas>
 </div>
 
 </div>
@@ -267,11 +274,11 @@
 <h3>Monthly Record Volume</h3>
 
 <p class="sub">
-  Records created and records with issues, by month.
+  Records created and records with issues, January–September 2026.
 </p>
 
 <div class="dq-chart">
-  <canvas id="cMonth"></canvas>
+  <canvas id="cMonth" role="img" aria-label="Chart of records created and records with issues by month"></canvas>
 </div>
 
 </div>
@@ -439,7 +446,33 @@
 </section>
 
 </div>
-</main>
+<div class="wrap sqlbox"><section><h2>SQL behind the findings</h2><p class="sqlnote">These queries reproduce the dashboard numbers outside the browser. The results below were produced by running these queries on the clean CSVs (SQLite). Reproduce them with <code>python3 sql/run_sql.py</code>.</p><h3 class="sqlh">crm duplicates in raw</h3><pre><code>-- Duplicate rows = a later record that repeats an earlier email OR company name
+WITH ranked AS (
+  SELECT Record_ID,
+         ROW_NUMBER() OVER (PARTITION BY LOWER(TRIM(Email))
+                            ORDER BY Record_ID) AS email_rank
+  FROM crm_raw
+  WHERE TRIM(Email) &lt;&gt; &#x27;&#x27;
+)
+SELECT (SELECT COUNT(*) FROM crm_raw)                       AS raw_rows,
+       (SELECT COUNT(*) FROM crm)                           AS clean_rows,
+       (SELECT COUNT(*) FROM crm_raw) - (SELECT COUNT(*) FROM crm) AS rows_removed,
+       (SELECT COUNT(*) FROM ranked WHERE email_rank &gt; 1)   AS repeated_emails_in_raw;</code></pre><div class="table-wrap"><table><thead><tr><th>raw_rows</th><th>clean_rows</th><th>rows_removed</th><th>repeated_emails_in_raw</th></tr></thead><tbody><tr><td>3090</td><td>3000</td><td>90</td><td>60</td></tr></tbody></table></div><h3 class="sqlh">crm issue resolution</h3><pre><code>SELECT Issue_Type,
+       COUNT(*)                                                       AS records,
+       SUM(Action_Taken IN (&#x27;Merged&#x27;,&#x27;Standardized&#x27;,&#x27;Enriched&#x27;))       AS resolved,
+       SUM(Review_Status &lt;&gt; &#x27;Ready&#x27;)                                   AS needs_follow_up,
+       ROUND(100.0 * SUM(Action_Taken IN (&#x27;Merged&#x27;,&#x27;Standardized&#x27;,&#x27;Enriched&#x27;)) / COUNT(*), 1) AS resolution_pct
+FROM crm
+WHERE Issue_Type &lt;&gt; &#x27;None&#x27;
+GROUP BY Issue_Type
+ORDER BY records DESC;</code></pre><div class="table-wrap"><table><thead><tr><th>Issue_Type</th><th>records</th><th>resolved</th><th>needs_follow_up</th><th>resolution_pct</th></tr></thead><tbody><tr><td>Phone Format</td><td>210</td><td>210</td><td>0</td><td>100.0</td></tr><tr><td>Missing Phone</td><td>210</td><td>103</td><td>107</td><td>49.0</td></tr><tr><td>Missing Email</td><td>180</td><td>58</td><td>122</td><td>32.2</td></tr><tr><td>Company Casing</td><td>180</td><td>180</td><td>0</td><td>100.0</td></tr><tr><td>Missing Industry</td><td>120</td><td>75</td><td>45</td><td>62.5</td></tr><tr><td>Invalid Email</td><td>120</td><td>82</td><td>38</td><td>68.3</td></tr><tr><td>Duplicate Email</td><td>60</td><td>60</td><td>0</td><td>100.0</td></tr><tr><td>Duplicate Company</td><td>30</td><td>30</td><td>0</td><td>100.0</td></tr></tbody></table></div><h3 class="sqlh">crm quality by owner</h3><pre><code>SELECT Owner,
+       COUNT(*)                                                          AS records,
+       ROUND(100.0 * SUM(Issue_Type &lt;&gt; &#x27;None&#x27;) / COUNT(*), 1)            AS issue_rate_pct,
+       ROUND(100.0 * SUM(Review_Status = &#x27;Ready&#x27;) / COUNT(*), 1)         AS ready_pct,
+       ROUND(AVG(Completeness_Score), 1)                                 AS avg_completeness
+FROM crm
+GROUP BY Owner
+ORDER BY ready_pct;</code></pre><div class="table-wrap"><table><thead><tr><th>Owner</th><th>records</th><th>issue_rate_pct</th><th>ready_pct</th><th>avg_completeness</th></tr></thead><tbody><tr><td>Customer Success</td><td>588</td><td>34.5</td><td>89.1</td><td>98.6</td></tr><tr><td>Growth Ops</td><td>575</td><td>36.7</td><td>89.4</td><td>98.7</td></tr><tr><td>Marketing Ops</td><td>629</td><td>39.6</td><td>89.5</td><td>98.7</td></tr><tr><td>Sales Ops</td><td>609</td><td>37.9</td><td>89.8</td><td>98.7</td></tr><tr><td>Partnerships</td><td>599</td><td>36.1</td><td>90.2</td><td>98.8</td></tr></tbody></table></div></section></div></main>
 
 
 <footer class="footer">
@@ -489,13 +522,18 @@ const RESOLVED=[
   "Enriched"
 ];
 
-const BLUE="#2563eb",
-      NAVY="#0f233f",
-      AMBER="#f59e0b",
-      RED="#ef4444",
-      GREEN="#22c55e",
-      SLATE="#94a3b8",
-      TEAL="#0f766e";
+const BLUE="#5B83FF",
+      TEAL="#35D3C6",
+      AMBER="#FFB547",
+      RED="#FF6B7A",
+      GREEN="#3DDC97",
+      VIOLET="#9B7BFF",
+      SLATE="#56648F",
+      TXT="#93A0C8",
+      TXT_HI="#EAF0FF",
+      GRID="rgba(160,180,255,.10)";
+
+const FONT='Manrope,"Segoe UI",Helvetica,Arial,sans-serif';
 
 const FILTERS=[
   ["fCountry","Country","All Countries",1],
@@ -853,6 +891,176 @@ function filt(rows,sel){
 }
 
 
+/* ---- Chart.js dark theme + small helper plugins ---- */
+
+function themeCharts(){
+
+  const d=Chart.defaults;
+
+  d.color=TXT;
+  d.font.family=FONT;
+  d.font.size=12;
+  d.borderColor=GRID;
+  d.animation.duration=700;
+
+  Object.assign(d.plugins.tooltip,{
+    backgroundColor:"#0B1124",
+    borderColor:"rgba(160,180,255,.32)",
+    borderWidth:1,
+    titleColor:TXT_HI,
+    bodyColor:"#C0CBEC",
+    padding:11,
+    cornerRadius:10,
+    boxPadding:5,
+    usePointStyle:true,
+    titleFont:{weight:"700"}
+  });
+
+}
+
+
+/* draws the value at the end of each bar */
+const valueLabels={
+
+  id:"valueLabels",
+
+  afterDatasetsDraw(chart,args,o){
+
+    if(!o||!o.show){return;}
+
+    const ctx=chart.ctx,
+          horiz=chart.options.indexAxis==="y";
+
+    ctx.save();
+    ctx.font="700 11px "+FONT;
+    ctx.fillStyle=TXT_HI;
+
+    chart.data.datasets.forEach((ds,i)=>{
+
+      const meta=chart.getDatasetMeta(i);
+
+      if(meta.hidden||meta.type!=="bar"){return;}
+
+      meta.data.forEach((bar,j)=>{
+
+        const v=ds.data[j];
+
+        if(!v){return;}
+
+        if(horiz){
+          ctx.textAlign="left";
+          ctx.textBaseline="middle";
+          ctx.fillText(int(v),bar.x+7,bar.y);
+        }else{
+          ctx.textAlign="center";
+          ctx.textBaseline="bottom";
+          ctx.fillText(int(v),bar.x,bar.y-6);
+        }
+
+      });
+
+    });
+
+    ctx.restore();
+
+  }
+
+};
+
+
+/* big number in the middle of a doughnut */
+const centerText={
+
+  id:"centerText",
+
+  afterDatasetsDraw(chart,args,o){
+
+    if(!o||!o.text){return;}
+
+    const m=chart.getDatasetMeta(0);
+
+    if(!m||!m.data[0]){return;}
+
+    const x=m.data[0].x,
+          y=m.data[0].y,
+          ctx=chart.ctx;
+
+    ctx.save();
+    ctx.textAlign="center";
+    ctx.textBaseline="middle";
+
+    ctx.fillStyle=TXT_HI;
+    ctx.font="800 28px "+FONT;
+    ctx.fillText(o.text,x,y-8);
+
+    ctx.fillStyle=TXT;
+    ctx.font="600 11px "+FONT;
+    ctx.fillText(o.sub||"",x,y+16);
+
+    ctx.restore();
+
+  }
+
+};
+
+
+function merge(a,b){
+
+  Object.keys(b).forEach(k=>{
+
+    if(
+      b[k]&&
+      typeof b[k]==="object"&&
+      !Array.isArray(b[k])
+    ){
+      a[k]=merge(
+        a[k]&&typeof a[k]==="object"?a[k]:{},
+        b[k]
+      );
+    }else{
+      a[k]=b[k];
+    }
+
+  });
+
+  return a;
+
+}
+
+
+function base(){
+
+  return{
+    responsive:true,
+    maintainAspectRatio:false,
+    interaction:{
+      mode:"nearest",
+      intersect:true
+    },
+    plugins:{
+      legend:{
+        position:"bottom",
+        labels:{
+          usePointStyle:true,
+          pointStyle:"circle",
+          boxWidth:8,
+          boxHeight:8,
+          padding:18,
+          color:"#B3BFE3",
+          font:{
+            size:12,
+            weight:"600"
+          }
+        }
+      },
+      valueLabels:{show:false},
+      centerText:{text:""}
+    }
+  };
+
+}
+
+
 function setChart(
   id,
   type,
@@ -866,16 +1074,15 @@ function setChart(
     datasets
   };
 
+  const options=merge(
+    base(),
+    opts||{}
+  );
+
   if(charts[id]){
 
     charts[id].data=data;
-
-    charts[id].options=
-      Object.assign(
-        base(),
-        opts||{}
-      );
-
+    charts[id].options=options;
     charts[id].update();
 
     return;
@@ -886,35 +1093,32 @@ function setChart(
     {
       type,
       data,
-      options:Object.assign(
-        base(),
-        opts||{}
-      )
+      options,
+      plugins:[
+        valueLabels,
+        centerText
+      ]
     }
   );
 
 }
 
 
-function base(){
+/* shared axis styling */
+const AX_GRID={
+  grid:{color:GRID},
+  border:{display:false},
+  ticks:{precision:0}
+};
 
-  return{
-    responsive:true,
-    maintainAspectRatio:false,
-    plugins:{
-      legend:{
-        position:"bottom",
-        labels:{
-          boxWidth:12,
-          font:{
-            size:11
-          }
-        }
-      }
-    }
-  };
-
-}
+const AX_CAT={
+  grid:{display:false},
+  border:{display:false},
+  ticks:{
+    color:"#C0CBEC",
+    font:{weight:"600"}
+  }
+};
 
 
 function pill(t,c){
@@ -945,9 +1149,7 @@ function renderKPIs(
   s
 ){
 
-  const rq=quality(rawS);
-
-  $("kRaw").textContent=int(rq.n);
+  $("kRaw").textContent=int(rawS.length);
 
   $("kClean").textContent=int(s.n);
 
@@ -988,12 +1190,18 @@ function renderKPIs(
     s.comp==null
       ?"—"
       :s.comp.toFixed(1);
+  const extra=pick(false).some(x=>!FILTERS.find(f=>f[1]===x[0])[3]);
+  $("kRawN").textContent=extra?"Rows before cleanup · Country/Owner filters only":"Rows before cleanup";
+  $("kDupN").textContent=extra?"Raw minus clean · Country/Owner filters only":"Raw rows minus clean records";
 
 }
   function renderCharts(rawS,cleanS){
 
   const a=quality(rawS),
         b=quality(cleanS);
+
+
+  /* ---- Before vs after ---- */
 
   setChart(
     "cBefore",
@@ -1020,7 +1228,10 @@ function renderKPIs(
           a.casing
         ],
         backgroundColor:RED,
-        borderRadius:4
+        borderRadius:6,
+        borderSkipped:false,
+        categoryPercentage:.78,
+        barPercentage:.92
       },
       {
         label:"Clean file (after)",
@@ -1034,79 +1245,137 @@ function renderKPIs(
           b.casing
         ],
         backgroundColor:GREEN,
-        borderRadius:4
+        borderRadius:6,
+        borderSkipped:false,
+        categoryPercentage:.78,
+        barPercentage:.92
       }
     ],
     {
+      indexAxis:"y",
+      layout:{padding:{right:38}},
+      interaction:{
+        mode:"index",
+        intersect:false
+      },
+      plugins:{
+        valueLabels:{show:true}
+      },
       scales:{
-        y:{
-          beginAtZero:true
-        }
+        x:Object.assign(
+          {beginAtZero:true},
+          AX_GRID
+        ),
+        y:AX_CAT
       }
     }
   );
 
 
-  const ig=ISSUES.map(
-    k=>VIEW.filter(
-      r=>r.Issue_Type===k
-    ).length
-  );
+  /* ---- Issues by type (largest first) ---- */
+
+  const ig=ISSUES
+    .map(
+      k=>({
+        k,
+        n:VIEW.filter(
+          r=>r.Issue_Type===k
+        ).length
+      })
+    )
+    .sort((x,y)=>y.n-x.n);
 
 
   setChart(
     "cIssue",
     "bar",
-    ISSUES,
+    ig.map(x=>x.k),
     [
       {
         label:"Records",
-        data:ig,
+        data:ig.map(x=>x.n),
         backgroundColor:BLUE,
-        borderRadius:4
+        hoverBackgroundColor:"#7C9BFF",
+        borderRadius:6,
+        borderSkipped:false,
+        barPercentage:.72,
+        categoryPercentage:.9
       }
     ],
     {
       indexAxis:"y",
+      layout:{padding:{right:38}},
       plugins:{
-        legend:{
-          display:false
-        }
+        legend:{display:false},
+        valueLabels:{show:true}
       },
       scales:{
-        x:{
-          beginAtZero:true
-        }
+        x:Object.assign(
+          {beginAtZero:true},
+          AX_GRID
+        ),
+        y:AX_CAT
       }
     }
   );
+
+
+  /* ---- Action taken ---- */
+
+  const ac=ACTIONS.map(
+    k=>VIEW.filter(
+      r=>r.Action_Taken===k
+    ).length
+  );
+
+  const acTotal=sum(ac);
 
 
   setChart(
     "cAction",
     "doughnut",
-    ACTIONS,
+    ACTIONS.map(
+      (k,i)=>
+        k+" · "+int(ac[i])+
+        (
+          acTotal
+            ?" ("+pct(ac[i],acTotal)+")"
+            :""
+        )
+    ),
     [
       {
-        data:ACTIONS.map(
-          k=>VIEW.filter(
-            r=>r.Action_Taken===k
-          ).length
-        ),
+        data:ac,
         backgroundColor:[
           SLATE,
-          NAVY,
+          VIOLET,
           BLUE,
           TEAL,
           AMBER
-        ]
+        ],
+        borderWidth:0,
+        spacing:3,
+        borderRadius:5,
+        hoverOffset:8
       }
     ],
     {
-      cutout:"60%"
+      cutout:"66%",
+      layout:{padding:6},
+      plugins:{
+        legend:{
+          labels:{padding:12}
+        },
+        centerText:{
+          text:int(acTotal),
+          sub:"records"
+        }
+      }
     }
   );
 
+
+  /* ---- Review status by owner ---- */
 
   const ow=group(
     VIEW,
@@ -1117,7 +1386,9 @@ function renderKPIs(
   setChart(
     "cOwner",
     "bar",
-    ow.map(g=>g.key),
+    ow.map(
+      g=>g.key.split(" ")
+    ),
     [
       {
         label:"Ready",
@@ -1126,7 +1397,11 @@ function renderKPIs(
             r=>r.Review_Status==="Ready"
           ).length
         ),
-        backgroundColor:GREEN
+        backgroundColor:GREEN,
+        borderRadius:0,
+        borderSkipped:false,
+        barPercentage:.62,
+        categoryPercentage:.9
       },
       {
         label:"Needs follow-up",
@@ -1135,27 +1410,44 @@ function renderKPIs(
             r=>r.Review_Status!=="Ready"
           ).length
         ),
-        backgroundColor:AMBER
+        backgroundColor:AMBER,
+        borderRadius:{
+          topLeft:6,
+          topRight:6
+        },
+        borderSkipped:false,
+        barPercentage:.62,
+        categoryPercentage:.9
       }
     ],
     {
+      interaction:{
+        mode:"index",
+        intersect:false
+      },
       scales:{
-        x:{
-          stacked:true
-        },
-        y:{
-          stacked:true,
-          beginAtZero:true
-        }
+        x:Object.assign(
+          {stacked:true},
+          AX_CAT
+        ),
+        y:Object.assign(
+          {
+            stacked:true,
+            beginAtZero:true
+          },
+          AX_GRID
+        )
       }
     }
   );
 
 
+  /* ---- Monthly volume ---- */
+
   const ml=MONTHS.map(
     m=>{
       const p=m.split("-");
-      return MON[+p[1]-1]+" "+p[0];
+      return MON[+p[1]-1];
     }
   );
 
@@ -1173,15 +1465,6 @@ function renderKPIs(
     ml,
     [
       {
-        type:"bar",
-        label:"Records",
-        data:mv.map(
-          x=>x.length
-        ),
-        backgroundColor:BLUE,
-        borderRadius:4
-      },
-      {
         type:"line",
         label:"With issues",
         data:mv.map(
@@ -1191,14 +1474,48 @@ function renderKPIs(
         ),
         borderColor:AMBER,
         backgroundColor:AMBER,
-        tension:.3
+        borderWidth:2.5,
+        tension:.35,
+        pointRadius:4,
+        pointHoverRadius:6,
+        pointBackgroundColor:"#0F1636",
+        pointBorderColor:AMBER,
+        pointBorderWidth:2,
+        order:0
+      },
+      {
+        type:"bar",
+        label:"Records",
+        data:mv.map(
+          x=>x.length
+        ),
+        backgroundColor:"rgba(91,131,255,.85)",
+        hoverBackgroundColor:"#7C9BFF",
+        borderRadius:{
+          topLeft:6,
+          topRight:6
+        },
+        borderSkipped:false,
+        barPercentage:.7,
+        categoryPercentage:.85,
+        order:1
       }
     ],
     {
+      layout:{padding:{top:18}},
+      interaction:{
+        mode:"index",
+        intersect:false
+      },
+      plugins:{
+        valueLabels:{show:true}
+      },
       scales:{
-        y:{
-          beginAtZero:true
-        }
+        x:AX_CAT,
+        y:Object.assign(
+          {beginAtZero:true},
+          AX_GRID
+        )
       }
     }
   );
@@ -1481,6 +1798,8 @@ async function init(){
       );
     }
 
+    themeCharts();
+
     [CLEAN,RAW]=await Promise.all([
       load(CLEAN_URL),
       load(RAW_URL)
@@ -1533,5 +1852,5 @@ init();
 
 </script>
 
-</body>
+<script src="modern.js"></script></body>
 </html>

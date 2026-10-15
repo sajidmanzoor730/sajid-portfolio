@@ -44,7 +44,7 @@ a{
 
 nav{
   height:72px;
-  background:rgba(255,255,255,.97);
+  background:rgba(6,9,20,.9);
   border-bottom:1px solid var(--line);
   position:sticky;
   top:0;
@@ -125,9 +125,9 @@ h3{
   margin:30px 0 42px;
   padding:18px 20px;
   background:var(--sky);
-  border:1px solid #dbeafe;
+  border:1px solid rgba(160,180,255,.22);
   border-radius:14px;
-  color:#334155;
+  color:#C0CBEC;
   font-size:14px;
 }
 
@@ -176,7 +176,7 @@ h3{
   border:1px solid var(--line);
   border-radius:16px;
   padding:26px;
-  box-shadow:0 4px 18px rgba(15,35,63,.035);
+  box-shadow:0 4px 18px rgba(0,0,0,.4);
 }
 
 .item{
@@ -184,12 +184,12 @@ h3{
   border:1px solid var(--line);
   border-radius:16px;
   padding:24px;
-  box-shadow:0 4px 18px rgba(15,35,63,.035);
+  box-shadow:0 4px 18px rgba(0,0,0,.4);
 }
 
 .item:hover{
-  border-color:#cbd5e1;
-  box-shadow:0 10px 26px rgba(15,35,63,.06);
+  border-color:rgba(160,180,255,.26);
+  box-shadow:0 10px 26px rgba(0,0,0,.4);
 }
 
 .check{
@@ -215,13 +215,13 @@ h3{
 
 .item p{
   margin:0;
-  color:#475569;
+  color:#B3BFE3;
   font-size:14px;
 }
 
 .card p{
   margin:0 0 14px;
-  color:#475569;
+  color:#B3BFE3;
   font-size:14px;
 }
 
@@ -233,7 +233,7 @@ ul,
 ol{
   margin:0;
   padding-left:22px;
-  color:#475569;
+  color:#B3BFE3;
   font-size:14px;
 }
 
@@ -242,7 +242,7 @@ li{
 }
 
 .footer{
-  background:#fff;
+  background:#0F1636;
   border-top:1px solid var(--line);
   padding:34px 0;
   color:var(--muted);
@@ -285,9 +285,9 @@ li{
   }
 }
 </style>
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="modern.css"><meta name="theme-color" content="#060914"><style>.sqlbox{margin-top:60px}.sqlbox h3.sqlh{margin:28px 0 10px;font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:#35D3C6!important}.sqlbox pre{margin:0 0 14px;padding:16px 18px;overflow-x:auto;font-size:12.5px;line-height:1.6;border:1px solid var(--line);border-radius:14px}.sqlbox pre code{background:none!important;padding:0;border:0}.sqlnote{color:#93A0C8;font-size:14px;max-width:760px}</style><style>.scr{margin:0 0 14px;border:1px solid var(--line);border-radius:14px;padding:4px 18px;background:var(--m-card)}.scr summary{cursor:pointer;padding:14px 0;line-height:1.5}.scr summary span{display:block;color:#93A0C8;font-size:13px}.scr pre{max-height:420px;overflow:auto;font-size:12.5px;line-height:1.55;padding:14px 16px;margin:0 0 14px}</style></head>
 
-<body>
+<body><div class="bar" id="bar"></div><div class="spot" id="spot" aria-hidden="true"></div>
 
 <nav>
   <div class="wrap navin">
@@ -438,7 +438,111 @@ li{
     </div>
 
   </div>
-</main>
+<div class="wrap sqlbox"><section><h2>Worked example: the checks, running</h2><p class="sqlnote">The framework above is demonstrated here on the Operational KPI dataset, because that is the data included in this portfolio; it is not run on the helpdesk tickets. The script computes the same KPIs three independent ways, compares them with the figure printed on the dashboard page, then runs data-quality gates in the style described above. It exits with code 1 if anything fails, so it can block a report refresh. Run it with <code>python3 scripts/reconcile_kpis.py</code>.</p><h3 class="sqlh">Output</h3><pre><code>$ python3 scripts/reconcile_kpis.py
+1) Reconciliation: three independent calculations
+  [PASS] rows: pandas = SQL = csv module  (7500 / 7500 / 7500)
+  [PASS] breaches: pandas = SQL = csv module  (145 / 145 / 145)
+  [PASS] p1_breaches: pandas = SQL = csv module  (143 / 143 / 143)
+
+2) Dashboard page vs data
+  [PASS] page says P1 breaches  (page 143 vs data 143)
+  [PASS] page says total breaches  (page 145 vs data 145)
+
+3) Data-quality gates
+  [PASS] Record_ID is unique
+  [PASS] Created_Date is populated
+  [PASS] Priority is P1-P4
+  [PASS] SLA_Status is Met or Breached
+  [PASS] Completed_Date is not before Created_Date  (0 violations)
+  [PASS] SLA_Status agrees with resolution time vs target  (0 mismatches)
+  [PASS] QA_Score is between 0 and 100  (6,563 scored rows)
+
+ALL CHECKS PASSED</code></pre><details class="scr"><summary><b>scripts/reconcile_kpis.py</b> <span>Full source</span></summary><pre><code>#!/usr/bin/env python3
+&quot;&quot;&quot;Source-to-report reconciliation and data-quality gates (pandas + stdlib).
+
+    python3 scripts/reconcile_kpis.py
+
+1. Computes the same KPIs three independent ways (pandas, SQL, plain csv module) and
+   requires all three to agree.
+2. Compares the result with the figure published on kpi-operations-dashboard.html.
+3. Runs data-quality gates. Exit code 1 if any reconciliation or gate fails, so it can
+   block a report refresh.
+&quot;&quot;&quot;
+import csv
+import re
+import sqlite3
+import sys
+from pathlib import Path
+
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parent.parent
+DATA = ROOT / &quot;data/Operational_KPI_Dataset_Clean.csv&quot;
+PAGE = ROOT / &quot;kpi-operations-dashboard.html&quot;
+failures = []
+
+
+def check(label, ok, detail=&quot;&quot;):
+    print(f&quot;  [{&#x27;PASS&#x27; if ok else &#x27;FAIL&#x27;}] {label}&quot; + (f&quot;  ({detail})&quot; if detail else &quot;&quot;))
+    if not ok:
+        failures.append(label)
+
+
+df = pd.read_csv(DATA, dtype=str, keep_default_na=False)
+for c in (&quot;Resolution_Minutes&quot;, &quot;SLA_Target_Minutes&quot;, &quot;QA_Score&quot;):
+    df[c] = pd.to_numeric(df[c], errors=&quot;coerce&quot;)
+
+# ---- 1. same KPIs, three ways ------------------------------------------------
+print(&quot;1) Reconciliation: three independent calculations&quot;)
+pandas_val = {&quot;rows&quot;: len(df), &quot;breaches&quot;: int((df.SLA_Status == &quot;Breached&quot;).sum()),
+              &quot;p1_breaches&quot;: int(((df.SLA_Status == &quot;Breached&quot;) &amp; (df.Priority == &quot;P1&quot;)).sum())}
+
+con = sqlite3.connect(&quot;:memory:&quot;)
+df.to_sql(&quot;kpi&quot;, con, index=False)
+sql_val = dict(zip((&quot;rows&quot;, &quot;breaches&quot;, &quot;p1_breaches&quot;), con.execute(
+    &quot;SELECT COUNT(*), SUM(SLA_Status=&#x27;Breached&#x27;), SUM(SLA_Status=&#x27;Breached&#x27; AND Priority=&#x27;P1&#x27;) FROM kpi&quot;).fetchone()))
+
+with open(DATA, newline=&quot;&quot;, encoding=&quot;utf-8-sig&quot;) as f:
+    rows = list(csv.DictReader(f))
+py_val = {&quot;rows&quot;: len(rows),
+          &quot;breaches&quot;: sum(r[&quot;SLA_Status&quot;] == &quot;Breached&quot; for r in rows),
+          &quot;p1_breaches&quot;: sum(r[&quot;SLA_Status&quot;] == &quot;Breached&quot; and r[&quot;Priority&quot;] == &quot;P1&quot; for r in rows)}
+
+for k in pandas_val:
+    check(f&quot;{k}: pandas = SQL = csv module&quot;, pandas_val[k] == sql_val[k] == py_val[k],
+          f&quot;{pandas_val[k]} / {sql_val[k]} / {py_val[k]}&quot;)
+
+# ---- 2. compare with the published page --------------------------------------
+print(&quot;\n2) Dashboard page vs data&quot;)
+html = PAGE.read_text(encoding=&quot;utf-8&quot;)
+m = re.search(r&quot;(\d+) of the (\d+) SLA breaches&quot;, html)
+check(&quot;page says P1 breaches&quot;, m and int(m.group(1)) == pandas_val[&quot;p1_breaches&quot;],
+      f&quot;page {m.group(1) if m else &#x27;?&#x27;} vs data {pandas_val[&#x27;p1_breaches&#x27;]}&quot;)
+check(&quot;page says total breaches&quot;, m and int(m.group(2)) == pandas_val[&quot;breaches&quot;],
+      f&quot;page {m.group(2) if m else &#x27;?&#x27;} vs data {pandas_val[&#x27;breaches&#x27;]}&quot;)
+
+# ---- 3. data-quality gates ---------------------------------------------------
+print(&quot;\n3) Data-quality gates&quot;)
+check(&quot;Record_ID is unique&quot;, df.Record_ID.is_unique)
+check(&quot;Created_Date is populated&quot;, (df.Created_Date != &quot;&quot;).all())
+check(&quot;Priority is P1-P4&quot;, df.Priority.isin([&quot;P1&quot;, &quot;P2&quot;, &quot;P3&quot;, &quot;P4&quot;]).all())
+check(&quot;SLA_Status is Met or Breached&quot;, df.SLA_Status.isin([&quot;Met&quot;, &quot;Breached&quot;]).all())
+
+done = df[df.Completed_Date != &quot;&quot;]
+created, completed = pd.to_datetime(done.Created_Date), pd.to_datetime(done.Completed_Date)
+bad_order = int((completed &lt; created).sum())
+check(&quot;Completed_Date is not before Created_Date&quot;, bad_order == 0, f&quot;{bad_order} violations&quot;)
+
+met_calc = done.Resolution_Minutes &lt;= done.SLA_Target_Minutes
+mismatch = int((met_calc != (done.SLA_Status == &quot;Met&quot;)).sum())
+check(&quot;SLA_Status agrees with resolution time vs target&quot;, mismatch == 0, f&quot;{mismatch} mismatches&quot;)
+
+qa = df.QA_Score.dropna()
+check(&quot;QA_Score is between 0 and 100&quot;, qa.between(0, 100).all(), f&quot;{len(qa):,} scored rows&quot;)
+
+print(f&quot;\n{&#x27;ALL CHECKS PASSED&#x27; if not failures else str(len(failures)) + &#x27; CHECK(S) FAILED&#x27;}&quot;)
+sys.exit(1 if failures else 0)
+</code></pre></details></section></div></main>
 
 <footer class="footer">
   <div class="wrap">
@@ -446,5 +550,5 @@ li{
   </div>
 </footer>
 
-</body>
+<script src="modern.js"></script></body>
 </html>

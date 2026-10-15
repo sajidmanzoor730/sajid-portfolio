@@ -12,14 +12,14 @@ html{scroll-behavior:smooth}
 body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
 .wrap{width:min(1120px,calc(100% - 40px));margin:auto}
 a{text-decoration:none;color:var(--blue)}
-nav{height:72px;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;backdrop-filter:blur(10px)}
+nav{height:72px;background:rgba(6,9,20,.9);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;backdrop-filter:blur(10px)}
 .navin{height:100%;display:flex;align-items:center;justify-content:space-between}
 .brand{font-weight:800;font-size:19px;color:var(--navy)}
 .links{display:flex;gap:22px}
 .links a{color:var(--text);font-size:14px;font-weight:650}
 .links a:hover{color:var(--blue)}
 main{padding:80px 0}
-.contact{background:var(--navy);color:#fff;border-radius:20px;padding:52px;box-shadow:0 12px 35px rgba(15,35,63,.08)}
+.contact{background:var(--navy);color:#fff;border-radius:20px;padding:52px;box-shadow:0 12px 35px rgba(0,0,0,.4)}
 .eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:#93c5fd}
 h1{font-size:clamp(42px,6vw,64px);line-height:1.05;letter-spacing:-.045em;margin:12px 0 18px;color:#fff;max-width:850px}
 .contact p{color:#cbd5e1;max-width:760px;font-size:18px;margin:0}
@@ -31,15 +31,15 @@ h1{font-size:clamp(42px,6vw,64px);line-height:1.05;letter-spacing:-.045em;margin
 .item a:hover{color:#fff}
 .buttons{margin-top:26px}
 .btn{display:inline-block;padding:12px 19px;border-radius:9px;font-size:14px;font-weight:750;margin:0 8px 8px 0}
-.btn.primary{background:#fff;color:var(--navy)}
+.btn.primary{background:#0F1636;color:var(--navy)}
 .btn.secondary{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}
-.btn.primary:hover{background:#eff6ff}
-.btn.secondary:hover{border-color:#fff}
-.footer{background:#fff;border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:14px}
+.btn.primary:hover{background:rgba(91,131,255,.14)}
+.btn.secondary:hover{border-color:rgba(160,180,255,.2)}
+.footer{background:#0F1636;border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:14px}
 @media(max-width:760px){.wrap{width:min(100% - 28px,1120px)}.links{display:flex;max-width:68vw;gap:16px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}.links::-webkit-scrollbar{display:none}main{padding:52px 0 60px}.contact{padding:30px}.details{grid-template-columns:1fr}h1{font-size:42px}.contact p{font-size:16px}}
 </style>
-</head>
-<body>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="modern.css"><meta name="theme-color" content="#060914"></head>
+<body><div class="bar" id="bar"></div><div class="spot" id="spot" aria-hidden="true"></div>
 <nav><div class="wrap navin">
 <a class="brand" href="index.html">Sajid Manzoor</a>
 <div class="links"><a href="index.html">Home</a><a href="experience.html">Experience</a><a href="projects.html">Projects</a><a href="skills.html">Skills</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></div>
@@ -58,5 +58,5 @@ h1{font-size:clamp(42px,6vw,64px);line-height:1.05;letter-spacing:-.045em;margin
 <div class="buttons"><a class="btn primary" href="mailto:sajidmanzoor730@gmail.com">Email me →</a><a class="btn secondary" href="projects.html">View projects →</a></div>
 </div></div></main>
 <footer class="footer"><div class="wrap">© 2026 Sajid Manzoor · Data Analyst · SQL · Power BI · Python</div></footer>
-</body>
+<script src="modern.js"></script></body>
 </html>

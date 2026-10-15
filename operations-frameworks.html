@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Three operations frameworks: lead follow-up pipeline, candidate sourcing analytics and an SOP runbook. Design documents, not data projects.">
+<title>Operations Frameworks | Sajid Manzoor</title>
+<link rel="stylesheet" href="project.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="modern.css"><meta name="theme-color" content="#060914"><style>.pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}
+.metric{background:#0F1636;border:1px solid rgba(160,180,255,.18);border-radius:16px;padding:20px}
+.metric span{display:block;color:#93A0C8;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.metric strong{display:block;margin-top:9px;font-size:25px;color:#EAF0FF}
+@media(max-width:760px){.pipeline{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.pipeline{grid-template-columns:1fr}}
+.fw{margin:0 0 70px;padding-top:30px;border-top:1px solid var(--line)}.fw h2{font-size:34px;margin:6px 0 12px}.fw h3.sub{font-size:20px;margin:30px 0 14px}.notice.small{font-size:13px;margin:18px 0 28px}.toc{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 40px}.toc a{padding:8px 14px;border:1px solid var(--line);border-radius:999px;font-size:14px;font-weight:650}</style></head>
+
+<body><div class="bar" id="bar"></div><div class="spot" id="spot" aria-hidden="true"></div>
+
+<nav>
+  <div class="wrap navin">
+    <a class="brand" href="index.html">Sajid Manzoor</a>
+
+    <div class="links">
+      <a href="projects.html">Projects</a>
+      <a href="experience.html">Experience</a>
+      <a href="skills.html">Skills</a>
+      <a href="resume.html">Resume</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main><div class="wrap">
+<a class="back" href="projects.html">← Back to Projects</a>
+<div class="eyebrow">Operations · Frameworks</div>
+<h1>Operations Frameworks</h1>
+<p class="lead">Three design documents from my operations background: how I would structure lead follow-up, technical candidate sourcing and a runbook. They are frameworks, not data projects, so they contain no results or metrics.</p>
+<div class="toc"><a href="#lead-pipeline">Lead follow-up pipeline</a><a href="#candidate-pipeline">Candidate sourcing analytics</a><a href="#sop-runbook">SOP &amp; runbook</a></div>
+<section class="fw" id="lead-pipeline"><div class="eyebrow">Operations · Pipeline Management</div><h2>Lead Follow-up Pipeline</h2><p class="lead">A structured pipeline framework for organizing lead stages, ownership, priorities, follow-up dates and next actions so outstanding work can be tracked consistently.</p><div class="notice small"><strong>Project scope:</strong>
+      This page demonstrates the structure and reporting logic of a lead follow-up workflow. It does not present fictional records or fabricated performance metrics as business results.</div><section>
+      <h3 class="sub">Pipeline structure</h3>
+
+      <div class="grid">
+
+        <div class="card">
+          <h3>Lead identification</h3>
+          <p>
+            Capture the lead identifier, company or account information, source and initial contact details.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Stage management</h3>
+          <p>
+            Track the current stage consistently from new lead through qualification, contact, proposal and closure.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Ownership</h3>
+          <p>
+            Assign an owner so every active lead has a clear person responsible for the next action.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Follow-up control</h3>
+          <p>
+            Record the next follow-up date, required action and priority to reduce missed or delayed follow-ups.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h3 class="sub">Recommended data fields</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><strong>Lead_ID</strong></td>
+              <td>Unique identifier for each lead or account.</td>
+            </tr>
+
+            <tr>
+              <td><strong>Company</strong></td>
+              <td>Company or account associated with the opportunity.</td>
+            </tr>
+
+            <tr>
+              <td><strong>Lead_Source</strong></td>
+              <td>Source through which the lead entered the pipeline.</td>
+            </tr>
+
+            <tr>
+              <td><strong>Stage</strong></td>
+              <td>Current position in the follow-up or sales process.</td>
+            </tr>
+
+            <tr>
+              <td><strong>Owner</strong></td>
+              <td>Person responsible for managing the lead.</td>
+            </tr>
+
+            <tr>
+              <td><strong>Priority</strong></td>
+              <td>Relative urgency used to organize follow-up work.</td>
+            </tr>
+
+            <tr>
+              <td><strong>Last_Activity_Date</strong></td>
+              <td>Date of the most recent recorded activity.</td>
+            </tr>
+
+            <tr>
+              <td><strong>Next_Follow_Up_Date</strong></td>
+              <td>Planned date for the next action.</td>
+            </tr>
+
+            <tr>
+              <td><strong>Next_Action</strong></td>
+              <td>Specific action required to move the lead forward.</td>
+            </tr>
+
+            <tr>
+              <td><strong>Status</strong></td>
+              <td>Current operational status of the lead.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="sub">Pipeline stages</h3>
+
+      <div class="grid">
+
+        <div class="card">
+          <h3>New</h3>
+          <p>
+            Lead has been added but has not yet received an initial follow-up.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Contacted</h3>
+          <p>
+            Initial outreach has been completed and the next interaction is being tracked.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Qualified</h3>
+          <p>
+            The lead has met the defined qualification criteria and requires continued follow-up.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Proposal</h3>
+          <p>
+            A proposal or commercial discussion is active and requires a clearly defined next action.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Won</h3>
+          <p>
+            The opportunity has reached a successful outcome.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Closed / Lost</h3>
+          <p>
+            The opportunity is no longer active and should include an appropriate closure reason where available.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h3 class="sub">Operational checks</h3>
+
+      <div class="card">
+        <ul>
+          <li>Every active lead should have an assigned owner.</li>
+          <li>Active leads should have a current pipeline stage.</li>
+          <li>Follow-up dates should be reviewed for overdue actions.</li>
+          <li>Next actions should be specific enough to be actionable.</li>
+          <li>Closed leads should have an appropriate outcome or closure reason.</li>
+          <li>Duplicate Lead_ID values should be identified before reporting.</li>
+          <li>Missing ownership and follow-up dates should be flagged for review.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="sub">Useful pipeline reporting</h3>
+
+      <div class="grid">
+
+        <div class="card">
+          <h3>Stage distribution</h3>
+          <p>
+            Monitor how records are distributed across pipeline stages and identify where work is concentrated.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Follow-ups due</h3>
+          <p>
+            Identify upcoming and overdue follow-ups so pending actions can be prioritized.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Owner workload</h3>
+          <p>
+            Compare active pipeline workload across owners and identify unassigned records.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Pipeline aging</h3>
+          <p>
+            Track how long active leads remain in each stage to identify potential bottlenecks.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h3 class="sub">What this project demonstrates</h3>
+
+      <div class="card">
+        <ul>
+          <li>Structured operational data design.</li>
+          <li>Pipeline stage and status management.</li>
+          <li>Follow-up and workload tracking.</li>
+          <li>Data-quality checks for operational records.</li>
+          <li>KPI and reporting requirements for pipeline management.</li>
+          <li>Turning an operational workflow into a structured reporting framework.</li>
+        </ul>
+      </div>
+    </section></section>
+<section class="fw" id="candidate-pipeline"><div class="eyebrow">Technical Sourcing · Operations Analytics</div><h2>Candidate Sourcing &amp; Pipeline Analytics</h2><p class="lead">A structured analytics framework for technical staffing workflows, connecting client requirements, candidate stages, aging, ownership, follow-ups, SLA/TAT and fulfillment reporting.</p><div class="notice small"><strong>Why this project:</strong> My staffing operations experience involved active client requirements, candidate records, weekly staffing requests and pipeline tracking. This project translates that workflow into an analyst-friendly reporting model without presenting simulated records as workplace results.</div><section><h3 class="sub">What the analysis tracks</h3>
+<div class="pipeline">
+<div class="metric"><span>Requirements</span><strong>Open demand</strong></div>
+<div class="metric"><span>Candidate stage</span><strong>Pipeline flow</strong></div>
+<div class="metric"><span>Requirement aging</span><strong>Time in stage</strong></div>
+<div class="metric"><span>Fulfillment</span><strong>Outcome view</strong></div>
+</div></section>
+
+<section><h3 class="sub">Core analytical views</h3><div class="grid">
+<div class="card"><h3>Requirement pipeline</h3><p>Track open roles by client, priority, owner, status and age so active demand is visible in one place.</p></div>
+<div class="card"><h3>Candidate funnel</h3><p>Follow candidates through sourced, screened, submitted, interviewed, selected and closed stages.</p></div>
+<div class="card"><h3>SLA &amp; TAT</h3><p>Compare request dates, target dates and completion dates to identify delayed requirements and recurring bottlenecks.</p></div>
+<div class="card"><h3>Fulfillment analysis</h3><p>Connect candidate movement to requirement outcomes and identify where the pipeline loses momentum.</p></div>
+</div></section>
+
+<section><h3 class="sub">Data model</h3><div class="card"><ul>
+<li><strong>Requirement:</strong> requirement ID, client, role, priority, owner, opened date, target date and status.</li>
+<li><strong>Candidate:</strong> candidate ID, source, stage, submission date, interview status and outcome.</li>
+<li><strong>Activity:</strong> follow-up date, action, owner, activity type and timestamp.</li>
+<li><strong>Metrics:</strong> aging, SLA/TAT, stage conversion, fulfillment and workload.</li>
+</ul></div></section>
+
+<section><h3 class="sub">Workplace relevance</h3><div class="card"><p>This project reflects the same analytical questions that matter in staffing operations: What is open? Where is each requirement in the pipeline? Which items are aging? Who owns the next action? Where are SLA or fulfillment delays appearing?</p><p>It demonstrates how operational staffing data can be structured for repeatable reporting and decision support rather than treated as a simple candidate list.</p></div></section>
+
+<section><h3 class="sub">Skills demonstrated</h3><div class="tags"><span class="tag">Operations Analytics</span><span class="tag">Technical Sourcing</span><span class="tag">Pipeline Analysis</span><span class="tag">SLA/TAT</span><span class="tag">Data Quality</span><span class="tag">KPI Reporting</span><span class="tag">Excel</span><span class="tag">SQL</span></div></section></section>
+<section class="fw" id="sop-runbook"><div class="eyebrow">Operations · Process Documentation</div><h2>Operations SOP &amp; Runbook</h2><p class="lead">A structured operational playbook covering onboarding, access reviews, recurring checks, escalation and handoffs with clear ownership and evidence requirements.</p><div class="notice small"><strong>Project scope:</strong>
+      This page demonstrates SOP and runbook design principles. It does not contain real employee credentials, customer information, internal company procedures or confidential operational records.</div><section>
+      <h3 class="sub">Core operational procedures</h3>
+
+      <div class="grid">
+
+        <div class="card">
+          <h3>01 · Onboarding</h3>
+          <p class="muted">
+            Confirm the request owner, required access, documentation and onboarding checklist before the process begins.
+          </p>
+          <span class="tag">Owner</span>
+          <span class="tag">Access</span>
+          <span class="tag">Checklist</span>
+        </div>
+
+        <div class="card">
+          <h3>02 · Access Review</h3>
+          <p class="muted">
+            Verify required systems and remove unnecessary access through the appropriate approval and request process.
+          </p>
+          <span class="tag">Security</span>
+          <span class="tag">Audit</span>
+          <span class="tag">Approval</span>
+        </div>
+
+        <div class="card">
+          <h3>03 · Recurring Checks</h3>
+          <p class="muted">
+            Review queues, overdue tasks, failed processes, data-quality exceptions and SLA-related issues on a defined schedule.
+          </p>
+          <span class="tag">Daily</span>
+          <span class="tag">SLA</span>
+          <span class="tag">Quality</span>
+        </div>
+
+        <div class="card">
+          <h3>04 · Escalation</h3>
+          <p class="muted">
+            Capture impact, evidence, owner, next action and escalation timing before handing an issue to the appropriate team.
+          </p>
+          <span class="tag">Incident</span>
+          <span class="tag">Evidence</span>
+          <span class="tag">Handoff</span>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h3 class="sub">Standard runbook structure</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>Required action</th>
+              <th>Owner</th>
+              <th>Evidence</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><strong>1</strong></td>
+              <td>Receive and review the operational request.</td>
+              <td>Assigned owner</td>
+              <td>Request or ticket reference</td>
+            </tr>
+
+            <tr>
+              <td><strong>2</strong></td>
+              <td>Confirm scope, priority and required approvals.</td>
+              <td>Process owner</td>
+              <td>Approval or request details</td>
+            </tr>
+
+            <tr>
+              <td><strong>3</strong></td>
+              <td>Complete the required operational checks.</td>
+              <td>Assigned operator</td>
+              <td>Checklist or system record</td>
+            </tr>
+
+            <tr>
+              <td><strong>4</strong></td>
+              <td>Document the outcome and any exceptions.</td>
+              <td>Assigned operator</td>
+              <td>Notes or supporting evidence</td>
+            </tr>
+
+            <tr>
+              <td><strong>5</strong></td>
+              <td>Escalate unresolved issues when defined thresholds are reached.</td>
+              <td>Process owner</td>
+              <td>Escalation record</td>
+            </tr>
+
+            <tr>
+              <td><strong>6</strong></td>
+              <td>Complete the handoff and confirm next ownership.</td>
+              <td>Outgoing owner</td>
+              <td>Handoff note</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="sub">Daily operations checklist</h3>
+
+      <div class="card">
+        <ul>
+          <li>Review open and overdue operational work.</li>
+          <li>Check SLA exceptions and aging items.</li>
+          <li>Review failed or incomplete automated processes.</li>
+          <li>Check for data-quality issues requiring correction.</li>
+          <li>Confirm ownership for unresolved items.</li>
+          <li>Document important exceptions and follow-up actions.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="sub">Escalation requirements</h3>
+
+      <div class="grid">
+
+        <div class="card">
+          <h3>Impact</h3>
+          <p class="muted">
+            Clearly describe what is affected and the operational consequence.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Evidence</h3>
+          <p class="muted">
+            Include relevant records, timestamps, screenshots or system references where appropriate.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Owner</h3>
+          <p class="muted">
+            Identify the current owner and the team responsible for the next action.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Next action</h3>
+          <p class="muted">
+            State what needs to happen next and whether a deadline or SLA applies.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h3 class="sub">Handoff checklist</h3>
+
+      <div class="card">
+        <ul>
+          <li>Current status is documented.</li>
+          <li>Outstanding actions are clearly listed.</li>
+          <li>Relevant evidence is attached or referenced.</li>
+          <li>Next owner is identified.</li>
+          <li>Priority and SLA expectations are clear.</li>
+          <li>Follow-up date is recorded when required.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="sub">What this project demonstrates</h3>
+
+      <div class="grid">
+
+        <div class="card">
+          <h3>Process standardization</h3>
+          <p class="muted">
+            Turning recurring operational work into clear, repeatable procedures.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Operational controls</h3>
+          <p class="muted">
+            Defining checks, evidence and ownership so work can be reviewed consistently.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Escalation management</h3>
+          <p class="muted">
+            Creating a structured approach for exceptions, handoffs and unresolved issues.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Documentation</h3>
+          <p class="muted">
+            Creating practical runbooks that support consistent execution and knowledge transfer.
+          </p>
+        </div>
+
+      </div>
+    </section></section></div></main>
+
+<footer class="footer">
+  <div class="wrap">
+    © 2026 Sajid Manzoor · Data Analyst & Business Operations
+  </div>
+</footer>
+
+<script src="modern.js"></script></body>
+</html>

@@ -32,7 +32,7 @@ html{
 
 body{
   margin:0;
-  background:#eef2f7;
+  background:rgba(255,255,255,.05);
   color:var(--text);
   font-family:Inter,Segoe UI,Arial,sans-serif;
   font-size:14px;
@@ -51,8 +51,8 @@ a{
 
 .resume{
   background:var(--white);
-  border:1px solid #e1e7ef;
-  box-shadow:0 12px 40px rgba(15,35,63,.10);
+  border:1px solid rgba(160,180,255,.18);
+  box-shadow:0 12px 40px rgba(0,0,0,.4);
 }
 
 /* HEADER */
@@ -144,7 +144,7 @@ section:last-child{
 .summary{
   margin:0;
   max-width:970px;
-  color:#354052;
+  color:#B3BFE3;
   font-size:14.5px;
   line-height:1.7;
 }
@@ -172,7 +172,7 @@ section:last-child{
 }
 
 .skill-row span{
-  color:#465366;
+  color:#B3BFE3;
   font-size:13px;
 }
 
@@ -227,7 +227,7 @@ section:last-child{
 .project li{
   margin-bottom:6px;
   padding-left:2px;
-  color:#354052;
+  color:#B3BFE3;
   font-size:13.5px;
 }
 
@@ -287,7 +287,7 @@ section:last-child{
 /* EDUCATION */
 
 .info-item{
-  color:#465366;
+  color:#B3BFE3;
   font-size:13.5px;
 }
 
@@ -323,8 +323,8 @@ section:last-child{
 }
 
 .action-secondary{
-  border:1px solid #cbd5e1;
-  background:#fff;
+  border:1px solid rgba(160,180,255,.26);
+  background:#0F1636;
   color:var(--navy);
 }
 
@@ -337,7 +337,7 @@ section:last-child{
 @media(max-width:800px){
 
   body{
-    background:#fff;
+    background:#0F1636;
   }
 
   .page{
@@ -411,8 +411,8 @@ section:last-child{
   }
 
   body{
-    background:#fff;
-    color:#172033;
+    background:#0F1636;
+    color:#DCE5FF;
     font-size:10.5px;
   }
 
@@ -540,16 +540,16 @@ section:last-child{
   .company,
   .tech,
   .project-link{
-    color:#10233f;
+    color:#EAF0FF;
   }
 
   .date,
   .contact{
-    color:#334155;
+    color:#C0CBEC;
   }
 
   .contact a{
-    color:#172033;
+    color:#DCE5FF;
   }
 
   a{
@@ -565,9 +565,9 @@ section:last-child{
   }
 }
 </style>
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="modern.css"><meta name="theme-color" content="#060914"></head>
 
-<body>
+<body><div class="bar" id="bar"></div><div class="spot" id="spot" aria-hidden="true"></div>
 
 <div class="page">
 
@@ -1043,5 +1043,5 @@ section:last-child{
 
 </div>
 
-</body>
+<script src="modern.js"></script></body>
 </html>

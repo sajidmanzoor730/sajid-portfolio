@@ -1,761 +1,523 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-
-<meta
-  name="description"
-  content="Sajid Manzoor — Data Analyst portfolio covering SQL, Python, Power BI, KPI reporting, data quality, dashboards and operational analytics."
->
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sajid Manzoor | Data Analyst Portfolio</title>
-
+<meta name="description" content="Sajid Manzoor is a Data Analyst with 4+ years in operations analytics, using SQL, Python, Power BI and Excel for KPI reporting and data quality.">
+<meta property="og:title" content="Sajid Manzoor | Data Analyst">
+<meta property="og:description" content="Data Analyst with 4+ years in operations analytics: SQL, Python, Power BI, Excel, KPI reporting and data quality.">
+<meta name="theme-color" content="#070B1A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%235B83FF'/%3E%3Ctext x='16' y='22.5' font-size='17' font-family='Arial' font-weight='800' text-anchor='middle' fill='white'%3ESM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#10233f;
-  --blue:#2563eb;
-  --sky:#eff6ff;
-  --text:#172033;
-  --muted:#64748b;
-  --line:#e2e8f0;
-  --bg:#f8fafc;
-  --white:#fff;
-  --green:#0f766e
+  --bg:#070B1A;--bg2:#0B1124;--card:#0F1630;--card2:#141D40;
+  --line:rgba(160,180,255,.14);--line2:rgba(160,180,255,.28);
+  --text:#EAF0FF;--muted:#93A0C8;
+  --blue:#5B83FF;--cyan:#35D3C6;--amber:#FFB547;--green:#3DDC97;
+  --font:"Manrope","Segoe UI",Helvetica,Arial,sans-serif;
+  --ease:cubic-bezier(.22,.8,.24,1);
 }
-
 *{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:10px}
+.skip{position:absolute;left:12px;top:-60px;background:var(--amber);color:#111;padding:10px 16px;border-radius:10px;z-index:100;font-weight:700;text-decoration:none}
+.skip:focus{top:12px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+section{padding:120px 0}
+h2{font-weight:800;font-size:clamp(32px,4.2vw,56px);line-height:1.04;letter-spacing:-.035em;margin:0 0 16px}
+.sub{color:var(--muted);max-width:36em;margin:0 0 56px;font-size:19px}
 
-html{scroll-behavior:smooth}
+.bar{position:fixed;inset:0 0 auto 0;height:3px;z-index:60;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left}
 
-body{
-  margin:0;
-  font-family:Inter,Segoe UI,Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.65
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.stuck{background:rgba(7,11,26,.88);border-color:var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:18px;letter-spacing:-.01em;text-decoration:none}
+.logo b{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#06101F;font-size:14px;font-weight:800}
+.links{display:flex;align-items:center;gap:6px}
+.links a{position:relative;text-decoration:none;color:var(--muted);font-weight:600;font-size:15px;padding:8px 14px;transition:color .25s}
+.links a:hover,.links a.on{color:var(--text)}
+.links a:not(.btn)::after{content:"";position:absolute;left:14px;right:14px;bottom:2px;height:2px;border-radius:2px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.links a:hover::after,.links a.on::after{transform:scaleX(1)}
+
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:14px;font-weight:700;font-size:16px;text-decoration:none;border:1px solid transparent;transition:transform .3s var(--ease),background .25s,border-color .25s,color .25s}
+.btn.pri{background:var(--blue);color:#fff}
+.btn.pri:hover{transform:translateY(-3px);background:#6F92FF}
+.btn.sec{border-color:var(--line2);color:var(--text)}
+.btn.sec:hover{transform:translateY(-3px);border-color:var(--text);background:rgba(255,255,255,.04)}
+.links .btn{padding:10px 20px;font-size:15px;margin-left:10px;color:#fff}
+.links .btn::after{display:none}
+
+/* hero */
+.hero{position:relative;isolation:isolate;overflow:hidden;padding:150px 0 130px}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(900px 520px at 78% 8%,rgba(91,131,255,.22),transparent 65%),radial-gradient(700px 480px at 8% 78%,rgba(53,211,198,.10),transparent 65%)}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;opacity:.35;-webkit-mask:radial-gradient(ellipse 70% 70% at 70% 35%,#000 20%,transparent 75%);mask:radial-gradient(ellipse 70% 70% at 70% 35%,#000 20%,transparent 75%)}
+.glow{position:absolute;z-index:-1;width:520px;height:520px;right:6%;top:6%;border-radius:50%;background:radial-gradient(closest-side,rgba(91,131,255,.35),transparent);animation:drift 14s ease-in-out infinite alternate;will-change:transform}
+@keyframes drift{to{transform:translate3d(-90px,60px,0) scale(1.15)}}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:64px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border:1px solid var(--line2);border-radius:999px;font-size:14px;font-weight:600;color:var(--muted);background:rgba(255,255,255,.03);margin-bottom:28px;opacity:0;animation:fade .7s ease forwards .1s}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(61,220,151,.6);animation:ping 2.2s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 10px rgba(61,220,151,0)}100%{box-shadow:0 0 0 0 rgba(61,220,151,0)}}
+@keyframes fade{to{opacity:1}}
+h1{font-weight:800;font-size:clamp(40px,5.2vw,76px);line-height:1;letter-spacing:-.045em;margin:0 0 28px}
+h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .04em .12em}
+h1 .w i{display:inline-block;font-style:normal;transform:translateY(112%);animation:rise .9s var(--ease) forwards;animation-delay:calc(var(--i)*70ms + 200ms)}
+@keyframes rise{to{transform:none}}
+.lede{color:var(--muted);font-size:20px;max-width:30em;margin:0 0 36px;opacity:0;animation:fade .8s ease forwards .75s}
+.cta{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fade .8s ease forwards .9s}
+.stats{display:flex;gap:44px;margin-top:52px;padding-top:30px;border-top:1px solid var(--line);opacity:0;animation:fade .8s ease forwards 1.05s}
+.stats b{display:block;font-size:38px;line-height:1.1;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.stats span{color:var(--muted);font-size:14px}
+
+/* dashboard card */
+.tilt{perspective:1100px;opacity:0;transform:translateY(34px);animation:up 1s var(--ease) forwards .35s;position:relative}
+@keyframes up{to{opacity:1;transform:none}}
+.dash{position:relative;background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line2);border-radius:26px;padding:26px;box-shadow:0 40px 80px -40px rgba(0,0,0,.8);will-change:transform}
+.dash-h{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;margin-bottom:22px}
+.dash-h::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--green)}
+.dash-h em{margin-left:auto;font-style:normal;font-size:12px;font-weight:600;color:var(--amber);border:1px solid rgba(255,181,71,.4);padding:3px 10px;border-radius:999px}
+.dash-top{display:flex;align-items:center;gap:22px;margin-bottom:22px}
+.ring{width:112px;height:112px;flex:none;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:11;stroke-linecap:round}
+.ring .bg{stroke:rgba(160,180,255,.14)}
+.ring .fg{stroke:url(#rg);stroke-dasharray:326.7;stroke-dashoffset:326.7;transition:stroke-dashoffset 1.6s var(--ease) .5s}
+.go .ring .fg{stroke-dashoffset:31}
+.big b{display:block;font-size:42px;line-height:1;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.big span{color:var(--muted);font-size:14px}
+.m{margin-top:14px}
+.m div{display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}
+.m b{color:var(--text);font-weight:700;font-variant-numeric:tabular-nums}
+.track{height:7px;border-radius:9px;background:rgba(160,180,255,.14);overflow:hidden;margin-top:7px;display:flex}
+.track i{display:block;height:100%;width:var(--w);background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform 1.2s var(--ease) calc(.7s + var(--k)*.14s)}
+.track i.a{background:var(--amber)}
+.go .track i{transform:none}
+.dedupe{margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+.chip{position:absolute;padding:9px 16px;border-radius:999px;font-weight:700;font-size:14px;background:var(--card2);border:1px solid var(--line2);box-shadow:0 18px 30px -18px rgba(0,0,0,.8);animation:bob 5s ease-in-out infinite;animation-delay:var(--b);will-change:transform}
+@keyframes bob{50%{transform:translate3d(0,-10px,0)}}
+.c1{right:-14px;top:-18px}.c2{left:-20px;bottom:90px;background:var(--blue);border-color:var(--blue);color:#fff}.c3{right:24px;bottom:-22px}
+
+/* marquee */
+.strip{border-block:1px solid var(--line);background:var(--bg2);overflow:hidden;padding:20px 0}
+.mq{display:flex;width:max-content;animation:mq 38s linear infinite;will-change:transform}
+.mq span{padding:0 34px;font-weight:700;font-size:19px;color:var(--muted);white-space:nowrap}
+.mq span::after{content:"";display:inline-block;width:6px;height:6px;margin-left:68px;border-radius:50%;background:var(--blue);vertical-align:middle}
+@keyframes mq{to{transform:translate3d(-50%,0,0)}}
+.off,.off *,.off::before,.off::after{animation-play-state:paused!important}
+
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px}
+.t1{grid-column:span 7}.t2{grid-column:span 5}.t3{grid-column:span 5}.t4{grid-column:span 7}
+.tile{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;min-height:420px;padding:34px;border-radius:26px;border:1px solid var(--line);background:linear-gradient(180deg,var(--card),var(--bg2));text-decoration:none;transition:transform .45s var(--ease),border-color .3s}
+.tile:hover,.tile:focus-visible{transform:translateY(-6px);border-color:var(--line2)}
+.tile::before{content:"";position:absolute;left:0;top:0;width:440px;height:440px;margin:-220px 0 0 -220px;z-index:-1;background:radial-gradient(closest-side,rgba(91,131,255,.26),transparent);opacity:0;transform:translate3d(var(--mx,220px),var(--my,220px),0);transition:opacity .35s;pointer-events:none}
+.tile:hover::before{opacity:1}
+.tile .tag{font-size:13px;font-weight:700;color:var(--cyan);margin-bottom:10px}
+.tile h3{font-weight:800;font-size:28px;line-height:1.15;letter-spacing:-.025em;margin:0 0 10px;padding-right:56px}
+.tile p{margin:0 0 20px;color:var(--muted);font-size:16px;max-width:34em}
+.tile .stack{margin-top:auto;padding-top:18px;font-size:14px;font-weight:600;color:var(--muted)}
+.arrow{position:absolute;top:28px;right:28px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;transition:transform .5s var(--ease),background .3s,color .3s}
+.tile:hover .arrow{transform:rotate(-45deg);background:var(--text);color:var(--bg)}
+.viz{margin:6px 0 4px}
+
+/* viz: pipeline */
+.pipe{display:grid;grid-template-columns:1fr 36px 1fr 36px 1fr;align-items:center;gap:0}
+.node{padding:14px 14px;border:1px solid var(--line2);border-radius:14px;background:rgba(255,255,255,.03);font-size:13px;color:var(--muted);min-height:78px}
+.node b{display:block;color:var(--text);font-size:19px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.node.hot{border-color:rgba(91,131,255,.6);background:rgba(91,131,255,.1)}
+.wire{position:relative;height:2px;background:var(--line2);overflow:hidden}
+.wire::after{content:"";position:absolute;left:0;top:-1px;width:12px;height:4px;border-radius:4px;background:var(--cyan);animation:flow 2.4s linear infinite}
+@keyframes flow{from{transform:translate3d(-14px,0,0)}to{transform:translate3d(38px,0,0)}}
+.pipe2{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+.pipe2 span{font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:rgba(61,220,151,.1);color:var(--green);border:1px solid rgba(61,220,151,.25)}
+
+/* viz: 24 issue types */
+.cells{display:grid;grid-template-columns:repeat(8,1fr);gap:8px}
+.cells i{aspect-ratio:1;border-radius:8px;background:rgba(160,180,255,.1);position:relative;overflow:hidden}
+.cells i::after{content:"";position:absolute;inset:0;background:var(--amber);opacity:0;animation:scan 4.8s ease-in-out infinite;animation-delay:calc(var(--n)*130ms)}
+@keyframes scan{0%,18%,100%{opacity:0}6%,10%{opacity:.9}}
+.cap{margin-top:14px;font-size:14px;color:var(--muted);display:flex;justify-content:space-between;gap:12px}
+.cap b{color:var(--text);font-weight:800;font-variant-numeric:tabular-nums}
+
+/* viz: kpis */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.kpis span{padding:14px 12px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:14px;font-weight:600;display:flex;align-items:center;gap:10px;opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .6s var(--ease);transition-delay:calc(var(--n)*90ms)}
+.kpis span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c,var(--blue));flex:none}
+.go .kpis span{opacity:1;transform:none}
+
+/* viz: star model */
+.star{width:100%;height:auto;max-height:190px}
+.star rect{fill:#10183A;stroke:var(--line2);stroke-width:1.2}
+.star .f{fill:#1B2A6B;stroke:var(--blue)}
+.star text{fill:var(--text);font:700 13px var(--font);text-anchor:middle}
+.star path{fill:none;stroke:var(--cyan);stroke-width:1.6;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1s var(--ease)}
+.go .star path{stroke-dashoffset:0}
+.go .star path:nth-of-type(2){transition-delay:.15s}.go .star path:nth-of-type(3){transition-delay:.3s}.go .star path:nth-of-type(4){transition-delay:.45s}
+
+.more{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:36px}
+.note{margin:0;font-size:14px;color:var(--muted)}
+
+/* experience */
+.exp{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:start}
+.stick{position:sticky;top:120px}
+.tl{position:relative;--p:0;padding-left:44px}
+.tl::before,.tl::after{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;border-radius:2px;background:var(--line)}
+.tl::after{background:linear-gradient(var(--blue),var(--cyan));transform:scaleY(var(--p));transform-origin:top}
+.job{position:relative;padding:28px;margin-bottom:22px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(180deg,var(--card),var(--bg2))}
+.job::before{content:"";position:absolute;left:-44px;top:34px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:3px solid var(--line2);transition:background .4s,border-color .4s,box-shadow .4s}
+.job.on::before{background:var(--blue);border-color:var(--blue);box-shadow:0 0 0 7px rgba(91,131,255,.18)}
+.when{font-size:14px;font-weight:600;color:var(--cyan)}
+.job h3{font-weight:800;font-size:23px;line-height:1.25;letter-spacing:-.02em;margin:6px 0 2px}
+.org{color:var(--muted);margin:0 0 14px;font-size:16px}
+.job p.d{margin:0 0 18px;color:var(--muted);font-size:16px}
+.res{display:inline-flex;align-items:baseline;gap:12px;padding:12px 18px;border-radius:14px;background:rgba(61,220,151,.09);border:1px solid rgba(61,220,151,.28)}
+.res b{font-size:32px;font-weight:800;letter-spacing:-.03em;color:var(--green);font-variant-numeric:tabular-nums}
+.res span{font-size:14px;font-weight:600}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.sk{padding:30px;border-radius:24px;border:1px solid var(--line);background:linear-gradient(180deg,var(--card),var(--bg2));transition:transform .4s var(--ease),border-color .3s}
+.sk:hover{transform:translateY(-5px);border-color:var(--line2)}
+.sk h3{font-weight:800;font-size:22px;letter-spacing:-.02em;margin:0 0 6px}
+.sk p{margin:0 0 18px;color:var(--muted);font-size:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{padding:7px 14px;border-radius:999px;border:1px solid var(--line2);font-size:14px;font-weight:600;transition:background .25s,border-color .25s,transform .25s}
+.chips span:hover{background:rgba(91,131,255,.16);border-color:var(--blue);transform:translateY(-2px)}
+.certs{margin:32px 0 0;color:var(--muted)}
+
+/* contact */
+.cp{position:relative;isolation:isolate;overflow:hidden;border-radius:32px;border:1px solid var(--line2);padding:72px 56px;background:linear-gradient(135deg,#0F1A4D,#0A1030 60%,#0B1F2E)}
+.cp::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(600px 340px at 90% 0%,rgba(91,131,255,.35),transparent 70%),radial-gradient(520px 320px at 0% 100%,rgba(53,211,198,.2),transparent 70%)}
+.cp h2{font-size:clamp(34px,5vw,64px);max-width:12em}
+.cp p{color:var(--muted);max-width:34em;margin:0 0 34px;font-size:19px}
+.mag{transition:transform .25s ease-out}
+footer{padding:28px 0 44px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{margin-left:20px;text-decoration:none}
+footer a:hover{color:var(--text);text-decoration:underline}
+
+/* scroll reveal */
+.js .rv{opacity:0;translate:0 30px;transition:opacity .8s ease var(--d,0s),translate .9s var(--ease) var(--d,0s)}
+.js .rv.in{opacity:1;translate:0 0}
+
+@media (max-width:980px){
+  section{padding:80px 0}.wrap{padding:0 22px}
+  .hero{padding:118px 0 70px}
+  .hero .wrap{grid-template-columns:1fr;gap:56px}
+  .links a:not(.btn){display:none}
+  .bento{grid-template-columns:1fr}.t1,.t2,.t3,.t4{grid-column:auto}
+  .tile{min-height:0}
+  .exp{grid-template-columns:1fr;gap:36px}.stick{position:static}
+  .skills{grid-template-columns:1fr}
+  .cp{padding:48px 28px}
+  .c2{left:-8px}.c1{right:-6px}
+}
+@media (max-width:560px){
+  .stats{gap:26px}.stats b{font-size:30px}
+  .pipe{grid-template-columns:1fr}.wire{width:2px;height:22px;margin:0 auto}
+  .wire::after{display:none}
+  .kpis{grid-template-columns:1fr 1fr}
+  .cells{grid-template-columns:repeat(6,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .pill,.lede,.cta,.stats,.tilt{opacity:1;transform:none}
+  h1 .w i{transform:none}
+  .ring .fg{stroke-dashoffset:31}.track i,.kpis span{transform:none;opacity:1}
+  .star path{stroke-dashoffset:0}.js .rv{opacity:1;translate:none}
 }
 
-a{text-decoration:none}
+/* ===== v2 upgrades ===== */
+:root{--bg:#060914;--card:#0D1430;--card2:#121B3F}
+body{background:var(--bg)}
+.spot{position:fixed;left:0;top:0;width:640px;height:640px;margin:-320px 0 0 -320px;z-index:0;pointer-events:none;background:radial-gradient(closest-side,rgba(91,131,255,.13),transparent);transform:translate3d(-999px,-999px,0);will-change:transform}
+main,header,.strip,footer{position:relative;z-index:1}
+.aur{position:absolute;z-index:-1;border-radius:50%;filter:blur(70px);opacity:.55;will-change:transform}
+.a1{width:460px;height:460px;left:-160px;top:380px;background:#2F4BD8;opacity:.32;animation:aur1 18s ease-in-out infinite alternate}
+.a2{width:460px;height:460px;right:-60px;top:-80px;background:#1AA5A0;opacity:.28;animation:aur2 22s ease-in-out infinite alternate}
+.a3{width:380px;height:380px;right:22%;bottom:-160px;background:#7A4DFF;opacity:.3;animation:aur1 26s ease-in-out infinite alternate-reverse}
+@keyframes aur1{to{transform:translate3d(120px,-60px,0) scale(1.15)}}
+@keyframes aur2{to{transform:translate3d(-140px,90px,0) scale(1.2)}}
+.glow{display:none}
+.dash{border:1px solid transparent;background:linear-gradient(180deg,var(--card2),var(--card)) padding-box,linear-gradient(140deg,rgba(130,160,255,.7),rgba(53,211,198,.25) 40%,rgba(160,180,255,.1)) border-box;backdrop-filter:blur(6px)}
+.me{position:absolute;left:28px;bottom:-78px;display:flex;align-items:center;gap:14px;padding:12px 20px 12px 12px;border-radius:20px;background:rgba(20,29,64,.92);border:1px solid var(--line2);box-shadow:0 24px 44px -22px rgba(0,0,0,.9);animation:bob 6s ease-in-out infinite;animation-delay:-1.2s;will-change:transform}
+.me img{width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:62% 30%;background:var(--card2);border:2px solid var(--blue)}
+.me b{display:block;font-size:16px;line-height:1.2}
+.me span{font-size:13px;color:var(--muted)}
+.chip.c2{display:none}
+.hero .stats b{background:linear-gradient(180deg,#fff,#9FB4FF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.tile{background:linear-gradient(180deg,rgba(18,27,63,.7),rgba(8,12,30,.7))}
+.tile::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(140deg,rgba(130,160,255,.5),transparent 40%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.0;transition:opacity .4s;pointer-events:none}
+.tile:hover::after{opacity:1}
+section h2{background:linear-gradient(180deg,#fff 40%,#9FB4FF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cp h2{-webkit-text-fill-color:#fff;background:none}
+@media (max-width:980px){.me{left:12px;bottom:-74px}.spot{display:none}.hero{padding-bottom:150px}}
+@media (prefers-reduced-motion:reduce){.aur{animation:none}}
 
-.wrap{
-  width:min(1120px,calc(100% - 40px));
-  margin:auto
-}
-
-nav{
-  height:72px;
-  background:rgba(255,255,255,.97);
-  border-bottom:1px solid var(--line);
-  position:sticky;
-  top:0;
-  z-index:20
-}
-
-.navin{
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between
-}
-
-.brand{
-  font-size:19px;
-  font-weight:800;
-  color:var(--navy)
-}
-
-.links{
-  display:flex;
-  gap:22px
-}
-
-.links a{
-  color:var(--text);
-  font-size:14px;
-  font-weight:650
-}
-
-.links a:hover{
-  color:var(--blue)
-}
-
-.hero{
-  background:linear-gradient(
-    135deg,
-    #fff 0%,
-    #f8fbff 58%,
-    #eef5ff 100%
-  );
-  padding:92px 0 86px;
-  border-bottom:1px solid var(--line)
-}
-
-.eyebrow{
-  font-size:13px;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  font-weight:800;
-  color:var(--blue)
-}
-
-h1{
-  font-size:clamp(44px,7vw,74px);
-  line-height:1.01;
-  letter-spacing:-.055em;
-  max-width:920px;
-  margin:14px 0 20px;
-  color:var(--navy)
-}
-
-h2{
-  font-size:36px;
-  line-height:1.15;
-  letter-spacing:-.035em;
-  margin:0 0 12px;
-  color:var(--navy)
-}
-
-h3{
-  color:var(--navy);
-  margin:0 0 8px
-}
-
-.hero p,
-.lead{
-  font-size:19px;
-  color:var(--muted);
-  max-width:800px
-}
-
-.buttons{
-  margin-top:24px
-}
-
-.btn{
-  display:inline-block;
-  padding:12px 19px;
-  border-radius:9px;
-  font-size:14px;
-  font-weight:750;
-  margin:0 8px 8px 0
-}
-
-.primary{
-  background:var(--navy);
-  color:#fff
-}
-
-.secondary{
-  background:#fff;
-  color:var(--navy);
-  border:1px solid var(--line)
-}
-
-section{
-  padding:76px 0
-}
-
-.white{
-  background:#fff
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:18px;
-  margin-top:30px
-}
-
-.card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:24px;
-  box-shadow:0 5px 20px rgba(15,35,63,.035)
-}
-
-.card:hover{
-  transform:translateY(-2px);
-  box-shadow:0 10px 28px rgba(15,35,63,.07);
-  transition:.18s ease
-}
-
-.muted{
-  color:var(--muted)
-}
-
-.tag{
-  display:inline-block;
-  background:var(--sky);
-  color:#1e40af;
-  border-radius:99px;
-  padding:5px 9px;
-  font-size:12px;
-  margin:3px
-}
-
-.card a{
-  color:var(--blue);
-  font-weight:750
-}
-
-.capabilities{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-  margin-top:30px
-}
-
-.cap{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:22px
-}
-
-.cap strong{
-  display:block;
-  color:var(--navy);
-  margin-bottom:5px
-}
-
-.cap span{
-  font-size:14px;
-  color:var(--muted)
-}
-
-.notice{
-  margin-top:28px;
-  padding:16px 18px;
-  background:var(--sky);
-  border:1px solid #dbeafe;
-  border-radius:12px;
-  color:#334155
-}
-
-.proof{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
-  margin-top:30px
-}
-
-.proof .card{
-  min-height:150px
-}
-
-.label{
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  font-weight:800;
-  color:var(--blue)
-}
-
-.contact{
-  background:var(--navy);
-  color:#fff;
-  border-radius:20px;
-  padding:44px
-}
-
-.contact h2{
-  color:#fff
-}
-
-.contact p{
-  color:#cbd5e1
-}
-
-.contact .primary{
-  background:#fff;
-  color:var(--navy)
-}
-
-.footer{
-  background:#fff;
-  border-top:1px solid var(--line);
-  padding:34px 0;
-  color:var(--muted);
-  font-size:14px
-}
-
-@media(max-width:820px){
-  .capabilities{
-    grid-template-columns:repeat(2,1fr)
-  }
-
-  .proof{
-    grid-template-columns:1fr 1fr
-  }
-}
-
-@media(max-width:760px){
-  .wrap{
-    width:min(100% - 28px,1120px)
-  }
-
-  .links{
-    display:none
-  }
-
-  .hero{
-    padding:62px 0
-  }
-
-  .grid,
-  .proof{
-    grid-template-columns:1fr
-  }
-
-  section{
-    padding:58px 0
-  }
-
-  h2{
-    font-size:31px
-  }
-
-  .capabilities{
-    grid-template-columns:1fr
-  }
-
-  .contact{
-    padding:30px
-  }
-}
-</style>
+/* ===== homepage v3 additions ===== */
+.mp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.mpc{display:flex;flex-direction:column;gap:6px;padding:24px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg,var(--card),var(--bg2));text-decoration:none;transition:transform .4s var(--ease),border-color .3s}
+.mpc:hover{transform:translateY(-5px);border-color:var(--line2)}
+.mpc b{font-size:18px;letter-spacing:-.015em;line-height:1.3}
+.mpc span{color:var(--muted);font-size:15px;line-height:1.55}
+.mpc em{font-style:normal;font-size:13px;font-weight:700;color:var(--cyan);margin-top:auto;padding-top:10px}
+.ap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;list-style:none;margin:0;padding:0;counter-reset:s}
+.ap li{counter-increment:s;padding:26px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(180deg,var(--card),var(--bg2))}
+.ap li::before{content:counter(s);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#5B83FF,#35D3C6);color:#06101F;font-weight:800;margin-bottom:16px}
+.ap b{display:block;font-size:19px;margin-bottom:6px;letter-spacing:-.015em}
+.ap span{color:var(--muted);font-size:15.5px}
+.ap small{display:block;color:var(--cyan);font-weight:700;font-size:13px;margin-bottom:2px}
+.job ul{margin:0;padding-left:20px;color:var(--muted);font-size:16px;display:grid;gap:8px}
+.job li::marker{color:var(--blue)}
+.job .org a,.sk-more{color:var(--text)}
+.more2{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+.sk h3{font-size:20px}
+@media (max-width:980px){.mp{grid-template-columns:repeat(2,minmax(0,1fr))}.ap{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.mp,.ap{grid-template-columns:1fr}}
+footer .wrap>span:last-child{display:flex;flex-wrap:wrap;gap:6px 0;min-width:0}@media (max-width:980px){footer .wrap>span:last-child a{margin:0 18px 0 0}}</style>
 </head>
-
 <body>
+<a class="skip" href="#work">Skip to projects</a>
+<div class="spot" id="spot" aria-hidden="true"></div>
+<div class="bar" id="bar"></div>
+<nav id="nav"><div class="wrap">
+  <a class="logo" href="#top"><b>SM</b>Sajid Manzoor</a>
+  <div class="links"><a href="index.html" class="on">Home</a><a href="projects.html">Projects</a><a href="experience.html">Experience</a><a href="skills.html">Skills</a><a href="contact.html">Contact</a><a class="btn pri" href="resume.html">Resume</a></div>
+</div></nav>
 
-<nav>
-  <div class="wrap navin">
-
-    <a class="brand" href="index.html">
-      Sajid Manzoor
-    </a>
-
-    <div class="links">
-      <a href="index.html">Home</a>
-      <a href="projects.html">Projects</a>
-      <a href="experience.html">Experience</a>
-      <a href="skills.html">Skills</a>
-      <a href="resume.html">Resume</a>
-      <a href="contact.html">Contact</a>
+<header class="hero" id="top">
+  <div class="aur a1"></div><div class="aur a2"></div><div class="aur a3"></div>
+  <div class="wrap">
+    <div>
+      <div class="pill"><i></i>Open to Data Analyst, BI and analytics-focused operations roles</div>
+      <h1 id="h1">Turning operational data into clear, useful insights.</h1>
+      <p class="lede">I’m Sajid Manzoor. I work across SQL, Python, Pandas, Power BI, data quality, KPI reporting and operational analytics to turn structured data into reliable reporting and useful business insights.</p>
+      <div class="cta"><a class="btn pri" href="projects.html">Explore analytics projects</a><a class="btn sec" href="resume.html">View resume</a></div>
+      <div class="stats">
+        <div><b>4+</b><span>years in operations analytics</span></div>
+        <div><b data-count="3600">3,600</b><span>tickets cleaned and analysed</span></div>
+        <div><b data-count="11">11</b><span>documented projects</span></div>
+      </div>
     </div>
 
+    <div class="tilt" id="tilt">
+      <div class="dash" id="dash">
+        <div class="dash-h">Helpdesk performance<em>sample data</em></div>
+        <div class="dash-top">
+          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5B83FF"/><stop offset="1" stop-color="#35D3C6"/></linearGradient></defs><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" cx="60" cy="60" r="52"/></svg>
+          <div class="big"><b data-count="90.5" data-dec="1" data-suf="%">90.5%</b><span>SLA adherence</span></div>
+        </div>
+        <div class="m"><div><span>CSAT score</span><b data-count="3.77" data-dec="2" data-suf=" / 5">3.77 / 5</b></div><div class="track"><i style="--w:75.4%;--k:0"></i></div></div>
+        <div class="m"><div><span>Data quality</span><b data-count="95.1" data-dec="1" data-suf="%">95.1%</b></div><div class="track"><i style="--w:95.1%;--k:1"></i></div></div>
+        <div class="m"><div><span>Repeat tickets</span><b data-count="9.2" data-dec="1" data-suf="%">9.2%</b></div><div class="track"><i style="--w:9.2%;--k:2"></i></div></div>
+        <div class="dedupe m"><div><span>3,672 raw rows, 72 duplicates removed</span><b>3,600</b></div><div class="track"><i style="--w:98.04%;--k:3"></i><i class="a" style="--w:1.96%;--k:4"></i></div></div>
+      </div>
+      <span class="chip c1" style="--b:0s">Power BI</span>
+      <span class="chip c2" style="--b:-1.7s">SQL</span>
+      <div class="me"><img src="sajid.jpg" alt="Portrait of Sajid Manzoor" width="56" height="56" onerror="this.closest('.me').style.display='none'"><div><b>Sajid Manzoor</b><span>Data Analyst · SQL, Python, Power BI</span></div></div>
+      <span class="chip c3" style="--b:-3.1s">Python</span>
+    </div>
   </div>
-</nav>
+</header>
 
+<div class="strip" aria-hidden="true"><div class="mq" id="mq"></div></div>
 
 <main>
+<section id="capabilities"><div class="wrap">
+  <h2 class="rv">Analytics capabilities</h2>
+  <p class="sub rv">A practical workflow from source data and data-quality checks to validated metrics, dashboards and decision-ready reporting.</p>
+  <div class="skills"><div class="sk rv" style="--d:0.00s"><h3>Python &amp; Pandas</h3><p>Cleaning, transformation, validation, exploratory analysis and repeatable data-processing workflows.</p><div class="chips"><span>Python</span><span>Pandas</span><span>NumPy</span><span>Data cleaning</span><span>EDA</span></div></div><div class="sk rv" style="--d:0.08s"><h3>SQL</h3><p>Joins, aggregations, CTEs, window functions, deduplication, reconciliation and KPI analysis.</p><div class="chips"><span>JOINs</span><span>CTEs</span><span>ROW_NUMBER</span><span>RANK</span><span>LAG</span></div></div><div class="sk rv" style="--d:0.00s"><h3>Power BI &amp; Dashboards</h3><p>Data modeling, KPI measures, validation, reporting pages and focused visual analysis for operational questions.</p><div class="chips"><span>Power BI</span><span>DAX</span><span>Data modeling</span><span>Streamlit</span></div></div><div class="sk rv" style="--d:0.08s"><h3>Data Quality</h3><p>Duplicate detection, missing-value checks, validation, reconciliation, issue classification and documentation.</p><div class="chips"><span>Duplicate detection</span><span>Missing values</span><span>Reconciliation</span><span>Data dictionary</span></div></div></div>
+</div></section>
 
-<section class="hero">
+<section id="work" style="background:var(--bg2);border-block:1px solid var(--line)"><div class="wrap">
+  <h2 class="rv">Featured analytics projects</h2>
+  <p class="sub rv">Practical projects showing how I clean data, validate KPIs, analyze operational performance and build reporting solutions. Datasets are synthetic and labeled as such.</p>
+  <div class="bento"><a class="tile t1 rv" href="helpdesk-kpi-dashboard.html">
+      <span class="arrow" aria-hidden="true">→</span><div class="tag">Python, Pandas, SQL, Power BI, Streamlit</div><h3>Helpdesk Ticket KPI Dashboard</h3><p>End-to-end helpdesk analytics covering data cleaning, SQL analysis, KPI calculations, SLA performance, CSAT, repeat tickets, resolution trends and interactive reporting.</p><div class="viz">
+        <div class="pipe">
+          <div class="node"><b>3,672</b>raw ticket rows</div><div class="wire"></div>
+          <div class="node hot"><b>ROW_NUMBER</b>keep one row per ticket</div><div class="wire"></div>
+          <div class="node"><b>3,600</b>unique tickets</div>
+        </div>
+        <div class="pipe2"><span>SLA</span><span>CSAT</span><span>Repeat tickets</span><span>Resolution time</span></div>
+      </div>
+    </a><a class="tile t2 rv" href="bi-validation.html" style="--d:.08s">
+      <span class="arrow" aria-hidden="true">→</span><div class="tag">Power BI, SQL, Python, data quality</div><h3>BI Validation &amp; Monitoring</h3><p>Data-quality checks, SQL reconciliation, KPI validation, Power BI reporting, refresh review and investigation workflows.</p><div class="viz">
+        <div class="cells" aria-hidden="true" id="cells"></div>
+        <div class="cap"><span>24 issue types</span><span><b data-count="765">765</b> row-level findings, 8,160 raw to 8,000 clean</span></div>
+      </div>
+    </a><a class="tile t3 rv" href="kpi-operations-dashboard.html">
+      <span class="arrow" aria-hidden="true">→</span><div class="tag">Excel, KPI, reporting, data quality</div><h3>KPI Operations Dashboard</h3><p>Completion, SLA achievement, QA coverage, data validity, rework, workload and performance trends.</p><div class="viz"><div class="kpis">
+        <span style="--n:0;--c:var(--blue)">Completion</span><span style="--n:1;--c:var(--cyan)">SLA</span><span style="--n:2;--c:var(--green)">QA</span>
+        <span style="--n:3;--c:var(--amber)">Data validity</span><span style="--n:4;--c:var(--blue)">Rework</span><span style="--n:5;--c:var(--cyan)">Workload</span>
+      </div></div>
+    </a><a class="tile t4 rv" href="powerbi-model.html" style="--d:.08s">
+      <span class="arrow" aria-hidden="true">→</span><div class="tag">Power BI, DAX, data modeling</div><h3>Power BI Model &amp; Reporting</h3><p>Dimensional structure, relationships, reusable measures, KPI definitions, data-quality controls and business-focused report views.</p><div class="viz">
+        <svg class="star" viewBox="0 0 520 190" role="img" aria-label="Star schema: one fact table connected to four dimension tables">
+          <path pathLength="1" d="M260 95 L90 38"/><path pathLength="1" d="M260 95 L430 38"/><path pathLength="1" d="M260 95 L90 152"/><path pathLength="1" d="M260 95 L430 152"/>
+          <rect x="205" y="70" width="110" height="50" rx="12" class="f"/><text x="260" y="100">Tickets</text>
+          <rect x="30" y="16" width="120" height="44" rx="12"/><text x="90" y="43">Date</text>
+          <rect x="370" y="16" width="120" height="44" rx="12"/><text x="430" y="43">Agent</text>
+          <rect x="30" y="130" width="120" height="44" rx="12"/><text x="90" y="157">Category</text>
+          <rect x="370" y="130" width="120" height="44" rx="12"/><text x="430" y="157">Priority</text>
+        </svg>
+      </div>
+    </a></div>
+  <div class="more2 rv"><a class="btn pri" href="https://hedesk-dashboard.streamlit.app/">Open the live dashboard</a><a class="btn sec" href="projects.html">See all 11 projects</a><span class="note" style="align-self:center">The live dashboard runs on a free tier and can take about 30 seconds to wake up.</span></div>
+</div></section>
 
-  <div class="wrap">
+<section id="more"><div class="wrap">
+  <h2 class="rv">More projects</h2>
+  <p class="sub rv">Data preparation, documentation, operations and security work behind the analytics.</p>
+  <div class="mp"><a class="mpc rv" href="nyc-311-service-analysis.html" style="--d:0.03s"><b>NYC 311 Service Analysis</b><span>Real public data: 343,133 requests, SQL, findings and actions.</span><em>Real data</em></a><a class="mpc rv" href="microsoft-security-lab.html" style="--d:0.00s"><b>Microsoft Security Investigation Lab</b><span>Endpoint alert triage, Microsoft Sentinel, KQL analysis, MITRE ATT&amp;CK mapping and security operations KPI analysis.</span><em>KQL, Sentinel, Defender</em></a><a class="mpc rv" href="crm-data-quality-cleanup.html" style="--d:0.07s"><b>CRM Data Quality</b><span>Finding, reviewing and resolving duplicate records, inconsistent values and incomplete CRM information.</span><em>Duplicate detection, cleaning</em></a><a class="mpc rv" href="helpdesk-dataset.html" style="--d:0.14s"><b>Helpdesk Dataset</b><span>Structured helpdesk data prepared for analysis, KPI development, SQL querying and data-quality checks.</span><em>SQL, data preparation</em></a><a class="mpc rv" href="data-dictionary.html" style="--d:0.00s"><b>Helpdesk Data Dictionary</b><span>Fields, business meaning, expected values and the data rules used across the analytics workflow.</span><em>Documentation</em></a><a class="mpc rv" href="executive-operations-dashboard.html" style="--d:0.07s"><b>Executive Operations Dashboard</b><span>Operational activity, completion, workload, status, ownership, deadlines and management-level trends.</span><em>Executive reporting</em></a><a class="mpc rv" href="operations-frameworks.html" style="--d:0.07s"><b>Operations Frameworks</b><span>Lead follow-up pipeline, candidate sourcing analytics and an SOP runbook, shown as design documents.</span><em>Process design</em></a><a class="mpc rv" href="python-bash-automation.html" style="--d:0.14s"><b>Python &amp; Bash Automation</b><span>Repeatable checks, log inspection, data handling and operational troubleshooting.</span><em>Python, shell scripts</em></a></div>
+</div></section>
 
-    <div class="eyebrow">
-      Data Analyst • SQL • Python • Power BI
-    </div>
+<section style="background:var(--bg2);border-block:1px solid var(--line)"><div class="wrap">
+  <h2 class="rv">Working approach</h2>
+  <p class="sub rv">Four steps I follow on every project, in this order.</p>
+  <ol class="ap"><li class="rv" style="--d:0.00s"><small>Inspect</small><b>Understand the source data</b><span>Review fields, missing values, duplicates, dates, definitions and assumptions before calculating metrics.</span></li><li class="rv" style="--d:0.07s"><small>Transform</small><b>Build a repeatable data process</b><span>Use Python, Pandas and SQL to clean, validate, transform, reconcile and analyze the data.</span></li><li class="rv" style="--d:0.14s"><small>Validate</small><b>Check the numbers</b><span>Reconcile KPIs across the source data, analytical layer and dashboard before using them for reporting.</span></li><li class="rv" style="--d:0.21s"><small>Communicate</small><b>Present the result clearly</b><span>Turn validated metrics into focused dashboards and concise findings that answer business questions.</span></li></ol>
+</div></section>
 
-    <h1>
-      Turning operational data into clear, useful insights.
-    </h1>
-
-    <p>
-      I’m Sajid Manzoor. I work across SQL, Python, Pandas, Power BI,
-      data quality, KPI reporting, and operational analytics to turn
-      structured data into reliable reporting and useful business insights.
-    </p>
-
-    <div class="buttons">
-
-      <a
-        class="btn primary"
-        href="projects.html">
-        Explore analytics projects →
-      </a>
-
-      <a
-        class="btn secondary"
-        href="resume.html">
-        View resume
-      </a>
-
-    </div>
-
+<section id="experience"><div class="wrap exp">
+  <div class="stick">
+    <h2 class="rv">Experience</h2>
+    <p class="sub rv" style="margin-bottom:26px">Operational data, reporting and process performance: SLA tracking, KPI reports, data reconciliation and root-cause analysis.</p>
+    <a class="btn sec rv" href="experience.html">Full experience</a>
   </div>
-
-</section>
-
-
-<section>
-
-  <div class="wrap">
-
-    <h2>
-      Analytics capabilities
-    </h2>
-
-    <p class="lead">
-      A practical workflow from source data and data-quality checks
-      to validated metrics, dashboards, and decision-ready reporting.
-    </p>
-
-
-    <div class="capabilities">
-
-      <div class="cap">
-
-        <strong>
-          Python &amp; Pandas
-        </strong>
-
-        <span>
-          Cleaning, transformation, validation, exploratory analysis
-          and repeatable data-processing workflows.
-        </span>
-
-      </div>
-
-
-      <div class="cap">
-
-        <strong>
-          SQL
-        </strong>
-
-        <span>
-          Joins, aggregations, CTEs, window functions,
-          deduplication, reconciliation and KPI analysis.
-        </span>
-
-      </div>
-
-
-      <div class="cap">
-
-        <strong>
-          Power BI &amp; Dashboards
-        </strong>
-
-        <span>
-          Data modeling, KPI measures, validation, reporting pages
-          and focused visual analysis for operational questions.
-        </span>
-
-      </div>
-
-
-      <div class="cap">
-
-        <strong>
-          Data Quality
-        </strong>
-
-        <span>
-          Duplicate detection, missing-value checks, validation,
-          reconciliation, issue classification and documentation.
-        </span>
-
-      </div>
-
-    </div>
-
+  <div class="tl" id="tl">
+    <div class="job rv"><div class="when">Oct 2023 – Present</div><h3>Operations Analyst (Network and Data Operations)</h3><p class="org">A2N Technologies Pvt Ltd · Mumbai, Maharashtra</p><ul>
+      <li>Analyzed operational data across 100+ IP surveillance deployments and maintained structured records in ServiceNow and JIRA.</li>
+      <li>Built an Excel dashboard covering 200+ records to track uptime, bandwidth and SLA performance.</li>
+      <li>Reviewed 40+ operational tickets each week to identify recurring downtime patterns and root causes.</li>
+      <li>Prepared weekly KPI and performance reports for leadership.</li></ul></div>
+    <div class="job rv"><div class="when">Jun 2022 – Aug 2023</div><h3>Staffing Operations Analyst</h3><p class="org">Global Management Services · Delhi</p><ul>
+      <li>Analyzed staffing data covering 150+ active client requirements and 500+ candidate records.</li>
+      <li>Tracked 40+ staffing requests each week, monitoring SLA performance, turnaround time and fulfillment rates.</li>
+      <li>Built an Excel KPI dashboard covering 200+ open positions using PivotTables, VLOOKUP, XLOOKUP and Conditional Formatting.</li>
+      <li>Prepared weekly and monthly reports on staffing performance, aging requirements and SLA trends.</li></ul></div>
+    <div class="job rv"><div class="when">2018 – 2021</div><h3>Bachelor of Computer Applications</h3><p class="org" style="margin:0">Amar Singh College (Cluster University)</p></div>
   </div>
+</div></section>
 
-</section>
+<section id="skills" style="background:var(--bg2);border-block:1px solid var(--line)"><div class="wrap">
+  <h2 class="rv">Data Analyst skills</h2>
+  <p class="sub rv">A practical analytics stack for taking operational data from source files through cleaning, analysis, KPI validation, dashboard development and business reporting.</p>
+  <div class="skills"><div class="sk rv" style="--d:0.00s"><h3>Python &amp; data preparation</h3><p>Used for cleaning, transformation, validation and repeatable data-processing workflows.</p><div class="chips"><span>Python</span><span>Pandas</span><span>NumPy</span><span>Data Cleaning</span><span>Data Transformation</span><span>Data Validation</span><span>EDA</span><span>CSV / Excel Data</span></div></div><div class="sk rv" style="--d:0.08s"><h3>SQL &amp; data analysis</h3><p>Used to query operational datasets, reconcile records, calculate KPIs and investigate performance trends.</p><div class="chips"><span>SQL</span><span>SELECT</span><span>JOINs</span><span>GROUP BY</span><span>Aggregations</span><span>CTEs</span><span>Window Functions</span><span>ROW_NUMBER</span><span>RANK</span><span>LAG</span><span>KPI Queries</span></div></div><div class="sk rv" style="--d:0.00s"><h3>Power BI &amp; reporting</h3><p>Data modeling, KPI measures, validation, dashboard design and business-focused reporting.</p><div class="chips"><span>Power BI</span><span>DAX</span><span>Data Modeling</span><span>KPI Dashboards</span><span>Data Visualization</span><span>Trend Analysis</span><span>SLA Reporting</span><span>Operational Reporting</span><span>Streamlit</span></div></div><div class="sk rv" style="--d:0.08s"><h3>Data quality &amp; validation</h3><p>Finding data problems before they affect KPIs, dashboards or business decisions.</p><div class="chips"><span>Duplicate Detection</span><span>Missing-Value Checks</span><span>Data Reconciliation</span><span>Data Validation</span><span>Issue Classification</span><span>Data Dictionary</span><span>Data Profiling</span><span>Assumption Tracking</span><span>ETL Concepts</span></div></div><div class="sk rv" style="--d:0.00s"><h3>KPI &amp; business analytics</h3><p>Turning operational records into measurable performance indicators and actionable business findings.</p><div class="chips"><span>KPI Definition</span><span>KPI Analysis</span><span>SLA Analysis</span><span>Trend Analysis</span><span>Root-Cause Analysis</span><span>Operational Analytics</span><span>Performance Reporting</span><span>Business Insights</span></div></div><div class="sk rv" style="--d:0.08s"><h3>Excel &amp; supporting tools</h3><p>Supporting tools for operational analysis, reporting, documentation and analytics workflows.</p><div class="chips"><span>Excel</span><span>PivotTables</span><span>VLOOKUP</span><span>XLOOKUP</span><span>Conditional Formatting</span><span>Google Sheets</span><span>GitHub</span><span>JIRA</span><span>ServiceNow</span><span>Notion</span><span>Confluence</span></div></div></div>
+  <div class="more2 rv"><a class="btn sec" href="skills.html">Skills page</a><a class="btn sec" href="resume.html">View resume</a></div>
+</div></section>
 
-
-<section class="white">
-
-  <div class="wrap">
-
-    <h2>
-      Featured analytics projects
-    </h2>
-
-    <p class="lead">
-      Practical projects showing how I clean data, validate KPIs,
-      analyze operational performance, and build reporting solutions.
-    </p>
-
-
-    <div class="grid">
-
-
-      <div class="card">
-
-        <div class="label">
-          End-to-end analytics
-        </div>
-
-        <h3>
-          Helpdesk Ticket KPI Dashboard
-        </h3>
-
-        <p class="muted">
-          End-to-end helpdesk analytics covering data cleaning,
-          SQL analysis, KPI calculations, SLA performance, CSAT,
-          repeat tickets, resolution trends and interactive reporting.
-        </p>
-
-        <span class="tag">Python</span>
-        <span class="tag">Pandas</span>
-        <span class="tag">SQL</span>
-        <span class="tag">Power BI</span>
-        <span class="tag">Streamlit</span>
-
-        <br><br>
-
-        <a href="helpdesk-kpi-dashboard.html">
-          View project →
-        </a>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="label">
-          BI validation
-        </div>
-
-        <h3>
-          BI Validation &amp; Monitoring
-        </h3>
-
-        <p class="muted">
-          End-to-end BI validation project covering data-quality
-          checks, SQL reconciliation, KPI validation, Power BI
-          reporting, refresh review, and investigation workflows.
-        </p>
-
-        <span class="tag">Power BI</span>
-        <span class="tag">SQL</span>
-        <span class="tag">Python</span>
-        <span class="tag">Data Quality</span>
-
-        <br><br>
-
-        <a href="bi-validation.html">
-          View project →
-        </a>
-
-        &nbsp;&nbsp;
-
-        <a
-          href="https://github.com/sajidmanzoor730/bi-validation"
-          target="_blank"
-          rel="noopener">
-          GitHub →
-        </a>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="label">
-          Operational analytics
-        </div>
-
-        <h3>
-          KPI Operations Dashboard
-        </h3>
-
-        <p class="muted">
-          Operational KPI dashboard covering completion,
-          SLA achievement, QA coverage, data validity,
-          rework, workload and performance trends.
-        </p>
-
-        <span class="tag">Excel</span>
-        <span class="tag">KPI</span>
-        <span class="tag">Reporting</span>
-        <span class="tag">Data Quality</span>
-
-        <br><br>
-
-        <a href="kpi-operations-dashboard.html">
-          View project →
-        </a>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="label">
-          Power BI modeling
-        </div>
-
-        <h3>
-          Power BI Model &amp; Reporting
-        </h3>
-
-        <p class="muted">
-          Documented BI model covering dimensional structure,
-          relationships, reusable measures, KPI definitions,
-          data-quality controls and business-focused report views.
-        </p>
-
-        <span class="tag">Power BI</span>
-        <span class="tag">DAX</span>
-        <span class="tag">Data Modeling</span>
-
-        <br><br>
-
-        <a href="powerbi-model.html">
-          View project →
-        </a>
-
-      </div>
-
-    </div>
-
+<section id="contact" style="padding-top:88px"><div class="wrap">
+  <div class="cp rv" id="cp">
+    <h2>Looking for practical analytics support?</h2>
+    <p>I’m interested in Data Analyst and analytics-focused operations roles where I can work with structured data, investigate business questions, build reliable reports, validate KPIs and improve data quality.</p>
+    <div class="cta" style="opacity:1;animation:none"><a class="btn pri mag" id="mag" href="contact.html">Contact me</a><a class="btn sec" href="projects.html">See all projects</a><a class="btn sec" href="https://github.com/sajidmanzoor730">GitHub</a><a class="btn sec" href="https://www.linkedin.com/in/sajid-manzoor-730zz/">LinkedIn</a></div>
   </div>
-
-</section>
-
-
-<section>
-
-  <div class="wrap">
-
-    <h2>
-      Working approach
-    </h2>
-
-
-    <div class="proof">
-
-
-      <div class="card">
-
-        <div class="label">
-          01 · Inspect
-        </div>
-
-        <h3>
-          Understand the source data
-        </h3>
-
-        <p class="muted">
-          Review fields, missing values, duplicates, dates,
-          definitions and assumptions before calculating metrics.
-        </p>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="label">
-          02 · Transform
-        </div>
-
-        <h3>
-          Build a repeatable data process
-        </h3>
-
-        <p class="muted">
-          Use Python, Pandas and SQL to clean, validate,
-          transform, reconcile and analyze the data.
-        </p>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="label">
-          03 · Validate
-        </div>
-
-        <h3>
-          Check the numbers
-        </h3>
-
-        <p class="muted">
-          Reconcile KPIs across the source data, analytical
-          layer and dashboard before using them for reporting.
-        </p>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="label">
-          04 · Communicate
-        </div>
-
-        <h3>
-          Present the result clearly
-        </h3>
-
-        <p class="muted">
-          Turn validated metrics into focused dashboards
-          and concise findings that answer business questions.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section>
-
-  <div class="wrap">
-
-    <div class="contact">
-
-      <h2>
-        Looking for practical analytics support?
-      </h2>
-
-      <p>
-        I’m interested in Data Analyst and analytics-focused
-        operations roles where I can work with structured data,
-        investigate business questions, build reliable reports,
-        validate KPIs, and improve data quality.
-      </p>
-
-      <a
-        class="btn primary"
-        href="contact.html">
-        Contact me →
-      </a>
-
-      <a
-        class="btn secondary"
-        href="projects.html">
-        See all projects
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-
+</div></section>
 </main>
 
+<footer><div class="wrap"><span>© 2026 Sajid Manzoor · Data Analyst &amp; Business Operations</span><span><a href="projects.html">Projects</a><a href="experience.html">Experience</a><a href="skills.html">Skills</a><a href="resume.html">Resume</a><a href="about.html">About</a><a href="contact.html">Contact</a></span></div></footer>
 
-<footer class="footer">
+<script>
+(function(){
+var d=document,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var hover=matchMedia('(hover:hover)').matches;
+if(!reduce)d.documentElement.classList.add('js');
 
-  <div class="wrap">
-    © 2026 Sajid Manzoor · Data Analyst &amp; Business Operations
-  </div>
+/* headline word reveal */
+var h1=d.getElementById('h1'),txt=h1.textContent.trim();
+h1.setAttribute('aria-label',txt);
+h1.innerHTML='<span aria-hidden="true">'+txt.split(' ').map(function(w,i){return '<span class="w"><i style="--i:'+i+'">'+w+'</i></span>'}).join(' ')+'</span>';
 
-</footer>
+/* tool strip and issue-type cells */
+var tools=['SQL','Power BI','Python','Pandas','NumPy','DAX','Excel','Streamlit','ServiceNow','JIRA','Confluence','GitHub','Postman'];
+var row=tools.map(function(t){return '<span>'+t+'</span>'}).join('');d.getElementById('mq').innerHTML=row+row;
+var cells='';for(var i=0;i<24;i++)cells+='<i style="--n:'+i+'"></i>';d.getElementById('cells').innerHTML=cells;
+
+/* reveal stagger inside grids */
+[].forEach.call(d.querySelectorAll('.skills .sk,.bento .tile'),function(){});
+
+/* counters */
+function fmt(n,dec){return dec?n.toFixed(dec):Math.round(n).toLocaleString('en-US')}
+function count(el){
+  if(el.__done)return;el.__done=1;
+  var to=parseFloat(el.dataset.count),dec=+(el.dataset.dec||0),suf=el.dataset.suf||'';
+  if(reduce){el.textContent=fmt(to,dec)+suf;return}
+  var t0=null;
+  function step(t){if(!t0)t0=t;var p=Math.min((t-t0)/1500,1),e=1-Math.pow(1-p,4);el.textContent=fmt(to*e,dec)+suf;if(p<1)requestAnimationFrame(step)}
+  requestAnimationFrame(step);
+}
+
+/* in-view triggers */
+if('IntersectionObserver' in window){
+  var rv=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');rv.unobserve(x.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  [].forEach.call(d.querySelectorAll('.rv'),function(e){rv.observe(e)});
+  var go=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('go');[].forEach.call(x.target.querySelectorAll('[data-count]'),count);go.unobserve(x.target)}})},{threshold:.3});
+  [].forEach.call(d.querySelectorAll('#tilt,.tile,.stats,.res'),function(e){go.observe(e)});
+  var cnt=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){count(x.target);cnt.unobserve(x.target)}})},{threshold:.6});
+  [].forEach.call(d.querySelectorAll('.stats [data-count],.job [data-count]'),function(e){cnt.observe(e)});
+  var po=new IntersectionObserver(function(es){es.forEach(function(x){x.target.classList.toggle('off',!x.isIntersecting)})});
+  ['.hero','.strip','#cells'].forEach(function(q){var e=d.querySelector(q);if(e)po.observe(e)});
+}else{
+  [].forEach.call(d.querySelectorAll('.rv'),function(e){e.classList.add('in')});
+  [].forEach.call(d.querySelectorAll('#tilt,.tile,.stats,.res'),function(e){e.classList.add('go')});
+}
+
+/* scroll: progress bar, nav, timeline, active link */
+var bar=d.getElementById('bar'),nav=d.getElementById('nav'),tl=d.getElementById('tl'),jobs=[].slice.call(tl.querySelectorAll('.job'));
+var links=[].slice.call(d.querySelectorAll('.links a[href^="#"]')),secs=links.map(function(a){return d.querySelector(a.getAttribute('href'))});
+function onScroll(){
+  var h=d.documentElement.scrollHeight-innerHeight;
+  var r=tl.getBoundingClientRect(),p=Math.min(Math.max((innerHeight*.7-r.top)/r.height,0),1);
+  var tops=jobs.map(function(j){return j.getBoundingClientRect().top});
+  var cur=-1;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<innerHeight*.4)cur=i});
+  bar.style.transform='scaleX('+(h>0?scrollY/h:0)+')';
+  nav.classList.toggle('stuck',scrollY>8);
+  tl.style.setProperty('--p',reduce?1:p.toFixed(3));
+  jobs.forEach(function(j,i){j.classList.toggle('on',reduce||tops[i]<innerHeight*.72)});
+  links.forEach(function(a,i){a.classList.toggle('on',i===cur)});
+}
+var tk=0;addEventListener('scroll',function(){if(!tk)tk=requestAnimationFrame(function(){tk=0;onScroll()})},{passive:true});
+addEventListener('resize',onScroll);onScroll();
+
+if(reduce||!hover)return;
+var spot=d.getElementById('spot'),sx=-999,sy=-999,sr=0;
+addEventListener('pointermove',function(e){sx=e.clientX;sy=e.clientY;if(!sr)sr=requestAnimationFrame(function(){sr=0;spot.style.transform='translate3d('+sx+'px,'+sy+'px,0)'})},{passive:true});
 
 
+/* hero card tilt, eased */
+var wrap=d.getElementById('tilt'),dash=d.getElementById('dash');
+var tx=0,ty=0,cx=0,cy=0,run=0,box=null;
+function loop(){
+  cx+=(tx-cx)*.1;cy+=(ty-cy)*.1;
+  dash.style.transform='rotateX('+(-cy*7).toFixed(2)+'deg) rotateY('+(cx*9).toFixed(2)+'deg)';
+  if(Math.abs(tx-cx)>.003||Math.abs(ty-cy)>.003)requestAnimationFrame(loop);else run=0;
+}
+function kick(){if(!run){run=1;requestAnimationFrame(loop)}}
+wrap.addEventListener('pointerenter',function(){box=wrap.getBoundingClientRect()});
+wrap.addEventListener('pointermove',function(e){if(!box)box=wrap.getBoundingClientRect();tx=(e.clientX-box.left)/box.width-.5;ty=(e.clientY-box.top)/box.height-.5;kick()},{passive:true});
+wrap.addEventListener('pointerleave',function(){tx=0;ty=0;box=null;kick()});
+addEventListener('resize',function(){box=null});
+
+/* tile spotlight */
+[].forEach.call(d.querySelectorAll('.tile'),function(t){
+  var raf=0,ex=0,ey=0;
+  t.addEventListener('pointermove',function(e){ex=e.clientX;ey=e.clientY;if(!raf)raf=requestAnimationFrame(function(){raf=0;var r=t.getBoundingClientRect();t.style.setProperty('--mx',(ex-r.left)+'px');t.style.setProperty('--my',(ey-r.top)+'px')})},{passive:true});
+});
+
+/* magnetic email button */
+var cp=d.getElementById('cp'),mag=d.getElementById('mag');
+cp.addEventListener('pointermove',function(e){
+  var r=mag.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2),dist=Math.hypot(dx,dy);
+  if(dist<170){mag.style.transform='translate('+(dx*.18).toFixed(1)+'px,'+(dy*.25).toFixed(1)+'px)'}else{mag.style.transform=''}
+},{passive:true});
+cp.addEventListener('pointerleave',function(){mag.style.transform=''});
+})();
+</script>
 </body>
 </html>
