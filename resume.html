@@ -578,6 +578,44 @@ section:last-child{
 .resume .action-secondary{background:#fff!important;color:#10233f!important;border:1px solid #cbd5e1!important}
 @media(max-width:800px){.resume .skills{grid-template-columns:minmax(0,1fr)}.resume .skill-row{grid-template-columns:minmax(0,1fr);gap:4px}.resume .header-top,.resume .job-head,.resume .project-head{display:block}.resume .contact{text-align:left;max-width:100%}.resume .tech,.resume .date{text-align:left}}
 @media print{.resume .summary,.resume .skill-row span,.resume .job li,.resume .project li,.resume .info-item{color:#222!important}.resume .role,.resume .company,.resume .tech,.resume .project-link{color:#1d4ed8!important}.resume .date,.resume .contact,.resume .contact a{color:#334155!important}}
+
+/* Restore visual hierarchy so the resume is not one flat white sheet. */
+.resume{background:#f3f6fb!important;color:#172033!important;border:1px solid #d6dfec!important;border-radius:14px;overflow:hidden}
+.resume .header{background:linear-gradient(135deg,#e6edfb 0%,#f8faff 75%)!important;border-bottom:3px solid #233e69!important}
+.resume .content{background:#f3f6fb!important}
+.resume section{background:#fff;border:1px solid #e0e7f1;border-radius:10px;padding:17px 18px;margin-bottom:18px}
+.resume .section-title{color:#17365f!important}
+.resume .section-title::after{background:#cbd7e8!important}
+.resume .summary,.resume .skill-row span,.resume .job li,.resume .project li,.resume .info-item{color:#334155!important}
+.resume .skill-row{background:#f8faff;border:1px solid #e5ebf4;border-radius:7px;padding:10px;grid-template-columns:minmax(95px,125px) minmax(0,1fr)}
+.resume .skill-row strong,.resume .job-title,.resume .project-title,.resume .info-item strong{color:#10233f!important}
+.resume .role,.resume .company,.resume .tech,.resume .project-link{color:#1d4ed8!important}
+.resume .date,.resume .contact{color:#475569!important}
+.resume .contact a{color:#172033!important;overflow-wrap:anywhere;word-break:break-word}
+.resume .job,.resume .project{padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid #dbe4f0}
+.resume .project-link{max-width:100%;overflow-wrap:anywhere;word-break:break-word}
+.resume .actions{background:#e8eef8!important;border-top:1px solid #d6dfec!important}
+.resume .action-secondary{background:#fff!important;color:#10233f!important;border:1px solid #cbd5e1!important}
+@media(max-width:800px){
+ .resume{border-radius:0}
+ .resume section{padding:14px 12px}
+ .resume .skills{grid-template-columns:minmax(0,1fr)}
+ .resume .skill-row{grid-template-columns:minmax(0,1fr);gap:4px}
+ .resume .header-top,.resume .job-head,.resume .project-head{display:block}
+ .resume .contact{text-align:left;max-width:100%}
+ .resume .tech,.resume .date{text-align:left}
+}
+@media print{
+ .resume{background:#fff!important;border-radius:0}
+ .resume .header,.resume .content,.resume section,.resume .skill-row{background:#fff!important}
+ .resume section{border:0;padding:0;margin-bottom:12px}
+ .resume .skill-row{border:0;padding:2px 0}
+ .resume .actions{display:none!important}
+ .resume .summary,.resume .skill-row span,.resume .job li,.resume .project li,.resume .info-item{color:#222!important}
+ .resume .role,.resume .company,.resume .tech,.resume .project-link{color:#1d4ed8!important}
+ .resume .date,.resume .contact,.resume .contact a{color:#334155!important}
+}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="modern.css"><meta name="theme-color" content="#060914">
 </head>
