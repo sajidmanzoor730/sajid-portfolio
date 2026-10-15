@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sajid Manzoor | Data Analyst Resume</title>
+<meta name="description" content="Sajid Manzoor — Data Analyst resume covering SQL, Python, Power BI, Excel, KPI reporting, data quality and operational analytics.">
+<meta name="theme-color" content="#070B1A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070B1A; --panel:#0D1430; --panel2:#111A3B; --line:#1F2B52;
+  --text:#E8ECF8; --muted:#9BA8CC; --accent:#56B6FF; --accent2:#7EE7C7;
+  --head:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:
+    radial-gradient(900px 500px at 85% -10%, rgba(86,182,255,.14), transparent 60%),
+    radial-gradient(700px 400px at -10% 20%, rgba(126,231,199,.07), transparent 60%),
+    var(--bg);
+  color:var(--text);font-family:var(--body);font-size:16.5px;line-height:1.6;
+  overflow-wrap:anywhere;word-break:normal;min-height:100vh;
+}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent2);outline-offset:3px;border-radius:6px}
+
+/* nav (matches portfolio) */
+.nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(12px);background:rgba(7,11,26,.82);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1040px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:20px;justify-content:space-between;flex-wrap:wrap}
+.logo{font-family:var(--head);font-weight:800;color:var(--text);display:flex;align-items:center;gap:10px}
+.logo b{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#04101f;font-size:14px}
+.links{display:flex;gap:4px;flex-wrap:wrap}
+.links a{color:var(--muted);padding:6px 12px;border-radius:8px;font-size:15px;font-weight:500}
+.links a:hover{color:var(--text);background:var(--panel);text-decoration:none}
+.links a[aria-current="page"]{color:var(--text);background:var(--panel2)}
+
+/* sheet */
+.wrap{max-width:1040px;margin:0 auto;padding:36px 20px 64px}
+.sheet{background:linear-gradient(180deg,var(--panel),#0A1128);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+header.top{padding:44px 44px 30px;border-bottom:1px solid var(--line);position:relative}
+header.top::after{content:"";position:absolute;left:44px;bottom:-1px;width:120px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;transform-origin:left;animation:draw 1s .5s cubic-bezier(.2,.7,.2,1) both}
+h1{font-family:var(--head);font-weight:800;font-size:clamp(2.1rem,6vw,3.5rem);line-height:1.05;letter-spacing:-.02em}
+.role{margin-top:10px;font-family:var(--head);font-weight:500;font-size:clamp(1rem,2.4vw,1.2rem);color:var(--accent2)}
+.contact{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.02);color:var(--text);font-size:14.5px;max-width:100%;transition:border-color .2s,transform .2s}
+a.chip:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.chip svg{width:15px;height:15px;flex:none;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.actions{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{font:600 15px var(--body);padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-2px);text-decoration:none}
+.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#04101f;border:0}
+
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;}
+.main{padding:34px 44px 40px;min-width:0}
+.side{padding:34px 30px 40px;border-left:1px solid var(--line);background:rgba(255,255,255,.015);min-width:0}
+section+section{margin-top:34px}
+h2{font-family:var(--head);font-size:1.15rem;font-weight:700;letter-spacing:.01em;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+h2::after{content:"";flex:1;height:1px;background:var(--line)}
+.summary{color:#CBD3EC;max-width:68ch}
+
+/* experience timeline */
+.job{position:relative;padding-left:24px;padding-bottom:6px}
+.job+.job{margin-top:26px}
+.job::before{content:"";position:absolute;left:4px;top:8px;bottom:-26px;width:2px;background:var(--line)}
+.job:last-child::before{display:none}
+.job::after{content:"";position:absolute;left:0;top:7px;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(86,182,255,.18)}
+.job h3,.proj h3{font-family:var(--head);font-size:1.08rem;font-weight:700;line-height:1.3}
+.meta{display:flex;justify-content:space-between;gap:4px 16px;flex-wrap:wrap;color:var(--muted);font-size:14.5px;margin:2px 0 10px}
+.meta .when{color:var(--accent2);font-weight:600}
+ul{list-style:none}
+li{position:relative;padding-left:18px;margin:6px 0;color:#CBD3EC}
+li::before{content:"";position:absolute;left:0;top:.7em;width:7px;height:7px;border-right:2px solid var(--accent);border-top:2px solid var(--accent);transform:rotate(45deg) scale(.8)}
+
+/* projects */
+.proj{padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02);transition:border-color .25s,transform .25s}
+.proj:hover{border-color:rgba(86,182,255,.55);transform:translateY(-2px)}
+.proj+.proj{margin-top:14px}
+.stack{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 6px}
+.tag{font-size:12.5px;padding:2px 9px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0 4px}
+.stat{padding:8px 10px;border-radius:10px;background:var(--panel2);text-align:center}
+.stat b{display:block;font-family:var(--head);font-size:1.15rem;color:var(--accent2);line-height:1.2}
+.stat span{font-size:12px;color:var(--muted);line-height:1.2;display:block}
+.plink{display:inline-block;margin-top:6px;font-weight:600;font-size:15px}
+
+/* sidebar */
+.skill+.skill{margin-top:18px}
+.skill h3{font-family:var(--head);font-size:.95rem;font-weight:700;margin-bottom:8px}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:13.5px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.025);color:#D5DCF2}
+.edu strong{display:block;font-family:var(--head)}
+.edu span{color:var(--muted);font-size:14.5px}
+
+/* motion: one orchestrated load sequence */
+.reveal{opacity:0;transform:translateY(14px);animation:rise .7s calc(var(--i,0)*90ms + 80ms) cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;animation:none}
+  header.top::after{animation:none}
+  .proj,.chip,.btn{transition:none}
+}
+
+@media (max-width:860px){
+  .grid{grid-template-columns:minmax(0,1fr)}
+  .side{border-left:0;border-top:1px solid var(--line)}
+  header.top{padding:32px 22px 26px}
+  header.top::after{left:22px}
+  .main{padding:28px 22px 32px}
+  .side{padding:28px 22px 34px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:480px){
+  body{font-size:16px}
+  .wrap{padding:20px 12px 48px}
+  .links a{padding:5px 9px;font-size:14px}
+}
+
+/* print: clean one-page-style resume */
+@media print{
+  @page{margin:12mm}
+  body{background:#fff;color:#111;font-size:11pt}
+  .nav,.actions{display:none}
+  .wrap{padding:0;max-width:none}
+  .sheet{background:#fff;border:0;box-shadow:none;border-radius:0}
+  .side{background:#fff;border-color:#ccc}
+  header.top,.proj,.pill,.chip,.tag,.stat,h2::after{border-color:#ccc}
+  .stat,.pill,.tag{background:#f3f4f8}
+  .role,.when,.stat b,.chip svg{color:#0a5a8f;stroke:#0a5a8f}
+  .summary,li,.meta{color:#222}
+  a{color:#0a5a8f}
+  .reveal{opacity:1;transform:none;animation:none}
+  .proj,.job{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Primary">
+  <div class="nav-in">
+    <a class="logo" href="index.html"><b>SM</b>Sajid Manzoor</a>
+    <div class="links">
+      <a href="index.html">Home</a><a href="projects.html">Projects</a><a href="experience.html">Experience</a><a href="skills.html">Skills</a><a href="contact.html">Contact</a><a href="resume.html" aria-current="page">Resume</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+<div class="sheet">
+  <header class="top">
+    <h1 class="reveal" style="--i:0">Sajid Manzoor</h1>
+    <p class="role reveal" style="--i:1">Data Analyst &mdash; SQL, Power BI, Python, Excel, KPI Reporting</p>
+    <div class="contact reveal" style="--i:2">
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Mumbai, Maharashtra, India</span>
+      <a class="chip" href="mailto:sajidmanzoor730@gmail.com"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>sajidmanzoor730@gmail.com</a>
+      <a class="chip" href="https://www.linkedin.com/in/sajid-manzoor-730zz" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v6M8 7.5v.01M12 17v-6m0 3c0-2 1.2-3 3-3s2 1.2 2 3v3"/></svg>LinkedIn</a>
+      <a class="chip" href="https://github.com/sajidmanzoor730" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9 19c-4 1.3-4-2-6-2m12 4v-3.2a2.8 2.8 0 0 0-.8-2.2c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.3 1.3a11.4 11.4 0 0 0-6 0C6.700 3.900 5.700 4.200 5.700 4.200a4.3 4.3 0 0 0-.1 3.200A4.600 4.600 0 0 0 4.300 10.600c0 4.700 2.800 5.700 5.500 6A2.800 2.800 0 0 0 9 18.800V21"/></svg>GitHub</a>
+      <a class="chip" href="index.html"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>Portfolio</a>
+    </div>
+    <div class="actions reveal" style="--i:3">
+      <a class="btn primary" href="resume.pdf" download>Download PDF</a>
+      <button class="btn" type="button" onclick="window.print()">Print</button>
+      <a class="btn" href="index.html">Back to portfolio</a>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="main">
+      <section class="reveal" style="--i:4">
+        <h2>Summary</h2>
+        <p class="summary">Operations Analyst with 4+ years of experience in operations analytics, reporting, data quality, KPI tracking and business analysis. I use SQL, Python, Pandas, Excel and Power BI to clean and reconcile data, analyze operational performance, build KPI reports and dashboards, and investigate recurring issues. Targeting Data Analyst and BI roles that value operational analytics, data validation and business-focused reporting.</p>
+      </section>
+
+      <section class="reveal" style="--i:5">
+        <h2>Professional experience</h2>
+
+        <article class="job">
+          <h3>Operations Analyst (Network and Data Operations)</h3>
+          <div class="meta"><span>A2N Technologies Pvt Ltd, Mumbai</span><span class="when">Oct 2023 &ndash; Present</span></div>
+          <ul>
+            <li>Analyzed operational data across 100+ IP surveillance deployments and maintained structured client infrastructure records in ServiceNow and JIRA.</li>
+            <li>Built an Excel dashboard covering 200+ records to track uptime, bandwidth and SLA performance.</li>
+            <li>Cleaned and reconciled infrastructure data with SQL and Excel, identifying duplicate IP addresses and inconsistencies across client records.</li>
+            <li>Reviewed 40+ operational tickets weekly to find recurring downtime patterns and root causes, supporting weekly RCA and escalation reporting.</li>
+            <li>Prepared weekly KPI and performance reports for leadership on SLA performance, operational trends and recurring infrastructure issues.</li>
+          </ul>
+        </article>
+
+        <article class="job">
+          <h3>Staffing Operations Analyst</h3>
+          <div class="meta"><span>Global Management Services, Delhi</span><span class="when">Jun 2022 &ndash; Aug 2023</span></div>
+          <ul>
+            <li>Analyzed staffing data for 150+ active client requirements and 500+ candidate records, keeping records accurate and consistent across ServiceNow and JIRA.</li>
+            <li>Tracked 40+ staffing requests weekly, monitoring SLA performance, turnaround time, fulfillment rates and candidate pipeline status.</li>
+            <li>Built an Excel KPI dashboard for 200+ open positions using PivotTables, VLOOKUP, XLOOKUP and Conditional Formatting.</li>
+            <li>Cleaned and reconciled candidate and client data with SQL and Excel, identifying duplicate profiles and inconsistent records.</li>
+            <li>Produced weekly and monthly reports on staffing performance, aging requirements, SLA trends and operational efficiency.</li>
+            <li>Investigated recurring fulfillment delays and SLA breaches using historical ticket data, and helped improve processes through SOPs and runbooks.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="reveal" style="--i:6">
+        <h2>Selected analytics projects</h2>
+
+        <article class="proj">
+          <h3>Helpdesk Ticket KPI Dashboard</h3>
+          <div class="stack"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">Streamlit</span></div>
+          <div class="stats" aria-label="Key results">
+            <div class="stat"><b>90.5%</b><span>SLA adherence</span></div>
+            <div class="stat"><b>3.77/5</b><span>CSAT</span></div>
+            <div class="stat"><b>9.2%</b><span>Repeat tickets</span></div>
+            <div class="stat"><b>95.1%</b><span>Data quality</span></div>
+          </div>
+          <ul>
+            <li>End-to-end helpdesk analytics: data cleaning, SQL analysis, KPI calculation and interactive Streamlit and Power BI reporting.</li>
+            <li>Cleaned a synthetic dataset of 3,672 raw rows to 3,600 unique tickets, with documented duplicate and missing-value issues.</li>
+            <li>Used SQL window functions (ROW_NUMBER, LAG) for deduplication and period comparisons.</li>
+            <li>Documented the data model, KPI definitions, cleaning process and validation approach.</li>
+          </ul>
+          <a class="plink" href="https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard" target="_blank" rel="noopener">View on GitHub</a>
+        </article>
+
+        <article class="proj">
+          <h3>BI Validation &amp; Monitoring</h3>
+          <div class="stack"><span class="tag">Power BI</span><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Data quality</span></div>
+          <ul>
+            <li>Built a validation framework for operational KPI reporting covering raw-data quality, transformation rules, SQL reconciliation and dashboard checks.</li>
+            <li>Reconciled 8,160 raw records to 8,000 clean records across 24 issue types and 765 row-level findings.</li>
+            <li>Defined business rules for duplicates, missing values, invalid categories, SLA logic, QA results, rework and derived fields.</li>
+            <li>Designed a Power BI structure for executive KPIs, operational performance, data quality and KPI reconciliation.</li>
+          </ul>
+          <a class="plink" href="https://github.com/sajidmanzoor730/bi-validation" target="_blank" rel="noopener">View on GitHub</a>
+        </article>
+
+        <article class="proj">
+          <h3>KPI Operations Dashboard</h3>
+          <div class="stack"><span class="tag">Excel</span><span class="tag">KPI reporting</span><span class="tag">Data quality</span></div>
+          <ul>
+            <li>Built an Excel dashboard monitoring completion, SLA achievement, QA coverage, data validity, rework and workload.</li>
+            <li>Added filters for team, priority and region, with trend views that highlight areas needing investigation.</li>
+          </ul>
+          <a class="plink" href="kpi-operations-dashboard.html">View project</a>
+        </article>
+      </section>
+    </div>
+
+    <aside class="side">
+      <section class="reveal" style="--i:5">
+        <h2>Core skills</h2>
+        <div class="skill"><h3>Data analysis</h3><div class="pills"><span class="pill">Data cleaning</span><span class="pill">Validation</span><span class="pill">Reconciliation</span><span class="pill">Profiling</span><span class="pill">EDA</span><span class="pill">Trend analysis</span><span class="pill">KPI analysis</span><span class="pill">Root-cause analysis</span></div></div>
+        <div class="skill"><h3>SQL</h3><div class="pills"><span class="pill">JOINs</span><span class="pill">GROUP BY</span><span class="pill">CTEs</span><span class="pill">Window functions</span><span class="pill">ROW_NUMBER</span><span class="pill">RANK</span><span class="pill">LAG</span></div></div>
+        <div class="skill"><h3>Python</h3><div class="pills"><span class="pill">Pandas</span><span class="pill">NumPy</span><span class="pill">Data transformation</span><span class="pill">Automation</span><span class="pill">CSV / Excel processing</span></div></div>
+        <div class="skill"><h3>BI &amp; reporting</h3><div class="pills"><span class="pill">Power BI</span><span class="pill">DAX</span><span class="pill">Data modeling</span><span class="pill">KPI dashboards</span><span class="pill">Streamlit</span><span class="pill">SLA reporting</span></div></div>
+        <div class="skill"><h3>Excel</h3><div class="pills"><span class="pill">PivotTables</span><span class="pill">VLOOKUP</span><span class="pill">XLOOKUP</span><span class="pill">Conditional formatting</span></div></div>
+        <div class="skill"><h3>Data quality</h3><div class="pills"><span class="pill">Duplicate detection</span><span class="pill">Missing-value checks</span><span class="pill">Validation rules</span><span class="pill">Documentation</span></div></div>
+        <div class="skill"><h3>Tools</h3><div class="pills"><span class="pill">ServiceNow</span><span class="pill">JIRA</span><span class="pill">GitHub</span><span class="pill">Google Sheets</span></div></div>
+      </section>
+
+      <section class="reveal" style="--i:6">
+        <h2>Education</h2>
+        <div class="edu"><strong>Bachelor of Computer Applications</strong><span>Amar Singh College (Cluster University)<br>2018 &ndash; 2021</span></div>
+      </section>
+    </aside>
+  </div>
+</div>
+</main>
+</body>
+</html>
