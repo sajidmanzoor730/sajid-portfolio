@@ -564,6 +564,20 @@ section:last-child{
     break-inside:avoid;
   }
 }
+
+/* Resume text contrast and overflow fixes */
+.resume{color:#172033!important;background:#fff!important;overflow:hidden}
+.resume .summary,.resume .skill-row span,.resume .job li,.resume .project li,.resume .info-item{color:#334155!important;overflow-wrap:anywhere}
+.resume .role,.resume .company,.resume .tech,.resume .project-link{color:#1d4ed8!important}
+.resume .date,.resume .contact{color:#475569!important}
+.resume .contact a{color:#172033!important;overflow-wrap:anywhere;word-break:break-word}
+.resume .skills{grid-template-columns:repeat(2,minmax(0,1fr))}
+.resume .skill-row{grid-template-columns:minmax(95px,125px) minmax(0,1fr);min-width:0}
+.resume .header-top,.resume .job-head,.resume .project-head,.resume .identity,.resume .contact,.resume .job-head>div,.resume .project-head>*{min-width:0}
+.resume .project-link{max-width:100%;word-break:break-word}
+.resume .action-secondary{background:#fff!important;color:#10233f!important;border:1px solid #cbd5e1!important}
+@media(max-width:800px){.resume .skills{grid-template-columns:minmax(0,1fr)}.resume .skill-row{grid-template-columns:minmax(0,1fr);gap:4px}.resume .header-top,.resume .job-head,.resume .project-head{display:block}.resume .contact{text-align:left;max-width:100%}.resume .tech,.resume .date{text-align:left}}
+@media print{.resume .summary,.resume .skill-row span,.resume .job li,.resume .project li,.resume .info-item{color:#222!important}.resume .role,.resume .company,.resume .tech,.resume .project-link{color:#1d4ed8!important}.resume .date,.resume .contact,.resume .contact a{color:#334155!important}}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="modern.css"><meta name="theme-color" content="#060914">
 </head>
