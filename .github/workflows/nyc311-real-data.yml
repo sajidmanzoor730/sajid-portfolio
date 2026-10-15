@@ -36,7 +36,7 @@ jobs:
 
       - name: Download actual NYC 311 records
         run: |
-          python download_311.py --start "${{ inputs.start_date }}" --end "${{ inputs.end_date }}"
+          python download_311.py --start "${{ inputs.start_date }}" --end "${{ inputs.end_date }}" ${SOCRATA_APP_TOKEN:+--app-token "$SOCRATA_APP_TOKEN"}
           test -s data/nyc311_raw.csv
           echo "Downloaded rows (excluding header): $(($(wc -l < data/nyc311_raw.csv) - 1))"
         working-directory: nyc311
