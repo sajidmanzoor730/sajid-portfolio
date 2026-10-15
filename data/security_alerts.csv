@@ -1,0 +1,13 @@
+Alert_ID,Severity,Category,Source,Technique,Investigation_Action,Status,MTTR_Minutes
+SEC-001,High,Malware,Endpoint,T1204.002,File quarantined and device reviewed,Resolved,20
+SEC-002,High,Execution,Endpoint,T1059.001,Process investigated and activity contained,Resolved,24
+SEC-003,Medium,Phishing,Email,T1566.002,URL blocked and message reviewed,Resolved,16
+SEC-004,High,Credential Access,Endpoint,T1056,Endpoint activity reviewed and credentials reset,Investigated,
+SEC-005,High,Malware,Endpoint,T1204.002,File quarantined and scan completed,Resolved,27
+SEC-006,Medium,Malware,Endpoint,T1204.002,Download removed and device reviewed,Resolved,19
+SEC-007,High,Phishing,Email,T1566.001,Attachment blocked and mailbox reviewed,Resolved,23
+SEC-008,Medium,Execution,Endpoint,T1059.001,Command reviewed and process terminated,Investigated,
+SEC-009,Medium,Command & Control,Endpoint,T1071.001,Connection blocked and endpoint checked,Resolved,32
+SEC-010,High,Credential Access,Endpoint,T1003,Process contained and endpoint investigated,Resolved,38
+SEC-011,Medium,Command & Control,Endpoint,T1071.001,Remote connection blocked,Resolved,22
+SEC-012,High,Malware,Endpoint,T1204.002,File quarantined and full scan completed,Resolved,32
