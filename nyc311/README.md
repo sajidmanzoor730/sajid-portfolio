@@ -11,7 +11,7 @@ An end-to-end analysis using real public service-request records from NYC Open D
 
 The analysis should be run on an actual dated extract from the official API. No stand-in or synthetic records should be presented as real findings. The checked-in `nyc311/results/*.csv` files must not be treated as verified official-data findings unless they were regenerated from a real download and the provenance report confirms that run.
 
-**Current execution status:** The repository includes the extraction and analysis pipeline. This README alone does not certify that a fresh live download has completed. Run the commands below to generate a run-specific quality report, cleaning log and results from the public dataset.
+**Latest verified execution:** GitHub Actions completed a live download and analysis for 1–31 July 2026 (end date exclusive). The run analyzed 343,133 records, with 0 duplicate unique keys and 0 missing/unparseable creation timestamps. Quality checks flagged 74 `closed_date < created_date` anomalies (0.02%), corrected by blanking those closure timestamps, and 460 records with unspecified/blank borough (0.13%). The run generated cleaning logs, quality reports and SQL result tables. [View the successful workflow run](https://github.com/sajidmanzoor730/sajid-portfolio/actions/runs/38719065382). The extract is a dated snapshot: the NYC Open Data source changes over time, so reruns may yield different values.
 
 ## Questions
 
@@ -44,7 +44,7 @@ To choose a different completed month, change the dates. You can pass `--app-tok
 - `output/cleaning_log.json`: counted cleaning actions.
 - `output/results.json` and `output/results/*.csv`: query results generated from the cleaned extract.
 
-A successful run should be accompanied by the selected date range and the reported row counts. Re-run the analysis after any data or code changes; do not hand-edit result counts to match the website.
+A successful run should be accompanied by the selected date range and the reported row counts. The latest successful run reported 343,133 raw rows and 343,133 cleaned rows; 74 invalid closure-before-creation timestamps were blanked and no rows were dropped for missing keys/creation dates or duplicate unique keys. Re-run the analysis after any data or code changes; do not hand-edit result counts to match the website.
 
 ## Methods
 
