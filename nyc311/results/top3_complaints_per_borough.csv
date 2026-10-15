@@ -1,0 +1,16 @@
+borough,rank,complaint_type,requests
+Bronx,1,Noise - Street/Sidewalk,10573
+Bronx,2,Noise - Residential,7842
+Bronx,3,Illegal Parking,7556
+Brooklyn,1,Illegal Parking,18063
+Brooklyn,2,Noise - Residential,9628
+Brooklyn,3,Noise - Street/Sidewalk,5189
+Manhattan,1,Noise - Street/Sidewalk,6229
+Manhattan,2,Illegal Parking,5909
+Manhattan,3,Noise - Residential,4221
+Queens,1,Illegal Parking,16183
+Queens,2,Noise - Residential,7205
+Queens,3,Blocked Driveway,6450
+Staten Island,1,Damaged Tree,1519
+Staten Island,2,Illegal Parking,1369
+Staten Island,3,Noise - Residential,1073
