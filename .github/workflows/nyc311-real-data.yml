@@ -1,0 +1,78 @@
+name: Verify NYC 311 analysis against official data
+
+on:
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: "Start date (inclusive), YYYY-MM-DD"
+        required: true
+        default: "2026-07-01"
+      end_date:
+        description: "End date (exclusive), YYYY-MM-DD"
+        required: true
+        default: "2026-08-01"
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: nyc311/requirements.txt
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+        working-directory: nyc311
+
+      - name: Download actual NYC 311 records
+        run: |
+          python download_311.py --start "${{ inputs.start_date }}" --end "${{ inputs.end_date }}"
+          test -s data/nyc311_raw.csv
+          echo "Downloaded rows (excluding header): $(($(wc -l < data/nyc311_raw.csv) - 1))"
+        working-directory: nyc311
+        env:
+          SOCRATA_APP_TOKEN: ${{ secrets.SOCRATA_APP_TOKEN }}
+
+      - name: Run quality checks, cleaning and SQL analysis
+        run: |
+          python quality_checks.py
+          python clean_311.py
+          python run_analysis.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          q = json.loads(Path("output/quality_report.json").read_text())
+          c = json.loads(Path("output/cleaning_log.json").read_text())
+          r = json.loads(Path("output/results.json").read_text())
+          assert q["rows"] > 0, "No raw records were analysed"
+          assert c["clean_rows"] > 0, "No clean records remain"
+          assert r["rows_analysed"] == c["clean_rows"], "Analysis row count does not match cleaned rows"
+          print(f"Verified: raw={q['rows']:,}, clean={c['clean_rows']:,}, analysed={r['rows_analysed']:,}")
+          print(f"Created date range: {r['created_range']}")
+          PY
+        working-directory: nyc311
+
+      - name: Upload run outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: nyc311-real-data-${{ inputs.start_date }}-to-${{ inputs.end_date }}
+          path: |
+            nyc311/data/nyc311_raw.csv
+            nyc311/data/nyc311_clean.csv
+            nyc311/output/quality_report.md
+            nyc311/output/quality_report.json
+            nyc311/output/cleaning_log.json
+            nyc311/output/results.json
+            nyc311/output/results/*.csv
+          if-no-files-found: error
+          retention-days: 30
