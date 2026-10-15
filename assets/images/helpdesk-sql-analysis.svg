@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+<rect width="1200" height="700" fill="#080D22"/>
+<style>
+text{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#DCE5FF} .code{font-family:Consolas,Monaco,monospace;font-family:monospace;fill:#0F1636} .title{font-size:28px;font-weight:800;fill:#EAF0FF}
+.sub{font-size:14px;fill:#93A0C8}.label{font-size:12px;font-weight:700;fill:#93A0C8}.value{font-size:26px;font-weight:800;fill:#EAF0FF}
+.card{fill:#0F1636;stroke:rgba(160,180,255,.18)}.blue{fill:#7C9BFF}.navy{fill:#EAF0FF}.line{stroke:rgba(160,180,255,.18)}.small{font-size:11px;fill:#93A0C8}.body{font-size:13px}.section{font-size:18px;font-weight:800;fill:#EAF0FF}.bigvalue{font-size:34px;font-weight:800;fill:#EAF0FF}
+</style>
+<text x="48" y="52" class="title">SQL Analysis</text>
+
+<text x="48" y="78" class="sub">Analytical SQL patterns and representative results</text>
+<rect x="48" y="105" width="650" height="510" rx="12" fill="#EAF0FF"/>
+<text x="72" y="140" class="code" font-size="13">-- deduplicate ticket records</text>
+<text x="72" y="166" class="code" font-size="13">ROW_NUMBER() OVER (PARTITION BY Ticket_ID</text>
+<text x="72" y="188" class="code" font-size="13">ORDER BY Created_At) AS rn</text>
+<text x="72" y="238" class="code" font-size="13">-- compare monthly performance</text>
+<text x="72" y="264" class="code" font-size="13">LAG(sla_pct) OVER (ORDER BY month)</text>
+<text x="72" y="314" class="code" font-size="13">-- rank agents within each team</text>
+<text x="72" y="340" class="code" font-size="13">RANK() OVER (PARTITION BY Team</text>
+<text x="72" y="362" class="code" font-size="13">ORDER BY sla_pct DESC, mttr_hours ASC)</text>
+<text x="72" y="412" class="code" font-size="13">-- enrich tickets with SLA policy</text>
+<text x="72" y="438" class="code" font-size="13">JOIN sla_policy p ON p.Priority = t.Priority</text>
+<text x="72" y="505" class="code" font-size="13">GROUP BY • CASE • CTE • aggregation</text>
+<rect x="730" y="105" width="422" height="510" rx="12" class="card"/>
+<text x="754" y="140" class="section">Priority result</text>
+<text x="754" y="174" class="label">Priority</text><text x="870" y="174" class="label">Tickets</text><text x="970" y="174" class="label">Breach</text>
+<line x1="754" y1="233" x2="1125" y2="233" class="line"/><text x="754" y="215" class="body">P1</text><text x="870" y="215" class="body">255</text><text x="970" y="215" class="body">20.9%</text><line x1="754" y1="285" x2="1125" y2="285" class="line"/><text x="754" y="267" class="body">P2</text><text x="870" y="267" class="body">737</text><text x="970" y="267" class="body">8.7%</text><line x1="754" y1="337" x2="1125" y2="337" class="line"/><text x="754" y="319" class="body">P3</text><text x="870" y="319" class="body">2,190</text><text x="970" y="319" class="body">3.2%</text><line x1="754" y1="389" x2="1125" y2="389" class="line"/><text x="754" y="371" class="body">P4</text><text x="870" y="371" class="body">1,730</text><text x="970" y="371" class="body">2.8%</text>
+<text x="754" y="470" class="label">Business use</text>
+<text x="754" y="496" class="body">Identify priority-level SLA risk</text>
+<text x="754" y="522" class="body">and investigate where breaches</text>
+<text x="754" y="548" class="body">are concentrated.</text>
+
+</svg>
