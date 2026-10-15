@@ -94,22 +94,3 @@ nav .links a[href="resume.html"]{margin:6px 0 0;text-align:center}
 @media(max-width:760px){:not(pre)>code{overflow-wrap:anywhere;white-space:normal}}
 pre{overflow-x:auto;max-width:100%;border-radius:14px}
 
-/* ===== Accessibility and consistency fixes (Oct 2026) ===== */
-:root{color-scheme:dark}
-body{color:var(--text)!important}
-main p,main li,main td,main th,main label{color:var(--text)}
-.card p,.item p,.notice,.step,.info-item{color:#C7D2F2}
-.metric span{color:#B8C5E8!important}
-.metric strong{color:#EAF0FF!important}
-.project-nav a{background:var(--m-card)!important;color:#EAF0FF!important;border-color:var(--line)!important}
-.project-nav a:hover{border-color:var(--m-line2)!important;color:#A9BEFF!important}
-a{ text-underline-offset:3px }
-a:focus-visible,button:focus-visible{outline:3px solid #FFB547!important;outline-offset:3px}
-@media(max-width:760px){
-  nav .navin{display:flex!important;align-items:center;gap:12px}
-  nav .navtoggle{flex-shrink:0}
-  nav .links{max-height:calc(100vh - 72px);overflow-y:auto}
-}
-@media print{
-  .resume,.resume *{box-shadow:none!important}
-}
