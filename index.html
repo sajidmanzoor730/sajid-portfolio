@@ -301,22 +301,22 @@ footer .wrap>span:last-child{display:flex;flex-wrap:wrap;gap:6px 0;min-width:0}@
       <div class="cta"><a class="btn pri" href="projects.html">Explore analytics projects</a><a class="btn sec" href="resume.html">View resume</a></div>
       <div class="stats">
         <div><b>4+</b><span>years in operations analytics</span></div>
-        <div><b data-count="3600">3,600</b><span>sample tickets cleaned and analysed</span></div>
+        <div><b data-count="33">33</b><span>published helpdesk summary rows</span></div>
         <div><b data-count="11">11</b><span>documented projects</span></div>
       </div>
     </div>
 
     <div class="tilt" id="tilt">
       <div class="dash" id="dash">
-        <div class="dash-h">Helpdesk performance<em>synthetic sample</em></div>
+        <div class="dash-h">Public IT helpdesk trends<em>official public data</em></div>
         <div class="dash-top">
           <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5B83FF"/><stop offset="1" stop-color="#35D3C6"/></linearGradient></defs><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" cx="60" cy="60" r="52"/></svg>
-          <div class="big"><b data-count="90.5" data-dec="1" data-suf="%">90.5%</b><span>SLA adherence</span></div>
+          <div class="big"><b data-count="2023">2023</b><span>latest fiscal year shown in source preview</span></div>
         </div>
-        <div class="m"><div><span>CSAT score</span><b data-count="3.77" data-dec="2" data-suf=" / 5">3.77 / 5</b></div><div class="track"><i style="--w:75.4%;--k:0"></i></div></div>
-        <div class="m"><div><span>Data quality</span><b data-count="95.1" data-dec="1" data-suf="%">95.1%</b></div><div class="track"><i style="--w:95.1%;--k:1"></i></div></div>
-        <div class="m"><div><span>Repeat tickets</span><b data-count="9.2" data-dec="1" data-suf="%">9.2%</b></div><div class="track"><i style="--w:9.2%;--k:2"></i></div></div>
-        <div class="dedupe m"><div><span>3,672 raw rows, 72 duplicates removed</span><b>3,600</b></div><div class="track"><i style="--w:98.04%;--k:3"></i><i class="a" style="--w:1.96%;--k:4"></i></div></div>
+        <div class="m"><div><span>Report sections</span><b>Top Request, Sources, Departments</b></div><div class="track"><i style="--w:70%;--k:0"></i></div></div>
+        <div class="m"><div><span>Source</span><b>Montgomery County Open Data</b></div><div class="track"><i style="--w:85%;--k:1"></i></div></div>
+        <div class="m"><div><span>Data type</span><b>Aggregated counts</b></div><div class="track"><i style="--w:55%;--k:2"></i></div></div>
+        <div class="dedupe m"><div><span>Source contains summary rows, not ticket-level records</span><b>Public</b></div><div class="track"><i style="--w:100%;--k:3"></i></div></div>
       </div>
       <span class="chip c1" style="--b:0s">Power BI</span>
       <span class="chip c2" style="--b:-1.7s">SQL</span>
@@ -339,13 +339,13 @@ footer .wrap>span:last-child{display:flex;flex-wrap:wrap;gap:6px 0;min-width:0}@
   <h2 class="rv">Featured analytics projects</h2>
   <p class="sub rv">Practical projects showing how I clean data, validate KPIs, analyze operational performance and build reporting solutions. Datasets are synthetic and labeled as such.</p>
   <div class="bento"><a class="tile t1 rv" href="helpdesk-kpi-dashboard.html">
-      <span class="arrow" aria-hidden="true">→</span><div class="tag">Python, Pandas, SQL, Power BI, Streamlit</div><h3>Helpdesk Ticket KPI Dashboard</h3><p>End-to-end helpdesk analytics covering data cleaning, SQL analysis, KPI calculations, SLA performance, CSAT, repeat tickets, resolution trends and interactive reporting.</p><div class="viz">
+      <span class="arrow" aria-hidden="true">→</span><div class="tag">Python, Pandas, SQL, Power BI, Streamlit</div><h3>Helpdesk Ticket KPI Dashboard</h3><p>Official public IT helpdesk summary data, source validation, request-type and contact-channel trends, department counts and interactive reporting.</p><div class="viz">
         <div class="pipe">
-          <div class="node"><b>3,672</b>raw ticket rows</div><div class="wire"></div>
-          <div class="node hot"><b>ROW_NUMBER</b>keep one row per ticket</div><div class="wire"></div>
-          <div class="node"><b>3,600</b>unique tickets</div>
+          <div class="node"><b>Public CSV</b>official source</div><div class="wire"></div>
+          <div class="node hot"><b>Validate</b>schema and counts</div><div class="wire"></div>
+          <div class="node"><b>Explore</b>published summaries</div>
         </div>
-        <div class="pipe2"><span>SLA</span><span>CSAT</span><span>Repeat tickets</span><span>Resolution time</span></div>
+        <div class="pipe2"><span>Request types</span><span>Contact sources</span><span>Departments</span><span>Fiscal years</span></div>
       </div>
     </a><a class="tile t2 rv" href="bi-validation.html" style="--d:.08s">
       <span class="arrow" aria-hidden="true">→</span><div class="tag">Power BI, SQL, Python, data quality</div><h3>BI Validation &amp; Monitoring</h3><p>Data-quality checks, SQL reconciliation, KPI validation, Power BI reporting, refresh review and investigation workflows.</p><div class="viz">
