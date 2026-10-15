@@ -1,6 +1,10 @@
 name: Verify NYC 311 analysis against official data
 
 on:
+  push:
+    paths:
+      - 'nyc311/**'
+      - '.github/workflows/nyc311-real-data.yml'
   workflow_dispatch:
     inputs:
       start_date:
