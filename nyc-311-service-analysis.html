@@ -97,7 +97,7 @@
 <h1>NYC 311: Where Service Is Fast, Slow and Repeated</h1>
 <p class="lead">An end-to-end analysis of 343,133 real New York City 311 service requests from July 2026: data-quality checks, cleaning, SQL analysis, findings and a recommended action for each.</p>
 
-<div class="notice"><strong>Data note:</strong> This project uses real public data, not generated data. Source: NYC Open Data, "311 Service Requests from 2020 to Present", every request created 1 to 31 July 2026, downloaded in October 2026 with a Python script. Request status is as of that download. It covers one month and has no population adjustment, so borough counts are volumes, not rates.</div>
+<div class="notice"><strong>Data note:</strong> This project is designed around real public data, not generated data. Source: NYC Open Data, "311 Service Requests from 2020 to Present", for requests created 1 to 31 July 2026. Request status is as of the extract. It covers one month and has no population adjustment, so borough counts are volumes, not rates. For reproducibility, run the official-data workflow in GitHub Actions; it downloads a fresh extract, runs quality checks and executes every SQL query.</div>
 
 <section class="dq">
 <div class="dq-kpis"><div class="dq-kpi"><div class="dq-kl">Requests</div><div class="dq-kv">343,133</div><div class="dq-kn">Created 1 to 31 July 2026</div></div><div class="dq-kpi"><div class="dq-kl">Top 3 complaint types</div><div class="dq-kv">30.4%</div><div class="dq-kn">Illegal Parking 14.3%, two noise types 16.1%</div></div><div class="dq-kpi"><div class="dq-kl">Online + mobile</div><div class="dq-kv">68.4%</div><div class="dq-kn">Phone 22.2%, unknown 9.0%</div></div><div class="dq-kpi"><div class="dq-kl">At repeat locations</div><div class="dq-kv">38.8%</div><div class="dq-kn">Same address and type, 3+ requests</div></div><div class="dq-kpi"><div class="dq-kl">NYPD closed in 24h</div><div class="dq-kv">99.4%</div><div class="dq-kn">Median 1.3 hours to close</div></div><div class="dq-kpi"><div class="dq-kl">HPD closed in 7 days</div><div class="dq-kv">37.4%</div><div class="dq-kn">Median 261 hours (10.9 days), 16% of volume</div></div><div class="dq-kpi"><div class="dq-kl">DPR still open</div><div class="dq-kv">4,140</div><div class="dq-kn">20.6% of DPR requests, from first half of July</div></div><div class="dq-kpi"><div class="dq-kl">Daily volume, last vs first week</div><div class="dq-kv">-15%</div><div class="dq-kn">10,604 vs 12,476 requests a day</div></div></div>
@@ -161,7 +161,7 @@
 </ul>
 
 <h2 class="sec">8. The SQL</h2>
-<p class="sqlnote">This is the full SQL file (SQLite). The page was built from the output of these queries. The last two queries, weekday_avg_per_day and midnight_check, were added after the first run and have not been run on the real data yet.</p>
+<p class="sqlnote">This is the full SQL file (SQLite). The page includes the complete SQL analysis. The last two queries, weekday_avg_per_day and midnight_check, were added after the initial result snapshot; use the official-data workflow to execute them against a fresh real-data extract before relying on those outputs.</p>
 <details class="scr"><summary><b>nyc311/queries.sql</b> <span>All queries</span></summary><pre><code>-- SQL analysis of the cleaned 311 extract. Table: r  (one row per service request). SQLite dialect.
 -- Run with: python3 run_analysis.py
 
