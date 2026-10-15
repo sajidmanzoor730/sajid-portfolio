@@ -1,42 +1,75 @@
 # NYC 311 Service Requests: Data Quality and Service Performance
 
-An end-to-end analysis of real NYC 311 requests from the official NYC Open Data portal:
-download, data-quality checks, cleaning, SQL analysis, findings and dashboard design.
+An end-to-end analysis using real public service-request records from NYC Open Data. The project covers extraction, data-quality checks, cleaning, SQL analysis and dashboard design.
 
-Dataset: [311 Service Requests from 2020 to Present](https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2020-to-Present/erm2-nwe9) (NYC Open Data, public).
+**Official source:** [NYC 311 Service Requests from 2020 to Present](https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2020-to-Present/erm2-nwe9)  
+**API dataset ID:** `erm2-nwe9`  
+**Unit of analysis:** one NYC 311 service request  
+**Data freshness:** NYC Open Data updates this dataset daily. The API can return different results on later runs as records are updated.
 
-## Status
-The pipeline is written and has been dry-run on a **fake stand-in file** to check that the code works.
-It has **not yet been run on a real month of data**, so this repo contains no findings yet.
-`tests/make_stand_in_data.py` produces meaningless numbers; never publish anything made from it.
+## Data provenance and status
 
-## Questions this answers
-1. How clean is a real public service-request extract, and what had to be fixed?
-2. What do New Yorkers complain about, where, and when?
-3. Which agencies close requests quickly, and how much of the volume is repeat complaints about the same address?
-4. Where is the backlog?
+The analysis should be run on an actual dated extract from the official API. No stand-in or synthetic records should be presented as real findings. The checked-in `nyc311/results/*.csv` files must not be treated as verified official-data findings unless they were regenerated from a real download and the provenance report confirms that run.
 
-## Run it (Python 3.9+)
+**Current execution status:** The repository includes the extraction and analysis pipeline. This README alone does not certify that a fresh live download has completed. Run the commands below to generate a run-specific quality report, cleaning log and results from the public dataset.
+
+## Questions
+
+1. Which problem types and boroughs generate the most requests in the selected period?
+2. What share of records have missing or inconsistent fields?
+3. How does recorded time-to-close vary by agency and problem type?
+4. Which agencies have the largest older-open-request backlog in this extract?
+5. How frequently do multiple records share the same normalized address and problem type?
+
+## Run the analysis (Python 3.9+)
+
+Use a completed historical month to reduce right-censoring from newly opened requests. The following example analyses July 2026; the end date is exclusive.
+
 ```bash
-pip install -r requirements.txt
-python3 download_311.py --start 2026-07-01 --end 2026-08-01   # one month, roughly 250-350k rows
-python3 quality_checks.py      # -> output/quality_report.md / .json
-python3 clean_311.py           # -> data/nyc311_clean.csv, output/cleaning_log.json
-python3 run_analysis.py        # -> output/results.json, output/results/*.csv
+cd nyc311
+python3 -m pip install -r requirements.txt
+python3 download_311.py --start 2026-07-01 --end 2026-08-01
+python3 quality_checks.py
+python3 clean_311.py
+python3 run_analysis.py
 ```
-Use a month that is at least two months old: requests from the last few days are mostly still open, which would make every agency look slow. (A look at the live API on 2026-10-10 showed the newest records almost all "In Progress" or "Open".) An optional free app token (`--app-token`) avoids API throttling.
 
-## Files
+To choose a different completed month, change the dates. You can pass `--app-token YOUR_TOKEN` to the downloader if NYC Open Data throttles requests.
+
+### Outputs
+
+- `data/nyc311_raw.csv`: the direct API extract for the selected date range.
+- `data/nyc311_clean.csv`: cleaned request records plus derived analysis fields.
+- `output/quality_report.md` and `output/quality_report.json`: measured data-quality checks.
+- `output/cleaning_log.json`: counted cleaning actions.
+- `output/results.json` and `output/results/*.csv`: query results generated from the cleaned extract.
+
+A successful run should be accompanied by the selected date range and the reported row counts. Re-run the analysis after any data or code changes; do not hand-edit result counts to match the website.
+
+## Methods
+
 | File | Purpose |
 |---|---|
-| `download_311.py` | Pages through the official API, keeps 16 columns |
-| `quality_checks.py` | Duplicates, impossible dates, status/date conflicts, bad zips and coordinates, blanks |
-| `clean_311.py` | Rule-based cleanup; every fix is counted; adds response time, 24h / 7-day flags, hour, weekday |
-| `queries.sql` | The SQL analysis (window functions: RANK, LAG, moving average) |
-| `run_analysis.py` | Runs the SQL and adds medians |
-| `DESIGN.md` | Dashboard design and the management decision each page supports |
+| `download_311.py` | Retrieves a bounded date range from the official NYC Open Data API |
+| `quality_checks.py` | Measures duplicate identifiers, date conflicts, missing values and invalid geographic fields |
+| `clean_311.py` | Applies documented cleanup rules and creates time-based fields |
+| `queries.sql` | Aggregations, window functions, volume trends and repeat-address analysis |
+| `run_analysis.py` | Executes SQL against the cleaned extract and exports result tables |
+| `DESIGN.md` | Dashboard structure and decisions supported by each view |
 
-## Limits to state honestly
-- One month is a slice, not the whole city's year; seasonality is not covered.
-- Response time is created-to-closed time as recorded; agencies can close requests administratively.
-- The column names were checked against a sample of live API records on 2026-10-10. Records carry no `due_date` value, so there is no "closed after due date" measure; response-time bands are used instead.
+## Interpretation and limitations
+
+- This is a period-specific extract, not a census of every NYC request across all years.
+- The source is updated daily; counts can change after records are updated or recategorized.
+- Recorded elapsed time is the difference between creation and closure timestamps. It is not automatically an official SLA metric and may reflect administrative closure practices.
+- Requests that are still open do not have an observed closure duration. Treat their duration as censored, not as zero.
+- Address-based repeat-request counts are indicators for investigation, not proof that the underlying issue persisted.
+- Do not infer causation from descriptive comparisons between boroughs, agencies or complaint types.
+- The public dataset documentation notes that it contains service requests directed to agencies and does not expose personally identifying information about the customer who made the request.
+
+## Source
+
+NYC Open Data, *311 Service Requests from 2020 to Present*:  
+https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2020-to-Present/erm2-nwe9
+
+Built by Sajid Manzoor.
