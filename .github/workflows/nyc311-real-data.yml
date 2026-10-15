@@ -40,11 +40,13 @@ jobs:
 
       - name: Download actual NYC 311 records
         run: |
-          python download_311.py --start "${{ inputs.start_date }}" --end "${{ inputs.end_date }}" ${SOCRATA_APP_TOKEN:+--app-token "$SOCRATA_APP_TOKEN"}
+          python download_311.py --start "${START_DATE}" --end "${END_DATE}" ${SOCRATA_APP_TOKEN:+--app-token "$SOCRATA_APP_TOKEN"}
           test -s data/nyc311_raw.csv
           echo "Downloaded rows (excluding header): $(($(wc -l < data/nyc311_raw.csv) - 1))"
         working-directory: nyc311
         env:
+          START_DATE: ${{ github.event.inputs.start_date || '2026-07-01' }}
+          END_DATE: ${{ github.event.inputs.end_date || '2026-08-01' }}
           SOCRATA_APP_TOKEN: ${{ secrets.SOCRATA_APP_TOKEN }}
 
       - name: Run quality checks, cleaning and SQL analysis
@@ -69,7 +71,7 @@ jobs:
       - name: Upload run outputs
         uses: actions/upload-artifact@v4
         with:
-          name: nyc311-real-data-${{ inputs.start_date }}-to-${{ inputs.end_date }}
+          name: nyc311-real-data-${{ github.event.inputs.start_date || '2026-07-01' }}-to-${{ github.event.inputs.end_date || '2026-08-01' }}
           path: |
             nyc311/data/nyc311_raw.csv
             nyc311/data/nyc311_clean.csv
