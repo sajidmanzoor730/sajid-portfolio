@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="VoIP troubleshooting portfolio case study covering SIP registration, RTP and one-way audio investigation, Python log parsing, SQL evidence analysis and API health checks.">
+<title>Sajid Manzoor | VoIP Incident Troubleshooting Toolkit</title>
+<link rel="stylesheet" href="project.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modern.css">
+<style>
+.case-wrap{width:min(1040px,calc(100% - 40px));margin:auto}.hero{padding:76px 0 48px}.eyebrow{color:#7c9cff;font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:12px}.hero h1{font-size:clamp(38px,6vw,64px);line-height:1.08;margin:14px 0}.lead{font-size:18px;line-height:1.7;max-width:850px;color:#b7c3e2}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.case-section{padding:34px 0;border-top:1px solid rgba(160,180,255,.16)}.case-section h2{font-size:27px;margin:0 0 14px}.case-section p,.case-section li{color:#c2cce5;line-height:1.75}.case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}.case-card{background:#0f1636;border:1px solid rgba(160,180,255,.18);border-radius:14px;padding:20px}.case-card h3{margin:0 0 8px;color:#edf2ff}.case-card p{margin:0}.steps{padding-left:22px}.notice{border-left:3px solid #7c9cff;background:#101a39;padding:16px 18px;border-radius:8px;color:#cbd5ed;margin-top:18px}@media(max-width:680px){.case-grid{grid-template-columns:1fr}.hero{padding-top:48px}}
+</style>
+</head>
+<body>
+<nav><div class="case-wrap navin">
+<a class="brand" href="index.html">Sajid Manzoor</a>
+<div class="links"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="experience.html">Experience</a><a href="skills.html">Skills</a><a href="resume.html">Resume</a></div>
+</div></nav>
+<main class="case-wrap">
+<header class="hero">
+<div class="eyebrow">#1 · Technical support &amp; troubleshooting</div>
+<h1>VoIP Incident Troubleshooting Toolkit</h1>
+<p class="lead">A practical support-engineering workflow for turning SIP/RTP packet evidence and service logs into structured investigation notes, testable hypotheses and clear escalation steps.</p>
+<div class="actions">
+<a class="btn primary" href="https://github.com/sajidmanzoor730/voip-support-automation" target="_blank" rel="noopener">View GitHub repository →</a>
+<a class="btn secondary" href="projects.html">Back to all projects</a>
+</div>
+</header>
+<section class="case-section">
+<h2>What this project demonstrates</h2>
+<p>The workflow starts with packet or log evidence, extracts relevant SIP, SDP and RTP details, organizes the findings, and documents what is confirmed versus what still needs checking. The aim is to make troubleshooting repeatable rather than jump to a root-cause conclusion from a symptom alone.</p>
+<div class="case-grid">
+<div class="case-card"><h3>SIP registration analysis</h3><p>Python parsing of sanitized SIP log fixtures, including the distinction between a 401 digest-authentication challenge and a confirmed registration rejection such as 403.</p></div>
+<div class="case-card"><h3>RTP and one-way audio</h3><p>Wireshark/TShark filters and packet-level review to examine RTP direction, stream presence, payload details and timing before forming a media-path hypothesis.</p></div>
+<div class="case-card"><h3>Structured evidence with SQL</h3><p>SQLite schema and investigation queries organize extracted evidence so related events and measurements can be reviewed consistently.</p></div>
+<div class="case-card"><h3>API health checks</h3><p>A Postman collection exercises public HTTP test endpoints and provides a repeatable starting point for checking request/response behavior.</p></div>
+</div>
+</section>
+<section class="case-section">
+<h2>Investigation workflow</h2>
+<ol class="steps">
+<li>Capture the reported symptom and identify the affected call or registration attempt.</li>
+<li>Inspect SIP signaling and relevant SDP details; note response codes and transaction sequence.</li>
+<li>For media symptoms, inspect RTP in both directions and review stream measurements rather than assuming a network cause.</li>
+<li>Parse available log fixtures with Python and load structured evidence into SQLite for targeted queries.</li>
+<li>Separate observed facts from hypotheses, list missing evidence and document the next diagnostic or escalation step.</li>
+</ol>
+</section>
+<section class="case-section">
+<h2>Worked investigation scenarios</h2>
+<div class="case-grid">
+<div class="case-card"><h3>SIP 403 registration rejection</h3><p>Walkthrough of a registration attempt rejected with 403, focusing on the signaling evidence and the checks needed before assigning a cause.</p></div>
+<div class="case-card"><h3>One-way audio after answer</h3><p>Walkthrough of RTP direction and packet evidence to determine whether media is visible in both directions and what additional network or endpoint evidence is needed.</p></div>
+<div class="case-card"><h3>401 challenge followed by success</h3><p>Shows why a SIP 401 response can be part of a normal digest-authentication exchange and should not automatically be labelled a registration failure.</p></div>
+<div class="case-card"><h3>API and SMS troubleshooting</h3><p>Additional guidance covers HTTP/API triage, safe retry considerations, message lifecycle interpretation and delivery callback checks.</p></div>
+</div>
+</section>
+<section class="case-section">
+<h2>Tools and repository contents</h2>
+<p><strong>Python</strong> for SIP log parsing and validation · <strong>Wireshark/TShark</strong> for packet inspection · <strong>SQLite/SQL</strong> for evidence queries · <strong>Postman</strong> for API health checks.</p>
+<ul>
+<li><code>sip-parser/</code> — parser and sanitized sample log fixture</li>
+<li><code>wireshark/</code> — display filters for SIP, RTP, DNS and TCP</li>
+<li><code>sql/</code> and <code>python-sql/</code> — evidence schema and analysis queries</li>
+<li><code>docs/</code> — runbook, worked incidents and API/SMS troubleshooting guide</li>
+<li><code>tests/</code> — parser and fixture validation tests</li>
+</ul>
+<div class="notice"><strong>Evidence and scope:</strong> This is a learning and portfolio project, not production support experience. The packet evidence comes from public Wireshark sample captures and documented examples. No customer, employer or live telecom data is used. Each worked scenario distinguishes what the sample evidence proves from hypotheses that would require further investigation.</div>
+<div class="actions"><a class="btn primary" href="https://github.com/sajidmanzoor730/voip-support-automation" target="_blank" rel="noopener">Explore code and documentation →</a><a class="btn secondary" href="projects.html">Back to projects</a></div>
+</section>
+</main>
+<footer><div class="case-wrap">© 2026 Sajid Manzoor · Technical Support &amp; Troubleshooting Portfolio</div></footer>
+</body></html>
