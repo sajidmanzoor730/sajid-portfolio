@@ -178,14 +178,17 @@ tcp.analysis.retransmission
 <p class="v-intro">The workflow below shows how a support engineer can move from an unclear symptom to a traceable handoff. Each stage has a specific evidence goal.</p>
 <div class="v-panel" style="padding:12px;overflow:hidden"><img src="https://raw.githubusercontent.com/sajidmanzoor730/voip-support-automation/main/docs/voip-investigation-workflow.svg" alt="Five-stage VoIP investigation workflow: define symptom, inspect SIP signaling, inspect SDP and RTP media, correlate with Python and SQL, and prepare an evidence-led handoff" style="display:block;width:100%;height:auto;border-radius:12px"></div>
 <div class="v-two" style="margin-top:18px">
-<div class="code-panel"><div class="code-label">Reproducible parser run · sample fixture</div><pre>$ python3 sip-parser/parse_sip_log.py sip-parser/sample_sip.log --json sip-parser/report.json
+<div class="code-panel"><div class="code-label">Reproducible parser run · condensed reference output</div><pre>$ python3 sip-parser/parse_sip_log.py sip-parser/sample_sip.log --json sip-parser/report.json
 $ python3 -m json.tool sip-parser/report.json
 
 {
   "parsed_events": 17,
-  "groups": 4,
-  "one_way_audio_flags": 1,
-  "repeated_403_groups": 1
+  "calls": [
+    { "call_id": "demo-reg-001", "methods": ["REGISTER", "401", "REGISTER"] },
+    { "call_id": "demo-call-1001", "methods": ["INVITE", "180", "200", "RTP", "BYE"] },
+    { "call_id": "demo-call-1002", "has_one_way_audio": true },
+    { "call_id": "demo-reg-002", "methods": ["REGISTER", "403", "REGISTER", "403"] }
+  ]
 }
 
 $ python3 -m unittest discover -s tests -v
