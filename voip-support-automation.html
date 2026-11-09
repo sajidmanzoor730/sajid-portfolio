@@ -3,74 +3,191 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="VoIP troubleshooting portfolio case study covering SIP registration, RTP and one-way audio investigation, Python log parsing, SQL evidence analysis and API health checks.">
-<title>Sajid Manzoor | VoIP Incident Troubleshooting Toolkit</title>
+<meta name="description" content="VoIP support engineering case study: SIP registration, RTP troubleshooting, packet analysis, Python log parsing, SQL evidence and REST API checks.">
+<title>Sajid Manzoor | VoIP Troubleshooting Toolkit</title>
 <link rel="stylesheet" href="project.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="modern.css">
 <style>
-.case-wrap{width:min(1040px,calc(100% - 40px));margin:auto}.hero{padding:76px 0 48px}.eyebrow{color:#7c9cff;font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:12px}.hero h1{font-size:clamp(38px,6vw,64px);line-height:1.08;margin:14px 0}.lead{font-size:18px;line-height:1.7;max-width:850px;color:#b7c3e2}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.case-section{padding:34px 0;border-top:1px solid rgba(160,180,255,.16)}.case-section h2{font-size:27px;margin:0 0 14px}.case-section p,.case-section li{color:#c2cce5;line-height:1.75}.case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}.case-card{background:#0f1636;border:1px solid rgba(160,180,255,.18);border-radius:14px;padding:20px}.case-card h3{margin:0 0 8px;color:#edf2ff}.case-card p{margin:0}.steps{padding-left:22px}.notice{border-left:3px solid #7c9cff;background:#101a39;padding:16px 18px;border-radius:8px;color:#cbd5ed;margin-top:18px}@media(max-width:680px){.case-grid{grid-template-columns:1fr}.hero{padding-top:48px}}
+.voip-wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+.voip-hero{padding:66px 0 42px;display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center;min-height:490px}
+.voip-kicker,.section-kicker{font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#35D3C6}
+.voip-hero h1{font-size:clamp(38px,5.3vw,62px);line-height:1.04;margin:14px 0 18px}
+.voip-lead{font-size:17px;line-height:1.8;color:#B7C3E2;max-width:650px}
+.voip-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.voip-tags span{font-size:11px;color:#C8D4F5;border:1px solid rgba(160,180,255,.23);background:rgba(91,131,255,.1);padding:7px 10px;border-radius:99px}
+.hero-visual{padding:22px;border:1px solid rgba(160,180,255,.2);border-radius:22px;background:linear-gradient(145deg,rgba(22,34,77,.9),rgba(8,13,32,.92));box-shadow:0 24px 70px rgba(0,0,0,.25)}
+.visual-top{display:flex;justify-content:space-between;align-items:center;color:#AAB8DC;font-size:11px;margin-bottom:18px}
+.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#35D3C6;margin-right:7px;box-shadow:0 0 12px #35D3C6}
+.flow-node{border:1px solid rgba(160,180,255,.22);background:rgba(8,14,34,.8);border-radius:12px;padding:13px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.flow-node b{font-size:13px;color:#EDF2FF}.flow-node small{display:block;font-size:10px;color:#8F9FC9;margin-top:3px}
+.node-icon{width:34px;height:34px;border-radius:10px;background:rgba(91,131,255,.17);display:grid;place-items:center;color:#AFC1FF;font-weight:800;font-size:12px;flex:none}
+.flow-arrow{text-align:center;color:#6D82C2;font-size:19px;line-height:27px}
+.flow-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mini-panel{margin-top:14px;padding:13px;border-radius:12px;background:rgba(53,211,198,.07);border:1px solid rgba(53,211,198,.2)}
+.mini-panel strong{display:block;color:#35D3C6;font-size:11px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px}
+.mini-panel p{font-size:11px;color:#AAB8DC;margin:0;line-height:1.55}
+.voip-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:12px 0 54px}
+.v-stat{padding:18px;border:1px solid rgba(160,180,255,.17);background:rgba(15,22,54,.76);border-radius:14px}
+.v-stat strong{display:block;font-size:27px;line-height:1.2;color:#EDF2FF}.v-stat span{font-size:11px;color:#93A0C8}
+.v-section{padding:48px 0;border-top:1px solid rgba(160,180,255,.14)}
+.v-section h2{font-size:clamp(25px,3vw,34px);margin:8px 0 12px}
+.v-intro{color:#AAB8DC;max-width:780px;line-height:1.75;margin:0 0 24px}
+.v-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.v-card{background:linear-gradient(160deg,rgba(17,27,62,.88),rgba(10,15,36,.9));border:1px solid rgba(160,180,255,.17);border-radius:16px;padding:20px;min-width:0}
+.v-card .number{font-size:11px;color:#35D3C6;font-weight:800;letter-spacing:.08em}
+.v-card h3{font-size:17px;margin:10px 0 8px}.v-card p{font-size:13px;line-height:1.7;color:#AAB8DC;margin:0}
+.v-card .micro{display:inline-block;margin-top:14px;color:#AFC1FF;font-size:10px;border:1px solid rgba(160,180,255,.2);border-radius:6px;padding:5px 7px}
+.v-two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.v-panel{border:1px solid rgba(160,180,255,.17);background:rgba(15,22,54,.72);border-radius:16px;padding:22px}
+.v-panel h3{margin:0 0 12px}.v-panel p,.v-panel li{font-size:13px;line-height:1.75;color:#AAB8DC}
+.v-steps{list-style:none;padding:0;margin:0;counter-reset:step}
+.v-steps li{counter-increment:step;display:grid;grid-template-columns:34px 1fr;gap:12px;margin:16px 0;color:#B7C3E2;font-size:13px;line-height:1.65}
+.v-steps li:before{content:counter(step,decimal-leading-zero);width:30px;height:30px;border-radius:9px;background:rgba(91,131,255,.16);color:#AFC1FF;display:grid;place-items:center;font-size:10px;font-weight:800}
+.sip-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:14px}
+.sip-table th,.sip-table td{text-align:left;padding:11px 12px;border-bottom:1px solid rgba(160,180,255,.13)}
+.sip-table th{color:#8F9FC9;font-size:10px;text-transform:uppercase;letter-spacing:.08em}
+.sip-table td{color:#C5D0EB}.sip-table td:first-child{font-weight:800;color:#EDF2FF}
+.code-panel{background:#070C1D;border:1px solid rgba(160,180,255,.17);border-radius:14px;padding:18px;overflow:auto}
+.code-panel .code-label{font-size:10px;letter-spacing:.1em;color:#35D3C6;font-weight:800;text-transform:uppercase;margin-bottom:10px}
+.code-panel pre{margin:0;white-space:pre-wrap;word-break:break-word;color:#C8D4F5;font:12px/1.75 ui-monospace,SFMono-Regular,Consolas,monospace}
+.evidence-note{border-left:3px solid #FFB547;background:rgba(255,181,71,.07);padding:16px 18px;border-radius:0 10px 10px 0;color:#C9CFE0;font-size:12px;line-height:1.7;margin-top:20px}
+.v-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+@media(max-width:800px){.voip-hero{grid-template-columns:1fr;padding-top:48px;gap:22px}.voip-stats{grid-template-columns:repeat(2,1fr)}.v-grid{grid-template-columns:1fr 1fr}.v-two{grid-template-columns:1fr}}
+@media(max-width:540px){.voip-wrap{width:min(100% - 28px,1120px)}.v-grid{grid-template-columns:1fr}.voip-stats{gap:9px}.v-stat{padding:14px}.v-stat strong{font-size:23px}.hero-visual{padding:14px}.flow-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<nav><div class="case-wrap navin">
-<a class="brand" href="index.html">Sajid Manzoor</a>
-<div class="links"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="experience.html">Experience</a><a href="skills.html">Skills</a><a href="resume.html">Resume</a></div>
-</div></nav>
-<main class="case-wrap">
-<header class="hero">
-<div class="eyebrow">#1 · Technical support &amp; troubleshooting</div>
-<h1>VoIP Incident Troubleshooting Toolkit</h1>
-<p class="lead">A practical support-engineering workflow for turning SIP/RTP packet evidence and service logs into structured investigation notes, testable hypotheses and clear escalation steps.</p>
-<div class="actions">
-<a class="btn primary" href="https://github.com/sajidmanzoor730/voip-support-automation" target="_blank" rel="noopener">View GitHub repository →</a>
-<a class="btn secondary" href="projects.html">Back to all projects</a>
+<div class="bar" id="bar"></div><div class="spot" id="spot" aria-hidden="true"></div>
+<nav><div class="voip-wrap navin"><a class="brand" href="index.html">Sajid Manzoor</a><div class="links"><a href="index.html">Home</a><a href="experience.html">Experience</a><a href="projects.html">Projects</a><a href="skills.html">Skills</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></div></div></nav>
+<main>
+<div class="voip-wrap">
+<header class="voip-hero">
+<div>
+<div class="voip-kicker">Technical support engineering · Project 01</div>
+<h1>VoIP Incident<br><span style="color:#7C9BFF">Troubleshooting</span> Toolkit</h1>
+<p class="voip-lead">A practical investigation workflow for SIP registration and RTP media symptoms. Turn packet and log evidence into structured findings, testable hypotheses and a useful escalation package.</p>
+<div class="v-cta"><a class="btn primary" href="https://github.com/sajidmanzoor730/voip-support-automation" target="_blank" rel="noopener">Explore GitHub repository ↗</a><a class="btn secondary" href="projects.html">All projects</a></div>
+<div class="voip-tags"><span>Python</span><span>SIP / SDP / RTP</span><span>Wireshark · TShark</span><span>SQLite · SQL</span><span>Postman</span></div>
+</div>
+<div class="hero-visual">
+<div class="visual-top"><span><i class="live-dot"></i>INVESTIGATION PIPELINE</span><span>01 / 05</span></div>
+<div class="flow-node"><div style="display:flex;align-items:center;gap:11px"><span class="node-icon">PC</span><div><b>Packet &amp; log evidence</b><small>Public captures · sanitized fixtures</small></div></div><span style="color:#35D3C6">01</span></div>
+<div class="flow-arrow">↓</div>
+<div class="flow-row">
+<div class="flow-node"><div><b>Wireshark</b><small>SIP · SDP · RTP</small></div><span class="node-icon">↗</span></div>
+<div class="flow-node"><div><b>Python parser</b><small>Normalize log events</small></div><span class="node-icon">{ }</span></div>
+</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-node"><div style="display:flex;align-items:center;gap:11px"><span class="node-icon">SQL</span><div><b>Structured evidence</b><small>SQLite tables · targeted queries</small></div></div><span style="color:#35D3C6">04</span></div>
+<div class="flow-arrow">↓</div>
+<div class="mini-panel"><strong>Investigation output</strong><p>Confirmed facts → open questions → next diagnostic checks → evidence-led escalation notes</p></div>
 </div>
 </header>
-<section class="case-section">
-<h2>What this project demonstrates</h2>
-<p>The workflow starts with packet or log evidence, extracts relevant SIP, SDP and RTP details, organizes the findings, and documents what is confirmed versus what still needs checking. The aim is to make troubleshooting repeatable rather than jump to a root-cause conclusion from a symptom alone.</p>
-<div class="case-grid">
-<div class="case-card"><h3>SIP registration analysis</h3><p>Python parsing of sanitized SIP log fixtures, including the distinction between a 401 digest-authentication challenge and a confirmed registration rejection such as 403.</p></div>
-<div class="case-card"><h3>RTP and one-way audio</h3><p>Wireshark/TShark filters and packet-level review to examine RTP direction, stream presence, payload details and timing before forming a media-path hypothesis.</p></div>
-<div class="case-card"><h3>Structured evidence with SQL</h3><p>SQLite schema and investigation queries organize extracted evidence so related events and measurements can be reviewed consistently.</p></div>
-<div class="case-card"><h3>API health checks</h3><p>A Postman collection exercises public HTTP test endpoints and provides a repeatable starting point for checking request/response behavior.</p></div>
+
+<div class="voip-stats">
+<div class="v-stat"><strong>3</strong><span>Worked investigation walkthroughs</span></div>
+<div class="v-stat"><strong>1.029 ms</strong><span>Documented RTP jitter example</span></div>
+<div class="v-stat"><strong>4</strong><span>Core tool groups in workflow</span></div>
+<div class="v-stat"><strong>401 ≠ 403</strong><span>Auth challenge vs rejection</span></div>
+</div>
+
+<section class="v-section">
+<div class="section-kicker">01 · What is inside</div><h2>Built around real support-engineering tasks</h2>
+<p class="v-intro">The toolkit focuses on the work behind a good technical investigation: reproduce the symptom, inspect the right layer, collect evidence, and explain what is known without overstating the root cause.</p>
+<div class="v-grid">
+<article class="v-card"><div class="number">01 / SIGNALING</div><h3>SIP registration analysis</h3><p>Parse sanitized REGISTER exchanges and distinguish authentication challenges from authorization rejections. Identify the next identity, account or policy checks.</p><span class="micro">Python · SIP response codes</span></article>
+<article class="v-card"><div class="number">02 / MEDIA</div><h3>RTP &amp; one-way audio</h3><p>Use packet filters and stream inspection to check whether media is present in both directions. Compare SDP negotiation with observed packet endpoints.</p><span class="micro">Wireshark · TShark · RTP</span></article>
+<article class="v-card"><div class="number">03 / DATA</div><h3>Evidence with SQL</h3><p>Load extracted observations into a structured SQLite schema and use repeatable queries to review related events and measurements.</p><span class="micro">SQLite · SQL</span></article>
+<article class="v-card"><div class="number">04 / API</div><h3>REST API health checks</h3><p>Run a Postman collection against public HTTP test endpoints to practice request/response checks and basic API troubleshooting.</p><span class="micro">Postman · HTTP</span></article>
+<article class="v-card"><div class="number">05 / OPERATIONS</div><h3>Triage &amp; escalation notes</h3><p>Record timestamps, identifiers, response headers, packet evidence, reproduction steps and unanswered questions in a structured handoff.</p><span class="micro">Runbooks · RCA discipline</span></article>
+<article class="v-card"><div class="number">06 / QUALITY</div><h3>Validation &amp; tests</h3><p>Run parser tests and project-integrity checks to catch malformed fixtures and prevent a normal SIP 401 challenge being mislabelled as failure.</p><span class="micro">unittest · project validation</span></article>
 </div>
 </section>
-<section class="case-section">
-<h2>Investigation workflow</h2>
-<ol class="steps">
-<li>Capture the reported symptom and identify the affected call or registration attempt.</li>
-<li>Inspect SIP signaling and relevant SDP details; note response codes and transaction sequence.</li>
-<li>For media symptoms, inspect RTP in both directions and review stream measurements rather than assuming a network cause.</li>
-<li>Parse available log fixtures with Python and load structured evidence into SQLite for targeted queries.</li>
-<li>Separate observed facts from hypotheses, list missing evidence and document the next diagnostic or escalation step.</li>
-</ol>
-</section>
-<section class="case-section">
-<h2>Worked investigation scenarios</h2>
-<div class="case-grid">
-<div class="case-card"><h3>SIP 403 registration rejection</h3><p>Walkthrough of a registration attempt rejected with 403, focusing on the signaling evidence and the checks needed before assigning a cause.</p></div>
-<div class="case-card"><h3>One-way audio after answer</h3><p>Walkthrough of RTP direction and packet evidence to determine whether media is visible in both directions and what additional network or endpoint evidence is needed.</p></div>
-<div class="case-card"><h3>401 challenge followed by success</h3><p>Shows why a SIP 401 response can be part of a normal digest-authentication exchange and should not automatically be labelled a registration failure.</p></div>
-<div class="case-card"><h3>API and SMS troubleshooting</h3><p>Additional guidance covers HTTP/API triage, safe retry considerations, message lifecycle interpretation and delivery callback checks.</p></div>
+
+<section class="v-section">
+<div class="section-kicker">02 · Visual workflow</div><h2>From symptom to evidence-based next step</h2>
+<p class="v-intro">A repeatable sequence helps avoid guessing at a network, endpoint or provider cause before the relevant evidence has been checked.</p>
+<div class="v-two">
+<div class="v-panel"><h3>Investigation sequence</h3><ol class="v-steps">
+<li><div><b>Define the symptom</b><br>Capture time, timezone, affected endpoint, call or request identifier, and exact behavior.</div></li>
+<li><div><b>Inspect signaling</b><br>Review SIP transaction order, response codes and SDP offer/answer details.</div></li>
+<li><div><b>Check media evidence</b><br>Inspect RTP streams in both directions; compare packet endpoints with negotiated SDP addresses and ports.</div></li>
+<li><div><b>Structure and query</b><br>Parse available logs and use SQL to correlate the evidence consistently.</div></li>
+<li><div><b>Document and escalate</b><br>Separate confirmed observations from hypotheses and list the next evidence required.</div></li>
+</ol></div>
+<div class="v-panel"><h3>What to capture in a handoff</h3>
+<table class="sip-table"><thead><tr><th>Evidence</th><th>Why it matters</th></tr></thead><tbody>
+<tr><td>Timestamp + timezone</td><td>Correlate logs across systems</td></tr>
+<tr><td>Call-ID / request ID</td><td>Trace one transaction</td></tr>
+<tr><td>SIP response + headers</td><td>Understand signaling outcome</td></tr>
+<tr><td>SDP addresses + ports</td><td>Understand negotiated media path</td></tr>
+<tr><td>RTP packet direction</td><td>Check media flow both ways</td></tr>
+<tr><td>Reproduction steps</td><td>Make the issue testable</td></tr>
+</tbody></table></div>
 </div>
 </section>
-<section class="case-section">
-<h2>Tools and repository contents</h2>
-<p><strong>Python</strong> for SIP log parsing and validation · <strong>Wireshark/TShark</strong> for packet inspection · <strong>SQLite/SQL</strong> for evidence queries · <strong>Postman</strong> for API health checks.</p>
-<ul>
-<li><code>sip-parser/</code> — parser and sanitized sample log fixture</li>
-<li><code>wireshark/</code> — display filters for SIP, RTP, DNS and TCP</li>
-<li><code>sql/</code> and <code>python-sql/</code> — evidence schema and analysis queries</li>
-<li><code>docs/</code> — runbook, worked incidents and API/SMS troubleshooting guide</li>
-<li><code>tests/</code> — parser and fixture validation tests</li>
-</ul>
-<div class="notice"><strong>Evidence and scope:</strong> This is a learning and portfolio project, not production support experience. The packet evidence comes from public Wireshark sample captures and documented examples. No customer, employer or live telecom data is used. Each worked scenario distinguishes what the sample evidence proves from hypotheses that would require further investigation.</div>
-<div class="actions"><a class="btn primary" href="https://github.com/sajidmanzoor730/voip-support-automation" target="_blank" rel="noopener">Explore code and documentation →</a><a class="btn secondary" href="projects.html">Back to projects</a></div>
+
+<section class="v-section">
+<div class="section-kicker">03 · Worked examples</div><h2>Three scenarios, with evidence limits made clear</h2>
+<p class="v-intro">These walkthroughs use synthetic log fixtures. They demonstrate diagnostic reasoning, not customer incidents or proven production root causes.</p>
+<div class="v-grid">
+<article class="v-card"><div class="number">CASE 01 · REGISTRATION</div><h3>SIP 403 rejection</h3><p><b>Observed in fixture:</b> two 403 responses after REGISTER attempts. A 403 indicates refusal; repeating the same request is unlikely to fix an authorization or policy rejection.</p><p style="margin-top:10px"><b>Next checks:</b> account identity, endpoint assignment, source-IP/domain policy and registrar-side authorization logs.</p><span class="micro">Finding: authorization investigation</span></article>
+<article class="v-card"><div class="number">CASE 02 · MEDIA</div><h3>One-way audio after answer</h3><p><b>Observed in fixture:</b> INVITE, 180, 200, a reported one-way-audio symptom and BYE. The fixture does not contain SDP bodies or bidirectional RTP packet evidence.</p><p style="margin-top:10px"><b>Next checks:</b> compare SDP, inspect RTP both ways, then review NAT/firewall and media-relay evidence.</p><span class="micro">Finding: media-path investigation only</span></article>
+<article class="v-card"><div class="number">CASE 03 · AUTHENTICATION</div><h3>401 challenge, then accepted</h3><p><b>Observed in fixture:</b> a 401 challenge followed by an authenticated REGISTER accepted event. A single 401 is not automatically a registration failure.</p><p style="margin-top:10px"><b>Next checks:</b> if retry fails, verify nonce/realm handling and the digest response without exposing credentials.</p><span class="micro">Finding: successful challenge flow</span></article>
+</div>
 </section>
+
+<section class="v-section">
+<div class="section-kicker">04 · Packet evidence</div><h2>A small example of measured RTP timing</h2>
+<p class="v-intro">The repository includes a documented Wireshark RTP statistics example. It is a sample measurement, not a live call-quality dashboard or a measurement from a customer call.</p>
+<div class="v-two">
+<div class="v-panel"><div style="font-size:11px;color:#93A0C8">PUBLIC WIRESHARK DOCUMENTATION EXAMPLE</div><div style="font-size:38px;font-weight:800;color:#35D3C6;margin:10px 0 2px">1.029 ms</div><div style="font-size:12px;color:#AAB8DC">Calculated interarrival jitter · SSRC 932629361</div>
+<table class="sip-table"><tbody><tr><td>Capture</td><td>aaa.pcap</td></tr><tr><td>Frames</td><td>624–626</td></tr><tr><td>Codec / payload</td><td>G.711 PCMA · PT 8</td></tr><tr><td>Sampling</td><td>8,000 Hz</td></tr></tbody></table></div>
+<div class="code-panel"><div class="code-label">Wireshark display filters · examples</div><pre>sip
+rtp
+rtp && ip.src == 192.0.2.10
+dns
+tcp.analysis.retransmission
+
+# Then inspect:
+# Telephony → RTP → RTP Streams
+# Analyze sequence, loss, jitter
+# and packet direction.</pre></div>
+</div>
+</section>
+
+<section class="v-section">
+<div class="section-kicker">05 · API troubleshooting</div><h2>Separate request acceptance from final delivery</h2>
+<p class="v-intro">The repository also includes a Twilio-style API/SMS practice guide. It uses placeholders and simulated examples; it is not a record of customer tickets.</p>
+<div class="v-two">
+<div class="v-panel"><h3>HTTP triage guide</h3><table class="sip-table"><tbody>
+<tr><td>400</td><td>Check required fields, formatting and validation details.</td></tr>
+<tr><td>401</td><td>Check authentication method; never request secrets in a ticket.</td></tr>
+<tr><td>403</td><td>Check account state, permissions and sender eligibility.</td></tr>
+<tr><td>429</td><td>Review rate limits; use bounded backoff with jitter.</td></tr>
+<tr><td>5xx / timeout</td><td>Check provider status and request IDs before retrying.</td></tr>
+</tbody></table></div>
+<div class="v-panel"><h3>SMS lifecycle distinction</h3><div class="flow-node"><div><b>API request accepted</b><small>Request accepted for processing</small></div><span class="node-icon">01</span></div><div class="flow-arrow">↓</div><div class="flow-node"><div><b>Queued / sent</b><small>Dispatch and upstream carrier acceptance</small></div><span class="node-icon">02</span></div><div class="flow-arrow">↓</div><div class="flow-node"><div><b>Delivered / undelivered</b><small>Final delivery receipt and error context</small></div><span class="node-icon">03</span></div><p style="font-size:11px">A successful API response does not, by itself, prove handset delivery.</p></div>
+</div>
+</section>
+
+<section class="v-section">
+<div class="section-kicker">06 · Repository &amp; proof</div><h2>Explore the implementation</h2>
+<div class="v-grid">
+<div class="v-card"><h3>Python parser</h3><p><code>sip-parser/</code> includes a parser and sanitized SIP log fixture.</p></div>
+<div class="v-card"><h3>Packet filters</h3><p><code>wireshark/</code> includes SIP, RTP, DNS and TCP investigation filters.</p></div>
+<div class="v-card"><h3>SQL evidence</h3><p><code>sql/</code> and <code>python-sql/</code> contain schema and investigation queries.</p></div>
+<div class="v-card"><h3>API collection</h3><p><code>postman/</code> contains public HTTP endpoint health-check requests.</p></div>
+<div class="v-card"><h3>Runbooks</h3><p><code>docs/</code> includes worked investigations and API/SMS troubleshooting guidance.</p></div>
+<div class="v-card"><h3>Automated checks</h3><p><code>tests/</code> and <code>validate_project.py</code> check parser behavior and repository consistency.</p></div>
+</div>
+<div class="evidence-note"><b>Data integrity note:</b> This is a learning and portfolio project. SIP scenarios use synthetic fixtures; packet evidence comes from public Wireshark sample captures and documented examples. The one-way-audio fixture does not prove a NAT or firewall root cause. No customer, employer or production telecom data is used.</div>
+<div class="v-cta"><a class="btn primary" href="https://github.com/sajidmanzoor730/voip-support-automation" target="_blank" rel="noopener">Open source code &amp; documentation ↗</a><a class="btn secondary" href="projects.html">Back to all projects</a></div>
+</section>
+</div>
 </main>
-<footer><div class="case-wrap">© 2026 Sajid Manzoor · Technical Support &amp; Troubleshooting Portfolio</div></footer>
+<footer class="footer"><div class="voip-wrap">© 2026 Sajid Manzoor · Technical Support &amp; Troubleshooting Portfolio</div></footer>
+<script src="modern.js"></script>
 </body></html>
