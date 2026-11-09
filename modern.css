@@ -94,3 +94,48 @@ nav .links a[href="resume.html"]{margin:6px 0 0;text-align:center}
 @media(max-width:760px){:not(pre)>code{overflow-wrap:anywhere;white-space:normal}}
 pre{overflow-x:auto;max-width:100%;border-radius:14px}
 
+
+
+/* ===== Portfolio-wide refinement: consistent spacing, contrast and controls ===== */
+:root{--content-width:1120px}
+body{font-size:16px;line-height:1.7}
+main>.wrap,main .wrap{max-width:var(--content-width)}
+main{padding-top:clamp(48px,6vw,76px);padding-bottom:clamp(58px,7vw,88px)}
+main>.wrap>h1,main .wrap>h1{max-width:18ch}
+main .lead{max-width:760px;line-height:1.7}
+main section{scroll-margin-top:92px}
+main section+section{margin-top:clamp(42px,6vw,72px)}
+main h2{line-height:1.16}
+main h3{line-height:1.3}
+main p{line-height:1.72}
+main .notice{line-height:1.7}
+main .card,main .item,main .job,main .evidence,main .stat,main .finding,main .case,main .dq-panel,main .dq-kpi{box-shadow:0 12px 32px rgba(0,0,0,.18)!important}
+main .card,main .item,main .job,main .evidence,main .finding,main .case{padding:clamp(20px,2.4vw,28px)}
+main .card p,main .item p,main .job li,main .analytics-box p,main .card li{color:#B3BFE3}
+main .project-meta{color:#AAB6D8;gap:8px 16px}
+main .actions{row-gap:12px}
+main .btn,main a.btn{min-height:40px;align-items:center}
+main .btn.primary,main .buttons .primary,main .contact .primary{padding:10px 16px!important}
+main .btn.secondary,main .buttons .secondary{padding:9px 13px!important;border:1px solid var(--m-line2)!important;border-radius:10px!important}
+main .btn.primary:hover,main .btn.secondary:hover{transform:translateY(-2px)}
+main img{max-width:100%;height:auto}
+main .table-wrap{max-width:100%;overflow-x:auto}
+main pre{max-width:100%;overflow:auto;tab-size:2}
+main :target{scroll-margin-top:96px}
+nav .navin,nav .wrap{max-width:var(--content-width);margin-inline:auto;padding-inline:clamp(14px,3vw,28px)}
+nav .brand{text-decoration:none}
+nav .links a{text-decoration:none}
+footer, .footer{line-height:1.7}
+@media(max-width:760px){
+  body{font-size:15px}
+  main{padding-top:42px;padding-bottom:56px}
+  main section+section{margin-top:42px}
+  nav .navin,nav .wrap{padding-inline:14px}
+  main .actions{gap:10px 14px}
+  main .btn,main a.btn{font-size:13px}
+  main .table-wrap{margin-inline:0}
+  main .data-table,main table{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  main .card,main .item,main .job{transition:none!important}
+}
