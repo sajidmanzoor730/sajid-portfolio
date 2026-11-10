@@ -132,6 +132,20 @@ h1 .w i{display:inline-block;font-style:normal;transform:translateY(112%);animat
 .toolkit-board-foot i{width:6px;height:6px;border-radius:50%;background:#249B7C}
 .toolkit-board-foot b{color:#27796D}
 @media(max-width:460px){.toolkit-board{padding:12px}.toolkit-step{padding:8px 9px}}
+.security-tile{background:linear-gradient(145deg,#241A2B 0%,#17172B 55%,#11172A 100%);border-color:rgba(255,181,71,.3)}
+.security-tile::after{content:"";position:absolute;right:-100px;top:105px;width:230px;height:230px;border:1px solid rgba(255,181,71,.13);border-radius:50%;box-shadow:0 0 0 24px rgba(255,181,71,.035),0 0 0 48px rgba(255,181,71,.025);pointer-events:none;z-index:-1}
+.security-tile .tag{color:#FFC46B}.security-tile .arrow{border-color:rgba(255,196,107,.35)}
+.security-visual{padding:13px;border:1px solid rgba(255,196,107,.2);border-radius:14px;background:linear-gradient(145deg,#171525,#211B2C);box-shadow:0 16px 32px rgba(0,0,0,.25)}
+.security-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;color:#B9AFC9;font-size:9px;font-weight:900;letter-spacing:.12em}
+.security-head b{padding:4px 7px;border-radius:5px;background:rgba(255,181,71,.13);color:#FFC46B;font-size:8px}
+.security-alert{display:flex;align-items:center;gap:9px;padding:8px 9px;margin-top:6px;border-radius:8px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.06)}
+.security-alert>span{display:grid;gap:1px;min-width:0}.security-alert>span b{font-size:10px;color:#F3EDF8}.security-alert>span small{font-size:8px;color:#A79BB7}
+.security-alert em{margin-left:auto;font:800 8px Consolas,monospace;font-style:normal;letter-spacing:.08em;color:#FFC46B}
+.sev{width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:#FF746F;box-shadow:0 0 0 4px rgba(255,116,111,.12)}
+.sev.med{background:#FFC46B;box-shadow:0 0 0 4px rgba(255,196,107,.12)}
+.security-foot{margin-top:10px;padding-top:9px;border-top:1px solid rgba(255,255,255,.09);color:#B8AFC6;font-size:8px;font-weight:700}
+.security-foot span{display:flex;align-items:center;gap:6px}.security-foot i{width:6px;height:6px;border-radius:50%;background:#D49BFF}
+@media(max-width:460px){.security-visual{padding:10px}}
 .more2{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .note{margin:0;font-size:14px;color:var(--muted)}
 .ap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;list-style:none;margin:0;padding:0;counter-reset:s}
@@ -245,20 +259,17 @@ footer a:hover{color:var(--text);text-decoration:underline}
       <div class="viz"><div class="pipe2"><span>Wireshark</span><span>Python + SQL</span><span>Postman</span><span>Incident runbook</span></div></div>
       <div class="tbtns"><a class="btn pri sm" href="voip-support-automation.html">Read case study</a><a class="btn sec sm" href="https://github.com/sajidmanzoor730/voip-support-automation">GitHub</a></div>
     </article>
-    <article class="tile t2 toolkit-tile rv" style="--d:.08s"><div class="tag">API and log investigation</div>
-      <h3>Support Automation Toolkit</h3>
-      <p>Python and Bash examples for parsing logs and counting error codes, SQL queries for error frequency, and API health checks covering status codes, response time and required fields.</p>
-      <div class="viz"><div class="toolkit-board" role="img" aria-label="Illustrative three-stage support workflow showing log review, error filtering and API validation">
-        <div class="toolkit-board-head"><span>SUPPORT WORKFLOW</span><b>ILLUSTRATIVE</b></div>
-        <div class="toolkit-flow">
-          <div class="toolkit-step"><strong>01</strong><span><b>Collect</b><small>Application logs</small></span><em>LOG</em></div>
-          <div class="toolkit-connector"></div>
-          <div class="toolkit-step"><strong>02</strong><span><b>Investigate</b><small>Filter error patterns</small></span><em>PY</em></div>
-          <div class="toolkit-connector"></div>
-          <div class="toolkit-step"><strong>03</strong><span><b>Validate</b><small>Check API response</small></span><em>API</em></div>
-        </div>
-        <div class="toolkit-board-foot"><span><i></i> Repeatable L1 checks</span><b>LOG → ACTION</b></div>
+    <article class="tile t2 security-tile rv" style="--d:.08s"><div class="tag">Cybersecurity · SIEM investigation</div>
+      <h3>Microsoft Security Investigation Lab</h3>
+      <p>Investigates endpoint alerts using Microsoft Defender concepts, Sentinel and KQL. Covers severity triage, suspicious activity, MITRE ATT&amp;CK mapping and incident reporting with a clearly labelled practice dataset.</p>
+      <div class="viz"><div class="security-visual" role="img" aria-label="Illustrative security operations alert triage panel with severity, alert category and investigation status">
+        <div class="security-head"><span>SECURITY OPERATIONS</span><b>LAB DATA</b></div>
+        <div class="security-alert"><i class="sev high"></i><span><b>Suspicious PowerShell</b><small>Endpoint · T1059</small></span><em>HIGH</em></div>
+        <div class="security-alert"><i class="sev med"></i><span><b>Unusual network activity</b><small>Network · Investigation</small></span><em>MED</em></div>
+        <div class="security-alert"><i class="sev high"></i><span><b>Malware detection</b><small>Defender · T1204</small></span><em>HIGH</em></div>
+        <div class="security-foot"><span><i></i> Alert triage → KQL → response review</span></div>
       </div></div>
+      <div class="tbtns"><a class="btn pri sm" href="microsoft-security-investigation.html">Read case study</a><a class="btn sec sm" href="https://github.com/sajidmanzoor730/microsoft-security-lab">GitHub</a></div>
       <div class="tbtns"><a class="btn pri sm" href="support-automation-toolkit.html">Read case study</a><a class="btn sec sm" href="https://github.com/sajidmanzoor730/support-automation-toolkit">GitHub</a></div>
     </article>
     <article class="tile t3 rv" style="--d:.12s"><div class="tag">Support operations and KPIs</div>
