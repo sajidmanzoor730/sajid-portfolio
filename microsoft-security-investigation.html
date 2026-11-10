@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080914">
+<meta name="description" content="Microsoft Security Investigation Lab case study covering endpoint alert triage, Microsoft Sentinel, KQL and MITRE ATT&CK mapping using an illustrative portfolio dataset.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Microsoft Security Investigation Lab | Sajid Manzoor</title>
+<style>
+:root{--bg:#080914;--panel:#151629;--panel2:#201D32;--text:#F4F0FA;--muted:#B0A9C1;--amber:#FFC46B;--violet:#C49AFF;--red:#FF7777;--line:rgba(203,180,235,.16)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(850px 470px at 88% -5%,rgba(173,105,201,.19),transparent 65%),radial-gradient(650px 420px at 0% 70%,rgba(255,181,71,.07),transparent 65%),var(--bg);color:var(--text);font:16px/1.7 Manrope,Inter,Segoe UI,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#D1B1FF;text-decoration:none;font-weight:700}a:hover{text-decoration:underline}a:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:7px}
+main{width:min(1080px,calc(100% - 40px));margin:auto;padding:34px 0 80px}.back{display:inline-block;font-size:13px;margin-bottom:38px;color:#C2B4D3}.eyebrow{color:var(--amber);font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+.hero{padding:22px 0 44px}h1{font-size:clamp(42px,7vw,76px);line-height:1.02;letter-spacing:-.06em;margin:15px 0 20px;max-width:950px}h2{font-size:clamp(28px,4vw,42px);line-height:1.15;letter-spacing:-.045em;margin:8px 0 14px}h3{font-size:18px;line-height:1.3;margin:0 0 9px}
+.lead{font-size:clamp(17px,2vw,20px);color:#C2B9D0;max-width:850px}.actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:25px}.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:11px;border:1px solid rgba(203,180,235,.3);font-size:13px}.btn.primary{background:#9A70CE;border-color:#9A70CE;color:white}.btn.secondary{color:var(--text);background:rgba(255,255,255,.025)}
+.notice{margin-top:28px;padding:18px 20px;border:1px solid rgba(255,196,107,.25);background:rgba(255,196,107,.07);border-radius:14px;color:#C9C0D1;font-size:13px}.notice strong{color:#FFE1B1}
+section{margin-top:58px}.head{margin-bottom:20px}.head p,.card p,.step p{color:var(--muted);font-size:13px;margin:0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card,.step{background:linear-gradient(145deg,rgba(32,29,50,.96),rgba(15,16,34,.98));border:1px solid var(--line);border-radius:16px;padding:22px}
+.tag{display:inline-block;padding:5px 9px;border:1px solid rgba(196,154,255,.25);background:rgba(196,154,255,.1);border-radius:99px;color:#D6B8FF;font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;margin:0 5px 9px 0}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.step .num{color:var(--amber);font-size:11px;font-weight:800;letter-spacing:.12em}.step h3{margin:8px 0}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel)}table{border-collapse:collapse;width:100%;min-width:600px}th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);font-size:12px}th{background:var(--panel2);color:#D0BFE4;font-size:11px;text-transform:uppercase;letter-spacing:.06em}td{color:#D2CADD}tr:last-child td{border-bottom:0}
+.visual{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:14px;background:#111225}.code{background:#0C0D1D;border:1px solid var(--line);border-radius:12px;padding:18px;overflow:auto;color:#F0EAF8;font:12px/1.75 Consolas,monospace;white-space:pre}
+.callout{padding:18px;border-left:3px solid var(--amber);background:rgba(255,196,107,.07);border-radius:0 12px 12px 0;color:#C9C0D1;font-size:13px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.kpi{padding:18px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025)}.kpi b{display:block;font-size:27px;letter-spacing:-.04em;color:#FFE0AE}.kpi span{font-size:11px;color:var(--muted)}
+.foot{margin-top:50px;padding-top:24px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;color:#9C93AC;font-size:12px}
+@media(max-width:760px){main{width:calc(100% - 28px);padding-top:22px}.grid{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,1fr)}.kpis{grid-template-columns:repeat(2,1fr)}section{margin-top:46px}}
+@media(max-width:460px){.flow{grid-template-columns:1fr}.actions .btn{width:100%}.card{padding:18px}h1{font-size:42px}}
+</style>
+</head>
+<body><main>
+<a class="back" href="index.html#work">← Back to portfolio</a>
+<header class="hero">
+<div class="eyebrow">Cybersecurity · Alert investigation · SIEM</div>
+<h1>Microsoft Security Investigation Lab</h1>
+<p class="lead">An endpoint-security investigation project focused on triaging alerts, reviewing evidence, mapping suspicious activity to MITRE ATT&amp;CK techniques and using KQL-style queries to explore security events across a practice dataset.</p>
+<div class="actions">
+<a class="btn primary" href="https://github.com/sajidmanzoor730/microsoft-security-lab" target="_blank" rel="noopener">View source repository ↗</a>
+<a class="btn secondary" href="index.html#work">Back to projects</a>
+</div>
+<div class="notice"><strong>Dataset and evidence disclosure:</strong> The alert records and KPI figures shown here are illustrative portfolio/lab data, not exports from a live Microsoft Defender or Sentinel tenant. KQL examples are query templates and must be validated against the actual workspace schema before use. This project does not claim production security incident response experience.</div>
+</header>
+<section>
+<div class="head"><div class="eyebrow">Lab snapshot</div><h2>What the sample investigation contains</h2><p>Summary values reported by the repository's illustrative dataset.</p></div>
+<div class="kpis">
+<div class="kpi"><b>12</b><span>Alerts investigated</span></div><div class="kpi"><b>7</b><span>High severity</span></div><div class="kpi"><b>10</b><span>Marked resolved</span></div><div class="kpi"><b>25.3 min</b><span>Illustrative average MTTR</span></div>
+</div>
+<div class="callout" style="margin-top:14px">These are sample project figures only. They should not be interpreted as operational performance metrics or independently verified security outcomes.</div>
+</section>
+<section>
+<div class="head"><div class="eyebrow">Visual evidence</div><h2>Investigation dashboard and workflow</h2><p>Repository visuals illustrate the alert review and query workflow.</p></div>
+<img class="visual" src="https://raw.githubusercontent.com/sajidmanzoor730/microsoft-security-lab/main/docs/security-operations-dashboard.svg" alt="Illustrative security operations dashboard from the Microsoft Security Investigation Lab">
+</section>
+<section>
+<div class="head"><div class="eyebrow">Investigation scope</div><h2>Alert triage and endpoint review</h2><p>The lab covers several common security alert categories and the evidence an analyst would review.</p></div>
+<div class="grid">
+<article class="card"><span class="tag">Endpoint</span><h3>Malware and suspicious execution</h3><p>Review malware detections and suspicious PowerShell activity, identify the affected device and entity, inspect alert context and record the investigation state.</p></article>
+<article class="card"><span class="tag">Identity and access</span><h3>Credential-access indicators</h3><p>Use alert context and mapped techniques to understand suspicious credential-access behavior. A technique mapping is an investigation aid, not proof that an attack succeeded.</p></article>
+<article class="card"><span class="tag">Network</span><h3>Unusual network connections</h3><p>Review unusual connection alerts alongside timestamps, device context, detection source and related entities before recommending escalation.</p></article>
+<article class="card"><span class="tag">Email</span><h3>Phishing alerts</h3><p>Classify phishing-related alerts, assess severity and document the available evidence and response status in the practice dataset.</p></article>
+</div>
+</section>
+<section>
+<div class="head"><div class="eyebrow">Microsoft Sentinel · KQL</div><h2>Query patterns for investigation</h2><p>The repository includes 5+ KQL examples for filtering, aggregation, severity analysis and entity-level review.</p></div>
+<img class="visual" src="https://raw.githubusercontent.com/sajidmanzoor730/microsoft-security-lab/main/docs/sentinel-kql-summary.svg" alt="Illustrative Microsoft Sentinel KQL query summary">
+<h3 style="margin-top:22px">Example: high-severity alert counts</h3>
+<div class="code">AlertInfo
+| where Timestamp &gt; ago(30d)
+| where Severity == "High"
+| summarize AlertCount = count()
+    by Category, DetectionSource
+| order by AlertCount desc</div>
+<div class="callout" style="margin-top:14px">Validate table availability, column names, workspace permissions, join keys and time ranges in the target Microsoft Sentinel environment. The sample queries are not guaranteed to run unchanged in every tenant.</div>
+</section>
+<section>
+<div class="head"><div class="eyebrow">Investigation method</div><h2>From alert to documented response</h2></div>
+<div class="flow">
+<div class="step"><div class="num">01 · TRIAGE</div><h3>Prioritise</h3><p>Review severity, alert category, timestamp and detection source.</p></div>
+<div class="step"><div class="num">02 · INVESTIGATE</div><h3>Gather context</h3><p>Inspect affected devices, entities and related evidence.</p></div>
+<div class="step"><div class="num">03 · CORRELATE</div><h3>Query and map</h3><p>Use KQL templates and MITRE ATT&amp;CK mapping to organise findings.</p></div>
+<div class="step"><div class="num">04 · DOCUMENT</div><h3>Record outcome</h3><p>Capture status, response action and escalation notes.</p></div>
+</div>
+</section>
+<section>
+<div class="head"><div class="eyebrow">Repository contents</div><h2>Project files</h2></div>
+<div class="table-wrap"><table><thead><tr><th>Path</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>data/security_alerts.csv</code></td><td>Illustrative alert-level records for triage and investigation analysis</td></tr>
+<tr><td><code>data/security_metrics.csv</code></td><td>Sample KPI summary associated with the lab dataset</td></tr>
+<tr><td><code>docs/investigation-workflow.svg</code></td><td>Visual overview of the investigation workflow</td></tr>
+<tr><td><code>docs/security-operations-dashboard.svg</code></td><td>Illustrative security operations dashboard</td></tr>
+<tr><td><code>docs/defender-lab-summary.svg</code></td><td>Defender for Endpoint lab analysis summary</td></tr>
+<tr><td><code>docs/sentinel-kql-summary.svg</code></td><td>Sentinel and KQL query summary visual</td></tr>
+<tr><td><code>README.md</code></td><td>Project scope, query examples, dataset notes and technical overview</td></tr>
+</tbody></table></div>
+</section>
+<section>
+<div class="head"><div class="eyebrow">Skills demonstrated</div><h2>Security operations and technical analysis</h2></div>
+<div class="grid">
+<article class="card"><h3>Security investigation</h3><p>Alert triage, endpoint context review, evidence organisation, incident prioritisation and response documentation.</p></article>
+<article class="card"><h3>Microsoft security tooling</h3><p>Microsoft Defender for Endpoint concepts, Microsoft Sentinel workflow concepts and KQL query patterns.</p></article>
+<article class="card"><h3>Threat framework</h3><p>MITRE ATT&amp;CK technique mapping to structure investigation notes and describe observed behavior.</p></article>
+<article class="card"><h3>Operational analytics</h3><p>Severity breakdowns, investigation status, response action tracking and illustrative MTTR calculations.</p></article>
+</div>
+</section>
+<footer class="foot"><span>Built by Sajid Manzoor · Technical Support &amp; Security Operations</span><span><a href="index.html#work">Portfolio</a> · <a href="https://github.com/sajidmanzoor730/microsoft-security-lab">GitHub repository</a></span></footer>
+</main></body></html>
