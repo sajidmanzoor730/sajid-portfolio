@@ -1,66 +1,75 @@
-# Sajid Manzoor — Data Analyst Portfolio
+# Sajid Manzoor — Technical Support Engineer
 
-**Data Analyst | SQL | Python | Power BI | Excel | KPI & Operations Analytics**
+**Technical Support Engineer | L2 Application Support | SIP/VoIP | Networking | REST APIs**
 
-This repository contains my portfolio and selected analytics projects focused on turning operational data into reliable KPIs, dashboards, reports, and practical business insights.
+I’m a Technical Support Engineer with 4+ years of experience supporting business applications, APIs, networks, and VoIP services. I work through incidents methodically: reproduce the issue, isolate the failing layer, validate the evidence, and communicate a clear resolution or escalation.
 
-## 🔗 Portfolio
+My experience includes L2 support for SIP/RTP and call-quality issues, troubleshooting JavaScript/Node.js/React applications, investigating REST API and HTTP failures, and documenting reproducible defects for engineering teams.
 
-**Live Portfolio:**  
-https://sajidmanzoor730.github.io/sajid-portfolio/
+## Portfolio
 
-## 📊 Core Focus
+**Live portfolio:** https://sajidmanzoor730.github.io/sajid-portfolio/
 
-- Data Analysis
-- SQL
-- Python & Pandas
-- Power BI
-- Excel
-- KPI Reporting
-- Data Cleaning & Validation
-- Operational Analytics
-- Dashboard Development
-- Business Reporting
+## Core Skills
 
-## ⭐ Featured Analytics Work
+- **Technical support:** L2 support, incident triage, root-cause analysis, SLA-driven queues, escalation, and case documentation
+- **VoIP & telephony:** SIP, RTP, IP PBX, call-flow analysis, call registration and setup, one-way audio, and call drops
+- **Networking:** TCP/UDP, DNS, DHCP, VPN, NAT, firewalls, SSL/TLS, and packet analysis with Wireshark
+- **Web & APIs:** JavaScript, Node.js, React.js, Express.js, REST APIs, HTTP, JSON, Postman, and Chrome DevTools
+- **Investigation & data:** SQL, MySQL, log analysis, and evidence-based troubleshooting
+- **Tools:** Jira, ServiceNow, Git, PuTTY, Cisco CLI, and Wireshark
 
-### Helpdesk KPI Dashboard
+## Featured Projects
 
-An end-to-end analytics project covering data cleaning, SQL analysis, KPI development, SLA performance, CSAT, resolution trends, and interactive dashboard reporting.
+### 1. VoIP Support Automation Toolkit
 
-**Workflow:** Python → Pandas → SQL → KPI Analysis → Power BI / Streamlit
+A practical toolkit for investigating VoIP support issues using SIP log parsing, SQL investigation queries, Postman API health checks, Wireshark workflows, and an incident-triage runbook. Built around public SIP/RTP sample captures.
 
-Project: https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard
+**Technologies:** Python, SQL, Wireshark, Postman
 
-### BI Validation & Monitoring
+[View repository](https://github.com/sajidmanzoor730/voip-support-automation)
 
-A data-quality and BI validation workflow covering SQL reconciliation, KPI validation, reporting checks, refresh review, and investigation of data issues.
+### 2. Support Automation Toolkit
 
-Project: https://github.com/sajidmanzoor730/bi-validation
+A collection of Python and Bash examples for parsing logs and counting error codes, SQL queries for investigating error frequency, and API health checks for status codes, response times, and required response fields.
 
-### KPI Operations Dashboard
+**Technologies:** Python, Bash, SQL, Postman
 
-Operational reporting focused on completion, QA accuracy, SLA achievement, status tracking, and performance trends.
+[View repository](https://github.com/sajidmanzoor730/support-automation-toolkit)
 
-Portfolio project: https://sajidmanzoor730.github.io/sajid-portfolio/kpi-operations-dashboard.html
+### 3. Helpdesk KPI Dashboard
 
-## 🧠 Analytics Approach
+A support-operations dashboard that cleans a sample ticket export and reports service metrics such as SLA adherence, customer satisfaction (CSAT), and repeat-ticket rate. The project uses a synthetic practice dataset.
 
-**Understand → Clean → Validate → Analyze → Communicate**
+**Technologies:** Python, Pandas, Streamlit
 
-I focus on making metrics trustworthy before using them for reporting or decision-making. My projects show the full workflow from source data and quality checks through KPI analysis and dashboard presentation.
+[View repository](https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard)
 
-## 👤 Professional Positioning
+[Open live dashboard](https://hedesk-dashboard.streamlit.app/)
 
-My background combines **operations, data quality, reporting, and technical problem-solving**. I’m now focused primarily on Data Analyst and analytics-focused roles where I can use SQL, Python, Power BI, Excel, and operational data to answer business questions.
+## Troubleshooting Approach
 
-## 🛠️ Technologies
+1. **Reproduce** — establish the symptoms, scope, timing, affected users, and recent changes.
+2. **Isolate** — identify whether the issue is in the client, application, API, database, network, or VoIP layer.
+3. **Validate** — use logs, API requests, SQL queries, and packet captures to confirm the likely cause.
+4. **Resolve or escalate** — document the impact, evidence, reproduction steps, and next action clearly.
 
-**Analytics:** Python · Pandas · NumPy · SQL  
-**BI & Reporting:** Power BI · DAX · Excel · Streamlit  
-**Data Quality:** Cleaning · Validation · Reconciliation · KPI checks  
-**Tools:** GitHub · JIRA · ServiceNow · Notion · Confluence
+## Professional Experience
+
+- **Technical Support Engineer — A2N Technologies Pvt Ltd**  
+  *January 2024 – Present*  
+  L2 support for SIP/RTP, networking, and application incidents across a business VoIP environment. Investigate call setup and quality issues with Wireshark, check firewall/NAT behaviour, troubleshoot REST API and HTTP failures, and create reproducible Jira escalations with supporting evidence.
+
+- **Software Support Associate — Global Management Services**  
+  *June 2022 – December 2023*  
+  Supported enterprise web applications built with JavaScript, Node.js, and React.js. Used browser developer tools, application logs, and Postman to investigate issues, and managed customer incidents through Jira and ServiceNow.
+
+## Connect
+
+- **Portfolio:** https://sajidmanzoor730.github.io/sajid-portfolio/
+- **GitHub:** https://github.com/sajidmanzoor730
+- **LinkedIn:** https://www.linkedin.com/in/sajid-manzoor-730zz/
 
 ---
 
-Built by Sajid Manzoor
+*Built and maintained by Sajid Manzoor.*
