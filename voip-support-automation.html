@@ -7,8 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <title>VoIP Support Automation Toolkit | Sajid Manzoor</title>
-  <meta name="description" content="A VoIP support-engineering toolkit for investigating SIP, RTP, signaling, media, API and network issues using public Wireshark sample captures.">
+  <title>Support Automation Toolkit | Sajid Manzoor</title>
+  <meta name="description" content="Small Python and Bash examples for the first steps of an API or log investigation, using sample data.">
   <style>
 :root{
   --navy:#EAF0FF;--blue:#5B83FF;--sky:rgba(91,131,255,.14);--text:#EAF0FF;
@@ -54,86 +54,71 @@ a:focus-visible{outline:3px solid #FFB547;outline-offset:3px;border-radius:6px}
 .footer-note{margin-top:30px;color:var(--muted);font-size:13px}
 @media(max-width:760px){main{width:min(100% - 28px,1120px);padding:58px 0}.metrics{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}section{margin-top:45px}h2{font-size:30px}}
 @media(max-width:520px){.metrics{grid-template-columns:1fr}h1{font-size:38px}th,td{padding:10px;font-size:12px}}
+.code{margin:0;padding:18px 20px;background:#080D22;border:1px solid var(--line);border-radius:12px;color:#EAF0FF;font:13px/1.7 Consolas,monospace;overflow:auto}
+.btn{display:inline-flex}
 </style>
 </head>
 <body>
 <main>
   <a class="back" href="index.html#work">← Back to portfolio</a>
-  <div class="eyebrow">Support Engineering • Evidence Workspace</div>
-  <h1>VoIP Support Automation Toolkit</h1>
-  <p class="subtitle">A practical VoIP support-engineering toolkit for investigating SIP, RTP, signaling, media, API, and network issues using structured evidence and repeatable troubleshooting workflows.</p>
+  <div class="eyebrow">Support Engineering • Investigation Toolkit</div>
+  <h1>Support Automation Toolkit</h1>
+  <p class="subtitle">Small Python and Bash examples for the first steps of an API or log investigation: counting errors, checking an API's health and querying the data behind a problem.</p>
   <div class="actions">
-    <a class="btn pri" href="https://github.com/sajidmanzoor730/voip-support-automation" target="_blank" rel="noopener">View on GitHub</a>
+    <a class="btn pri" href="https://github.com/sajidmanzoor730/support-automation-toolkit" target="_blank" rel="noopener">View on GitHub</a>
     <a class="btn sec" href="index.html#work">Back to projects</a>
   </div>
-  <div class="source-note"><strong>Data provenance:</strong> This project uses publicly available Wireshark VoIP sample captures and documented RTP statistics. The evidence shown here is not customer data, employer data, carrier data, or production telemetry.</div>
+  <div class="source-note"><strong>Data provenance:</strong> These are example scripts and queries working on sample data. They contain no employer or customer data, and they are demonstration code, not a production tool.</div>
 
   <section>
     <div class="metrics">
-      <div class="metric"><div class="metric-value">8</div><div class="metric-label">Public VoIP capture artifacts indexed</div></div>
-      <div class="metric"><div class="metric-value">3</div><div class="metric-label">Verified RTP frames in measurement set</div></div>
-      <div class="metric"><div class="metric-value">1.029 ms</div><div class="metric-label">Documented RTP interarrival jitter</div></div>
-      <div class="metric"><div class="metric-value">G.711</div><div class="metric-label">Verified RTP payload family</div></div>
+      <div class="metric"><div class="metric-value">3</div><div class="metric-label">API health checks: status code, response time, required fields</div></div>
+      <div class="metric"><div class="metric-value">2</div><div class="metric-label">Scripting languages: Python and Bash</div></div>
+      <div class="metric"><div class="metric-value">SQL</div><div class="metric-label">Error-frequency queries</div></div>
+      <div class="metric"><div class="metric-value">Postman</div><div class="metric-label">Collection for repeatable API checks</div></div>
     </div>
   </section>
 
   <section>
-    <h2>Public VoIP Evidence Inventory</h2>
-    <div class="panel">
-      <table>
-        <thead><tr><th>Capture</th><th>Protocol / Media</th><th>Evidence Type</th><th>Source</th></tr></thead>
-        <tbody>
-          <tr><td><strong>aaa.pcap</strong></td><td>SIP + RTP</td><td><span class="badge">Public Capture</span></td><td><a href="https://wiki.wireshark.org/SampleCaptures" target="_blank" rel="noopener">Wireshark</a></td></tr>
-          <tr><td><strong>SIP_CALL_RTP_G711</strong></td><td>SIP + RTP + G.711</td><td><span class="badge">Public Capture</span></td><td><a href="https://wiki.wireshark.org/SampleCaptures" target="_blank" rel="noopener">Wireshark</a></td></tr>
-          <tr><td><strong>SIP_DTMF2.cap</strong></td><td>SIP + RTP + DTMF</td><td><span class="badge">Public Capture</span></td><td><a href="https://wiki.wireshark.org/SampleCaptures" target="_blank" rel="noopener">Wireshark</a></td></tr>
-          <tr><td><strong>DTMFsipinfo.pcap</strong></td><td>SIP + DTMF / SIP INFO</td><td><span class="badge">Public Capture</span></td><td><a href="https://wiki.wireshark.org/SampleCaptures" target="_blank" rel="noopener">Wireshark</a></td></tr>
-          <tr><td><strong>sip-rtp-g711.pcap</strong></td><td>SIP + RTP + G.711</td><td><span class="badge">Public Capture</span></td><td><a href="https://wiki.wireshark.org/SampleCaptures" target="_blank" rel="noopener">Wireshark</a></td></tr>
-          <tr><td><strong>sip-rtp-g722.pcap</strong></td><td>SIP + RTP + G.722</td><td><span class="badge">Public Capture</span></td><td><a href="https://wiki.wireshark.org/SampleCaptures" target="_blank" rel="noopener">Wireshark</a></td></tr>
-          <tr><td><strong>sip-rtp-opus.pcap</strong></td><td>SIP + RTP + Opus</td><td><span class="badge">Public Capture</span></td><td><a href="https://wiki.wireshark.org/SampleCaptures" target="_blank" rel="noopener">Wireshark</a></td></tr>
-          <tr><td><strong>sip-tls-1.3-and-rtcp.zip</strong></td><td>SIP/TLS + RTCP</td><td><span class="badge">Public Capture</span></td><td><a href="https://wiki.wireshark.org/SampleCaptures" target="_blank" rel="noopener">Wireshark</a></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section>
-    <h2>Verified RTP Measurement</h2>
-    <div class="panel">
-      <table>
-        <thead><tr><th>Frame</th><th>Capture Time</th><th>RTP Timestamp</th><th>Payload</th><th>Clock</th><th>Jitter</th></tr></thead>
-        <tbody>
-          <tr><td>624</td><td>11:56:25.348411</td><td>1240</td><td>G.711 PCMA (8)</td><td>8000 Hz</td><td>0.000 ms</td></tr>
-          <tr><td>625</td><td>11:56:25.418358</td><td>1400</td><td>G.711 PCMA (8)</td><td>8000 Hz</td><td>0.000 ms</td></tr>
-          <tr><td>626</td><td>11:56:25.421891</td><td>1560</td><td>G.711 PCMA (8)</td><td>8000 Hz</td><td class="verified">1.029 ms</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section>
-    <h2>Support Investigation Workflow</h2>
+    <h2>Investigation Workflow</h2>
     <div class="grid">
-      <div class="card"><h3>1. SIP Signaling</h3><p>Inspect INVITE, response codes, registration, authentication, call setup and termination.</p><p>Example filter: <code>sip</code></p></div>
-      <div class="card"><h3>2. RTP Media</h3><p>Check RTP streams, packet sequence, timing, payload type, jitter and media direction.</p><p>Example filter: <code>rtp</code></p></div>
-      <div class="card"><h3>3. Network Layer</h3><p>Investigate TCP retransmissions, DNS behavior, routing, NAT and possible firewall-related symptoms.</p><p>Example: <code>tcp.analysis.retransmission</code></p></div>
-      <div class="card"><h3>4. API Integration</h3><p>Validate HTTP status codes, authentication, authorization, request payloads and response data.</p><p>Example: <code>401</code> vs <code>403</code></p></div>
+      <div class="card"><h3>1. Read the logs</h3><p>Parse log files and count error codes to see which errors are most frequent before digging into any single one.</p></div>
+      <div class="card"><h3>2. Check the API</h3><p>Run a health check against an endpoint to confirm it responds, how quickly, and with the expected fields.</p></div>
+      <div class="card"><h3>3. Query the data</h3><p>Use SQL to group errors by type and see how often each one occurs.</p></div>
+      <div class="card"><h3>4. Hand off</h3><p>Collect the results into a short evidence summary that an engineer can act on without repeating the checks.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What Each Check Tells You</h2>
+    <div class="panel">
+      <table>
+        <thead><tr><th>Check</th><th>What it looks at</th><th>Question it answers</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Error-code count</strong></td><td>Log lines grouped by error code</td><td>Which errors are most frequent?</td></tr>
+          <tr><td><strong>Status code</strong></td><td>HTTP status of an API response</td><td>Is the endpoint up, and is it a client or server problem (4xx or 5xx)?</td></tr>
+          <tr><td><strong>Response time</strong></td><td>How long the API takes to answer</td><td>Is the slowness in the API?</td></tr>
+          <tr><td><strong>Required fields</strong></td><td>Expected fields in the response body</td><td>Is the response complete and in the agreed shape?</td></tr>
+          <tr><td><strong>SQL error frequency</strong></td><td>Error records grouped by type</td><td>What is the pattern behind the tickets?</td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
   <section>
     <h2>Toolkit Components</h2>
     <div class="grid">
-      <div class="card"><h3>Python SIP Parser</h3><p>Parses structured SIP support logs and extracts signaling events, response codes and media symptoms.</p><a href="https://github.com/sajidmanzoor730/voip-support-automation/blob/main/sip-parser/parse_sip_log.py" target="_blank" rel="noopener">View parser →</a></div>
-      <div class="card"><h3>SQL Investigation</h3><p>Queries the evidence inventory and RTP measurement dataset for repeatable support analysis.</p><a href="https://github.com/sajidmanzoor730/voip-support-automation/blob/main/sql/voip_metrics.sql" target="_blank" rel="noopener">View SQL →</a></div>
-      <div class="card"><h3>Wireshark Filters</h3><p>Practical SIP, RTP, DNS, TCP and TLS filters for packet-level investigation.</p><a href="https://github.com/sajidmanzoor730/voip-support-automation/blob/main/wireshark/voip-filters.md" target="_blank" rel="noopener">View filters →</a></div>
-      <div class="card"><h3>Ticket Automation</h3><p>JIRA and Zendesk triage design for categorizing VoIP incidents and preparing escalation packages.</p><a href="https://github.com/sajidmanzoor730/voip-support-automation/blob/main/automation/jira-zendesk-blueprint.md" target="_blank" rel="noopener">View automation blueprint →</a></div>
+      <div class="card"><h3>Python and Bash scripts</h3><p>Examples for log parsing and error counting.</p><a href="https://github.com/sajidmanzoor730/support-automation-toolkit" target="_blank" rel="noopener">Browse the repository →</a></div>
+      <div class="card"><h3>SQL queries</h3><p>Queries for error frequency analysis.</p><a href="https://github.com/sajidmanzoor730/support-automation-toolkit/tree/main/sql" target="_blank" rel="noopener">Browse the sql folder →</a></div>
+      <div class="card"><h3>Postman collection</h3><p>Repeatable API checks for status, timing and fields.</p><a href="https://github.com/sajidmanzoor730/support-automation-toolkit/tree/main/postman" target="_blank" rel="noopener">Browse the postman folder →</a></div>
+      <div class="card"><h3>Wireshark notes</h3><p>Packet-level reference for network investigation.</p><a href="https://github.com/sajidmanzoor730/support-automation-toolkit/tree/main/wireshark" target="_blank" rel="noopener">Browse the wireshark folder →</a></div>
     </div>
   </section>
 
   <section>
-    <div class="source-note"><strong>Evidence integrity:</strong> The public capture inventory and RTP measurements are sourced from Wireshark documentation. The SIP parser fixture is included only to demonstrate parsing logic. No customer records, private credentials, employer network information, or production monitoring data are represented in this portfolio.</div>
-    <div class="actions"><a class="btn pri" href="https://github.com/sajidmanzoor730/voip-support-automation" target="_blank" rel="noopener">View on GitHub</a><a class="btn sec" href="index.html#work">Back to projects</a></div>
-    <p class="footer-note">VoIP Support Automation Toolkit • Built for support engineering, troubleshooting and technical operations.</p>
+    <div class="source-note"><strong>Scope:</strong> This project is a set of small examples that show how I automate the first steps of a support investigation. It is not a monitoring system, and no performance figures are published for it.</div>
+    <div class="actions"><a class="btn pri" href="https://github.com/sajidmanzoor730/support-automation-toolkit" target="_blank" rel="noopener">View on GitHub</a><a class="btn sec" href="index.html#work">Back to projects</a></div>
+    <p class="footer-note">Support Automation Toolkit • Built for support engineering and troubleshooting.</p>
   </section>
 </main>
 </body>
