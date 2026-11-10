@@ -23,6 +23,10 @@ footer{padding:30px 0 42px;color:var(--muted);font-size:12px}footer .wrap{displa
 @media(max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:35px}.hero{padding:75px 0}.hero-art{max-width:650px;width:100%;margin:auto}.metrics{grid-template-columns:repeat(2,1fr)}.two,.evidence{grid-template-columns:1fr}.workflow{grid-template-columns:repeat(2,1fr)}.step:nth-child(2):after{display:none}}
 @media(max-width:580px){.wrap{width:calc(100% - 30px)}.nav{height:66px}.navlinks{gap:13px;font-size:11px}.navlinks a:nth-child(2),.navlinks a:nth-child(3){display:none}.hero{padding:58px 0}.hero-art{min-height:330px}.photo{inset:0 8px 25px 12px}.capture{padding:15px;width:95%}.capline{font-size:9px;grid-template-columns:54px 1fr auto}.float-tag{top:20px}.head{display:block}.intro{margin-top:13px}.metrics{gap:10px}.metric{padding:17px}.metric strong{font-size:27px}.workflow,.tools{grid-template-columns:1fr 1fr}.step{padding:16px}.step:not(:last-child):after{display:none}.donutwrap{gap:18px;flex-wrap:wrap}.donut{width:160px;height:160px}.barrow{grid-template-columns:92px 1fr 34px;gap:8px}.panel{padding:17px}section{padding:58px 0}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* Added evidence/demo components */
+.demo textarea{width:100%;min-height:190px;resize:vertical;background:#080d1d;border:1px solid var(--line2);border-radius:12px;color:var(--text);padding:15px;font:12px/1.8 var(--mono)}.demo textarea:focus{outline:2px solid var(--blue);outline-offset:2px}.demo-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:13px}.demo-btn{border:1px solid var(--line2);background:var(--card2);color:var(--text);border-radius:10px;padding:10px 14px;font:700 12px var(--font);cursor:pointer}.demo-btn:hover{border-color:var(--cyan)}.demo-output{margin-top:16px;min-height:90px;padding:15px;border:1px solid var(--line);border-radius:12px;background:#080d1d;color:var(--muted);font:12px/1.8 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere}.demo-output strong{color:var(--cyan)}.fineprint{font-size:11px;color:var(--muted);margin-top:13px}.checks{grid-template-columns:repeat(3,1fr)}.check{padding:20px}.check h3{font-size:14px;margin:0 0 7px}.check p{font-size:12px;color:var(--muted);margin:0}.check .status{display:inline-block;font:10px var(--mono);color:var(--amber);margin-bottom:12px}.method-list{display:grid;gap:13px}.method-list article{padding:15px 17px;border:1px solid var(--line);border-radius:12px;background:rgba(18,27,63,.45)}.method-list b{display:block;font-size:13px;margin-bottom:4px}.method-list p{margin:0;color:var(--muted);font-size:12px}
+@media(max-width:700px){.checks{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -79,7 +83,21 @@ rtcp
 <span class="c"># STUN / NAT investigation</span>
 stun</pre></article></div>
 </div></section>
-<section id="toolkit" class="reveal"><div class="wrap"><div class="head"><div><div class="kicker">04 / Repository contents</div><h2>Explore the working files.</h2></div><p class="intro">Open the actual source files to inspect the scripts, SQL and troubleshooting references behind this case study.</p></div>
+
+<section id="demo" class="reveal"><div class="wrap"><div class="head"><div><div class="kicker">04 / Try a sample</div><h2>Run a small SIP log demo.</h2></div><p class="intro">Paste log lines or load the clearly synthetic sample. The browser demo mirrors the parser's response-code and RTP/RTCP matching rules; it does not call a VoIP server.</p></div>
+<div class="grid two"><article class="panel demo"><div class="panel-title"><h3>Input · SIP trace text</h3><span class="source">LOCAL BROWSER DEMO</span></div><textarea id="sipInput" spellcheck="false" aria-label="SIP log input">2026-01-15 09:41:02 SIP/2.0 401 Unauthorized
+2026-01-15 09:41:03 SIP/2.0 403 Forbidden
+2026-01-15 09:41:04 RTP stream observed - no RTCP received
+2026-01-15 09:41:05 SIP/2.0 200 OK
+2026-01-15 09:41:06 SIP/2.0 486 Busy Here
+2026-01-15 09:41:07 SIP/2.0 401 Unauthorized</textarea><div class="demo-actions"><button class="demo-btn" id="runDemo" type="button">Analyse sample</button><button class="demo-btn" id="loadSample" type="button">Reload sample</button><button class="demo-btn" id="downloadCsv" type="button">Export CSV</button></div><p class="fineprint">Synthetic sample for demonstration only. Do not paste customer identifiers, phone numbers, credentials or confidential production logs into a public webpage.</p></article>
+<article class="panel"><div class="panel-title"><h3>Parser output</h3><span class="source">MATCH COUNTS</span></div><div class="demo-output" id="demoOutput" aria-live="polite">Select “Analyse sample” to process the example log.</div><div class="note" style="margin-top:15px"><strong>Interpretation:</strong> a SIP response code is a clue, not a root-cause diagnosis. A 401 can be part of a normal authentication challenge; inspect the full REGISTER exchange and credentials before classifying it as a fault.</div></article></div></div></section>
+<section id="methodology" class="reveal"><div class="wrap"><div class="head"><div><div class="kicker">05 / Measurement & validation</div><h2>What the evidence does—and doesn't—prove.</h2></div><p class="intro">A recruiter should be able to distinguish documented project outcomes, code-level checks and production measurements.</p></div>
+<div class="grid checks"><article class="check"><span class="status">DOCUMENTED FIGURES</span><h3>Reported impact</h3><p>The project notes state 40% repeatable L1 patterns, 35% lower manual effort, 28% KB/macro deflection and 95%+ CSAT. The notes do not specify sample size, measurement dates or calculation baselines.</p></article><article class="check"><span class="status">CONFIGURED TESTS</span><h3>API assertions</h3><p>The Postman collection defines checks for HTTP 200, response time below 500 ms, SIP registration and packet loss below 5%. No exported test run or live endpoint result is included here.</p></article><article class="check"><span class="status">QUERY EXAMPLES</span><h3>SQL reporting</h3><p>The SQL file includes a last-30-days issue-volume query plus CSAT/SLA and KB-link queries. A database schema, source extract and query execution output are not included.</p></article></div>
+<div class="panel" style="margin-top:17px"><div class="panel-title"><h3>Metric definitions to use when validating results</h3><span class="source">RECOMMENDED METHOD</span></div><div class="method-list"><article><b>Repeatable issue share</b><p>Count tickets matching the agreed repeatable categories ÷ all eligible L1 tickets in the same period × 100. The notes list 18% + 12% + 10% = 40%, but do not state the ticket denominator or period.</p></article><article><b>Manual effort reduction</b><p>(Baseline average handling minutes − post-automation average handling minutes) ÷ baseline average handling minutes × 100. Compare equivalent ticket types and disclose the observation windows.</p></article><article><b>KB / macro deflection</b><p>Count tickets demonstrably resolved through self-service or approved macros without agent escalation ÷ eligible support contacts × 100. Define what counts as deflection and avoid double-counting.</p></article><article><b>CSAT and SLA</b><p>Report the number of survey responses and average score for CSAT; report tickets resolved within the agreed SLA ÷ tickets eligible for that SLA. State the time window and exclusions.</p></article></div></div>
+<div class="note"><strong>Accuracy note:</strong> until a dated ticket export, baseline, denominator and test-run evidence are available, treat the percentages as figures reported in project notes—not independently reproducible results. No fabricated sample size, live API status or test pass rate is shown.</div></div></section>
+<section id="scope" class="reveal"><div class="wrap"><div class="head"><div><div class="kicker">06 / Scope & limitations</div><h2>Automation assists the engineer.</h2></div><p class="intro">The toolkit is an investigation aid, not an autonomous VoIP remediation platform.</p></div><div class="grid two"><article class="panel"><h3 style="margin-top:0">What it helps with</h3><div class="result"><div class="resultrow"><span>Count SIP response codes from a text log</span><b>SUPPORTED</b></div><div class="resultrow"><span>Flag the script's RTP / no-RTCP text pattern</span><b>HEURISTIC</b></div><div class="resultrow"><span>Run configured API assertions against a supplied endpoint</span><b>CONFIGURED</b></div><div class="resultrow"><span>Query ticket tables for reporting</span><b>QUERY EXAMPLES</b></div></div></article><article class="panel"><h3 style="margin-top:0">What still needs human validation</h3><div class="result"><div class="resultrow"><span>Confirm root cause from full SIP ladder and packet capture</span><b>ENGINEER</b></div><div class="resultrow"><span>Validate NAT, firewall, codec and RTP path</span><b>ENGINEER</b></div><div class="resultrow"><span>Supply credentials, endpoint and real database schema</span><b>SETUP</b></div><div class="resultrow"><span>Approve customer-impacting configuration changes</span><b>ENGINEER</b></div></div></article></div></div></section>
+\n<section id="toolkit" class="reveal"><div class="wrap"><div class="head"><div><div class="kicker">07 / Repository contents</div><h2>Explore the working files.</h2></div><p class="intro">Open the actual source files to inspect the scripts, SQL and troubleshooting references behind this case study.</p></div>
 <div class="grid tools">
 <article class="tool"><div class="toolicon">🐍</div><div><h3>SIP log parser</h3><p>Python script that counts SIP response codes, flags possible RTP/RTCP symptoms and exports an RCA CSV.</p><a href="https://github.com/sajidmanzoor730/support-automation-toolkit/blob/main/postman/sip_log_parser.py" target="_blank" rel="noopener">VIEW PYTHON FILE ↗</a></div></article>
 <article class="tool"><div class="toolicon">⌘</div><div><h3>VoIP API health collection</h3><p>Postman checks for registration, API response time, packet-loss threshold and authentication.</p><a href="https://github.com/sajidmanzoor730/support-automation-toolkit/blob/main/postman/voip-api-health.json" target="_blank" rel="noopener">VIEW POSTMAN JSON ↗</a></div></article>
@@ -92,5 +110,37 @@ stun</pre></article></div>
 <script>
 const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const sampleSipLog = `2026-01-15 09:41:02 SIP/2.0 401 Unauthorized
+2026-01-15 09:41:03 SIP/2.0 403 Forbidden
+2026-01-15 09:41:04 RTP stream observed - no RTCP received
+2026-01-15 09:41:05 SIP/2.0 200 OK
+2026-01-15 09:41:06 SIP/2.0 486 Busy Here
+2026-01-15 09:41:07 SIP/2.0 401 Unauthorized`;
+let latestCsv = 'SIP Code,Count,Action\\n';
+const input = document.getElementById('sipInput');
+const output = document.getElementById('demoOutput');
+function analyseSipLog(){
+  const raw = input.value || '';
+  const codes = raw.match(/SIP\\/2\\.0 (\\d{3})/g) || [];
+  const counts = {};
+  codes.forEach(item=>{const code=item.match(/(\\d{3})$/)[1];counts[code]=(counts[code]||0)+1;});
+  const noRtcp = (raw.match(/RTP.*no RTCP/g)||[]).length;
+  const rows = Object.keys(counts).sort().map(code=>{
+    const action = ['401','403'].includes(code)?'Check Auth':code==='486'?'Check NAT/Firewall':'Review';
+    return [code,counts[code],action];
+  });
+  latestCsv = 'SIP Code,Count,Action\\n'+rows.map(row=>row.join(',')).join('\\n')+'\\n';
+  output.textContent = 'SIP responses found: '+codes.length+'\\n'+
+    (rows.length ? rows.map(row=>'SIP '+row[0]+': '+row[1]+' · '+row[2]).join('\\n') : 'No SIP response codes matched.')+
+    '\\nPotential one-way-audio text matches: '+noRtcp+
+    '\\n\\nNote: these are text-pattern counts, not validated call diagnoses.';
+}
+document.getElementById('runDemo').addEventListener('click',analyseSipLog);
+document.getElementById('loadSample').addEventListener('click',()=>{input.value=sampleSipLog;analyseSipLog();});
+document.getElementById('downloadCsv').addEventListener('click',()=>{
+  const blob = new Blob([latestCsv],{type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');a.href=url;a.download='sip-demo-report.csv';a.click();URL.revokeObjectURL(url);
+});
 </script>
 </body></html>
