@@ -1,152 +1,96 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#07111f">
-  <meta name="description" content="A practical support engineering toolkit with Python and Bash log checks, SQL error analysis, Postman API tests and Wireshark investigation notes.">
-  <title>Support Automation Toolkit | Sajid Manzoor</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root{color-scheme:dark;--bg:#07111f;--panel:#0d1b2d;--panel2:#102239;--line:rgba(169,197,225,.14);--text:#edf5ff;--muted:#9db0c7;--blue:#6ea8fe;--cyan:#62e0d0;--green:#67ddb0;--shadow:0 24px 70px rgba(0,0,0,.28)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}
-    body{margin:0;background:radial-gradient(ellipse at 78% 0%,rgba(43,113,174,.2),transparent 34%),var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
-    a{color:inherit;text-decoration:none}a:focus-visible,button:focus-visible{outline:3px solid var(--cyan);outline-offset:4px}
-    .wrap{width:min(1160px,calc(100% - 44px));margin:auto}
-    .topbar{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;position:sticky;top:0;z-index:10;background:rgba(7,17,31,.84);backdrop-filter:blur(16px)}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.03em}.brand-mark{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,#4e91ef,#54d8c9);color:#07111f;font-weight:900}
-    .nav-links{display:flex;align-items:center;gap:25px;color:var(--muted);font-size:13px;font-weight:700}.nav-links a:hover,.back:hover{color:var(--cyan)}
-    .back{font-size:13px;color:var(--muted);font-weight:700}
-    .hero{padding:86px 0 70px;display:grid;grid-template-columns:1.04fr .96fr;gap:54px;align-items:center;min-height:590px}
-    .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--cyan);font:500 11px 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.15em}.dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 0 5px rgba(103,221,176,.12)}
-    h1{font-size:clamp(43px,6.1vw,76px);line-height:1.02;letter-spacing:-.065em;margin:20px 0 22px;max-width:700px}h1 span{color:var(--blue)}
-    .lead{font-size:17px;color:var(--muted);max-width:610px;line-height:1.8}
-    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 19px;border-radius:11px;font-size:13px;font-weight:800;transition:transform .2s,background .2s,border-color .2s}.btn:hover{transform:translateY(-3px)}.primary{background:var(--blue);color:#07111f}.primary:hover{background:#91bcff}.secondary{border:1px solid var(--line);background:rgba(255,255,255,.025)}.secondary:hover{border-color:rgba(98,224,208,.5)}
-    .hero-visual{position:relative;min-height:420px}.visual-photo{position:absolute;inset:0 28px 34px 30px;border-radius:25px;overflow:hidden;border:1px solid rgba(169,197,225,.22);box-shadow:var(--shadow);transform:rotate(1.5deg)}.visual-photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.78) brightness(.62)}.visual-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(7,17,31,.08),rgba(7,17,31,.72))}
-    .terminal{position:absolute;z-index:2;left:0;bottom:0;width:min(380px,88%);padding:20px 22px;border:1px solid rgba(169,197,225,.22);border-radius:16px;background:rgba(10,25,42,.94);box-shadow:var(--shadow);backdrop-filter:blur(12px);animation:float 6s ease-in-out infinite}.terminal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;color:var(--muted);font:11px 'DM Mono',monospace}.lights{display:flex;gap:5px}.lights i{width:7px;height:7px;border-radius:50%;background:#66819c}.terminal-line{font:12px/2 'DM Mono',monospace;color:#b6c9dd}.terminal-line b{color:var(--cyan);font-weight:500}.terminal-line em{color:var(--green);font-style:normal}
-    .floating-tag{position:absolute;z-index:3;right:0;top:48px;padding:11px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(13,27,45,.95);font:11px 'DM Mono',monospace;color:var(--cyan);box-shadow:var(--shadow);animation:float 5s ease-in-out infinite reverse}
-    .section{padding:72px 0;border-top:1px solid var(--line)}.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:30px}.kicker{color:var(--cyan);font:11px 'DM Mono',monospace;letter-spacing:.14em;text-transform:uppercase}.section h2{font-size:clamp(29px,4vw,43px);letter-spacing:-.05em;line-height:1.1;margin:10px 0 0}.section-intro{max-width:430px;color:var(--muted);font-size:14px;margin:0}
-    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat{padding:22px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,rgba(16,34,57,.9),rgba(13,27,45,.75));transition:transform .25s,border-color .25s}.stat:hover,.tool:hover,.step:hover{transform:translateY(-5px);border-color:rgba(110,168,254,.45)}.stat strong{display:block;font-size:30px;letter-spacing:-.05em}.stat span{font-size:12px;color:var(--muted)}
-    .workflow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.step{padding:23px 20px;border:1px solid var(--line);border-radius:15px;background:var(--panel);transition:transform .25s,border-color .25s}.step-num{font:12px 'DM Mono',monospace;color:var(--cyan)}.step h3,.tool h3{font-size:16px;margin:14px 0 8px}.step p,.tool p{font-size:13px;color:var(--muted);margin:0}.step-icon{width:39px;height:39px;border-radius:12px;display:grid;place-items:center;background:rgba(110,168,254,.12);color:var(--blue);font-size:18px}
-    .visual-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.feature-image{position:relative;min-height:300px;border-radius:18px;overflow:hidden;border:1px solid var(--line)}.feature-image img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;filter:brightness(.58) saturate(.75)}.image-caption{position:absolute;left:24px;right:24px;bottom:22px}.image-caption small{font:11px 'DM Mono',monospace;color:var(--cyan);text-transform:uppercase;letter-spacing:.12em}.image-caption h3{font-size:24px;letter-spacing:-.04em;margin:7px 0}.image-caption p{font-size:13px;color:#d1deec;margin:0;max-width:470px}
-    .check-list{display:grid;gap:12px}.check{display:flex;gap:14px;align-items:flex-start;padding:17px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}.check-icon{flex:0 0 32px;height:32px;border-radius:10px;background:rgba(98,224,208,.12);color:var(--cyan);display:grid;place-items:center;font-weight:800}.check strong{font-size:13px}.check p{margin:3px 0 0;font-size:12px;color:var(--muted)}
-    .tools{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.tool{display:flex;gap:17px;padding:22px;border:1px solid var(--line);border-radius:15px;background:var(--panel);transition:transform .25s,border-color .25s}.tool-icon{width:43px;height:43px;flex:0 0 43px;display:grid;place-items:center;border-radius:13px;background:rgba(110,168,254,.12);font-size:19px}.tool h3{margin:1px 0 6px}.tool p{margin-bottom:12px}.text-link{color:var(--cyan);font-size:12px;font-weight:800}
-    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:15px;background:var(--panel)}table{width:100%;border-collapse:collapse;min-width:650px}th,td{text-align:left;padding:15px 18px;border-bottom:1px solid var(--line);font-size:12px}th{color:var(--cyan);font:11px 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;background:rgba(255,255,255,.025)}td{color:var(--muted)}td:first-child{color:var(--text);font-weight:800}tr:last-child td{border:0}
-    .note{display:flex;gap:13px;padding:18px 20px;border:1px solid rgba(98,224,208,.2);border-radius:14px;background:rgba(98,224,208,.055);color:var(--muted);font-size:12px}.note strong{color:var(--text)}
-    .closing{padding:38px;border:1px solid var(--line);border-radius:20px;background:radial-gradient(circle at 90% 10%,rgba(110,168,254,.18),transparent 35%),var(--panel)}.closing h2{font-size:clamp(26px,4vw,38px);letter-spacing:-.05em;margin:8px 0}.closing p{font-size:14px;color:var(--muted);max-width:680px}
-    footer{padding:28px 0 40px;color:var(--muted);font-size:11px;border-top:1px solid var(--line);margin-top:65px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
-    .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
-    @media(max-width:850px){.hero{grid-template-columns:1fr;gap:20px;padding-top:65px}.hero-visual{min-height:390px}.workflow{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.visual-grid{grid-template-columns:1fr}.feature-image{min-height:260px}.section-head{align-items:flex-start;flex-direction:column;gap:12px}}
-    @media(max-width:560px){.wrap{width:min(100% - 30px,1160px)}.topbar{height:64px}.nav-links{gap:13px;font-size:11px}.nav-links a:nth-child(2){display:none}.hero{padding:52px 0 55px}.hero-visual{min-height:320px}.visual-photo{inset:0 8px 30px 12px}.terminal{width:90%;padding:15px}.floating-tag{top:25px}.stats,.workflow,.tools{grid-template-columns:1fr 1fr}.stat{padding:17px}.stat strong{font-size:25px}.step{padding:17px 14px}.tool{padding:16px;display:block}.tool-icon{margin-bottom:12px}.section{padding:55px 0}.closing{padding:25px 20px}}
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#060914">
+<meta name="description" content="VoIP support automation case study by Sajid Manzoor: SIP log parsing, API health checks, SQL support metrics and Wireshark troubleshooting.">
+<title>VoIP Support Automation | Sajid Manzoor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060914;--bg2:#0B1124;--card:#0D1430;--card2:#121B3F;--line:rgba(160,180,255,.14);--line2:rgba(160,180,255,.28);--text:#EAF0FF;--muted:#93A0C8;--blue:#5B83FF;--cyan:#35D3C6;--amber:#FFB547;--green:#3DDC97;--font:"Manrope","Segoe UI",Arial,sans-serif;--mono:"DM Mono",monospace;--ease:cubic-bezier(.22,.8,.24,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.7 var(--font);-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}a:focus-visible{outline:3px solid var(--amber);outline-offset:4px;border-radius:8px}.wrap{width:min(1160px,calc(100% - 48px));margin:auto}
+.nav{height:76px;position:sticky;top:0;z-index:20;background:rgba(6,9,20,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:12px;font-weight:800}.mark{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#06101F;font-size:14px}.navlinks{display:flex;gap:26px;align-items:center;color:var(--muted);font-size:13px;font-weight:700}.navlinks a:hover{color:var(--text)}.navlinks .back{color:var(--cyan)}
+.hero{position:relative;overflow:hidden;padding:104px 0 94px;border-bottom:1px solid var(--line);background:radial-gradient(850px 520px at 85% 8%,rgba(91,131,255,.2),transparent 65%),radial-gradient(620px 420px at 5% 90%,rgba(53,211,198,.1),transparent 70%)}.hero:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.22;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:62px 62px;mask-image:linear-gradient(90deg,transparent,#000)}.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.02fr .98fr;gap:54px;align-items:center}.eyebrow,.kicker{font:500 11px var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--cyan)}.eyebrow{display:flex;align-items:center;gap:10px}.pulse{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 6px rgba(61,220,151,.12)}h1{font-size:clamp(44px,5.8vw,72px);line-height:1.03;letter-spacing:-.06em;margin:22px 0 22px;font-weight:800}h1 span{background:linear-gradient(100deg,var(--blue),var(--cyan));background-clip:text;-webkit-background-clip:text;color:transparent}.lead{max-width:610px;color:var(--muted);font-size:17px;line-height:1.85}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;border-radius:12px;font-size:13px;font-weight:800;transition:.25s}.btn:hover{transform:translateY(-3px)}.primary{background:var(--blue);color:white}.primary:hover{background:#7595ff}.secondary{border:1px solid var(--line2);background:rgba(255,255,255,.025)}.secondary:hover{border-color:var(--cyan)}
+.hero-art{min-height:420px;position:relative}.photo{position:absolute;inset:0 18px 28px 28px;border-radius:25px;overflow:hidden;border:1px solid var(--line2);box-shadow:0 35px 80px rgba(0,0,0,.45);transform:rotate(1deg)}.photo img{width:100%;height:100%;object-fit:cover;filter:brightness(.46) saturate(.7)}.photo:after{content:"";position:absolute;inset:0;background:linear-gradient(130deg,rgba(6,9,20,.1),rgba(6,9,20,.85))}.capture{position:absolute;left:0;bottom:0;width:min(420px,94%);padding:19px 21px;border:1px solid var(--line2);border-radius:17px;background:rgba(13,20,48,.96);box-shadow:0 25px 60px rgba(0,0,0,.55)}.caphead{display:flex;justify-content:space-between;color:var(--muted);font:11px var(--mono);padding-bottom:13px;border-bottom:1px solid var(--line);margin-bottom:10px}.capline{display:grid;grid-template-columns:65px 1fr auto;gap:10px;font:11px/2 var(--mono);color:var(--muted)}.capline b{color:var(--cyan);font-weight:500}.capline em{font-style:normal;color:var(--green)}.float-tag{position:absolute;right:0;top:40px;background:var(--card2);border:1px solid var(--line2);border-radius:12px;padding:10px 14px;font:11px var(--mono);color:var(--cyan);box-shadow:0 16px 35px #0008}
+section{padding:82px 0;border-bottom:1px solid var(--line)}.head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:32px}.head h2{font-size:clamp(30px,4vw,45px);letter-spacing:-.05em;line-height:1.12;margin:10px 0 0}.intro{max-width:440px;color:var(--muted);font-size:14px;margin:0}.grid{display:grid;gap:16px}.metrics{grid-template-columns:repeat(4,1fr)}.metric,.panel,.step,.tool,.check{border:1px solid var(--line);background:linear-gradient(145deg,rgba(18,27,63,.88),rgba(13,20,48,.9));border-radius:18px}.metric{padding:23px}.metric strong{display:block;font-size:34px;letter-spacing:-.05em;line-height:1.2;background:linear-gradient(180deg,#fff,#9FB4FF);background-clip:text;-webkit-background-clip:text;color:transparent}.metric span{display:block;color:var(--muted);font-size:12px;margin-top:7px}.metric small{display:block;color:var(--cyan);font:10px var(--mono);margin-top:12px}
+.two{grid-template-columns:1.05fr .95fr;align-items:stretch}.panel{padding:25px}.panel-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:20px}.panel-title h3{font-size:16px;margin:0}.source{font:10px var(--mono);color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:5px 9px}.chart-legend{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:11px;margin-top:16px}.key{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;background:var(--blue)}.key.cyan{background:var(--cyan)}.barrow{display:grid;grid-template-columns:130px 1fr 44px;gap:12px;align-items:center;margin:19px 0;font-size:12px}.barlabel{color:var(--muted)}.track{height:11px;background:rgba(160,180,255,.1);border-radius:99px;overflow:hidden}.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--cyan))}.pct{font:11px var(--mono);text-align:right;color:var(--text)}.donutwrap{display:flex;align-items:center;justify-content:center;gap:30px;min-height:240px}.donut{width:190px;height:190px;border-radius:50%;background:conic-gradient(var(--blue) 0 18%,var(--cyan) 18% 30%,var(--amber) 30% 40%,rgba(160,180,255,.13) 40% 100%);position:relative;display:grid;place-items:center}.donut:before{content:"";position:absolute;inset:25px;border-radius:50%;background:var(--card)}.donutcenter{position:relative;text-align:center}.donutcenter b{display:block;font-size:32px;line-height:1.2}.donutcenter span{font:10px var(--mono);color:var(--muted)}.legend{display:grid;gap:13px;font-size:12px;color:var(--muted)}.legend span{display:flex;align-items:center;gap:9px}.swatch{width:9px;height:9px;border-radius:3px;flex:0 0 auto}.swatch.blue{background:var(--blue)}.swatch.cyan{background:var(--cyan)}.swatch.amber{background:var(--amber)}.swatch.gray{background:rgba(160,180,255,.35)}
+.workflow{grid-template-columns:repeat(4,1fr)}.step{padding:23px;position:relative}.stepnum{font:11px var(--mono);color:var(--cyan)}.stepicon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:rgba(91,131,255,.13);color:var(--blue);font-size:18px;margin:18px 0 13px}.step h3{font-size:16px;margin:0 0 7px}.step p{font-size:12px;color:var(--muted);margin:0}.step:not(:last-child):after{content:"→";position:absolute;right:-14px;top:47%;z-index:2;color:var(--cyan);font-size:18px}
+.evidence{grid-template-columns:1fr 1fr}.code{background:#080d1d;border:1px solid var(--line2);border-radius:15px;overflow:hidden}.codehead{padding:13px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;color:var(--muted);font:10px var(--mono)}pre{margin:0;padding:20px;overflow:auto;color:#b9c9ef;font:12px/1.9 var(--mono)}pre .c{color:var(--muted)}pre .g{color:var(--green)}pre .b{color:var(--cyan)}.result{display:grid;gap:10px}.resultrow{display:flex;justify-content:space-between;gap:15px;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:rgba(18,27,63,.55);font-size:12px}.resultrow span{color:var(--muted)}.resultrow b{font:11px var(--mono);color:var(--green)}
+.tools{grid-template-columns:repeat(2,1fr)}.tool{display:flex;gap:16px;padding:22px}.toolicon{width:44px;height:44px;flex:0 0 44px;border-radius:13px;display:grid;place-items:center;background:rgba(53,211,198,.1);color:var(--cyan);font-size:18px}.tool h3{margin:0 0 5px;font-size:15px}.tool p{margin:0 0 12px;color:var(--muted);font-size:12px}.tool a{color:var(--cyan);font-size:11px;font-weight:800}.note{margin-top:20px;padding:16px 18px;border:1px solid rgba(255,181,71,.24);border-radius:13px;background:rgba(255,181,71,.055);color:var(--muted);font-size:12px}.note strong{color:var(--amber)}
+footer{padding:30px 0 42px;color:var(--muted);font-size:12px}footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}footer a{color:var(--cyan)}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}.reveal.visible{opacity:1;transform:none}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:35px}.hero{padding:75px 0}.hero-art{max-width:650px;width:100%;margin:auto}.metrics{grid-template-columns:repeat(2,1fr)}.two,.evidence{grid-template-columns:1fr}.workflow{grid-template-columns:repeat(2,1fr)}.step:nth-child(2):after{display:none}}
+@media(max-width:580px){.wrap{width:calc(100% - 30px)}.nav{height:66px}.navlinks{gap:13px;font-size:11px}.navlinks a:nth-child(2),.navlinks a:nth-child(3){display:none}.hero{padding:58px 0}.hero-art{min-height:330px}.photo{inset:0 8px 25px 12px}.capture{padding:15px;width:95%}.capline{font-size:9px;grid-template-columns:54px 1fr auto}.float-tag{top:20px}.head{display:block}.intro{margin-top:13px}.metrics{gap:10px}.metric{padding:17px}.metric strong{font-size:27px}.workflow,.tools{grid-template-columns:1fr 1fr}.step{padding:16px}.step:not(:last-child):after{display:none}.donutwrap{gap:18px;flex-wrap:wrap}.donut{width:160px;height:160px}.barrow{grid-template-columns:92px 1fr 34px;gap:8px}.panel{padding:17px}section{padding:58px 0}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
 </head>
 <body>
-<header class="topbar">
-  <div class="wrap nav">
-    <a class="brand" href="index.html#work"><span class="brand-mark">SM</span><span>Sajid Manzoor</span></a>
-    <nav class="nav-links" aria-label="Page navigation">
-      <a href="#workflow">Workflow</a><a href="#toolkit">Toolkit</a><a href="#checks">Checks</a>
-      <a class="back" href="index.html#work">← Portfolio</a>
-    </nav>
-  </div>
-</header>
-<main class="wrap">
-  <section class="hero">
-    <div>
-      <a class="back" href="index.html#work">← Back to portfolio</a>
-      <div class="eyebrow" style="margin-top:28px"><span class="dot"></span> Support engineering · Practical toolkit</div>
-      <h1>Investigate faster.<br><span>Resolve smarter.</span></h1>
-      <p class="lead">A hands-on collection of small automation examples for support investigations — from parsing logs and checking API responses to analysing error patterns with SQL.</p>
-      <div class="actions">
-        <a class="btn primary" href="https://github.com/sajidmanzoor730/support-automation-toolkit" target="_blank" rel="noopener">Explore the GitHub repo ↗</a>
-        <a class="btn secondary" href="#workflow">See how it works ↓</a>
-      </div>
-    </div>
-    <div class="hero-visual" aria-label="Technical server and terminal illustration">
-      <div class="visual-photo"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=85" alt="Rows of illuminated server equipment"></div>
-      <div class="floating-tag">● SYSTEM CHECKS · READY</div>
-      <div class="terminal">
-        <div class="terminal-head"><span>support-toolkit / checks</span><span class="lights"><i></i><i></i><i></i></span></div>
-        <div class="terminal-line"><b>$</b> python api_health.py</div>
-        <div class="terminal-line">HTTP status ........ <em>200 OK</em></div>
-        <div class="terminal-line">Response fields .... <em>validated</em></div>
-        <div class="terminal-line">Result ............. <em>complete</em></div>
-      </div>
-    </div>
-  </section>
+<header class="nav"><div class="wrap"><a class="brand" href="index.html#top"><span class="mark">SM</span><span>Sajid Manzoor</span></a><nav class="navlinks" aria-label="Page navigation"><a href="#metrics">Metrics</a><a href="#workflow">Workflow</a><a href="#toolkit">Toolkit</a><a class="back" href="index.html#work">← Portfolio</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap">
+<div><div class="eyebrow"><i class="pulse"></i> Support engineering · VoIP automation</div><h1>Make support investigations <span>measurable.</span></h1><p class="lead">A practical VoIP support workflow combining SIP log parsing, API health checks, SQL-based ticket analysis and Wireshark filters. The goal: turn scattered troubleshooting signals into evidence an engineer can act on.</p><div class="actions"><a class="btn primary" href="https://github.com/sajidmanzoor730/support-automation-toolkit" target="_blank" rel="noopener">Explore source repository ↗</a><a class="btn secondary" href="#evidence">See technical evidence ↓</a></div></div>
+<div class="hero-art"><div class="photo"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1300&q=85" alt="Network server racks with illuminated status lights"></div><div class="float-tag">SIP · RTP · API · SQL</div><div class="capture"><div class="caphead"><span>sample_sip_trace.log</span><span>PACKET / RESPONSE VIEW</span></div><div class="capline"><b>09:41:02</b><span>SIP/2.0 401 Unauthorized</span><em>AUTH</em></div><div class="capline"><b>09:41:03</b><span>SIP REGISTER · retry</span><em>CHECK</em></div><div class="capline"><b>09:41:04</b><span>RTP stream · RTCP missing</span><em>MEDIA</em></div><div class="capline"><b>09:41:05</b><span>RCA row exported to CSV</span><em>DONE</em></div></div></div>
+</div></section>
+<section id="metrics" class="reveal"><div class="wrap"><div class="head"><div><div class="kicker">01 / Reported project indicators</div><h2>Support patterns, made visible.</h2></div><p class="intro">The project notes document repeatable VoIP issue categories and operational outcomes. These visuals restate those notes; they are not a live dashboard or independently verified telemetry.</p></div>
+<div class="grid metrics"><article class="metric"><strong>40%</strong><span>Of L1 volume described as repeatable patterns</span><small>PROJECT NOTES</small></article><article class="metric"><strong>35%</strong><span>Reduction in manual L1 effort reported</span><small>PROJECT NOTES</small></article><article class="metric"><strong>28%</strong><span>Ticket deflection attributed to KB and macros</span><small>PROJECT NOTES</small></article><article class="metric"><strong>95%+</strong><span>CSAT maintained, as documented</span><small>PROJECT NOTES</small></article></div>
+<div class="grid two" style="margin-top:18px">
+<article class="panel"><div class="panel-title"><h3>Repeatable issue mix</h3><span class="source">NOTES · 40% TOTAL</span></div><div class="donutwrap"><div class="donut"><div class="donutcenter"><b>40%</b><span>REPEATABLE</span></div></div><div class="legend"><span><i class="swatch blue"></i>SIP auth failures · 18%</span><span><i class="swatch cyan"></i>One-way audio / RTP · 12%</span><span><i class="swatch amber"></i>API auth failures · 10%</span><span><i class="swatch gray"></i>Other issue types · 60%</span></div></div></article>
+<article class="panel"><div class="panel-title"><h3>Documented workflow outcomes</h3><span class="source">REPORTED</span></div><div class="barrow"><span class="barlabel">Manual L1 effort</span><div class="track"><div class="fill" style="width:35%"></div></div><b class="pct">−35%</b></div><div class="barrow"><span class="barlabel">KB deflection</span><div class="track"><div class="fill" style="width:28%"></div></div><b class="pct">28%</b></div><div class="barrow"><span class="barlabel">CSAT</span><div class="track"><div class="fill" style="width:95%"></div></div><b class="pct">95%+</b></div><div class="barrow"><span class="barlabel">P1 response SLA</span><div class="track"><div class="fill" style="width:82%"></div></div><b class="pct">&lt;2h</b></div><div class="chart-legend"><span><i class="key"></i>Values transcribed from project notes; not a time-series dataset.</span></div></article>
+</div><div class="note"><strong>Data transparency:</strong> percentages above are stated in the repository's VoIP project notes. No raw ticket export or historical time series is included in the repository, so this page does not present invented daily counts, sample sizes or trend lines. <a href="https://github.com/sajidmanzoor730/support-automation-toolkit/blob/main/VOIP-SUPPORT-AUTOMATION.md" target="_blank" rel="noopener">Read the source notes ↗</a></div>
+</div></section>
+<section id="workflow" class="reveal"><div class="wrap"><div class="head"><div><div class="kicker">02 / Investigation flow</div><h2>From symptom to evidence.</h2></div><p class="intro">Each stage is represented in the repository through a script, query, API collection or packet-filter reference.</p></div>
+<div class="grid workflow"><article class="step"><div class="stepnum">STEP 01</div><div class="stepicon">⌁</div><h3>Parse SIP logs</h3><p>Extract SIP response codes and potential one-way-audio indicators from a log file.</p></article><article class="step"><div class="stepnum">STEP 02</div><div class="stepicon">⌘</div><h3>Validate APIs</h3><p>Test registration state, response time, call-quality fields and authentication responses.</p></article><article class="step"><div class="stepnum">STEP 03</div><div class="stepicon">▤</div><h3>Analyse tickets</h3><p>Use SQL to group issue types, calculate CSAT/SLA measures and inspect KB-linked deflection.</p></article><article class="step"><div class="stepnum">STEP 04</div><div class="stepicon">◉</div><h3>Inspect packets</h3><p>Apply SIP, RTP, RTCP and STUN display filters to narrow down network-side causes.</p></article></div>
+</div></section>
+<section id="evidence" class="reveal"><div class="wrap"><div class="head"><div><div class="kicker">03 / Technical evidence</div><h2>Actual project logic, not mock screenshots.</h2></div><p class="intro">These excerpts reflect files currently present in the linked toolkit repository. Example output is illustrative because no SIP capture or production log is published.</p></div>
+<div class="grid evidence"><article class="code"><div class="codehead"><span>postman / sip_log_parser.py</span><span>PYTHON</span></div><pre><span class="c"># Count SIP response codes</span>
+codes = re.findall(
+  r'SIP/2\\.0 (\\d{3})', content
+)
+print("Total SIP Responses:", len(codes))
 
-  <section class="section reveal" id="overview">
-    <div class="section-head"><div><div class="kicker">01 / At a glance</div><h2>Small tools. Clear signals.</h2></div><p class="section-intro">The toolkit focuses on repeatable first-line checks that help organise evidence before escalating an issue.</p></div>
-    <div class="stats">
-      <div class="stat"><strong>03</strong><span>API response checks</span></div>
-      <div class="stat"><strong>02</strong><span>Python and Bash examples</span></div>
-      <div class="stat"><strong>SQL</strong><span>Error-frequency analysis</span></div>
-      <div class="stat"><strong>Postman</strong><span>Repeatable API collection</span></div>
-    </div>
-  </section>
+<span class="c"># Flag potential one-way audio</span>
+one_way = len(re.findall(
+  r'RTP.*no RTCP', content
+))
 
-  <section class="section reveal" id="workflow">
-    <div class="section-head"><div><div class="kicker">02 / Method</div><h2>A simple investigation flow.</h2></div><p class="section-intro">Move from raw symptoms to a concise evidence summary with four practical steps.</p></div>
-    <div class="workflow">
-      <article class="step"><div class="step-icon">⌁</div><div class="step-num">STEP 01</div><h3>Inspect the logs</h3><p>Parse log lines and group error codes to identify recurring patterns.</p></article>
-      <article class="step"><div class="step-icon">⌘</div><div class="step-num">STEP 02</div><h3>Test the API</h3><p>Check the HTTP status, response time and expected response fields.</p></article>
-      <article class="step"><div class="step-icon">▤</div><div class="step-num">STEP 03</div><h3>Analyse with SQL</h3><p>Group error records by type to understand frequency and trends.</p></article>
-      <article class="step"><div class="step-icon">↗</div><div class="step-num">STEP 04</div><h3>Share evidence</h3><p>Bring the findings together so the next engineer can continue quickly.</p></article>
-    </div>
-  </section>
+<span class="g"># Export an RCA CSV for follow-up</span>
+writer.writerow(['SIP Code','Count','Action'])</pre></article>
+<div class="panel"><div class="panel-title"><h3>What the parser produces</h3><span class="source">OUTPUT FIELDS</span></div><div class="result"><div class="resultrow"><span>SIP response inventory</span><b>CODE + COUNT</b></div><div class="resultrow"><span>Authentication failures</span><b>401 / 403</b></div><div class="resultrow"><span>Potential media issue</span><b>RTP / RTCP</b></div><div class="resultrow"><span>Export format</span><b>CSV · RCA</b></div><div class="resultrow"><span>Suggested next step</span><b>AUTH / NAT / REVIEW</b></div></div><p style="color:var(--muted);font-size:11px;margin:17px 0 0">The script labels 401/403 for authentication checks and exports counts with a suggested action for investigation.</p></div>
+<article class="code"><div class="codehead"><span>postman / voip-api-health.json</span><span>POSTMAN TESTS</span></div><pre><span class="b">GET</span> /api/v1/sip/status
+✓ HTTP status is 200
+✓ Response time below 500 ms
+✓ SIP registered = true
 
-  <section class="section reveal" id="checks">
-    <div class="section-head"><div><div class="kicker">03 / Investigation</div><h2>What the checks reveal.</h2></div><p class="section-intro">Each check answers a focused troubleshooting question — without claiming to replace full monitoring or observability.</p></div>
-    <div class="visual-grid">
-      <div class="feature-image"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85" alt="Close-up of a printed circuit board and electronic components"><div class="image-caption"><small>Evidence-first troubleshooting</small><h3>Know what to investigate next.</h3><p>Use the first set of signals to narrow down the next useful diagnostic step.</p></div></div>
-      <div class="check-list">
-        <div class="check"><div class="check-icon">01</div><div><strong>Error-code count</strong><p>Which errors appear most frequently in the log sample?</p></div></div>
-        <div class="check"><div class="check-icon">02</div><div><strong>HTTP status</strong><p>Is the endpoint responding, and is the result a 4xx or 5xx?</p></div></div>
-        <div class="check"><div class="check-icon">03</div><div><strong>Response time</strong><p>How long does the endpoint take to return a response?</p></div></div>
-        <div class="check"><div class="check-icon">04</div><div><strong>Required fields</strong><p>Does the response contain the expected data structure?</p></div></div>
-        <div class="check"><div class="check-icon">05</div><div><strong>SQL error frequency</strong><p>Which error types stand out when records are grouped?</p></div></div>
-      </div>
-    </div>
-  </section>
+<span class="b">GET</span> /api/v1/calls/quality?last=1h
+✓ Packet loss below 5%
 
-  <section class="section reveal" id="toolkit">
-    <div class="section-head"><div><div class="kicker">04 / What's included</div><h2>Explore the toolkit.</h2></div><p class="section-intro">Open the project folders to review the examples and supporting material.</p></div>
-    <div class="tools">
-      <article class="tool"><div class="tool-icon">🐍</div><div><h3>Python &amp; Bash</h3><p>Log parsing and error-counting examples for quick investigation.</p><a class="text-link" href="https://github.com/sajidmanzoor730/support-automation-toolkit" target="_blank" rel="noopener">View repository ↗</a></div></article>
-      <article class="tool"><div class="tool-icon">▤</div><div><h3>SQL queries</h3><p>Queries that group error records and highlight frequent types.</p><a class="text-link" href="https://github.com/sajidmanzoor730/support-automation-toolkit/tree/main/sql" target="_blank" rel="noopener">Browse SQL folder ↗</a></div></article>
-      <article class="tool"><div class="tool-icon">⌘</div><div><h3>Postman collection</h3><p>Repeatable API checks for status, timing and required fields.</p><a class="text-link" href="https://github.com/sajidmanzoor730/support-automation-toolkit/tree/main/postman" target="_blank" rel="noopener">Browse Postman folder ↗</a></div></article>
-      <article class="tool"><div class="tool-icon">◉</div><div><h3>Wireshark notes</h3><p>Packet-level reference notes for network troubleshooting.</p><a class="text-link" href="https://github.com/sajidmanzoor730/support-automation-toolkit/tree/main/wireshark" target="_blank" rel="noopener">Browse Wireshark folder ↗</a></div></article>
-    </div>
-  </section>
+<span class="b">POST</span> /api/v1/auth/validate
+✓ Authentication returns 200</pre></article>
+<article class="code"><div class="codehead"><span>wireshark / filters.txt</span><span>DISPLAY FILTERS</span></div><pre><span class="c"># SIP registration / call failures</span>
+sip.Status-Code == 401 ||
+sip.Status-Code == 403 ||
+sip.Status-Code == 486
 
-  <section class="section reveal">
-    <div class="section-head"><div><div class="kicker">05 / Quick reference</div><h2>From check to insight.</h2></div></div>
-    <div class="table-wrap"><table><thead><tr><th>Check</th><th>Signal inspected</th><th>Question answered</th></tr></thead><tbody>
-      <tr><td>Error-code count</td><td>Log lines grouped by error code</td><td>Which errors occur most often?</td></tr>
-      <tr><td>HTTP status</td><td>API response status</td><td>Is it a client-side or server-side response?</td></tr>
-      <tr><td>Response time</td><td>Elapsed API response time</td><td>How quickly does the endpoint respond?</td></tr>
-      <tr><td>Required fields</td><td>Response body structure</td><td>Is the expected data present?</td></tr>
-      <tr><td>SQL frequency</td><td>Error records grouped by type</td><td>What patterns appear in the sample?</td></tr>
-    </tbody></table></div>
-  </section>
+<span class="c"># RTP / RTCP investigation</span>
+rtp && !rtcp
+rtcp
 
-  <section class="section reveal">
-    <div class="note"><span>ⓘ</span><div><strong>Project scope &amp; data provenance</strong><br>These are demonstration scripts and queries using sample data. They contain no employer or customer data. This is a collection of investigation examples, not a production monitoring system; no performance figures are claimed.</div></div>
-    <div style="margin-top:22px" class="closing"><div class="kicker">Want to inspect the implementation?</div><h2>See the code behind the workflow.</h2><p>Browse the repository for the scripts, SQL examples, Postman collection and Wireshark notes.</p><a class="btn primary" href="https://github.com/sajidmanzoor730/support-automation-toolkit" target="_blank" rel="noopener">Open GitHub project ↗</a></div>
-  </section>
-  <footer><span>© Sajid Manzoor · Support Automation Toolkit</span><a href="index.html#work">Return to portfolio ↑</a></footer>
+<span class="c"># STUN / NAT investigation</span>
+stun</pre></article></div>
+</div></section>
+<section id="toolkit" class="reveal"><div class="wrap"><div class="head"><div><div class="kicker">04 / Repository contents</div><h2>Explore the working files.</h2></div><p class="intro">Open the actual source files to inspect the scripts, SQL and troubleshooting references behind this case study.</p></div>
+<div class="grid tools">
+<article class="tool"><div class="toolicon">🐍</div><div><h3>SIP log parser</h3><p>Python script that counts SIP response codes, flags possible RTP/RTCP symptoms and exports an RCA CSV.</p><a href="https://github.com/sajidmanzoor730/support-automation-toolkit/blob/main/postman/sip_log_parser.py" target="_blank" rel="noopener">VIEW PYTHON FILE ↗</a></div></article>
+<article class="tool"><div class="toolicon">⌘</div><div><h3>VoIP API health collection</h3><p>Postman checks for registration, API response time, packet-loss threshold and authentication.</p><a href="https://github.com/sajidmanzoor730/support-automation-toolkit/blob/main/postman/voip-api-health.json" target="_blank" rel="noopener">VIEW POSTMAN JSON ↗</a></div></article>
+<article class="tool"><div class="toolicon">▤</div><div><h3>Support metrics SQL</h3><p>Queries for issue volume, CSAT, SLA compliance and knowledge-base linked deflection.</p><a href="https://github.com/sajidmanzoor730/support-automation-toolkit/blob/main/sql/support_metrics.sql" target="_blank" rel="noopener">VIEW SQL QUERIES ↗</a></div></article>
+<article class="tool"><div class="toolicon">◉</div><div><h3>Wireshark filter reference</h3><p>Display filters covering SIP status codes, RTP/RTCP, STUN and HTTP error responses.</p><a href="https://github.com/sajidmanzoor730/support-automation-toolkit/blob/main/wireshark/filters.txt" target="_blank" rel="noopener">VIEW FILTERS ↗</a></div></article>
+</div></div></section>
+<section class="reveal"><div class="wrap"><div class="panel" style="padding:34px;background:radial-gradient(650px 260px at 90% 0%,rgba(91,131,255,.18),transparent 65%),var(--card)"><div class="kicker">05 / Project summary</div><h2 style="font-size:clamp(28px,4vw,42px);letter-spacing:-.05em;margin:12px 0">A repeatable support investigation toolkit.</h2><p style="color:var(--muted);max-width:720px;font-size:14px">This project brings together log parsing, API validation, SQL reporting and packet-level checks. It demonstrates how technical support investigations can be made more consistent, traceable and easier to hand over.</p><div class="actions"><a class="btn primary" href="https://github.com/sajidmanzoor730/support-automation-toolkit" target="_blank" rel="noopener">View all source files ↗</a><a class="btn secondary" href="index.html#work">Back to portfolio</a></div></div></div></section>
 </main>
+<footer><div class="wrap"><span>© Sajid Manzoor · Technical Support Engineering</span><span>Built around source files in <a href="https://github.com/sajidmanzoor730/support-automation-toolkit" target="_blank" rel="noopener">support-automation-toolkit</a></span></div></footer>
 <script>
-  (function(){
-    const items=document.querySelectorAll('.reveal');
-    if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){items.forEach(el=>el.classList.add('visible'));return;}
-    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}}),{threshold:.12});
-    items.forEach(el=>observer.observe(el));
-  })();
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
-</body>
-</html>
+</body></html>
