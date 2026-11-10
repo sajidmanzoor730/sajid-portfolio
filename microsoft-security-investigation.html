@@ -29,6 +29,29 @@ section{margin-top:58px}.head{margin-bottom:20px}.head p,.card p,.step p{color:v
 @media(max-width:760px){main{width:calc(100% - 28px);padding-top:22px}.grid{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,1fr)}.kpis{grid-template-columns:repeat(2,1fr)}section{margin-top:46px}}
 @media(max-width:460px){.flow{grid-template-columns:1fr}.actions .btn{width:100%}.card{padding:18px}h1{font-size:42px}}
 
+/* Additional investigation-panel polish */
+.signal-panel{position:relative;overflow:hidden;padding:22px;border:1px solid rgba(91,131,255,.24);border-radius:18px;background:linear-gradient(135deg,rgba(18,27,63,.94),rgba(7,12,29,.98));box-shadow:0 24px 60px -42px rgba(53,211,198,.38)}
+.signal-panel::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(500px 180px at 50% 0%,rgba(91,131,255,.13),transparent 75%)}
+.signal-top,.signal-foot{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.signal-label{display:flex;align-items:center;gap:9px;color:#AFC1FF;font-size:10px;font-weight:800;letter-spacing:.13em}
+.signal-label i,.signal-key i{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px rgba(53,211,198,.8)}
+.signal-note,.signal-foot{color:var(--muted);font-size:11px}
+.signal-track{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:30px 0 24px}
+.signal-track::before{content:"";position:absolute;left:7%;right:7%;top:21px;height:2px;background:linear-gradient(90deg,rgba(91,131,255,.35),rgba(53,211,198,.55),rgba(91,131,255,.35))}
+.signal-track::after{content:"";position:absolute;top:19px;left:7%;width:13%;height:4px;border-radius:9px;background:var(--cyan);filter:blur(1px);box-shadow:0 0 13px rgba(53,211,198,.8);animation:signalTravel 6s ease-in-out infinite}
+.signal-node{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;min-width:0}
+.signal-icon{display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(91,131,255,.48);border-radius:13px;background:#101A3A;color:#B9C9FF;font-size:11px;font-weight:800;box-shadow:0 0 0 5px rgba(6,9,20,.8);transition:transform .25s,border-color .25s,background .25s}
+.signal-node b{font-size:12px;color:var(--text)}
+.signal-node small{font-size:10px;color:var(--muted)}
+.signal-node:hover .signal-icon{transform:translateY(-4px);border-color:var(--cyan);background:#142747}
+.signal-foot{padding-top:14px;border-top:1px solid var(--line)}
+.signal-foot strong{color:#D5DDF5}
+.signal-key{display:flex;align-items:center;gap:7px}
+@keyframes signalTravel{0%,8%{left:7%;opacity:.45}85%,100%{left:80%;opacity:.9}}
+@media(max-width:650px){.signal-panel{padding:17px}.signal-track{grid-template-columns:1fr;gap:14px;margin:22px 0}.signal-track::before{left:21px;right:auto;top:20px;bottom:20px;width:2px;height:auto;background:linear-gradient(180deg,rgba(91,131,255,.35),rgba(53,211,198,.55),rgba(91,131,255,.35))}.signal-track::after{left:19px;top:20px;width:4px;height:20%;animation:signalTravelVertical 6s ease-in-out infinite}.signal-node{display:grid;grid-template-columns:44px 1fr;grid-template-rows:auto auto;column-gap:13px;align-items:center;text-align:left}.signal-icon{grid-row:1/3}.signal-node b,.signal-node small{justify-self:start}.signal-note{font-size:10px}}
+@keyframes signalTravelVertical{0%,8%{top:20%;opacity:.45}85%,100%{top:78%;opacity:.9}}
+@media(prefers-reduced-motion:reduce){.signal-track::after{animation:none;display:none}}
+
 /* Motion and interaction polish */
 :root{scroll-padding-top:24px}
 body{overflow-x:hidden}
@@ -66,6 +89,20 @@ section .head{position:relative}.head .eyebrow{display:inline-flex;align-items:c
 </div>
 <div class="notice"><strong>Dataset and evidence disclosure:</strong> The alert records and KPI figures shown here are illustrative portfolio/lab data, not exports from a live Microsoft Defender or Sentinel tenant. KQL examples are query templates and must be validated against the actual workspace schema before use. This project does not claim production security incident response experience.</div>
 </header>
+<section class="signal-section">
+<div class="head"><div class="eyebrow">Inside the lab</div><h2>How an investigation moves</h2><p>A clear, repeatable path from an initial security signal to documented findings.</p></div>
+<div class="signal-panel">
+<div class="signal-top"><span class="signal-label"><i></i> INVESTIGATION WORKFLOW</span><span class="signal-note">Illustrative process · not a live feed</span></div>
+<div class="signal-track" aria-label="Alert source, triage, evidence review, KQL analysis, documented outcome">
+<div class="signal-node"><span class="signal-icon">01</span><b>Alert source</b><small>Detection received</small></div>
+<div class="signal-node"><span class="signal-icon">02</span><b>Triage</b><small>Assess priority</small></div>
+<div class="signal-node"><span class="signal-icon">03</span><b>Evidence</b><small>Review context</small></div>
+<div class="signal-node"><span class="signal-icon">04</span><b>KQL analysis</b><small>Explore events</small></div>
+<div class="signal-node"><span class="signal-icon">05</span><b>Outcome</b><small>Document findings</small></div>
+</div>
+<div class="signal-foot"><span> <strong>Focus:</strong> structured investigation and clear handover</span><span class="signal-key"><i></i> Process stage</span></div>
+</div>
+</section>
 <section>
 <div class="head"><div class="eyebrow">Lab snapshot</div><h2>What the sample investigation contains</h2><p>Summary values reported by the repository's illustrative dataset.</p></div>
 <div class="kpis">
