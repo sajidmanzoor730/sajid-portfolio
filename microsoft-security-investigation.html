@@ -75,6 +75,55 @@ section .head{position:relative}.head .eyebrow{display:inline-flex;align-items:c
 @keyframes orbitGlow{from{transform:translate3d(0,-5px,0) rotate(-8deg);opacity:.55}to{transform:translate3d(0,12px,0) rotate(8deg);opacity:1}}
 @media(max-width:760px){.hero::after{right:-4%;top:8%;opacity:.55}.card:hover,.step:hover,.kpi:hover{transform:translateY(-2px)}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal-ready .reveal{opacity:1;transform:none}}
+
+/* Match the Microsoft Security project card on the portfolio homepage */
+:root{
+  --panel:#171525;--panel2:#211B2C;--text:#F3EDF8;--muted:#A79BB7;
+  --blue:#FFC46B;--cyan:#D49BFF;--amber:#FFC46B;
+  --line:rgba(255,196,107,.16);
+}
+body{
+  background:
+    radial-gradient(900px 520px at 78% 5%,rgba(255,181,71,.10),transparent 65%),
+    radial-gradient(700px 480px at 8% 78%,rgba(212,155,255,.09),transparent 65%),
+    var(--bg);
+}
+body::before{
+  background-image:linear-gradient(rgba(255,196,107,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,196,107,.035) 1px,transparent 1px);
+}
+.hero::before{
+  background:radial-gradient(650px 360px at 82% 18%,rgba(255,181,71,.13),transparent 68%),radial-gradient(520px 360px at 10% 88%,rgba(212,155,255,.09),transparent 68%);
+}
+.hero::after{
+  border-color:rgba(255,181,71,.16);
+  box-shadow:0 0 0 22px rgba(255,181,71,.035),0 0 0 48px rgba(212,155,255,.025),inset 0 0 50px rgba(255,181,71,.06);
+}
+h1{background:linear-gradient(105deg,#fff 5%,#FFC46B 52%,#D49BFF 92%);background-clip:text;-webkit-background-clip:text;color:transparent}
+h2{background:linear-gradient(180deg,#fff 40%,#D8B7E8);-webkit-background-clip:text;background-clip:text}
+a{color:#D49BFF}
+.btn.primary{background:#6B8CFF;border-color:#6B8CFF}
+.btn.primary:hover{background:#829CFF}
+.notice{border-color:rgba(255,181,71,.25);background:rgba(255,181,71,.055)}
+.notice strong{color:#FFC46B}
+.card,.step,.kpi{background:linear-gradient(145deg,rgba(36,26,43,.96),rgba(17,23,42,.98))}
+.tag{border-color:rgba(255,196,107,.22);background:rgba(255,181,71,.09);color:#FFC46B}
+.signal-panel{border-color:rgba(255,196,107,.24);background:linear-gradient(145deg,rgba(36,26,43,.96),rgba(17,23,42,.98));box-shadow:0 24px 60px -42px rgba(212,155,255,.28)}
+.signal-panel::before{background:radial-gradient(500px 180px at 50% 0%,rgba(255,181,71,.12),transparent 75%)}
+.signal-track::before{background:linear-gradient(90deg,rgba(255,181,71,.35),rgba(212,155,255,.55),rgba(255,181,71,.35))}
+.signal-track::after{background:#FFC46B;box-shadow:0 0 13px rgba(255,196,107,.7)}
+.signal-icon{border-color:rgba(255,196,107,.38);background:#211B2C;color:#FFC46B}
+.signal-node:hover .signal-icon{border-color:#D49BFF;background:#2A2034}
+.signal-label i,.signal-key i{background:#D49BFF;box-shadow:0 0 12px rgba(212,155,255,.8)}
+.signal-foot strong{color:#F3EDF8}
+.code{background:#11101D;border-color:rgba(255,196,107,.16)}
+th{background:#211B2C;color:#FFC46B}
+.visual{background:#171525;border-color:rgba(255,196,107,.2)}
+.callout{border-left-color:#FFC46B;background:rgba(255,181,71,.055)}
+.scroll-progress span{background:linear-gradient(90deg,#FFC46B,#D49BFF);box-shadow:0 0 12px rgba(255,196,107,.55)}
+.btn:hover{box-shadow:0 10px 28px rgba(255,181,71,.16)}
+.card:hover,.step:hover,.kpi:hover{border-color:rgba(255,196,107,.38)}
+@media(max-width:650px){.signal-track::before{background:linear-gradient(180deg,rgba(255,181,71,.35),rgba(212,155,255,.55),rgba(255,181,71,.35))}}
+
 </style>
 </head>
 <body><main>
