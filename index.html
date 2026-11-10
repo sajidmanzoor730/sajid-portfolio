@@ -4,10 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sajid Manzoor | Technical Support Engineer</title>
-<meta name="portfolio-role" content="Technical Support Engineer">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <meta name="description" content="Technical Support Engineer with 4+ years of L2 experience across Node.js/React applications, REST APIs, networking and SIP/VoIP.">
 <meta property="og:title" content="Sajid Manzoor | Technical Support Engineer">
 <meta property="og:description" content="Technical Support Engineer: REST APIs, networking and SIP/VoIP troubleshooting.">
@@ -98,16 +94,17 @@ h1 .w i{display:inline-block;font-style:normal;transform:translateY(112%);animat
 .off,.off *,.off::before,.off::after{animation-play-state:paused!important}
 .bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px}
 .t1{grid-column:span 7}.t2{grid-column:span 5}.t3{grid-column:1/-1}
-.tile{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;min-height:300px;padding:34px;border-radius:26px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(18,27,63,.7),rgba(8,12,30,.7));text-decoration:none;transition:transform .45s var(--ease),border-color .3s}
+.tile{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;min-height:300px;padding:34px;border-radius:26px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(18,27,63,.7),rgba(8,12,30,.7));transition:transform .45s var(--ease),border-color .3s}
 .tile:hover,.tile:focus-visible{transform:translateY(-6px);border-color:var(--line2)}
 .tile::before{content:"";position:absolute;left:0;top:0;width:440px;height:440px;margin:-220px 0 0 -220px;z-index:-1;background:radial-gradient(closest-side,rgba(91,131,255,.26),transparent);opacity:0;transform:translate3d(var(--mx,220px),var(--my,220px),0);transition:opacity .35s;pointer-events:none}
 .tile:hover::before{opacity:1}
 .tile .tag{font-size:14px;font-weight:700;color:var(--cyan);margin-bottom:10px}
-.tile h3{font-weight:800;font-size:27px;line-height:1.15;letter-spacing:-.025em;margin:0 0 10px;padding-right:56px}
+.tile h3{font-weight:800;font-size:27px;line-height:1.15;letter-spacing:-.025em;margin:0 0 10px}
 .tile p{margin:0 0 20px;color:var(--muted);font-size:16px;max-width:42em}
 .viz{margin-top:auto}
 .arrow{position:absolute;top:28px;right:28px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;transition:transform .5s var(--ease),background .3s,color .3s}
 .tile:hover .arrow{transform:rotate(-45deg);background:var(--text);color:var(--bg)}
+.tbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.btn.sm{padding:10px 18px;font-size:15px}
 .pipe2{display:flex;flex-wrap:wrap;gap:8px}
 .pipe2 span{font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:rgba(61,220,151,.1);color:var(--green);border:1px solid rgba(61,220,151,.25)}
 .more2{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
@@ -217,24 +214,24 @@ footer a:hover{color:var(--text);text-decoration:underline}
   <h2 class="rv">Projects</h2>
   <p class="sub rv">Ordered by how closely they match day-to-day support work. All use public sample or synthetic data, and none contains employer or customer data.</p>
   <div class="bento">
-    <a class="tile t1 rv" href="https://github.com/sajidmanzoor730/voip-support-automation">
-      <span class="arrow" aria-hidden="true">↗</span><div class="tag">VoIP and network troubleshooting</div>
+    <article class="tile t1 rv"><div class="tag">VoIP and network troubleshooting</div>
       <h3>VoIP Support Automation Toolkit</h3>
       <p>A Python and SQL toolkit for VoIP support: SIP log parsing, SQL investigation queries, Postman API health checks, Wireshark workflows and an incident-triage runbook. Built from public SIP/RTP sample captures.</p>
       <div class="viz"><div class="pipe2"><span>Wireshark</span><span>Python + SQL</span><span>Postman</span><span>Incident runbook</span></div></div>
-    </a>
-    <a class="tile t2 rv" href="https://github.com/sajidmanzoor730/support-automation-toolkit" style="--d:.08s">
-      <span class="arrow" aria-hidden="true">↗</span><div class="tag">API and log investigation</div>
+      <div class="tbtns"><a class="btn pri sm" href="voip-support-automation.html">Read case study</a><a class="btn sec sm" href="https://github.com/sajidmanzoor730/voip-support-automation">GitHub</a></div>
+    </article>
+    <article class="tile t2 rv" style="--d:.08s"><div class="tag">API and log investigation</div>
       <h3>Support Automation Toolkit</h3>
       <p>Python and Bash examples for parsing logs and counting error codes, SQL queries for error frequency, and API health checks covering status codes, response time and required fields.</p>
       <div class="viz"><div class="pipe2"><span>Python</span><span>Bash</span><span>SQL</span><span>Postman</span></div></div>
-    </a>
-    <a class="tile t3 rv" href="https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard" style="--d:.12s">
-      <span class="arrow" aria-hidden="true">↗</span><div class="tag">Support operations and KPIs</div>
+      <div class="tbtns"><a class="btn pri sm" href="support-automation-toolkit.html">Read case study</a><a class="btn sec sm" href="https://github.com/sajidmanzoor730/support-automation-toolkit">GitHub</a></div>
+    </article>
+    <article class="tile t3 rv" style="--d:.12s"><div class="tag">Support operations and KPIs</div>
       <h3>Helpdesk KPI Dashboard</h3>
       <p>Cleans a raw ticket export (1,020 rows down to 1,000 unique tickets) and reports SLA adherence, CSAT and repeat-ticket rate in an interactive Streamlit dashboard. Uses a synthetic practice dataset.</p>
       <div class="viz"><div class="pipe2"><span>Python</span><span>Pandas</span><span>Streamlit</span><span>SLA · CSAT</span></div></div>
-    </a>
+      <div class="tbtns"><a class="btn pri sm" href="helpdesk-kpi-dashboard.html">Read case study</a><a class="btn sec sm" href="https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard">GitHub</a><a class="btn sec sm" href="https://hedesk-dashboard.streamlit.app/">Live demo</a></div>
+    </article>
   </div>
   <div class="more2 rv"><a class="btn pri" href="https://hedesk-dashboard.streamlit.app/">Open the live dashboard</a><a class="btn sec" href="https://github.com/sajidmanzoor730">See all on GitHub</a><span class="note">The live dashboard runs on a free tier and can take about 30 seconds to wake up.</span></div>
 </div></section>
