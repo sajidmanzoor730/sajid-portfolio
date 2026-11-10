@@ -114,6 +114,24 @@ h1 .w i{display:inline-block;font-style:normal;transform:translateY(112%);animat
 .toolkit-log div{display:flex;gap:9px;align-items:center}.toolkit-log time{color:#7787B1}.toolkit-log strong{font-size:9px;letter-spacing:.06em;color:#F0B875}.toolkit-log .ok{color:#45D6C7}
 .toolkit-status{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 12px 12px}.toolkit-status div{padding:9px 10px;border-radius:8px;background:rgba(107,140,255,.08);border:1px solid rgba(160,180,255,.12)}.toolkit-status small{display:block;color:#8292BA;font-size:8px;font-weight:800;letter-spacing:.08em}.toolkit-status b{display:block;margin-top:4px;color:#EAF0FF;font:700 12px Consolas,monospace}.toolkit-status b i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#45D6C7;vertical-align:middle;margin-right:4px}
 @media(max-width:460px){.toolkit-status{grid-template-columns:1fr 1fr}.toolkit-status div:last-child{grid-column:1/-1}}
+.toolkit-tile{background:linear-gradient(145deg,#102B32 0%,#0C1D2A 52%,#10172B 100%);border-color:rgba(53,211,198,.3)}
+.toolkit-tile::after{content:"";position:absolute;right:-95px;top:105px;width:230px;height:230px;border:1px solid rgba(53,211,198,.13);border-radius:50%;box-shadow:0 0 0 24px rgba(53,211,198,.035),0 0 0 48px rgba(53,211,198,.025);pointer-events:none;z-index:-1}
+.toolkit-tile .tag{color:#65E4D7}
+.toolkit-tile .arrow{border-color:rgba(101,228,215,.35)}
+.toolkit-board{padding:16px;border-radius:16px;background:linear-gradient(135deg,#E5F7F2,#D5ECE7);color:#123A3B;box-shadow:0 16px 32px rgba(0,0,0,.22);border:1px solid rgba(220,255,248,.65)}
+.toolkit-board-head,.toolkit-board-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:9px;font-weight:900;letter-spacing:.12em;color:#527A76}
+.toolkit-board-head b{padding:4px 7px;border-radius:5px;background:#C3E5DC;color:#28756A;font-size:8px}
+.toolkit-flow{display:grid;grid-template-columns:1fr;gap:5px;margin:14px 0}
+.toolkit-step{display:flex;align-items:center;gap:11px;padding:9px 11px;border:1px solid rgba(34,112,100,.14);border-radius:10px;background:rgba(255,255,255,.72)}
+.toolkit-step>strong{font:800 17px/1 Consolas,monospace;color:#1B9A88}
+.toolkit-step span{display:grid;gap:1px}.toolkit-step span b{font-size:12px;color:#153F3D}.toolkit-step span small{font-size:10px;color:#62817C}
+.toolkit-step em{margin-left:auto;font:800 9px Consolas,monospace;font-style:normal;letter-spacing:.08em;padding:5px 7px;border-radius:6px;background:#D9EEE8;color:#247A6D}
+.toolkit-connector{height:7px;width:1px;margin-left:24px;background:#55A99A}
+.toolkit-board-foot{padding-top:10px;border-top:1px solid rgba(34,112,100,.16);font-size:8px}
+.toolkit-board-foot span{display:flex;align-items:center;gap:6px;letter-spacing:.04em}
+.toolkit-board-foot i{width:6px;height:6px;border-radius:50%;background:#249B7C}
+.toolkit-board-foot b{color:#27796D}
+@media(max-width:460px){.toolkit-board{padding:12px}.toolkit-step{padding:8px 9px}}
 .more2{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .note{margin:0;font-size:14px;color:var(--muted)}
 .ap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;list-style:none;margin:0;padding:0;counter-reset:s}
@@ -227,21 +245,19 @@ footer a:hover{color:var(--text);text-decoration:underline}
       <div class="viz"><div class="pipe2"><span>Wireshark</span><span>Python + SQL</span><span>Postman</span><span>Incident runbook</span></div></div>
       <div class="tbtns"><a class="btn pri sm" href="voip-support-automation.html">Read case study</a><a class="btn sec sm" href="https://github.com/sajidmanzoor730/voip-support-automation">GitHub</a></div>
     </article>
-    <article class="tile t2 rv" style="--d:.08s"><div class="tag">API and log investigation</div>
+    <article class="tile t2 toolkit-tile rv" style="--d:.08s"><div class="tag">API and log investigation</div>
       <h3>Support Automation Toolkit</h3>
       <p>Python and Bash examples for parsing logs and counting error codes, SQL queries for error frequency, and API health checks covering status codes, response time and required fields.</p>
-      <div class="viz"><div class="toolkit-visual" role="img" aria-label="Illustrative support log console with sample error events and API check summary">
-        <div class="toolkit-bar"><i></i><i></i><i></i><span>support-toolkit / sample-output</span><b>EXAMPLE</b></div>
-        <div class="toolkit-log">
-          <div><time>09:41:02</time><strong>ERROR</strong><span>Token validation failed</span></div>
-          <div><time>09:41:05</time><strong>WARN</strong><span>Retry threshold reached</span></div>
-          <div><time>09:41:08</time><strong class="ok">INFO</strong><span>Health check completed</span></div>
+      <div class="viz"><div class="toolkit-board" role="img" aria-label="Illustrative three-stage support workflow showing log review, error filtering and API validation">
+        <div class="toolkit-board-head"><span>SUPPORT WORKFLOW</span><b>ILLUSTRATIVE</b></div>
+        <div class="toolkit-flow">
+          <div class="toolkit-step"><strong>01</strong><span><b>Collect</b><small>Application logs</small></span><em>LOG</em></div>
+          <div class="toolkit-connector"></div>
+          <div class="toolkit-step"><strong>02</strong><span><b>Investigate</b><small>Filter error patterns</small></span><em>PY</em></div>
+          <div class="toolkit-connector"></div>
+          <div class="toolkit-step"><strong>03</strong><span><b>Validate</b><small>Check API response</small></span><em>API</em></div>
         </div>
-        <div class="toolkit-status">
-          <div><small>API RESPONSE</small><b><i></i>200 OK</b></div>
-          <div><small>LATENCY CHECK</small><b>184 ms</b></div>
-          <div><small>ASSERTIONS</small><b>4 / 4 defined</b></div>
-        </div>
+        <div class="toolkit-board-foot"><span><i></i> Repeatable L1 checks</span><b>LOG → ACTION</b></div>
       </div></div>
       <div class="tbtns"><a class="btn pri sm" href="support-automation-toolkit.html">Read case study</a><a class="btn sec sm" href="https://github.com/sajidmanzoor730/support-automation-toolkit">GitHub</a></div>
     </article>
