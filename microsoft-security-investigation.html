@@ -28,6 +28,28 @@ section{margin-top:58px}.head{margin-bottom:20px}.head p,.card p,.step p{color:v
 .foot{margin-top:50px;padding-top:24px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;color:#9C93AC;font-size:12px}
 @media(max-width:760px){main{width:calc(100% - 28px);padding-top:22px}.grid{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,1fr)}.kpis{grid-template-columns:repeat(2,1fr)}section{margin-top:46px}}
 @media(max-width:460px){.flow{grid-template-columns:1fr}.actions .btn{width:100%}.card{padding:18px}h1{font-size:42px}}
+
+/* Motion and interaction polish */
+:root{scroll-padding-top:24px}
+body{overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.22;background-image:linear-gradient(rgba(204,180,235,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(204,180,235,.045) 1px,transparent 1px);background-size:54px 54px;mask-image:linear-gradient(to bottom,black,transparent 78%)}
+.hero{position:relative;isolation:isolate}
+.hero::after{content:"";position:absolute;z-index:-1;right:2%;top:2%;width:clamp(150px,28vw,310px);aspect-ratio:1;border:1px solid rgba(196,154,255,.18);border-radius:50%;box-shadow:0 0 0 22px rgba(196,154,255,.035),0 0 0 48px rgba(255,196,107,.025),inset 0 0 50px rgba(196,154,255,.08);animation:orbitGlow 9s ease-in-out infinite alternate}
+h1{background:linear-gradient(105deg,#fff 5%,#e4d4ff 48%,#ffd99e 85%);background-clip:text;-webkit-background-clip:text;color:transparent;animation:titleIn .85s cubic-bezier(.2,.75,.25,1) both}
+.hero .eyebrow,.hero .lead,.hero .actions,.hero .notice{animation:riseIn .7s both}.hero .eyebrow{animation-delay:.08s}.hero .lead{animation-delay:.18s}.hero .actions{animation-delay:.28s}.hero .notice{animation-delay:.38s}
+.btn{transition:transform .22s ease,box-shadow .22s ease,background .22s ease}.btn:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(154,112,206,.2);text-decoration:none}.btn.primary:hover{background:#ad86dc}
+.card,.step,.kpi,.visual,.table-wrap{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}.card:hover,.step:hover,.kpi:hover{transform:translateY(-5px);border-color:rgba(255,196,107,.38);box-shadow:0 16px 36px rgba(0,0,0,.22)}
+section .head{position:relative}.head .eyebrow{display:inline-flex;align-items:center;gap:9px}.head .eyebrow::before{content:"";width:18px;height:1px;background:var(--amber);box-shadow:0 0 10px rgba(255,196,107,.65)}
+.kpi b{font-variant-numeric:tabular-nums}.kpi{position:relative;overflow:hidden}.kpi::after{content:"";position:absolute;width:70px;height:70px;right:-32px;top:-32px;border-radius:50%;background:rgba(196,154,255,.09);transition:transform .35s}.kpi:hover::after{transform:scale(2.2)}
+.visual{transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}.visual:hover{transform:translateY(-3px);border-color:rgba(196,154,255,.42);box-shadow:0 18px 42px rgba(0,0,0,.25)}
+.reveal-ready .reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1)}.reveal-ready .reveal.is-visible{opacity:1;transform:translateY(0)}
+.reveal-ready .grid .card:nth-child(2),.reveal-ready .flow .step:nth-child(2){transition-delay:.08s}.reveal-ready .grid .card:nth-child(3),.reveal-ready .flow .step:nth-child(3){transition-delay:.16s}.reveal-ready .grid .card:nth-child(4),.reveal-ready .flow .step:nth-child(4){transition-delay:.24s}
+.scroll-progress{position:fixed;z-index:20;top:0;left:0;width:100%;height:3px;background:rgba(255,255,255,.05)}.scroll-progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--violet),var(--amber));box-shadow:0 0 12px rgba(196,154,255,.65)}
+@keyframes titleIn{from{opacity:0;transform:translateY(18px);filter:blur(7px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes riseIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@keyframes orbitGlow{from{transform:translate3d(0,-5px,0) rotate(-8deg);opacity:.55}to{transform:translate3d(0,12px,0) rotate(8deg);opacity:1}}
+@media(max-width:760px){.hero::after{right:-4%;top:8%;opacity:.55}.card:hover,.step:hover,.kpi:hover{transform:translateY(-2px)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal-ready .reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body><main>
@@ -105,4 +127,19 @@ section{margin-top:58px}.head{margin-bottom:20px}.head p,.card p,.step p{color:v
 </div>
 </section>
 <footer class="foot"><span>Built by Sajid Manzoor · Technical Support &amp; Security Operations</span><span><a href="index.html#work">Portfolio</a> · <a href="https://github.com/sajidmanzoor730/microsoft-security-lab">GitHub repository</a></span></footer>
-</main></body></html>
+</main><script>
+(function(){
+  const reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const bar=document.createElement('div');bar.className='scroll-progress';bar.setAttribute('aria-hidden','true');bar.innerHTML='<span></span>';document.body.appendChild(bar);
+  const fill=bar.firstElementChild;
+  function updateProgress(){const max=document.documentElement.scrollHeight-window.innerHeight;const value=max>0?(window.scrollY/max)*100:0;fill.style.width=value+'%';}
+  window.addEventListener('scroll',updateProgress,{passive:true});window.addEventListener('resize',updateProgress);updateProgress();
+  if(reduceMotion||!('IntersectionObserver' in window))return;
+  const targets=document.querySelectorAll('main section,.kpi,.card,.step,.visual,.table-wrap,.callout');
+  targets.forEach(el=>el.classList.add('reveal'));
+  document.body.classList.add('reveal-ready');
+  const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}});},{threshold:.12,rootMargin:'0px 0px -35px 0px'});
+  targets.forEach(el=>observer.observe(el));
+})();
+</script>
+</body></html>
