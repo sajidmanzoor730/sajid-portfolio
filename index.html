@@ -107,6 +107,13 @@ h1 .w i{display:inline-block;font-style:normal;transform:translateY(112%);animat
 .tbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.btn.sm{padding:10px 18px;font-size:15px}
 .pipe2{display:flex;flex-wrap:wrap;gap:8px}
 .pipe2 span{font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:rgba(61,220,151,.1);color:var(--green);border:1px solid rgba(61,220,151,.25)}
+.toolkit-visual{border:1px solid rgba(160,180,255,.2);border-radius:14px;overflow:hidden;background:#080D20;box-shadow:0 12px 28px rgba(0,0,0,.2)}
+.toolkit-bar{display:flex;align-items:center;gap:7px;padding:10px 13px;background:rgba(160,180,255,.07);border-bottom:1px solid rgba(160,180,255,.13);font:11px Consolas,monospace;color:#AAB9E9}
+.toolkit-bar i{width:7px;height:7px;border-radius:50%;background:#6B8CFF}.toolkit-bar i:nth-child(2){background:#E8B86B}.toolkit-bar i:nth-child(3){background:#45D6C7}.toolkit-bar span{margin-left:5px}.toolkit-bar b{margin-left:auto;color:#45D6C7;font-size:9px;letter-spacing:.08em}
+.toolkit-log{display:grid;gap:7px;padding:13px 14px;font:11px/1.5 Consolas,monospace;color:#C6D2F2}
+.toolkit-log div{display:flex;gap:9px;align-items:center}.toolkit-log time{color:#7787B1}.toolkit-log strong{font-size:9px;letter-spacing:.06em;color:#F0B875}.toolkit-log .ok{color:#45D6C7}
+.toolkit-status{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 12px 12px}.toolkit-status div{padding:9px 10px;border-radius:8px;background:rgba(107,140,255,.08);border:1px solid rgba(160,180,255,.12)}.toolkit-status small{display:block;color:#8292BA;font-size:8px;font-weight:800;letter-spacing:.08em}.toolkit-status b{display:block;margin-top:4px;color:#EAF0FF;font:700 12px Consolas,monospace}.toolkit-status b i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#45D6C7;vertical-align:middle;margin-right:4px}
+@media(max-width:460px){.toolkit-status{grid-template-columns:1fr 1fr}.toolkit-status div:last-child{grid-column:1/-1}}
 .more2{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .note{margin:0;font-size:14px;color:var(--muted)}
 .ap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;list-style:none;margin:0;padding:0;counter-reset:s}
@@ -223,7 +230,19 @@ footer a:hover{color:var(--text);text-decoration:underline}
     <article class="tile t2 rv" style="--d:.08s"><div class="tag">API and log investigation</div>
       <h3>Support Automation Toolkit</h3>
       <p>Python and Bash examples for parsing logs and counting error codes, SQL queries for error frequency, and API health checks covering status codes, response time and required fields.</p>
-      <div class="viz"><div class="pipe2"><span>Python</span><span>Bash</span><span>SQL</span><span>Postman</span></div></div>
+      <div class="viz"><div class="toolkit-visual" role="img" aria-label="Illustrative support log console with sample error events and API check summary">
+        <div class="toolkit-bar"><i></i><i></i><i></i><span>support-toolkit / sample-output</span><b>EXAMPLE</b></div>
+        <div class="toolkit-log">
+          <div><time>09:41:02</time><strong>ERROR</strong><span>Token validation failed</span></div>
+          <div><time>09:41:05</time><strong>WARN</strong><span>Retry threshold reached</span></div>
+          <div><time>09:41:08</time><strong class="ok">INFO</strong><span>Health check completed</span></div>
+        </div>
+        <div class="toolkit-status">
+          <div><small>API RESPONSE</small><b><i></i>200 OK</b></div>
+          <div><small>LATENCY CHECK</small><b>184 ms</b></div>
+          <div><small>ASSERTIONS</small><b>4 / 4 defined</b></div>
+        </div>
+      </div></div>
       <div class="tbtns"><a class="btn pri sm" href="support-automation-toolkit.html">Read case study</a><a class="btn sec sm" href="https://github.com/sajidmanzoor730/support-automation-toolkit">GitHub</a></div>
     </article>
     <article class="tile t3 rv" style="--d:.12s"><div class="tag">Support operations and KPIs</div>
