@@ -116,24 +116,24 @@ const sampleSipLog = `2026-01-15 09:41:02 SIP/2.0 401 Unauthorized
 2026-01-15 09:41:05 SIP/2.0 200 OK
 2026-01-15 09:41:06 SIP/2.0 486 Busy Here
 2026-01-15 09:41:07 SIP/2.0 401 Unauthorized`;
-let latestCsv = 'SIP Code,Count,Action\\n';
+let latestCsv = 'SIP Code,Count,Action\n';
 const input = document.getElementById('sipInput');
 const output = document.getElementById('demoOutput');
 function analyseSipLog(){
   const raw = input.value || '';
-  const codes = raw.match(/SIP\\/2\\.0 (\\d{3})/g) || [];
+  const codes = raw.match(/SIP\/2\.0 (\d{3})/g) || [];
   const counts = {};
-  codes.forEach(item=>{const code=item.match(/(\\d{3})$/)[1];counts[code]=(counts[code]||0)+1;});
+  codes.forEach(item=>{const code=item.match(/(\d{3})$/)[1];counts[code]=(counts[code]||0)+1;});
   const noRtcp = (raw.match(/RTP.*no RTCP/g)||[]).length;
   const rows = Object.keys(counts).sort().map(code=>{
     const action = ['401','403'].includes(code)?'Check Auth':code==='486'?'Check NAT/Firewall':'Review';
     return [code,counts[code],action];
   });
-  latestCsv = 'SIP Code,Count,Action\\n'+rows.map(row=>row.join(',')).join('\\n')+'\\n';
-  output.textContent = 'SIP responses found: '+codes.length+'\\n'+
-    (rows.length ? rows.map(row=>'SIP '+row[0]+': '+row[1]+' · '+row[2]).join('\\n') : 'No SIP response codes matched.')+
-    '\\nPotential one-way-audio text matches: '+noRtcp+
-    '\\n\\nNote: these are text-pattern counts, not validated call diagnoses.';
+  latestCsv = 'SIP Code,Count,Action\n'+rows.map(row=>row.join(',')).join('\n')+'\n';
+  output.textContent = 'SIP responses found: '+codes.length+'\n'+
+    (rows.length ? rows.map(row=>'SIP '+row[0]+': '+row[1]+' · '+row[2]).join('\n') : 'No SIP response codes matched.')+
+    '\nPotential one-way-audio text matches: '+noRtcp+
+    '\n\nNote: these are text-pattern counts, not validated call diagnoses.';
 }
 document.getElementById('runDemo').addEventListener('click',analyseSipLog);
 document.getElementById('loadSample').addEventListener('click',()=>{input.value=sampleSipLog;analyseSipLog();});
