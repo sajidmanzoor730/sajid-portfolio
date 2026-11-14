@@ -20,7 +20,7 @@
 <div class="eyebrow">Additional project · Email protocol diagnostics</div>
 <h1>SMTP/IMAP <span style="color:var(--cyan)">Troubleshooting Lab</span></h1>
 <p class="lead">A zero-dependency Python toolkit built around an L2 support workflow: determine whether an email connectivity or delivery failure is caused by DNS, TCP, TLS, authentication, transient server behavior or policy—and produce concrete next steps from the evidence.</p>
-<div class="actions"><a class="btn primary" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">View source on GitHub ↗</a><a class="btn secondary" href="index.html#work">Back to portfolio</a></div>
+<div class="actions"><a class="btn primary" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">Explore source on GitHub ↗</a><a class="btn secondary" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/demo/index.html" target="_blank" rel="noopener">Try interactive demo ↗</a><a class="btn secondary" href="index.html#work">Back to portfolio</a></div>
 </div></header>
 <main class="wrap">
 <section><div class="kicker">01 / What it does</div><h2>Diagnose the layer, not just the symptom.</h2>
@@ -63,6 +63,28 @@ maillab mock smtp --mode starttls_unavailable --port 2525
 maillab smtp 127.0.0.1 --port 2525 --mode starttls</pre>
 <div class="note"><strong>Scope and safety:</strong> use the probes only against mail servers and accounts you own or are authorized to test. Provider smoke testing requires separately configured, user-authorized credentials. The project uses local mock servers for its automated protocol-failure tests.</div>
 <div class="actions"><a class="btn primary" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">Explore repository ↗</a><a class="btn secondary" href="projects.html">Back to projects</a></div>
+</section>
+<section><div class="kicker">06 / Engineering design</div><h2>From protocol checks to a support-ready investigation.</h2>
+<div class="grid">
+<article class="card"><h3>Modular diagnostic layers</h3><p>Separate SMTP, IMAP, OAuth2 and CLI responsibilities keep protocol handling, credential acquisition and user-facing output easier to reason about and test.</p></article>
+<article class="card"><h3>Repeatable local reproduction</h3><p>Fault-injecting mock servers let the engineer reproduce protocol failures without relying on a live provider, customer mailbox or external network condition.</p></article>
+<article class="card"><h3>Incident-oriented output</h3><p>Diagnostic categories and next-step guidance are intended to help turn a raw socket or server response into a clear support investigation.</p></article>
+</div></section>
+<section><div class="kicker">07 / Security and verification</div><h2>Designed to keep diagnostics safe and honest.</h2>
+<div class="grid">
+<article class="card"><h3>Credential handling</h3><p>Passwords and tokens are supplied through environment variables; diagnostic transcripts redact authentication material. Avoid placing secrets in command history or shared logs.</p></article>
+<article class="card"><h3>TLS by default</h3><p>Certificate verification is enabled by default. Credentials are not sent over an unencrypted connection unless an explicit local-lab override is used.</p></article>
+<article class="card"><h3>Automated tests and CI</h3><p>Local regression tests cover protocol behavior, mock-server scenarios, CLI flows and OAuth2/XOAUTH2 paths. CI is configured across multiple Python versions.</p></article>
+</div>
+<div class="note"><strong>Provider validation:</strong> the optional Gmail and Microsoft 365 smoke-test workflow requires authorized test-mailbox secrets. Do not interpret local mock tests as proof of live-provider compatibility. OAuth2 support exchanges an already-issued refresh token; interactive consent and initial authorization-code flow are outside the current scope.</div>
+</section>
+<section><div class="kicker">08 / Technical documentation</div><h2>Go deeper into the implementation.</h2>
+<div class="grid">
+<article class="card"><h3>Architecture overview</h3><p>How the diagnostic components fit together and where the project boundaries sit.</p><p style="margin-top:12px"><a href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/docs/architecture.md" target="_blank" rel="noopener">Read architecture ↗</a></p></article>
+<article class="card"><h3>Incident playbooks</h3><p>Practical investigation steps for STARTTLS failures, SMTP AUTH rejection, relay denial and IMAP login problems.</p><p style="margin-top:12px"><a href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/docs/incident-playbooks.md" target="_blank" rel="noopener">Read playbooks ↗</a></p></article>
+<article class="card"><h3>Security policy</h3><p>Responsible reporting guidance and safe handling of diagnostic evidence.</p><p style="margin-top:12px"><a href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/SECURITY.md" target="_blank" rel="noopener">Read security policy ↗</a></p></article>
+</div>
+<div class="actions"><a class="btn primary" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/demo/index.html" target="_blank" rel="noopener">Open browser scenario explorer ↗</a><a class="btn secondary" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">View full repository ↗</a></div>
 </section>
 </main>
 <footer class="foot"><div class="wrap">© 2026 Sajid Manzoor · Technical Support · SMTP / IMAP Diagnostics</div></footer>
