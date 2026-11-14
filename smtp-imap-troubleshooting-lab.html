@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#060914">
+<meta name="description" content="SMTP/IMAP Troubleshooting Lab by Sajid Manzoor: Python diagnostics for email connectivity, TLS, authentication, OAuth2 and server-policy failures.">
+<title>SMTP/IMAP Troubleshooting Lab | Sajid Manzoor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060914;--bg2:#0B1124;--card:#0D1430;--card2:#121B3F;--line:rgba(160,180,255,.14);--line2:rgba(160,180,255,.28);--text:#EAF0FF;--muted:#93A0C8;--blue:#5B83FF;--cyan:#35D3C6;--amber:#FFB547;--green:#3DDC97;--font:"Manrope","Segoe UI",Arial,sans-serif;--mono:"DM Mono",monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(850px 520px at 85% 5%,rgba(53,211,198,.13),transparent 65%),var(--bg);color:var(--text);font:16px/1.7 var(--font)}a{color:inherit;text-decoration:none}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}.nav{height:72px;display:flex;align-items:center;border-bottom:1px solid var(--line);background:rgba(6,9,20,.88)}.nav .wrap{display:flex;justify-content:space-between;align-items:center}.brand{font-weight:800}.nav a:last-child{color:var(--cyan);font-size:13px;font-weight:700}.hero{padding:82px 0 68px;border-bottom:1px solid var(--line);background:radial-gradient(700px 400px at 80% 10%,rgba(53,211,198,.13),transparent 70%)}.eyebrow,.kicker{font:11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}h1{font-size:clamp(40px,6vw,68px);line-height:1.04;letter-spacing:-.055em;margin:18px 0}.lead{max-width:850px;color:#B4C0DF;font-size:18px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{display:inline-flex;padding:12px 18px;border-radius:11px;font-size:13px;font-weight:800}.primary{background:var(--blue)}.secondary{border:1px solid var(--line2)}section{padding:58px 0;border-bottom:1px solid var(--line)}h2{font-size:clamp(27px,4vw,40px);line-height:1.15;letter-spacing:-.04em;margin:8px 0 18px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{padding:22px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,var(--card2),var(--card))}.card h3{margin:0 0 8px;font-size:18px}.card p{margin:0;color:var(--muted);font-size:14px}.tag{display:inline-block;margin:0 6px 8px 0;padding:5px 9px;border:1px solid rgba(53,211,198,.24);border-radius:99px;color:var(--cyan);font-size:11px;font-weight:800}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.step{padding:17px;border:1px solid var(--line);border-radius:13px;background:var(--card)}.step b{display:block;color:var(--cyan);font:11px var(--mono);margin-bottom:8px}.step span{font-size:14px;font-weight:800}.step p{font-size:12px;color:var(--muted);margin:7px 0 0}.code{padding:18px;border:1px solid var(--line);border-radius:12px;background:#080D20;color:#C9D6F4;overflow:auto;font:12px/1.8 var(--mono);white-space:pre}.note{padding:17px 19px;border-left:3px solid var(--cyan);background:rgba(53,211,198,.06);color:#B8C8DF;border-radius:0 12px 12px 0;font-size:13px}.foot{padding:28px 0;color:var(--muted);font-size:12px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,1fr)}.hero{padding:58px 0}.lead{font-size:16px}}
+@media(max-width:440px){.flow{grid-template-columns:1fr}.actions .btn{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="wrap"><a class="brand" href="index.html">Sajid Manzoor</a><a href="projects.html">← All projects</a></div></nav>
+<header class="hero"><div class="wrap">
+<div class="eyebrow">Additional project · Email protocol diagnostics</div>
+<h1>SMTP/IMAP <span style="color:var(--cyan)">Troubleshooting Lab</span></h1>
+<p class="lead">A zero-dependency Python toolkit built around an L2 support workflow: determine whether an email connectivity or delivery failure is caused by DNS, TCP, TLS, authentication, transient server behavior or policy—and produce concrete next steps from the evidence.</p>
+<div class="actions"><a class="btn primary" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">View source on GitHub ↗</a><a class="btn secondary" href="index.html#work">Back to portfolio</a></div>
+</div></header>
+<main class="wrap">
+<section><div class="kicker">01 / What it does</div><h2>Diagnose the layer, not just the symptom.</h2>
+<div class="grid">
+<article class="card"><span class="tag">SMTP</span><h3>Outbound mail checks</h3><p>Walk through TCP connection, server banner, EHLO, STARTTLS or implicit TLS, authentication and recipient-envelope checks.</p></article>
+<article class="card"><span class="tag">IMAP</span><h3>Mailbox connectivity</h3><p>Probe IMAP over SSL or STARTTLS, inspect server responses and test password or XOAUTH2 authentication.</p></article>
+<article class="card"><span class="tag">Diagnosis</span><h3>Actionable failure mapping</h3><p>Classify reply codes and socket/TLS errors into network, TLS, authentication, policy or transient categories with recommended next steps.</p></article>
+</div></section>
+<section><div class="kicker">02 / Diagnostic workflow</div><h2>From connection attempt to evidence-based next step.</h2>
+<div class="flow">
+<div class="step"><b>01 · CONNECT</b><span>DNS + TCP</span><p>Check name resolution, reachability, timeouts and refused connections.</p></div>
+<div class="step"><b>02 · NEGOTIATE</b><span>SMTP / IMAP + TLS</span><p>Inspect protocol banners, capabilities, STARTTLS and certificate validation.</p></div>
+<div class="step"><b>03 · AUTHENTICATE</b><span>LOGIN / XOAUTH2</span><p>Exercise authentication safely; mask credentials and bearer tokens in transcripts.</p></div>
+<div class="step"><b>04 · CLASSIFY</b><span>Failure category</span><p>Map server replies and transport errors to likely causes and practical checks.</p></div>
+<div class="step"><b>05 · REPORT</b><span>Next action</span><p>Produce readable or JSON output that can support repeatable troubleshooting.</p></div>
+</div></section>
+<section><div class="kicker">03 / Safe reproduction</div><h2>Reproduce failures without depending on a live mail provider.</h2>
+<div class="grid">
+<article class="card"><h3>Fault-injecting mock servers</h3><p>Local SMTP and IMAP mocks reproduce unavailable STARTTLS, reset connections, authentication failures, relay denial, greylisting, banner errors and blackholed connections.</p></article>
+<article class="card"><h3>Security-conscious handling</h3><p>Passwords and OAuth2 tokens are read from environment variables, authentication payloads are redacted, TLS verification is enabled by default and credentials are blocked on unencrypted connections unless explicitly overridden for local lab use.</p></article>
+<article class="card"><h3>Read-only verification</h3><p>Probes do not send a message body. The SMTP envelope check stops after RCPT TO and issues RSET, avoiding message delivery during diagnostics.</p></article>
+</div></section>
+<section><div class="kicker">04 / Authentication and test coverage</div><h2>Modern authentication with repeatable local tests.</h2>
+<div class="grid">
+<article class="card"><h3>OAuth2 refresh exchange</h3><p>Exchanges an already-issued refresh token for a short-lived access token. Interactive consent, initial authorization-code handling and persistent token rotation are outside the toolkit's scope.</p></article>
+<article class="card"><h3>SMTP / IMAP XOAUTH2</h3><p>Supports bearer-token authentication flows for SMTP and IMAP, with token redaction in diagnostic transcripts.</p></article>
+<article class="card"><h3>Continuous integration</h3><p>The latest checked CI run passed the test suite on Python 3.11, 3.12 and 3.13, with 54 tests per version. Provider-specific Gmail and Microsoft 365 smoke tests are opt-in and have not been claimed as completed.</p></article>
+</div>
+</section>
+<section><div class="kicker">05 / Run it locally</div><h2>Quick start.</h2>
+<pre class="code">git clone https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab.git
+cd smtp-imap-troubleshooting-lab
+python3 -m pip install -e .
+
+# Explain a server reply
+maillab explain 454 "4.7.0 TLS not available"
+
+# Run the local mock and probe it
+maillab mock smtp --mode starttls_unavailable --port 2525
+maillab smtp 127.0.0.1 --port 2525 --mode starttls</pre>
+<div class="note"><strong>Scope and safety:</strong> use the probes only against mail servers and accounts you own or are authorized to test. Provider smoke testing requires separately configured, user-authorized credentials. The project uses local mock servers for its automated protocol-failure tests.</div>
+<div class="actions"><a class="btn primary" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">Explore repository ↗</a><a class="btn secondary" href="projects.html">Back to projects</a></div>
+</section>
+</main>
+<footer class="foot"><div class="wrap">© 2026 Sajid Manzoor · Technical Support · SMTP / IMAP Diagnostics</div></footer>
+</body></html>
