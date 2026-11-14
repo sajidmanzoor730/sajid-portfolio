@@ -1,91 +1,413 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#060914">
-<meta name="description" content="SMTP/IMAP Troubleshooting Lab by Sajid Manzoor: Python diagnostics for email connectivity, TLS, authentication, OAuth2 and server-policy failures.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SMTP/IMAP Troubleshooting Lab | Sajid Manzoor</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="description" content="SMTP/IMAP Troubleshooting Lab by Sajid Manzoor: Python diagnostics for email connectivity, TLS, authentication, OAuth2 and server-policy failures.">
+<link rel="canonical" href="https://sajidmanzoor730.github.io/sajid-portfolio/smtp-imap-troubleshooting-lab.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Sajid Manzoor">
+<meta property="og:url" content="https://sajidmanzoor730.github.io/sajid-portfolio/smtp-imap-troubleshooting-lab.html">
+<meta property="og:title" content="SMTP/IMAP Troubleshooting Lab | Sajid Manzoor">
+<meta property="og:description" content="Python diagnostics for email connectivity, TLS, authentication, OAuth2 and server-policy failures.">
+<meta property="og:image" content="https://sajidmanzoor730.github.io/sajid-portfolio/sajid.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#060914">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%235B83FF'/%3E%3Ctext x='16' y='22.5' font-size='17' font-family='Arial' font-weight='800' text-anchor='middle' fill='white'%3ESM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#060914;--bg2:#0B1124;--card:#0D1430;--card2:#121B3F;--line:rgba(160,180,255,.14);--line2:rgba(160,180,255,.28);--text:#EAF0FF;--muted:#93A0C8;--blue:#5B83FF;--cyan:#35D3C6;--amber:#FFB547;--green:#3DDC97;--font:"Manrope","Segoe UI",Arial,sans-serif;--mono:"DM Mono",monospace}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(850px 520px at 85% 5%,rgba(53,211,198,.13),transparent 65%),var(--bg);color:var(--text);font:16px/1.7 var(--font)}a{color:inherit;text-decoration:none}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}.nav{height:72px;display:flex;align-items:center;border-bottom:1px solid var(--line);background:rgba(6,9,20,.88)}.nav .wrap{display:flex;justify-content:space-between;align-items:center}.brand{font-weight:800}.nav a:last-child{color:var(--cyan);font-size:13px;font-weight:700}.hero{padding:82px 0 68px;border-bottom:1px solid var(--line);background:radial-gradient(700px 400px at 80% 10%,rgba(53,211,198,.13),transparent 70%)}.eyebrow,.kicker{font:11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}h1{font-size:clamp(40px,6vw,68px);line-height:1.04;letter-spacing:-.055em;margin:18px 0}.lead{max-width:850px;color:#B4C0DF;font-size:18px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{display:inline-flex;padding:12px 18px;border-radius:11px;font-size:13px;font-weight:800}.primary{background:var(--blue)}.secondary{border:1px solid var(--line2)}section{padding:58px 0;border-bottom:1px solid var(--line)}h2{font-size:clamp(27px,4vw,40px);line-height:1.15;letter-spacing:-.04em;margin:8px 0 18px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{padding:22px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,var(--card2),var(--card))}.card h3{margin:0 0 8px;font-size:18px}.card p{margin:0;color:var(--muted);font-size:14px}.tag{display:inline-block;margin:0 6px 8px 0;padding:5px 9px;border:1px solid rgba(53,211,198,.24);border-radius:99px;color:var(--cyan);font-size:11px;font-weight:800}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.step{padding:17px;border:1px solid var(--line);border-radius:13px;background:var(--card)}.step b{display:block;color:var(--cyan);font:11px var(--mono);margin-bottom:8px}.step span{font-size:14px;font-weight:800}.step p{font-size:12px;color:var(--muted);margin:7px 0 0}.code{padding:18px;border:1px solid var(--line);border-radius:12px;background:#080D20;color:#C9D6F4;overflow:auto;font:12px/1.8 var(--mono);white-space:pre}.note{padding:17px 19px;border-left:3px solid var(--cyan);background:rgba(53,211,198,.06);color:#B8C8DF;border-radius:0 12px 12px 0;font-size:13px}.foot{padding:28px 0;color:var(--muted);font-size:12px}
-@media(max-width:760px){.grid{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,1fr)}.hero{padding:58px 0}.lead{font-size:16px}}
-@media(max-width:440px){.flow{grid-template-columns:1fr}.actions .btn{width:100%;justify-content:center}}
+:root{--bg:#060914;--bg2:#0B1124;--card:#0D1430;--card2:#121B3F;--line:rgba(160,180,255,.14);--line2:rgba(160,180,255,.28);--text:#EAF0FF;--muted:#93A0C8;--blue:#5B83FF;--cyan:#35D3C6;--amber:#FFB547;--green:#3DDC97;--red:#FF746F;--font:"Manrope","Segoe UI",Helvetica,Arial,sans-serif;--mono:"DM Mono",Consolas,monospace;--ease:cubic-bezier(.22,.8,.24,1)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:10px}
+.skip{position:absolute;left:12px;top:-60px;background:var(--amber);color:#111;padding:10px 16px;border-radius:10px;z-index:100;font-weight:700;text-decoration:none}
+.skip:focus{top:12px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+.sec{padding:96px 0;position:relative}
+.alt{background:var(--bg2);border-block:1px solid var(--line)}
+.kicker{font:500 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+h2{font-weight:800;font-size:clamp(30px,4vw,46px);line-height:1.08;letter-spacing:-.035em;margin:0 0 14px;background:linear-gradient(180deg,#fff 40%,#9FB4FF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--muted);max-width:40em;margin:0 0 46px;font-size:19px}
+.bar{position:fixed;inset:0 0 auto 0;height:3px;z-index:60;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
+nav.stuck{background:rgba(7,11,26,.88);border-color:var(--line);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:18px;text-decoration:none}
+.logo b{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#06101F;font-size:14px}
+.links{display:flex;align-items:center;gap:4px}
+.links a{position:relative;text-decoration:none;color:var(--muted);font-weight:600;font-size:15px;padding:8px 12px;transition:color .25s}
+.links a:hover,.links a.on{color:var(--text)}
+.links a.back{color:var(--cyan);border:1px solid rgba(53,211,198,.35);border-radius:12px;margin-left:8px}
+.links a.back:hover{background:rgba(53,211,198,.08)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:14px;font-weight:700;font-size:16px;text-decoration:none;border:1px solid transparent;transition:transform .3s var(--ease),background .25s,border-color .25s}
+.btn.pri{background:var(--blue);color:#fff}
+.btn.pri:hover{transform:translateY(-3px);background:#6F92FF}
+.btn.sec{border-color:var(--line2);color:var(--text)}
+.btn.sec:hover{transform:translateY(-3px);border-color:var(--text);background:rgba(255,255,255,.04)}
+.hero{position:relative;isolation:isolate;overflow:hidden;padding:150px 0 100px}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(900px 520px at 80% 6%,rgba(53,211,198,.2),transparent 65%),radial-gradient(700px 480px at 6% 80%,rgba(91,131,255,.16),transparent 65%)}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;opacity:.35;-webkit-mask:radial-gradient(ellipse 70% 70% at 70% 35%,#000 20%,transparent 75%);mask:radial-gradient(ellipse 70% 70% at 70% 35%,#000 20%,transparent 75%)}
+.aur{position:absolute;z-index:-1;border-radius:50%;filter:blur(70px)}
+.a1{width:420px;height:420px;left:-140px;top:360px;background:#2F4BD8;opacity:.3;animation:aur1 18s ease-in-out infinite alternate}
+.a2{width:440px;height:440px;right:-60px;top:-80px;background:#1AA5A0;opacity:.28;animation:aur2 22s ease-in-out infinite alternate}
+@keyframes aur1{to{transform:translate3d(120px,-60px,0) scale(1.15)}}
+@keyframes aur2{to{transform:translate3d(-140px,90px,0) scale(1.2)}}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border:1px solid var(--line2);border-radius:999px;font-size:14px;font-weight:600;color:var(--muted);background:rgba(255,255,255,.03);margin-bottom:26px;opacity:0;animation:fade .7s ease forwards .1s}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--green);animation:ping 2.2s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 10px rgba(61,220,151,0)}0%{box-shadow:0 0 0 0 rgba(61,220,151,.6)}}
+@keyframes fade{to{opacity:1}}
+h1{font-weight:800;font-size:clamp(38px,5.4vw,68px);line-height:1.03;letter-spacing:-.05em;margin:0 0 26px}
+h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .04em .12em}
+h1 .w i{display:inline-block;font-style:normal;transform:translateY(112%);animation:rise .9s var(--ease) forwards;animation-delay:calc(var(--i)*90ms + 200ms)}
+h1 .cy{color:var(--cyan)}
+@keyframes rise{to{transform:none}}
+.lead{color:var(--muted);font-size:19px;max-width:32em;margin:0 0 34px;opacity:0;animation:fade .8s ease forwards .8s}
+.cta{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fade .8s ease forwards .95s}
+.ci{display:inline-block;margin-top:20px;line-height:0;opacity:0;animation:fade .8s ease forwards 1.1s}
+.ci img{height:22px;width:auto}
+.stack{position:relative;border:1px solid transparent;border-radius:26px;padding:26px;box-shadow:0 40px 80px -40px rgba(0,0,0,.8);background:linear-gradient(180deg,var(--card2),var(--card)) padding-box,linear-gradient(140deg,rgba(130,160,255,.7),rgba(53,211,198,.3) 40%,rgba(160,180,255,.1)) border-box;opacity:0;transform:translateY(34px);animation:up 1s var(--ease) forwards .4s}
+@keyframes up{to{opacity:1;transform:none}}
+.stack-h{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;margin-bottom:18px}
+.stack-h::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--green)}
+.stack-h em{margin-left:auto;font-style:normal;font-size:12px;font-weight:600;color:var(--amber);border:1px solid rgba(255,181,71,.4);padding:3px 10px;border-radius:999px}
+.lyr{display:flex;align-items:center;gap:14px;padding:12px 14px;margin-bottom:8px;border:1px solid var(--line);border-radius:14px;animation:scan 10s infinite;animation-delay:calc(var(--i)*2s)}
+.lyr>b{font:500 12px var(--mono);color:var(--cyan);width:28px}
+.lyr span{display:grid;line-height:1.3}
+.lyr span b{font-size:16px}
+.lyr span small{font-size:13px;color:var(--muted)}
+@keyframes scan{0%,16%{background:rgba(53,211,198,.14);border-color:rgba(53,211,198,.6)}20%,100%{background:transparent;border-color:var(--line)}}
+.stack-f{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.stack-f b{color:var(--text)}
+.stats{border-block:1px solid var(--line);background:var(--bg2)}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding-top:34px;padding-bottom:34px}
+.stats b{display:block;font-size:42px;line-height:1.1;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff,#9FB4FF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.stats span{display:block;color:var(--muted);font-size:14px;max-width:14em}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.grid4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.card{position:relative;isolation:isolate;overflow:hidden;padding:30px;border-radius:24px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(18,27,63,.7),rgba(8,12,30,.7));transition:transform .45s var(--ease),border-color .3s}
+.card:hover{transform:translateY(-6px);border-color:var(--line2)}
+.card::before{content:"";position:absolute;left:0;top:0;width:420px;height:420px;margin:-210px 0 0 -210px;z-index:-1;background:radial-gradient(closest-side,rgba(91,131,255,.24),transparent);opacity:0;transform:translate3d(var(--mx,210px),var(--my,210px),0);transition:opacity .35s;pointer-events:none}
+.card:hover::before{opacity:1}
+.ico{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;margin-bottom:18px;background:linear-gradient(135deg,rgba(91,131,255,.25),rgba(53,211,198,.2));border:1px solid var(--line2);color:var(--cyan)}
+.ico svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tag{display:inline-block;margin:0 0 10px;padding:4px 11px;border:1px solid rgba(53,211,198,.3);border-radius:999px;color:var(--cyan);font:500 12px var(--mono);letter-spacing:.06em}
+.card h3{font-weight:800;font-size:21px;line-height:1.25;letter-spacing:-.02em;margin:0 0 8px}
+.card p{margin:0;color:var(--muted);font-size:16px}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;list-style:none;margin:0;padding:0}
+.flow li{position:relative;padding:24px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(180deg,var(--card),var(--bg2))}
+.flow li>small{display:block;font:500 12px var(--mono);letter-spacing:.1em;color:var(--cyan);margin-bottom:10px}
+.flow li>b{display:block;font-size:18px;margin-bottom:6px;line-height:1.25}
+.flow li>span{color:var(--muted);font-size:15px;display:block}
+.flow li::after{content:"";position:absolute;top:44px;right:-17px;width:18px;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease) calc(var(--d,0s) + .45s)}
+.flow li.in::after{transform:scaleX(1)}
+.flow li:last-child::after{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.chips span{padding:8px 16px;border-radius:999px;border:1px solid var(--line2);font-size:14px;font-weight:600;font-family:var(--mono);transition:background .25s,border-color .25s}
+.chips span:hover{background:rgba(91,131,255,.16);border-color:var(--blue)}
+.lbl{color:var(--muted);font-size:14px;margin:36px 0 0;font-weight:600}
+.tblw{overflow-x:auto;border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,var(--card),var(--bg2))}
+table{width:100%;border-collapse:collapse;min-width:680px}
+th{font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);text-align:left;padding:16px 20px;border-bottom:1px solid var(--line)}
+td{padding:16px 20px;border-bottom:1px solid var(--line);font-size:15.5px;color:var(--muted);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td:first-child{font:500 15px var(--mono);color:var(--text);white-space:nowrap}
+.badge{display:inline-block;padding:3px 11px;border-radius:999px;font-size:13px;font-weight:700;border:1px solid}
+.b-net{color:#9FB4FF;border-color:rgba(159,180,255,.4);background:rgba(91,131,255,.12)}
+.b-tls{color:var(--cyan);border-color:rgba(53,211,198,.4);background:rgba(53,211,198,.1)}
+.b-auth{color:var(--amber);border-color:rgba(255,181,71,.4);background:rgba(255,181,71,.1)}
+.b-pol{color:var(--red);border-color:rgba(255,116,111,.4);background:rgba(255,116,111,.1)}
+.b-tra{color:var(--green);border-color:rgba(61,220,151,.4);background:rgba(61,220,151,.1)}
+.note{margin:26px 0 0;padding:18px 22px;border-left:3px solid var(--amber);background:rgba(255,181,71,.06);border-radius:0 14px 14px 0;color:#CBD5EE;font-size:15.5px}
+.note b{color:var(--text)}
+.note.cy{border-left-color:var(--cyan);background:rgba(53,211,198,.06)}
+.term{border:1px solid var(--line2);border-radius:18px;overflow:hidden;background:#080D20;box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.term-h{display:flex;align-items:center;gap:8px;padding:12px 16px;background:rgba(160,180,255,.07);border-bottom:1px solid var(--line);font:13px var(--mono);color:#AAB9E9}
+.term-h i{width:10px;height:10px;border-radius:50%;background:#6B8CFF}.term-h i:nth-child(2){background:#E8B86B}.term-h i:nth-child(3){background:#45D6C7}
+.term-h span{margin-left:8px}
+.copy{margin-left:auto;font:600 13px var(--font);color:var(--text);background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:9px;padding:6px 14px;cursor:pointer;transition:background .25s}
+.copy:hover{background:rgba(255,255,255,.1)}
+.term pre{margin:0;padding:22px 24px;font:14.5px/1.9 var(--mono);color:#C9D6F4;overflow-x:auto;min-height:290px}
+.term .cm{color:#7787B1}.term .pm{color:var(--green)}
+.term.out{margin-top:18px}
+.term.out pre{min-height:0;white-space:pre-wrap;word-break:break-word}
+.term .hd{color:var(--cyan);font-weight:500}.term .lb{color:var(--amber)}.term .lb2{color:var(--green)}
+.cur{display:inline-block;width:8px;height:1.1em;background:var(--cyan);vertical-align:text-bottom;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.docs a.card{display:block;text-decoration:none}
+.docs .go{display:inline-block;margin-top:16px;color:var(--cyan);font-weight:700;font-size:15px}
+.cp{position:relative;isolation:isolate;overflow:hidden;border-radius:32px;border:1px solid var(--line2);padding:64px 52px;background:linear-gradient(135deg,#0F1A4D,#0A1030 60%,#0B1F2E)}
+.cp::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(600px 340px at 90% 0%,rgba(91,131,255,.35),transparent 70%),radial-gradient(520px 320px at 0% 100%,rgba(53,211,198,.2),transparent 70%)}
+.cp h2{font-size:clamp(28px,4vw,48px);max-width:16em;-webkit-text-fill-color:#fff;background:none}
+.cp p{color:var(--muted);max-width:34em;margin:0 0 30px;font-size:18px}
+footer{padding:28px 0 44px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{text-decoration:none;margin-left:18px}
+footer a:hover{color:var(--text);text-decoration:underline}
+.js .rv{opacity:0;translate:0 30px;transition:opacity .8s ease var(--d,0s),translate .9s var(--ease) var(--d,0s)}
+.js .rv.in{opacity:1;translate:0 0}
+.off,.off *{animation-play-state:paused!important}
+@media (max-width:980px){
+  .sec{padding:72px 0}.wrap{padding:0 22px}
+  .hero{padding:118px 0 70px}.hero .wrap{grid-template-columns:1fr;gap:44px}
+  .grid3,.grid4{grid-template-columns:1fr}
+  .flow{grid-template-columns:repeat(2,minmax(0,1fr))}.flow li::after{display:none}
+  .stats .wrap{grid-template-columns:repeat(2,1fr)}
+  .links a:not(.back){display:none}
+  .cp{padding:44px 26px}
+}
+@media (max-width:560px){.flow{grid-template-columns:1fr}.stats b{font-size:34px}.cta .btn{width:100%;justify-content:center}.term pre{font-size:13px;padding:18px}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .pill,.lead,.cta,.ci,.stack{opacity:1;transform:none}h1 .w i{transform:none}.js .rv{opacity:1;translate:none}.flow li::after{transform:scaleX(1)}.cur{display:none}
+}
 </style>
 </head>
 <body>
-<nav class="nav"><div class="wrap"><a class="brand" href="index.html">Sajid Manzoor</a><a href="projects.html">← All projects</a></div></nav>
-<header class="hero"><div class="wrap">
-<div class="eyebrow">Additional project · Email protocol diagnostics</div>
-<h1>SMTP/IMAP <span style="color:var(--cyan)">Troubleshooting Lab</span></h1>
-<p class="lead">A zero-dependency Python toolkit built around an L2 support workflow: determine whether an email connectivity or delivery failure is caused by DNS, TCP, TLS, authentication, transient server behavior or policy—and produce concrete next steps from the evidence.</p>
-<div class="actions"><a class="btn primary" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">Explore source on GitHub ↗</a><a class="btn secondary" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/demo/index.html" target="_blank" rel="noopener">Try interactive demo ↗</a><a class="btn secondary" href="index.html#work">Back to portfolio</a></div>
-</div></header>
-<main class="wrap">
-<section><div class="kicker">01 / What it does</div><h2>Diagnose the layer, not just the symptom.</h2>
-<div class="grid">
-<article class="card"><span class="tag">SMTP</span><h3>Outbound mail checks</h3><p>Walk through TCP connection, server banner, EHLO, STARTTLS or implicit TLS, authentication and recipient-envelope checks.</p></article>
-<article class="card"><span class="tag">IMAP</span><h3>Mailbox connectivity</h3><p>Probe IMAP over SSL or STARTTLS, inspect server responses and test password or XOAUTH2 authentication.</p></article>
-<article class="card"><span class="tag">Diagnosis</span><h3>Actionable failure mapping</h3><p>Classify reply codes and socket/TLS errors into network, TLS, authentication, policy or transient categories with recommended next steps.</p></article>
+<a class="skip" href="#what">Skip to content</a>
+<div class="bar" id="bar"></div>
+<nav id="nav" aria-label="Primary"><div class="wrap">
+  <a class="logo" href="index.html"><b>SM</b>Sajid Manzoor</a>
+  <div class="links"><a href="#what">Overview</a><a href="#flow">Workflow</a><a href="#safe">Safety</a><a href="#start">Quick start</a><a href="#docs">Docs</a><a class="back" href="projects.html">← All projects</a></div>
+</div></nav>
+
+<header class="hero">
+  <div class="aur a1"></div><div class="aur a2"></div>
+  <div class="wrap">
+    <div>
+      <div class="pill"><i></i>Additional project · Email protocol diagnostics</div>
+      <h1 aria-label="SMTP/IMAP Troubleshooting Lab"><span class="w" aria-hidden="true"><i style="--i:0">SMTP/IMAP</i></span> <span class="w" aria-hidden="true"><i class="cy" style="--i:1">Troubleshooting</i></span> <span class="w" aria-hidden="true"><i class="cy" style="--i:2">Lab</i></span></h1>
+      <p class="lead">A zero-dependency Python toolkit built around an L2 support workflow: determine whether an email connectivity or delivery failure is caused by DNS, TCP, TLS, authentication, transient server behavior or policy, and produce concrete next steps from the evidence.</p>
+      <div class="cta">
+        <a class="btn pri" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">Explore source on GitHub ↗</a>
+        <a class="btn sec" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/demo/index.html" target="_blank" rel="noopener">Browser demo (source) ↗</a>
+        <a class="btn sec" href="index.html#work">Back to portfolio</a>
+      </div>
+      <a class="ci" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/actions/workflows/ci.yml" target="_blank" rel="noopener"><img src="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/actions/workflows/ci.yml/badge.svg" alt="CI status for the SMTP/IMAP Troubleshooting Lab" height="22"></a>
+    </div>
+    <div class="stack" aria-label="Diagnostic layers checked, in order">
+      <div class="stack-h">Diagnostic layers<em>how a failure is narrowed</em></div>
+      <div class="lyr" style="--i:0"><b>01</b><span><b>DNS</b><small>Name resolution</small></span></div>
+      <div class="lyr" style="--i:1"><b>02</b><span><b>TCP</b><small>Reachability, timeouts, refused connections</small></span></div>
+      <div class="lyr" style="--i:2"><b>03</b><span><b>TLS</b><small>STARTTLS, certificate validation</small></span></div>
+      <div class="lyr" style="--i:3"><b>04</b><span><b>Authentication</b><small>LOGIN / XOAUTH2</small></span></div>
+      <div class="lyr" style="--i:4"><b>05</b><span><b>Policy</b><small>Relay denial, greylisting, server rules</small></span></div>
+      <div class="stack-f"><span>Evidence <b>→</b> category <b>→</b> next step</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="stats"><div class="wrap">
+  <div><b data-count="54">54</b><span>tests per Python version in the latest checked CI run</span></div>
+  <div><b data-count="3">3</b><span>Python versions tested: 3.11, 3.12 and 3.13</span></div>
+  <div><b>0</b><span>runtime dependencies</span></div>
+  <div><b data-count="7">7</b><span>fault modes reproduced with local mock servers</span></div>
+</div></div>
+
+<main>
+<section class="sec" id="what"><div class="wrap">
+  <div class="kicker rv">01 / What it does</div>
+  <h2 class="rv">Diagnose the layer, not just the symptom.</h2>
+  <p class="sub rv">Three capabilities that turn a raw socket error or server reply into a next step.</p>
+  <div class="grid3">
+    <article class="card rv" style="--d:0s"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></div><span class="tag">SMTP</span><h3>Outbound mail checks</h3><p>Walk through TCP connection, server banner, EHLO, STARTTLS or implicit TLS, authentication and recipient-envelope checks.</p></article>
+    <article class="card rv" style="--d:.08s"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M12 12v9M3 8l9 4 9-4"/></svg></div><span class="tag">IMAP</span><h3>Mailbox connectivity</h3><p>Probe IMAP over SSL or STARTTLS, inspect server responses and test password or XOAUTH2 authentication.</p></article>
+    <article class="card rv" style="--d:.16s"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><span class="tag">Diagnosis</span><h3>Actionable failure mapping</h3><p>Classify reply codes and socket/TLS errors into network, TLS, authentication, policy or transient categories with recommended next steps.</p></article>
+  </div>
 </div></section>
-<section><div class="kicker">02 / Diagnostic workflow</div><h2>From connection attempt to evidence-based next step.</h2>
-<div class="flow">
-<div class="step"><b>01 · CONNECT</b><span>DNS + TCP</span><p>Check name resolution, reachability, timeouts and refused connections.</p></div>
-<div class="step"><b>02 · NEGOTIATE</b><span>SMTP / IMAP + TLS</span><p>Inspect protocol banners, capabilities, STARTTLS and certificate validation.</p></div>
-<div class="step"><b>03 · AUTHENTICATE</b><span>LOGIN / XOAUTH2</span><p>Exercise authentication safely; mask credentials and bearer tokens in transcripts.</p></div>
-<div class="step"><b>04 · CLASSIFY</b><span>Failure category</span><p>Map server replies and transport errors to likely causes and practical checks.</p></div>
-<div class="step"><b>05 · REPORT</b><span>Next action</span><p>Produce readable or JSON output that can support repeatable troubleshooting.</p></div>
+
+<section class="sec alt" id="flow"><div class="wrap">
+  <div class="kicker rv">02 / Diagnostic workflow</div>
+  <h2 class="rv">From connection attempt to evidence-based next step.</h2>
+  <p class="sub rv">Five stages, in order, so the failing layer is identified before anyone guesses at a fix.</p>
+  <ol class="flow">
+    <li class="rv" style="--d:0s"><small>01 · CONNECT</small><b>DNS + TCP</b><span>Check name resolution, reachability, timeouts and refused connections.</span></li>
+    <li class="rv" style="--d:.1s"><small>02 · NEGOTIATE</small><b>SMTP / IMAP + TLS</b><span>Inspect protocol banners, capabilities, STARTTLS and certificate validation.</span></li>
+    <li class="rv" style="--d:.2s"><small>03 · AUTHENTICATE</small><b>LOGIN / XOAUTH2</b><span>Exercise authentication safely; mask credentials and bearer tokens in transcripts.</span></li>
+    <li class="rv" style="--d:.3s"><small>04 · CLASSIFY</small><b>Failure category</b><span>Map server replies and transport errors to likely causes and practical checks.</span></li>
+    <li class="rv" style="--d:.4s"><small>05 · REPORT</small><b>Next action</b><span>Produce readable or JSON output that can support repeatable troubleshooting.</span></li>
+  </ol>
 </div></section>
-<section><div class="kicker">03 / Safe reproduction</div><h2>Reproduce failures without depending on a live mail provider.</h2>
-<div class="grid">
-<article class="card"><h3>Fault-injecting mock servers</h3><p>Local SMTP and IMAP mocks reproduce unavailable STARTTLS, reset connections, authentication failures, relay denial, greylisting, banner errors and blackholed connections.</p></article>
-<article class="card"><h3>Security-conscious handling</h3><p>Passwords and OAuth2 tokens are read from environment variables, authentication payloads are redacted, TLS verification is enabled by default and credentials are blocked on unencrypted connections unless explicitly overridden for local lab use.</p></article>
-<article class="card"><h3>Read-only verification</h3><p>Probes do not send a message body. The SMTP envelope check stops after RCPT TO and issues RSET, avoiding message delivery during diagnostics.</p></article>
+
+<section class="sec" id="safe"><div class="wrap">
+  <div class="kicker rv">03 / Safe reproduction</div>
+  <h2 class="rv">Reproduce failures without depending on a live mail provider.</h2>
+  <p class="sub rv">Local mock servers and conservative defaults keep diagnostics repeatable and safe.</p>
+  <div class="grid4">
+    <article class="card rv" style="--d:0s"><div class="ico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><h3>Fault-injecting mock servers</h3><p>Local SMTP and IMAP mocks reproduce unavailable STARTTLS, reset connections, authentication failures, relay denial, greylisting, banner errors and blackholed connections.</p></article>
+    <article class="card rv" style="--d:.08s"><div class="ico"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Read-only verification</h3><p>Probes do not send a message body. The SMTP envelope check stops after RCPT TO and issues RSET, avoiding message delivery during diagnostics.</p></article>
+    <article class="card rv" style="--d:0s"><div class="ico"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div><h3>Credentials stay out of the logs</h3><p>Passwords and OAuth2 tokens are read from environment variables, and authentication payloads are redacted in transcripts. Avoid placing secrets in command history or shared logs.</p></article>
+    <article class="card rv" style="--d:.08s"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>TLS verified by default</h3><p>Certificate verification is enabled by default. Credentials are blocked on unencrypted connections unless an explicit override is used for local lab work.</p></article>
+  </div>
+  <div class="lbl rv">Failure modes the mock servers can reproduce</div>
+  <div class="chips rv"><span>STARTTLS unavailable</span><span>Connection reset</span><span>Authentication failure</span><span>Relay denied</span><span>Greylisting</span><span>Banner error</span><span>Blackholed connection</span></div>
 </div></section>
-<section><div class="kicker">04 / Authentication and test coverage</div><h2>Modern authentication with repeatable local tests.</h2>
-<div class="grid">
-<article class="card"><h3>OAuth2 refresh exchange</h3><p>Exchanges an already-issued refresh token for a short-lived access token. Interactive consent, initial authorization-code handling and persistent token rotation are outside the toolkit's scope.</p></article>
-<article class="card"><h3>SMTP / IMAP XOAUTH2</h3><p>Supports bearer-token authentication flows for SMTP and IMAP, with token redaction in diagnostic transcripts.</p></article>
-<article class="card"><h3>Continuous integration</h3><p>The latest checked CI run passed the test suite on Python 3.11, 3.12 and 3.13, with 54 tests per version. Provider-specific Gmail and Microsoft 365 smoke tests are opt-in and have not been claimed as completed.</p></article>
-</div>
-</section>
-<section><div class="kicker">05 / Run it locally</div><h2>Quick start.</h2>
-<pre class="code">git clone https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab.git
+
+<section class="sec alt" id="ref"><div class="wrap">
+  <div class="kicker rv">04 / Reading SMTP replies</div>
+  <h2 class="rv">What the reply usually points to.</h2>
+  <p class="sub rv">A general reference for the kinds of failures this workflow sorts into categories.</p>
+  <div class="tblw rv"><table>
+    <thead><tr><th>Reply</th><th>What it usually means</th><th>Category</th><th>Check first</th></tr></thead>
+    <tbody>
+      <tr><td>No reply</td><td>Connection refused, timed out or silently dropped</td><td><span class="badge b-net">Network</span></td><td>DNS, firewall, port and whether the connection is blackholed</td></tr>
+      <tr><td>421</td><td>Service not available; the server is closing the connection</td><td><span class="badge b-tra">Transient</span></td><td>Retry later; look for connection limits or server load</td></tr>
+      <tr><td>454 4.7.0</td><td>TLS not available (temporary)</td><td><span class="badge b-tls">TLS</span></td><td>Is STARTTLS advertised? Right port? Client TLS settings?</td></tr>
+      <tr><td>535 5.7.8</td><td>Authentication credentials invalid</td><td><span class="badge b-auth">Authentication</span></td><td>Username, app password or XOAUTH2 token validity</td></tr>
+      <tr><td>550 5.7.1</td><td>Relaying denied or message refused by policy</td><td><span class="badge b-pol">Policy</span></td><td>Relay rules, authenticated sender and recipient domain</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note cy rv"><b>Reference only.</b> This is a general guide to common SMTP replies for context. The toolkit's own classification and wording live in the repository.</div>
+</div></section>
+
+<section class="sec" id="auth"><div class="wrap">
+  <div class="kicker rv">05 / Authentication and test coverage</div>
+  <h2 class="rv">Modern authentication with repeatable local tests.</h2>
+  <p class="sub rv">XOAUTH2 support, automated regression tests and a clear statement of what has and has not been verified.</p>
+  <div class="grid3">
+    <article class="card rv" style="--d:0s"><div class="ico"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></div><h3>OAuth2 refresh exchange</h3><p>Exchanges an already-issued refresh token for a short-lived access token. Interactive consent, initial authorization-code handling and persistent token rotation are outside the toolkit's scope.</p></article>
+    <article class="card rv" style="--d:.08s"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M16 7l3 3"/></svg></div><h3>SMTP / IMAP XOAUTH2</h3><p>Supports bearer-token authentication flows for SMTP and IMAP, with token redaction in diagnostic transcripts.</p></article>
+    <article class="card rv" style="--d:.16s"><div class="ico"><svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg></div><h3>Automated tests and CI</h3><p>The latest checked CI run passed the test suite on Python 3.11, 3.12 and 3.13, with 54 tests per version. Local regression tests cover protocol behavior, mock-server scenarios, CLI flows and OAuth2/XOAUTH2 paths.</p></article>
+  </div>
+  <div class="note rv"><b>Scope and provider validation.</b> Provider-specific Gmail and Microsoft 365 smoke tests are opt-in, need authorized test-mailbox secrets and have not been claimed as completed. Local mock tests are not proof of live-provider compatibility.</div>
+</div></section>
+
+<section class="sec alt" id="start"><div class="wrap">
+  <div class="kicker rv">06 / Run it locally</div>
+  <h2 class="rv">Quick start.</h2>
+  <p class="sub rv">Clone it, install it, explain a reply, then probe a local mock server.</p>
+  <div class="term rv" id="term">
+    <div class="term-h"><i></i><i></i><i></i><span>terminal</span><button class="copy" id="copy" type="button">Copy</button></div>
+<pre id="code" aria-label="Quick start commands">git clone https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab.git
 cd smtp-imap-troubleshooting-lab
 python3 -m pip install -e .
-
-# Explain a server reply
+  # Explain a server reply
 maillab explain 454 "4.7.0 TLS not available"
 
 # Run the local mock and probe it
 maillab mock smtp --mode starttls_unavailable --port 2525
 maillab smtp 127.0.0.1 --port 2525 --mode starttls</pre>
-<div class="note"><strong>Scope and safety:</strong> use the probes only against mail servers and accounts you own or are authorized to test. Provider smoke testing requires separately configured, user-authorized credentials. The project uses local mock servers for its automated protocol-failure tests.</div>
-<div class="actions"><a class="btn primary" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">Explore repository ↗</a><a class="btn secondary" href="projects.html">Back to projects</a></div>
-</section>
-<section><div class="kicker">06 / Engineering design</div><h2>From protocol checks to a support-ready investigation.</h2>
-<div class="grid">
-<article class="card"><h3>Modular diagnostic layers</h3><p>Separate SMTP, IMAP, OAuth2 and CLI responsibilities keep protocol handling, credential acquisition and user-facing output easier to reason about and test.</p></article>
-<article class="card"><h3>Repeatable local reproduction</h3><p>Fault-injecting mock servers let the engineer reproduce protocol failures without relying on a live provider, customer mailbox or external network condition.</p></article>
-<article class="card"><h3>Incident-oriented output</h3><p>Diagnostic categories and next-step guidance are intended to help turn a raw socket or server response into a clear support investigation.</p></article>
+  </div>
+  <div class="lbl rv">Output of the explain command above</div>
+  <div class="term out rv">
+    <div class="term-h"><i></i><i></i><i></i><span>maillab explain</span></div>
+<pre aria-label="Output of maillab explain 454"><span class="pm">$ </span>maillab explain 454 "4.7.0 TLS not available"
+
+<span class="hd">TLS: TLS/STARTTLS could not be negotiated</span>
+<span class="lb">Likely causes:</span>
+  - Server cannot start TLS (certificate, config or resource problem)
+  - A firewall or SMTP inspection feature is interfering with STARTTLS
+  - Client and server share no TLS version or cipher
+<span class="lb2">Next steps:</span>
+  - Capture on port 587 and look for the STARTTLS reply and the TLS ClientHello after it
+  - Test the same host from another network to separate a customer firewall from a server fault
+  - Try implicit TLS on 465 as a workaround and confirm with the customer
+  - Check the certificate chain and supported TLS versions with openssl s_client</pre>
+  </div>
+  <div class="note rv"><b>Scope and safety.</b> Use the probes only against mail servers and accounts you own or are authorized to test. Provider smoke testing requires separately configured, user-authorized credentials. The project uses local mock servers for its automated protocol-failure tests.</div>
+  <div class="cta rv" style="opacity:1;animation:none;margin-top:26px"><a class="btn pri" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">Explore repository ↗</a><a class="btn sec" href="projects.html">Back to projects</a></div>
 </div></section>
-<section><div class="kicker">07 / Security and verification</div><h2>Designed to keep diagnostics safe and honest.</h2>
-<div class="grid">
-<article class="card"><h3>Credential handling</h3><p>Passwords and tokens are supplied through environment variables; diagnostic transcripts redact authentication material. Avoid placing secrets in command history or shared logs.</p></article>
-<article class="card"><h3>TLS by default</h3><p>Certificate verification is enabled by default. Credentials are not sent over an unencrypted connection unless an explicit local-lab override is used.</p></article>
-<article class="card"><h3>Automated tests and CI</h3><p>Local regression tests cover protocol behavior, mock-server scenarios, CLI flows and OAuth2/XOAUTH2 paths. CI is configured across multiple Python versions.</p></article>
-</div>
-<div class="note"><strong>Provider validation:</strong> the optional Gmail and Microsoft 365 smoke-test workflow requires authorized test-mailbox secrets. Do not interpret local mock tests as proof of live-provider compatibility. OAuth2 support exchanges an already-issued refresh token; interactive consent and initial authorization-code flow are outside the current scope.</div>
-</section>
-<section><div class="kicker">08 / Technical documentation</div><h2>Go deeper into the implementation.</h2>
-<div class="grid">
-<article class="card"><h3>Architecture overview</h3><p>How the diagnostic components fit together and where the project boundaries sit.</p><p style="margin-top:12px"><a href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/docs/architecture.md" target="_blank" rel="noopener">Read architecture ↗</a></p></article>
-<article class="card"><h3>Incident playbooks</h3><p>Practical investigation steps for STARTTLS failures, SMTP AUTH rejection, relay denial and IMAP login problems.</p><p style="margin-top:12px"><a href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/docs/incident-playbooks.md" target="_blank" rel="noopener">Read playbooks ↗</a></p></article>
-<article class="card"><h3>Security policy</h3><p>Responsible reporting guidance and safe handling of diagnostic evidence.</p><p style="margin-top:12px"><a href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/SECURITY.md" target="_blank" rel="noopener">Read security policy ↗</a></p></article>
-</div>
-<div class="actions"><a class="btn primary" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/demo/index.html" target="_blank" rel="noopener">Open browser scenario explorer ↗</a><a class="btn secondary" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">View full repository ↗</a></div>
-</section>
+
+<section class="sec" id="design"><div class="wrap">
+  <div class="kicker rv">07 / Engineering design</div>
+  <h2 class="rv">From protocol checks to a support-ready investigation.</h2>
+  <p class="sub rv">Design choices that keep the toolkit easy to test and useful in a real support workflow.</p>
+  <div class="grid3">
+    <article class="card rv" style="--d:0s"><h3>Modular diagnostic layers</h3><p>Separate SMTP, IMAP, OAuth2 and CLI responsibilities keep protocol handling, credential acquisition and user-facing output easier to reason about and test.</p></article>
+    <article class="card rv" style="--d:.08s"><h3>Repeatable local reproduction</h3><p>Fault-injecting mock servers let the engineer reproduce protocol failures without relying on a live provider, customer mailbox or external network condition.</p></article>
+    <article class="card rv" style="--d:.16s"><h3>Incident-oriented output</h3><p>Diagnostic categories and next-step guidance are intended to help turn a raw socket or server response into a clear support investigation.</p></article>
+  </div>
+</div></section>
+
+<section class="sec alt docs" id="docs"><div class="wrap">
+  <div class="kicker rv">08 / Technical documentation</div>
+  <h2 class="rv">Go deeper into the implementation.</h2>
+  <p class="sub rv">Architecture, playbooks and the security policy, all in the repository.</p>
+  <div class="grid3">
+    <a class="card rv" style="--d:0s" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/docs/architecture.md" target="_blank" rel="noopener"><h3>Architecture overview</h3><p>How the diagnostic components fit together and where the project boundaries sit.</p><span class="go">Read architecture ↗</span></a>
+    <a class="card rv" style="--d:.08s" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/docs/incident-playbooks.md" target="_blank" rel="noopener"><h3>Incident playbooks</h3><p>Practical investigation steps for STARTTLS failures, SMTP AUTH rejection, relay denial and IMAP login problems.</p><span class="go">Read playbooks ↗</span></a>
+    <a class="card rv" style="--d:.16s" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/SECURITY.md" target="_blank" rel="noopener"><h3>Security policy</h3><p>Responsible reporting guidance and safe handling of diagnostic evidence.</p><span class="go">Read security policy ↗</span></a>
+  </div>
+</div></section>
+
+<section class="sec" style="padding-top:88px"><div class="wrap">
+  <div class="cp rv">
+    <h2>See how it works in the code.</h2>
+    <p>The full source, tests, playbooks and a browser scenario explorer are in the repository.</p>
+    <div class="cta" style="opacity:1;animation:none"><a class="btn pri" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">View full repository ↗</a><a class="btn sec" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/demo/index.html" target="_blank" rel="noopener">Browser scenario explorer (source) ↗</a></div>
+  </div>
+</div></section>
 </main>
-<footer class="foot"><div class="wrap">© 2026 Sajid Manzoor · Technical Support · SMTP / IMAP Diagnostics</div></footer>
-</body></html>
+
+<footer><div class="wrap"><span>© 2026 Sajid Manzoor · Technical Support · SMTP / IMAP Diagnostics</span><span><a href="index.html">Portfolio</a><a href="projects.html">All projects</a><a href="#what">Top</a></span></div></footer>
+
+<script>
+(function(){
+var d=document,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,hover=matchMedia('(hover:hover)').matches;
+if(!reduce)d.documentElement.classList.add('js');
+function count(el){
+  if(el.__done)return;el.__done=1;
+  var to=parseFloat(el.dataset.count);
+  if(reduce){el.textContent=to;return}
+  var t0=null;
+  function step(t){if(!t0)t0=t;var p=Math.min((t-t0)/1400,1),e=1-Math.pow(1-p,4);el.textContent=Math.round(to*e);if(p<1)requestAnimationFrame(step)}
+  requestAnimationFrame(step);
+}
+var code=d.getElementById('code'),full=code.textContent,typed=false;
+function render(n){
+  var out='',left=n,lines=full.split('\n');
+  for(var i=0;i<lines.length&&left>0;i++){
+    var ln=lines[i],part=ln.slice(0,left);left-=ln.length+1;
+    var esc=part.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+    if(ln.charAt(0)==='#')out+='<span class="cm">'+esc+'</span>';
+    else if(ln)out+='<span class="pm">$ </span>'+esc;
+    out+='\n';
+  }
+  return out.replace(/\n$/,'')+(n<full.length?'<span class="cur"></span>':'');
+}
+function typeCode(){
+  if(typed||reduce)return;typed=true;
+  var n=0;code.style.minHeight=code.offsetHeight+'px';
+  var id=setInterval(function(){n+=2;code.innerHTML=render(n);if(n>=full.length){clearInterval(id);code.innerHTML=render(full.length)}},22);
+}
+if(reduce){code.innerHTML=render(full.length)}
+else{code.innerHTML=render(0)}
+if('IntersectionObserver' in window){
+  var rv=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');rv.unobserve(x.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  [].forEach.call(d.querySelectorAll('.rv,.flow li'),function(e){rv.observe(e)});
+  var cnt=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){count(x.target);cnt.unobserve(x.target)}})},{threshold:.6});
+  [].forEach.call(d.querySelectorAll('[data-count]'),function(e){cnt.observe(e)});
+  var tp=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){typeCode();tp.unobserve(x.target)}})},{threshold:.4});
+  tp.observe(d.getElementById('term'));
+  var po=new IntersectionObserver(function(es){es.forEach(function(x){x.target.classList.toggle('off',!x.isIntersecting)})});
+  po.observe(d.querySelector('.hero'));
+}else{[].forEach.call(d.querySelectorAll('.rv,.flow li'),function(e){e.classList.add('in')});code.innerHTML=render(full.length)}
+var bar=d.getElementById('bar'),nav=d.getElementById('nav');
+var links=[].slice.call(d.querySelectorAll('.links a[href^="#"]')),secs=links.map(function(a){return d.querySelector(a.getAttribute('href'))});
+function onScroll(){
+  var h=d.documentElement.scrollHeight-innerHeight,cur=-1;
+  secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<innerHeight*.4)cur=i});
+  bar.style.transform='scaleX('+(h>0?scrollY/h:0)+')';
+  nav.classList.toggle('stuck',scrollY>8);
+  links.forEach(function(a,i){a.classList.toggle('on',i===cur)});
+}
+var tk=0;addEventListener('scroll',function(){if(!tk)tk=requestAnimationFrame(function(){tk=0;onScroll()})},{passive:true});
+addEventListener('resize',onScroll);onScroll();
+if(!reduce&&hover){
+  [].forEach.call(d.querySelectorAll('.card'),function(t){t.addEventListener('pointermove',function(e){var r=t.getBoundingClientRect();t.style.setProperty('--mx',(e.clientX-r.left)+'px');t.style.setProperty('--my',(e.clientY-r.top)+'px')},{passive:true})});
+}
+var cb=d.getElementById('copy');
+cb.addEventListener('click',function(){
+  function done(m){cb.textContent=m;setTimeout(function(){cb.textContent='Copy'},1600)}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(full).then(function(){done('Copied')},function(){done('Press Ctrl+C')})}
+  else{done('Press Ctrl+C')}
+});
+})();
+</script>
+</body>
+</html>
