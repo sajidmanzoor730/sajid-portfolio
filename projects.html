@@ -38,221 +38,49 @@
 
 
 <main>
-
 <div class="wrap">
-
   <div class="eyebrow">Technical Support · Troubleshooting · Operations</div>
-
   <h1>Projects</h1>
-
-  <p class="lead">
-    Technical support projects focused on troubleshooting, SIP/VoIP, packet analysis, ticket operations, scripting, incident investigation and repeatable validation.
-  </p>
-
-
-  <!-- TECHNICAL SUPPORT PROJECTS -->
+  <p class="lead">A focused portfolio of projects that demonstrate troubleshooting, protocol analysis, support operations and incident investigation. Ordered by relevance to technical support engineering.</p>
   <section>
-    <div class="section-head">
-      <div>
-        <h2>Technical Support &amp; Troubleshooting</h2>
-        <p class="section-description">Prioritized by relevance to support engineering: hands-on troubleshooting evidence first, then ticket operations and structured incident investigation. Project data sources and lab limitations are disclosed.</p>
-      </div>
-    </div>
+    <div class="section-head"><div><h2>Technical Support &amp; Troubleshooting</h2><p class="section-description">The first three projects appear on my resume. The SMTP/IMAP lab is an additional project demonstrating practical email-protocol troubleshooting.</p></div></div>
     <div class="grid">
       <article class="card featured">
-        <div class="featured-label">#1 · Strongest technical support alignment</div>
+        <div class="featured-label">#1 · Strongest technical support alignment · Resume project</div>
         <div class="tags"><span class="tag">Python</span><span class="tag">SIP / RTP</span><span class="tag">Wireshark / TShark</span><span class="tag">SQL</span><span class="tag">Postman</span></div>
-        <h3>VoIP Incident Troubleshooting Toolkit</h3>
-        <p>Support-engineering workflow for investigating SIP/VoIP issues: parse SIP logs, inspect packet evidence, analyze RTP measurements, run API health checks, classify incidents and document evidence-based escalation paths.</p>
+        <h3>VoIP Support Automation Toolkit</h3>
+        <p>A support-engineering workflow for investigating SIP/VoIP issues: parse SIP logs, inspect packet evidence, analyze RTP measurements, run API health checks, classify incidents and document evidence-based escalation paths.</p>
         <div class="project-meta"><span>SIP registration cases</span><span>One-way audio investigation</span><span>RTP packet analysis</span><span>Automated tests</span></div>
-        <p class="work-impact"><strong>Evidence note:</strong> uses public Wireshark sample captures and documented examples, not production/customer incidents. Worked cases distinguish observed evidence from hypotheses that need further verification.</p>
+        <p class="work-impact"><strong>Evidence note:</strong> uses public Wireshark sample captures and documented examples, not production/customer incidents.</p>
         <div class="actions"><a class="btn primary" href="voip-support-automation.html">View project details →</a><a class="btn secondary" href="https://github.com/sajidmanzoor730/voip-support-automation" target="_blank" rel="noopener">GitHub →</a></div>
       </article>
       <article class="card">
-        <div class="tags"><span class="tag">#2 · Support operations</span><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Streamlit</span></div>
-        <h3>Helpdesk Ticket Analysis &amp; Support KPIs</h3>
-        <p>Clean and analyze ticket records by priority, SLA outcome, repeat issue and customer satisfaction, then present support metrics in an interactive dashboard.</p>
-        <div class="project-meta"><span>1,020 raw rows</span><span>1,000 clean tickets</span><span>SLA / CSAT / repeat rate</span></div>
-        <p class="work-impact"><strong>Evidence note:</strong> ticket-level records and KPI values use a synthetic practice dataset; they are not employer or customer support records.</p>
+        <div class="featured-label">#2 · Additional project · Email protocol troubleshooting</div>
+        <div class="tags"><span class="tag">Python</span><span class="tag">SMTP / IMAP</span><span class="tag">TLS</span><span class="tag">OAuth2</span><span class="tag">GitHub Actions</span></div>
+        <h3>SMTP/IMAP Troubleshooting Lab</h3>
+        <p>A zero-dependency diagnostic toolkit that identifies whether email connectivity failures originate in DNS, TCP, TLS, authentication or server policy. Includes protocol probes, fault-injecting mock servers, OAuth2/XOAUTH2 authentication and repeatable tests.</p>
+        <div class="project-meta"><span>SMTP + IMAP probes</span><span>Failure classification</span><span>OAuth2 / XOAUTH2</span><span>54 tests per Python version in latest CI</span></div>
+        <p class="work-impact"><strong>Scope note:</strong> automated tests use local mock servers. Gmail and Microsoft 365 provider smoke tests are available as an opt-in workflow and are not represented as completed provider validation.</p>
+        <div class="actions"><a class="btn primary" href="smtp-imap-troubleshooting-lab.html">View project details →</a><a class="btn secondary" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">GitHub →</a></div>
+      </article>
+      <article class="card">
+        <div class="tags"><span class="tag">#3 · Resume project</span><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Streamlit</span></div>
+        <h3>Helpdesk KPI Dashboard</h3>
+        <p>A Python and Streamlit reporting workflow that loads published IT helpdesk summaries, validates source data and lets readers explore request types, contact channels, departments and survey summaries across fiscal years.</p>
+        <div class="project-meta"><span>Official public data</span><span>Fiscal-year filters</span><span>Source-aware reporting</span></div>
+        <p class="work-impact"><strong>Evidence note:</strong> the live dashboard uses aggregated Montgomery County Government MCG HelpIT public data; it does not claim ticket-level SLA or CSAT results from that source.</p>
         <div class="actions"><a class="btn primary" href="helpdesk-kpi-dashboard.html">View project details →</a><a class="btn secondary" href="https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard" target="_blank" rel="noopener">GitHub →</a><a class="btn secondary" href="https://hedesk-dashboard.streamlit.app/" target="_blank" rel="noopener">Live dashboard →</a></div>
       </article>
       <article class="card">
-        <div class="tags"><span class="tag">#3 · Incident investigation lab</span><span class="tag">KQL</span><span class="tag">Microsoft Sentinel</span><span class="tag">Defender</span></div>
-        <h3>Security Alert Triage &amp; Investigation Lab</h3>
-        <p>Practice an investigation workflow across alert context, severity, evidence, KQL queries, MITRE ATT&amp;CK mapping, response notes and escalation decisions.</p>
+        <div class="tags"><span class="tag">#4 · Resume project</span><span class="tag">KQL</span><span class="tag">Microsoft Sentinel</span><span class="tag">Defender</span></div>
+        <h3>Microsoft Security Investigation Lab</h3>
+        <p>A practice investigation workflow covering endpoint-alert severity triage, suspicious-activity analysis, KQL queries, MITRE ATT&amp;CK mapping, response notes and escalation decisions.</p>
         <div class="project-meta"><span>Alert triage</span><span>KQL templates</span><span>Evidence review</span><span>Escalation workflow</span></div>
-        <p class="work-impact"><strong>Evidence note:</strong> the alert dataset and outcomes are illustrative lab material, not real Microsoft tenant incidents. KQL examples require validation against a live workspace schema.</p>
-        <div class="actions"><a class="btn primary" href="microsoft-security-lab.html">View project details →</a><a class="btn secondary" href="https://github.com/sajidmanzoor730/microsoft-security-lab" target="_blank" rel="noopener">GitHub →</a></div>
-      </article>
-      <article class="card">
-        <div class="tags"><span class="tag">#4 · Reproducible verification</span><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">GitHub Actions</span></div>
-        <h3>Automated Data &amp; KPI Validation Framework</h3>
-        <p>Demonstrates systematic fault detection through controlled defect injection, independent validation, SQL exception checks, regression tests and CI workflow results.</p>
-        <div class="project-meta"><span>8,160 raw → 8,000 clean</span><span>24 issue types</span><span>765 row-level findings</span><span>CI tests</span></div>
-        <p class="work-impact"><strong>Evidence note:</strong> synthetic operational records. Relevant as transferable debugging, validation and reproducibility practice, rather than a telecom support project.</p>
-        <div class="actions"><a class="btn primary" href="bi-validation.html">View project details →</a><a class="btn secondary" href="https://github.com/sajidmanzoor730/bi-validation" target="_blank" rel="noopener">GitHub →</a></div>
+        <p class="work-impact"><strong>Evidence note:</strong> alert data and outcomes are illustrative lab material, not real Microsoft tenant incidents.</p>
+        <div class="actions"><a class="btn primary" href="microsoft-security-investigation.html">View project details →</a><a class="btn secondary" href="https://github.com/sajidmanzoor730/microsoft-security-lab" target="_blank" rel="noopener">GitHub →</a></div>
       </article>
     </div>
   </section>
-
-  <!-- SUPPORTING TECHNICAL PROJECTS -->
-  <section>
-    <div class="section-head"><div><h2>Additional Technical &amp; Analytical Work</h2><p class="section-description">Supporting evidence for scripting, data handling, documentation and structured problem-solving; less directly aligned to day-to-day telecom support.</p></div></div>
-    <div class="grid">
-      <article class="card"><div class="tags"><span class="tag">Python</span><span class="tag">Data quality</span></div><h3>CRM Data Quality &amp; Deduplication</h3><p>Repeatable cleanup of synthetic CRM records, normalization, duplicate detection, invalid-value flags and owner follow-up fields.</p><div class="project-meta"><span>3,090 raw rows</span><span>3,000 clean records</span></div><div class="actions"><a class="btn primary" href="https://github.com/sajidmanzoor730/crm-data-quality" target="_blank" rel="noopener">GitHub →</a><a class="btn secondary" href="crm-data-quality-cleanup.html">Case study →</a></div></article>
-      <article class="card"><div class="tags"><span class="tag">Python</span><span class="tag">Bash</span><span class="tag">Automation</span></div><h3>Python &amp; Bash Operational Automation</h3><p>Small repeatable scripts for checks, log inspection, data handling and operational workflows.</p><div class="project-meta"><span>Scripting</span><span>Repeatable checks</span></div><div class="actions"><a class="btn primary" href="python-bash-automation.html">View project →</a></div></article>
-      <article class="card"><div class="tags"><span class="tag">Real public data</span><span class="tag">SQL</span><span class="tag">Python</span></div><h3>NYC 311 Service Request Analysis</h3><p>Large public-data workflow covering extraction, data-quality checks, cleaning, SQL analysis and careful interpretation of service-request records.</p><div class="project-meta"><span>343,133 records in verified extract</span><span>13 SQL result tables</span></div><div class="actions"><a class="btn primary" href="nyc-311-service-analysis.html">Case study →</a><a class="btn secondary" href="https://github.com/sajidmanzoor730/nyc-311-service-analysis" target="_blank" rel="noopener">GitHub →</a></div></article>
-      <article class="card"><div class="tags"><span class="tag">Public aggregated data</span><span class="tag">Streamlit</span></div><h3>Public IT Helpdesk Trends Analysis</h3><p>Explore published government request-type, contact-channel and department summaries, with source validation and clear limits on what the data can prove.</p><div class="project-meta"><span>Official summaries</span><span>Source checks</span></div><div class="actions"><a class="btn primary" href="helpdesk-kpi-dashboard.html">Case study →</a><a class="btn secondary" href="https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard" target="_blank" rel="noopener">Repository →</a></div></article>
-    </div>
-  </section>
-
-  <!-- OPERATIONS -->
-
-  <section>
-
-    <div class="section-head">
-
-      <div>
-
-        <h2>
-          Operations &amp; Process Analytics
-        </h2>
-
-        <p class="section-description">
-          Analytics and operational projects connecting
-          reporting, process tracking, workflow management,
-          and decision support.
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="grid">
-
-
-      <!-- EXECUTIVE DASHBOARD -->
-
-      <article class="card">
-
-        <div class="tags">
-
-          <span class="tag">Operations</span>
-          <span class="tag">Dashboard</span>
-          <span class="tag">KPI</span>
-
-        </div>
-
-
-        <h3>
-          Executive Operations Dashboard
-        </h3>
-
-
-        <p>
-          Management view of the open workload: overdue and aging
-          records, ownership, follow-ups, SLA breaches, and items
-          waiting on a decision.
-        </p><div class="work-impact"><strong>Workplace relevance:</strong> shows managers what is late, who owns it and what needs a decision.</div>
-
-
-        <div class="project-meta">
-
-          <span>Backlog &amp; Aging</span>
-          <span>Ownership</span>
-          <span>Overdue Tracking</span>
-
-        </div>
-
-
-        <div class="actions">
-
-          <a
-            class="btn primary"
-            href="executive-operations-dashboard.html">
-            View Project →
-          </a>
-          <a class="btn secondary" href="https://github.com/sajidmanzoor730/sajid-portfolio" target="_blank" rel="noopener">GitHub →</a>
-
-        </div>
-
-      </article>
-
-
-      <!-- CANDIDATE PIPELINE -->
-
-      <article class="card">
-        <div class="tags"><span class="tag">Operations</span><span class="tag">Process Design</span><span class="tag">Frameworks</span></div>
-        <h3>Operations Frameworks</h3>
-        <p>Three design documents from my operations background: a lead follow-up pipeline, candidate sourcing analytics and an SOP runbook. They show how I structure work, not data results.</p>
-        <div class="project-meta"><span>Pipeline design</span><span>Data model</span><span>Runbook</span></div>
-        <div class="actions"><a class="btn primary" href="operations-frameworks.html">View Project →</a></div>
-      </article>
-
-
-      <!-- LEAD PIPELINE -->
-
-      
-
-
-      <!-- SOP -->
-
-      
-
-
-      <!-- AUTOMATION -->
-
-      <article class="card">
-
-        <div class="tags">
-
-          <span class="tag">Python</span>
-          <span class="tag">Bash</span>
-          <span class="tag">Automation</span>
-
-        </div>
-
-
-        <h3>
-          Python &amp; Bash Automation
-        </h3>
-
-
-        <p>
-          Practical automation workflows for repeatable checks,
-          log inspection, data handling, and operational
-          troubleshooting.
-        </p><div class="work-impact"><strong>Workplace relevance:</strong> documents repeatable checks and escalation paths that support consistent operational execution.</div>
-
-
-        <div class="project-meta">
-
-          <span>Python Automation</span>
-          <span>Shell Scripts</span>
-          <span>Operational Checks</span>
-
-        </div>
-
-
-        <div class="actions">
-
-          <a
-            class="btn primary"
-            href="python-bash-automation.html">
-            View Project →
-          </a>
-
-        </div>
-
-      </article>
-
-
-    </div>
-
-  </section>
-
-
 </div>
 </main>
 
