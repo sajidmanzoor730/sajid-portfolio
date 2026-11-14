@@ -173,7 +173,7 @@ footer a:hover{color:var(--text);text-decoration:underline}
 <div class="bar" id="bar"></div>
 <nav id="nav" aria-label="Primary"><div class="wrap">
   <a class="logo" href="index.html"><b>SM</b>Sajid Manzoor</a>
-  <div class="links"><a href="#what">Overview</a><a href="#flow">Workflow</a><a href="#safe">Safety</a><a href="#start">Quick start</a><a href="#docs">Docs</a><a class="back" href="projects.html">← All projects</a></div>
+  <div class="links"><a href="#what">Overview</a><a href="#flow">Workflow</a><a href="#safe">Safety</a><a href="#demo">Demo</a><a href="#start">Quick start</a><a href="#docs">Docs</a><a class="back" href="projects.html">← All projects</a></div>
 </div></nav>
 
 <header class="hero">
@@ -257,9 +257,10 @@ footer a:hover{color:var(--text);text-decoration:underline}
     <tbody>
       <tr><td>No reply</td><td>Connection refused, timed out or silently dropped</td><td><span class="badge b-net">Network</span></td><td>DNS, firewall, port and whether the connection is blackholed</td></tr>
       <tr><td>421</td><td>Service not available; the server is closing the connection</td><td><span class="badge b-tra">Transient</span></td><td>Retry later; look for connection limits or server load</td></tr>
+      <tr><td>451 4.7.1</td><td>Temporary rejection, for example greylisting</td><td><span class="badge b-tra">Transient</span></td><td>Retry with backoff; check whether it persists beyond normal retry windows</td></tr>
       <tr><td>454 4.7.0</td><td>TLS not available (temporary)</td><td><span class="badge b-tls">TLS</span></td><td>Is STARTTLS advertised? Right port? Client TLS settings?</td></tr>
       <tr><td>535 5.7.8</td><td>Authentication credentials invalid</td><td><span class="badge b-auth">Authentication</span></td><td>Username, app password or XOAUTH2 token validity</td></tr>
-      <tr><td>550 5.7.1</td><td>Relaying denied or message refused by policy</td><td><span class="badge b-pol">Policy</span></td><td>Relay rules, authenticated sender and recipient domain</td></tr>
+      <tr><td>550 / 554 5.7.1</td><td>Relaying denied or message refused by policy</td><td><span class="badge b-pol">Policy</span></td><td>Relay rules, authenticated sender and recipient domain</td></tr>
     </tbody>
   </table></div>
   <div class="note cy rv"><b>Reference only.</b> This is a general guide to common SMTP replies for context. The toolkit's own classification and wording live in the repository.</div>
@@ -277,8 +278,24 @@ footer a:hover{color:var(--text);text-decoration:underline}
   <div class="note rv"><b>Scope and provider validation.</b> Provider-specific Gmail and Microsoft 365 smoke tests are opt-in, need authorized test-mailbox secrets and have not been claimed as completed. Local mock tests are not proof of live-provider compatibility.</div>
 </div></section>
 
-<section class="sec alt" id="start"><div class="wrap">
-  <div class="kicker rv">06 / Run it locally</div>
+<section class="sec alt" id="demo"><div class="wrap">
+  <div class="kicker rv">06 / Incident scenario explorer</div>
+  <h2 class="rv">Practise the investigation in the browser.</h2>
+  <p class="sub rv">An offline training simulator with six simulated incidents. Each one shows the evidence, likely causes, recommended checks and escalation evidence for a common support ticket.</p>
+  <div class="grid3">
+    <article class="card rv" style="--d:0s"><span class="tag">SMTP / TLS</span><h3>STARTTLS refused</h3><p>Greeting and EHLO succeed, then STARTTLS gets a 454 4.7.0 and no TLS handshake follows.</p></article>
+    <article class="card rv" style="--d:0.08s"><span class="tag">SMTP / Authentication</span><h3>SMTP credentials rejected</h3><p>TLS is healthy, but the server returns 535. A 535 confirms rejection, not necessarily a wrong password.</p></article>
+    <article class="card rv" style="--d:0.16s"><span class="tag">SMTP / Policy</span><h3>Relay access denied</h3><p>The session reaches RCPT TO and gets 554 5.7.1. Check relay authorisation and the endpoint, not connectivity.</p></article>
+    <article class="card rv" style="--d:0s"><span class="tag">IMAP / Authentication</span><h3>IMAP login failure</h3><p>The endpoint answers CAPABILITY but rejects LOGIN or XOAUTH2. Confirm mailbox policy before resetting credentials.</p></article>
+    <article class="card rv" style="--d:0.08s"><span class="tag">Network / Timeout</span><h3>Server accepts TCP but stays silent</h3><p>The handshake completes but no greeting arrives before the timeout, which is different from a blocked SYN.</p></article>
+    <article class="card rv" style="--d:0.16s"><span class="tag">SMTP / Transient</span><h3>Greylisting / temporary deferral</h3><p>A 451 4.7.1 at RCPT TO. Follow the retry policy with backoff; instant retries can make rate limiting worse.</p></article>
+  </div>
+  <div class="note cy rv"><b>Training simulator.</b> Scenarios and terminal output in the demo are illustrative. It makes no network requests and does not connect to mail servers, authenticate accounts or run live diagnostics. Use the MailLab CLI for authorised probes.</div>
+  <div class="cta rv" style="opacity:1;animation:none;margin-top:26px"><a class="btn pri" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/demo/index.html" target="_blank" rel="noopener">Open the scenario explorer (source) ↗</a></div>
+</div></section>
+
+<section class="sec" id="start"><div class="wrap">
+  <div class="kicker rv">07 / Run it locally</div>
   <h2 class="rv">Quick start.</h2>
   <p class="sub rv">Clone it, install it, explain a reply, then probe a local mock server.</p>
   <div class="term rv" id="term">
@@ -286,7 +303,8 @@ footer a:hover{color:var(--text);text-decoration:underline}
 <pre id="code" aria-label="Quick start commands">git clone https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab.git
 cd smtp-imap-troubleshooting-lab
 python3 -m pip install -e .
-  # Explain a server reply
+
+# Explain a server reply
 maillab explain 454 "4.7.0 TLS not available"
 
 # Run the local mock and probe it
@@ -313,8 +331,8 @@ maillab smtp 127.0.0.1 --port 2525 --mode starttls</pre>
   <div class="cta rv" style="opacity:1;animation:none;margin-top:26px"><a class="btn pri" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">Explore repository ↗</a><a class="btn sec" href="projects.html">Back to projects</a></div>
 </div></section>
 
-<section class="sec" id="design"><div class="wrap">
-  <div class="kicker rv">07 / Engineering design</div>
+<section class="sec alt" id="design"><div class="wrap">
+  <div class="kicker rv">08 / Engineering design</div>
   <h2 class="rv">From protocol checks to a support-ready investigation.</h2>
   <p class="sub rv">Design choices that keep the toolkit easy to test and useful in a real support workflow.</p>
   <div class="grid3">
@@ -324,8 +342,18 @@ maillab smtp 127.0.0.1 --port 2525 --mode starttls</pre>
   </div>
 </div></section>
 
-<section class="sec alt docs" id="docs"><div class="wrap">
-  <div class="kicker rv">08 / Technical documentation</div>
+<section class="sec docs" id="docs"><div class="wrap">
+  <div class="kicker rv">09 / Technical documentation</div>
+  <h2 class="rv">Go deeper into the implementation.</h2>
+  <p class="sub rv">Architecture, playbooks and the security policy, all in the repository.</p>
+  <div class="grid3">
+    <a class="card rv" style="--d:0s" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/docs/architecture.md" target="_blank" rel="noopener"><h3>Architecture overview</h3><p>How the diagnostic components fit together and where the project boundaries sit.</p><span class="go">Read architecture ↗</span></a>
+    <a class="card rv" style="--d:.08s" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/docs/incident-playbooks.md" target="_blank" rel="noopener"><h3>Incident playbooks</h3><p>Practical investigation steps for STARTTLS failures, SMTP AUTH rejection, relay denial and IMAP login problems.</p><span class="go">Read playbooks ↗</span></a>
+    <a class="card rv" style="--d:.16s" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab/blob/main/SECURITY.md" target="_blank" rel="noopener"><h3>Security policy</h3><p>Responsible reporting guidance and safe handling of diagnostic evidence.</p><span class="go">Read security policy ↗</span></a>
+  </div>
+</div></section>
+<section class="sec docs" id="docs"><div class="wrap">
+  <div class="kicker rv">09 / Technical documentation</div>
   <h2 class="rv">Go deeper into the implementation.</h2>
   <p class="sub rv">Architecture, playbooks and the security policy, all in the repository.</p>
   <div class="grid3">
@@ -411,3 +439,5 @@ cb.addEventListener('click',function(){
 </script>
 </body>
 </html>
+
+
