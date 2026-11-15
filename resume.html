@@ -3,262 +3,302 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sajid Manzoor | Technical Support Engineer Resume</title>
-<meta name="description" content="Sajid Manzoor — Technical Support Engineer resume covering L2 support, REST APIs, Node.js, networking and SIP/VoIP troubleshooting.">
-<meta name="theme-color" content="#070B1A">
+<title>Resume | Sajid Manzoor | Technical Support Engineer (L2)</title>
+<meta name="description" content="Sajid Manzoor, Technical Support Engineer (L2): REST APIs, messaging and telecom support. 4+ years supporting a business VoIP service used by 150+ customer teams.">
+<link rel="canonical" href="https://sajidmanzoor730.github.io/sajid-portfolio/resume.html">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Sajid Manzoor">
+<meta property="og:url" content="https://sajidmanzoor730.github.io/sajid-portfolio/resume.html">
+<meta property="og:title" content="Resume | Sajid Manzoor">
+<meta property="og:description" content="Technical Support Engineer (L2): REST APIs, messaging and telecom support.">
+<meta property="og:image" content="https://sajidmanzoor730.github.io/sajid-portfolio/sajid.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#060914">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%235B83FF'/%3E%3Ctext x='16' y='22.5' font-size='17' font-family='Arial' font-weight='800' text-anchor='middle' fill='white'%3ESM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#070B1A; --panel:#0D1430; --panel2:#111A3B; --line:#1F2B52;
-  --text:#E8ECF8; --muted:#9BA8CC; --accent:#56B6FF; --accent2:#7EE7C7;
-  --head:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
-  --body:"Source Sans 3","Segoe UI",system-ui,-apple-system,sans-serif;
-}
+:root{--bg:#060914;--bg2:#0B1124;--card:#0D1430;--card2:#121B3F;--line:rgba(160,180,255,.14);--line2:rgba(160,180,255,.28);--text:#EAF0FF;--muted:#93A0C8;--soft:#C4CEEA;--blue:#5B83FF;--cyan:#35D3C6;--amber:#FFB547;--green:#3DDC97;--font:"Manrope","Segoe UI",Helvetica,Arial,sans-serif;--mono:"DM Mono",Consolas,monospace;--ease:cubic-bezier(.22,.8,.24,1)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{
-  background:
-    radial-gradient(900px 500px at 85% -10%, rgba(86,182,255,.14), transparent 60%),
-    radial-gradient(700px 400px at -10% 20%, rgba(126,231,199,.07), transparent 60%),
-    var(--bg);
-  color:var(--text);font-family:var(--body);font-size:16.5px;line-height:1.6;
-  overflow-wrap:anywhere;word-break:normal;min-height:100vh;
-}
-a{color:var(--accent);text-decoration:none}
+body{background:var(--bg);color:var(--text);font:400 16.5px/1.65 var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-wrap:anywhere;position:relative;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(900px 520px at 85% -5%,rgba(91,131,255,.2),transparent 62%),radial-gradient(700px 480px at -5% 30%,rgba(53,211,198,.1),transparent 62%)}
+a{color:var(--cyan);text-decoration:none}
 a:hover{text-decoration:underline;text-underline-offset:3px}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent2);outline-offset:3px;border-radius:6px}
-
-/* nav (matches portfolio) */
-.nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(12px);background:rgba(7,11,26,.82);border-bottom:1px solid var(--line)}
-.nav-in{max-width:1040px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:20px;justify-content:space-between;flex-wrap:wrap}
-.logo{font-family:var(--head);font-weight:800;color:var(--text);display:flex;align-items:center;gap:10px}
-.logo b{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#04101f;font-size:14px}
-.links{display:flex;gap:4px;flex-wrap:wrap}
-.links a{color:var(--muted);padding:6px 12px;border-radius:8px;font-size:15px;font-weight:500}
-.links a:hover{color:var(--text);background:var(--panel);text-decoration:none}
-.links a[aria-current="page"]{color:var(--text);background:var(--panel2)}
-
-/* sheet */
-.wrap{max-width:1040px;margin:0 auto;padding:36px 20px 64px}
-.sheet{background:linear-gradient(180deg,var(--panel),#0A1128);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
-header.top{padding:44px 44px 30px;border-bottom:1px solid var(--line);position:relative}
-header.top::after{content:"";position:absolute;left:44px;bottom:-1px;width:120px;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;transform-origin:left;animation:draw 1s .5s cubic-bezier(.2,.7,.2,1) both}
-h1{font-family:var(--head);font-weight:800;font-size:clamp(2.1rem,6vw,3.5rem);line-height:1.05;letter-spacing:-.02em}
-.role{margin-top:10px;font-family:var(--head);font-weight:500;font-size:clamp(1rem,2.4vw,1.2rem);color:var(--accent2)}
-.contact{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
-.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.02);color:var(--text);font-size:14.5px;max-width:100%;transition:border-color .2s,transform .2s}
-a.chip:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
-.chip svg{width:15px;height:15px;flex:none;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.actions{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
-.btn{font:600 15px var(--body);padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer;transition:transform .2s,background .2s}
-.btn:hover{transform:translateY(-2px);text-decoration:none}
-.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#04101f;border:0}
-
-.grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;}
-.main{padding:34px 44px 40px;min-width:0}
-.side{padding:34px 30px 40px;border-left:1px solid var(--line);background:rgba(255,255,255,.015);min-width:0}
-section+section{margin-top:34px}
-h2{font-family:var(--head);font-size:1.15rem;font-weight:700;letter-spacing:.01em;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:10px}
+.skip{position:absolute;left:12px;top:-60px;background:var(--amber);color:#111;padding:10px 16px;border-radius:10px;z-index:100;font-weight:700}
+.skip:focus{top:12px}
+.bar{position:fixed;inset:0 0 auto 0;height:3px;z-index:60;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left}
+nav{position:sticky;top:0;z-index:50;background:rgba(7,11,26,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1120px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:18px;color:var(--text)}
+.logo:hover{text-decoration:none}
+.logo b{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#06101F;font-size:14px}
+.links{display:flex;gap:2px;flex-wrap:wrap}
+.links a{color:var(--muted);padding:7px 12px;border-radius:10px;font-size:15px;font-weight:600}
+.links a:hover{color:var(--text);background:rgba(255,255,255,.05);text-decoration:none}
+.links a[aria-current="page"]{color:var(--text);background:var(--card2)}
+.wrap{max-width:1120px;margin:0 auto;padding:36px 24px 72px}
+.sheet{border:1px solid var(--line2);border-radius:28px;overflow:hidden;background:linear-gradient(180deg,rgba(18,27,63,.75),rgba(8,12,30,.85));box-shadow:0 40px 90px -40px rgba(0,0,0,.85)}
+.top{position:relative;isolation:isolate;overflow:hidden;padding:52px 48px 36px;border-bottom:1px solid var(--line)}
+.top::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(620px 320px at 92% 0%,rgba(91,131,255,.28),transparent 70%),radial-gradient(520px 300px at 0% 100%,rgba(53,211,198,.14),transparent 70%)}
+.top::after{content:"";position:absolute;left:48px;bottom:-1px;width:140px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform-origin:left;animation:draw 1s .5s var(--ease) both}
+h1{font-weight:800;font-size:clamp(2.3rem,6.4vw,4.1rem);line-height:1.02;letter-spacing:-.05em}
+.role{margin-top:12px;font-weight:700;font-size:clamp(1.02rem,2.3vw,1.3rem);color:var(--cyan);letter-spacing:-.01em}
+.avail{margin-top:10px;display:inline-flex;align-items:center;gap:10px;font-size:14.5px;color:var(--muted)}
+.avail i{width:8px;height:8px;border-radius:50%;background:var(--green);animation:ping 2.2s infinite;flex:none}
+@keyframes ping{70%{box-shadow:0 0 0 9px rgba(61,220,151,0)}0%{box-shadow:0 0 0 0 rgba(61,220,151,.6)}}
+.contact{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--line2);border-radius:999px;background:rgba(255,255,255,.03);color:var(--text);font-size:14.5px;font-weight:600;max-width:100%;transition:border-color .25s,transform .3s var(--ease),background .25s}
+a.chip:hover{border-color:var(--blue);background:rgba(91,131,255,.12);transform:translateY(-2px);text-decoration:none}
+.chip svg{width:15px;height:15px;flex:none;stroke:var(--cyan);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.actions{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{font:700 15px var(--font);padding:12px 20px;border-radius:12px;border:1px solid var(--line2);background:transparent;color:var(--text);cursor:pointer;transition:transform .3s var(--ease),background .25s,border-color .25s;display:inline-block}
+.btn:hover{transform:translateY(-3px);text-decoration:none;border-color:var(--text);background:rgba(255,255,255,.04)}
+.btn.pri{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.pri:hover{background:#6F92FF;border-color:#6F92FF}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--line);background:rgba(11,17,36,.6)}
+.kpi{padding:22px 26px;border-right:1px solid var(--line)}
+.kpi:last-child{border-right:0}
+.kpi b{display:block;font-size:clamp(1.7rem,3.4vw,2.4rem);line-height:1.1;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff,#9FB4FF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.kpi span{display:block;color:var(--muted);font-size:13.5px;line-height:1.35;margin-top:2px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 330px}
+.main{padding:38px 48px 46px;min-width:0}
+.side{padding:38px 30px 46px;border-left:1px solid var(--line);background:rgba(255,255,255,.015);min-width:0}
+section+section{margin-top:40px}
+h2{font-weight:800;font-size:1.2rem;letter-spacing:-.01em;margin-bottom:18px;display:flex;align-items:center;gap:14px}
+h2::before{content:"";width:9px;height:9px;border-radius:3px;background:linear-gradient(135deg,var(--blue),var(--cyan));flex:none}
 h2::after{content:"";flex:1;height:1px;background:var(--line)}
-.summary{color:#CBD3EC;max-width:68ch}
-
-/* experience timeline */
-.job{position:relative;padding-left:24px;padding-bottom:6px}
-.job+.job{margin-top:26px}
-.job::before{content:"";position:absolute;left:4px;top:8px;bottom:-26px;width:2px;background:var(--line)}
+.summary{color:var(--soft);max-width:70ch}
+.job{position:relative;padding-left:28px}
+.job+.job{margin-top:34px}
+.job::before{content:"";position:absolute;left:4px;top:12px;bottom:-34px;width:2px;background:var(--line)}
 .job:last-child::before{display:none}
-.job::after{content:"";position:absolute;left:0;top:7px;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(86,182,255,.18)}
-.job h3,.proj h3{font-family:var(--head);font-size:1.08rem;font-weight:700;line-height:1.3}
-.meta{display:flex;justify-content:space-between;gap:4px 16px;flex-wrap:wrap;color:var(--muted);font-size:14.5px;margin:2px 0 10px}
-.meta .when{color:var(--accent2);font-weight:600}
+.job::after{content:"";position:absolute;left:0;top:8px;width:11px;height:11px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 5px rgba(91,131,255,.2)}
+.job h3,.proj h3{font-weight:800;font-size:1.2rem;line-height:1.3;letter-spacing:-.02em}
+.meta{display:flex;justify-content:space-between;gap:4px 16px;flex-wrap:wrap;color:var(--muted);font-size:14.5px;margin:3px 0 14px}
+.meta .when{color:var(--cyan);font-weight:700;font-family:var(--mono);font-size:13px;letter-spacing:.04em}
+.sub{font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin:18px 0 8px}
 ul{list-style:none}
-li{position:relative;padding-left:18px;margin:6px 0;color:#CBD3EC}
-li::before{content:"";position:absolute;left:0;top:.7em;width:7px;height:7px;border-right:2px solid var(--accent);border-top:2px solid var(--accent);transform:rotate(45deg) scale(.8)}
-
-/* projects */
-.proj{padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02);transition:border-color .25s,transform .25s}
-.proj:hover{border-color:rgba(86,182,255,.55);transform:translateY(-2px)}
+li{position:relative;padding-left:20px;margin:7px 0;color:var(--soft)}
+li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:9px;border-radius:3px;background:linear-gradient(135deg,var(--blue),var(--cyan))}
+li b{color:var(--text)}
+.cases{display:grid;gap:12px;margin-top:6px}
+.case{padding:16px 18px;border:1px solid var(--line);border-left:3px solid var(--cyan);border-radius:0 14px 14px 0;background:rgba(255,255,255,.025);color:var(--soft);font-size:15.5px;transition:border-color .25s,transform .3s var(--ease)}
+.case:hover{border-color:var(--line2);border-left-color:var(--cyan);transform:translateX(3px)}
+.case b{display:block;color:var(--text);font-size:15px;margin-bottom:3px}
+.proj{padding:20px 22px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(18,27,63,.6),rgba(8,12,30,.6));transition:border-color .3s,transform .4s var(--ease)}
+.proj:hover{border-color:var(--line2);transform:translateY(-3px)}
 .proj+.proj{margin-top:14px}
-.stack{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 6px}
-.tag{font-size:12.5px;padding:2px 9px;border-radius:6px;background:var(--panel2);color:var(--muted);border:1px solid var(--line)}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0 4px}
-.stat{padding:8px 10px;border-radius:10px;background:var(--panel2);text-align:center}
-.stat b{display:block;font-family:var(--head);font-size:1.15rem;color:var(--accent2);line-height:1.2}
-.stat span{font-size:12px;color:var(--muted);line-height:1.2;display:block}
-.plink{display:inline-block;margin-top:6px;font-weight:600;font-size:15px}
-
-/* sidebar */
-.skill+.skill{margin-top:18px}
-.skill h3{font-family:var(--head);font-size:.95rem;font-weight:700;margin-bottom:8px}
+.stack{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 6px}
+.tag{font:500 12px var(--mono);padding:3px 10px;border-radius:999px;background:rgba(91,131,255,.12);color:#B5C6FF;border:1px solid rgba(91,131,255,.3)}
+.plink{display:inline-block;margin-top:6px;font-weight:700;font-size:15px}
+.skill+.skill{margin-top:20px}
+.skill h3{font-size:.9rem;font-weight:800;margin-bottom:9px;color:var(--text)}
 .pills{display:flex;flex-wrap:wrap;gap:6px}
-.pill{font-size:13.5px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.025);color:#D5DCF2}
-.edu strong{display:block;font-family:var(--head)}
-.edu span{color:var(--muted);font-size:14.5px}
-
-/* motion: one orchestrated load sequence */
-.reveal{opacity:0;transform:translateY(14px);animation:rise .7s calc(var(--i,0)*90ms + 80ms) cubic-bezier(.2,.7,.2,1) forwards}
+.pill{font-size:13px;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid var(--line2);background:rgba(255,255,255,.03);color:#D5DCF2;transition:background .25s,border-color .25s}
+.pill:hover{background:rgba(91,131,255,.16);border-color:var(--blue)}
+.edu+.edu{margin-top:14px}
+.edu strong{display:block;font-weight:800;line-height:1.35}
+.edu span{color:var(--muted);font-size:14.5px;display:block}
+.note{margin-top:14px;font-size:13.5px;color:var(--muted)}
+.reveal{opacity:0;transform:translateY(16px);animation:rise .8s calc(var(--i,0)*90ms + 80ms) var(--ease) forwards}
 @keyframes rise{to{opacity:1;transform:none}}
 @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .reveal{opacity:1;transform:none;animation:none}
-  header.top::after{animation:none}
-  .proj,.chip,.btn{transition:none}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
 }
-
-@media (max-width:860px){
+@media (max-width:900px){
   .grid{grid-template-columns:minmax(0,1fr)}
   .side{border-left:0;border-top:1px solid var(--line)}
-  header.top{padding:32px 22px 26px}
-  header.top::after{left:22px}
-  .main{padding:28px 22px 32px}
-  .side{padding:28px 22px 34px}
-  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .top{padding:36px 22px 30px}.top::after{left:22px}
+  .main{padding:30px 22px 34px}.side{padding:30px 22px 36px}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kpi:nth-child(2){border-right:0}.kpi:nth-child(-n+2){border-bottom:1px solid var(--line)}
 }
 @media (max-width:480px){
-  body{font-size:16px}
-  .wrap{padding:20px 12px 48px}
-  .links a{padding:5px 9px;font-size:14px}
+  body{font-size:16px}.wrap{padding:20px 12px 48px}
+  .links a{padding:6px 9px;font-size:14px}
+  .actions .btn{flex:1;text-align:center}
 }
-
-/* print: clean one-page-style resume */
 @media print{
-  @page{margin:12mm}
-  body{background:#fff;color:#111;font-size:11pt}
-  .nav,.actions{display:none}
+  @page{margin:11mm}
+  body{background:#fff;color:#111;font-size:10pt;line-height:1.5}
+  body::before,.bar,nav,.actions,.skip{display:none!important}
   .wrap{padding:0;max-width:none}
   .sheet{background:#fff;border:0;box-shadow:none;border-radius:0}
-  .side{background:#fff;border-color:#ccc}
-  header.top,.proj,.pill,.chip,.tag,.stat,h2::after{border-color:#ccc}
-  .stat,.pill,.tag{background:#f3f4f8}
-  .role,.when,.stat b,.chip svg{color:#0a5a8f;stroke:#0a5a8f}
-  .summary,li,.meta{color:#222}
+  .top{padding:0 0 14px}.top::before,.top::after{display:none}
+  .top,.kpis,.kpi,.side,.proj,.case,.pill,.chip,.tag{border-color:#ccc}
+  .kpis{background:#fff}
+  .kpi b{background:none;-webkit-text-fill-color:#0a5a8f;color:#0a5a8f}
+  .kpi span,.meta,.avail,.edu span,.note{color:#444}
+  .role,.when,.sub,.chip svg{color:#0a5a8f;stroke:#0a5a8f}
+  .summary,li,.case{color:#222}
+  .case b,li b,.skill h3,h1{color:#111}
+  .proj,.case,.pill,.chip,.tag{background:#f4f6fa}
+  .main,.side{padding:18px 0 0}.side{padding-left:18px;background:#fff}
+  .grid{grid-template-columns:minmax(0,1fr) 240px}
   a{color:#0a5a8f}
   .reveal{opacity:1;transform:none;animation:none}
-  .proj,.job{break-inside:avoid}
+  .job,.proj,.case{break-inside:avoid}
+  .avail i{display:none}
 }
 </style>
 </head>
 <body>
-<nav class="nav" aria-label="Primary">
+<a class="skip" href="#resume">Skip to resume</a>
+<div class="bar" id="bar"></div>
+<nav aria-label="Primary">
   <div class="nav-in">
-    <a class="logo" href="index.html"><b>SM</b>Sajid Manzoor</a>
+    <a class="logo" href="index.html#top"><b>SM</b>Sajid Manzoor</a>
     <div class="links">
-      <a href="index.html">Home</a><a href="projects.html">Projects</a><a href="experience.html">Experience</a><a href="skills.html">Skills</a><a href="contact.html">Contact</a><a href="resume.html" aria-current="page">Resume</a>
+      <a href="index.html#top">Home</a><a href="index.html#experience">Experience</a><a href="projects.html">Projects</a><a href="index.html#skills">Skills</a><a href="index.html#contact">Contact</a><a href="resume.html" aria-current="page">Resume</a>
     </div>
   </div>
 </nav>
 
-<main class="wrap">
+<main class="wrap" id="resume">
 <div class="sheet">
   <header class="top">
     <h1 class="reveal" style="--i:0">Sajid Manzoor</h1>
-    <p class="role reveal" style="--i:1">Technical Support Engineer &mdash; REST APIs, Node.js, Networking &amp; SIP/VoIP</p>
-    <div class="contact reveal" style="--i:2">
-      <span class="chip"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Delhi, India</span>
-      <a class="chip" href="tel:+919149979829"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>+91 91499 79829</a>
-      <a class="chip" href="mailto:sajidmanzoor730@gmail.com"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>sajidmanzoor730@gmail.com</a>
-      <a class="chip" href="https://www.linkedin.com/in/sajid-manzoor-730zz" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v6M8 7.5v.01M12 17v-6m0 3c0-2 1.2-3 3-3s2 1.2 2 3v3"/></svg>LinkedIn</a>
-      <a class="chip" href="https://github.com/sajidmanzoor730" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9 19c-4 1.3-4-2-6-2m12 4v-3.2a2.8 2.8 0 0 0-.8-2.2c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.3 1.3a11.4 11.4 0 0 0-6 0C6.700 3.900 5.700 4.200 5.700 4.200a4.3 4.3 0 0 0-.1 3.200A4.600 4.600 0 0 0 4.300 10.600c0 4.700 2.800 5.700 5.500 6A2.800 2.800 0 0 0 9 18.800V21"/></svg>GitHub</a>
-      <a class="chip" href="index.html"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>Portfolio</a>
+    <p class="role reveal" style="--i:1">Technical Support Engineer (L2) &mdash; REST APIs, Messaging &amp; Telecom Support</p>
+    <p class="avail reveal" style="--i:2"><i></i>Flexible for weekend, swing and night shifts &middot; Open to occasional travel for team meetings</p>
+    <div class="contact reveal" style="--i:3">
+      <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Delhi, India (remote)</span>
+      <a class="chip" href="tel:+919149979829"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>+91 91499 79829</a>
+      <a class="chip" href="mailto:sajidmanzoor730@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>sajidmanzoor730@gmail.com</a>
+      <a class="chip" href="https://www.linkedin.com/in/sajid-manzoor-730zz" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v6M8 7.5v.01M12 17v-6m0 3c0-2 1.2-3 3-3s2 1.2 2 3v3"/></svg>LinkedIn</a>
+      <a class="chip" href="https://github.com/sajidmanzoor730" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1.3-4-2-6-2m12 4v-3.2a2.8 2.8 0 0 0-.8-2.2c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.3 1.3a11.4 11.4 0 0 0-6 0C6.7 3.9 5.7 4.2 5.7 4.2a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.3 10.600c0 4.700 2.800 5.700 5.500 6A2.800 2.800 0 0 0 9 18.800V21"/></svg>GitHub</a>
+      <a class="chip" href="index.html#top"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>Portfolio</a>
     </div>
-    <div class="actions reveal" style="--i:3">
-      <a class="btn primary" href="resume.pdf" download>Download PDF</a>
+    <div class="actions reveal" style="--i:4">
+      <a class="btn pri" href="resume.pdf" download>Download PDF</a>
       <button class="btn" type="button" onclick="window.print()">Print</button>
-      <a class="btn" href="index.html">Back to portfolio</a>
+      <a class="btn" href="index.html#top">Back to portfolio</a>
     </div>
   </header>
 
+  <div class="kpis reveal" style="--i:5">
+    <div class="kpi"><b>4+</b><span>years in technical support</span></div>
+    <div class="kpi"><b>150+</b><span>customer teams on the VoIP service I support</span></div>
+    <div class="kpi"><b>180&ndash;200</b><span>tickets closed a month</span></div>
+    <div class="kpi"><b>93&ndash;95%</b><span>SLA adherence across P1&ndash;P4 queues</span></div>
+  </div>
+
   <div class="grid">
     <div class="main">
-      <section class="reveal" style="--i:4">
-        <h2>Summary</h2>
-        <p class="summary">Technical Support Engineer with 4+ years in technical support across Node.js/React applications, REST APIs, networking and SIP/VoIP, including L2 support since 2024 on a business VoIP service for 150+ customer teams. Skilled at isolating whether a problem lives in client-side code, an API, a database query or the network, and at explaining the cause and the fix clearly to both engineers and non-technical customers.</p>
+      <section class="reveal" style="--i:6">
+        <h2>Professional summary</h2>
+        <p class="summary">L2 Technical Support Engineer with 4+ years in a client-facing technical role supporting a business VoIP service (REST API and enterprise software) used by 150+ customer teams, including wholesale and reseller customers. Close 180&ndash;200 tickets a month at 93&ndash;95% SLA adherence. Troubleshoot REST APIs, SDKs and webhooks with Postman and cURL, message and call deliverability issues, and carrier escalations across the web and telco technology stacks (SIP, RTP, TCP/UDP, SMTP). Resolve complex customer requests by phone, email and chat with strong problem-solving, de-escalate tense situations in a live environment, and explain technical issues to technical and non-technical audiences. Collaborate with the Product and Engineering teams on Slack, file reproducible Jira bugs and keep knowledge base documentation current.</p>
       </section>
 
-      <section class="reveal" style="--i:5">
+      <section class="reveal" style="--i:7">
         <h2>Professional experience</h2>
 
         <article class="job">
-          <h3>Technical Support Engineer</h3>
-          <div class="meta"><span>A2N Technologies Pvt Ltd, Jammu &amp; Kashmir</span><span class="when">Jan 2024 &ndash; Present</span></div>
+          <h3>Technical Support Engineer (L2)</h3>
+          <div class="meta"><span>A2N Technologies Pvt Ltd &mdash; Jammu and Kashmir, India</span><span class="when">JAN 2024 &ndash; PRESENT</span></div>
+          <div class="sub" style="margin-top:0">Operations</div>
           <ul>
-            <li>Provide L2 support as part of the team covering A2N&rsquo;s business VoIP service for 150+ customer teams, taking escalated SIP/RTP, networking and application cases; handle roughly 8&ndash;12 tickets a day, more during outages, prioritised P1&ndash;P4 against priority-based SLA targets, tracking response, escalation and resolution progress in Jira.</li>
-            <li>Handle P1 cases where customers are upset about call drops, one-way audio or registration failures during business hours: acknowledge the business impact, trace the SIP flow in Wireshark (INVITE, provisional and final responses, RTP), isolate causes such as firewall/NAT behaviour with the network team, keep the customer updated with ETAs in Jira, confirm the fix with test calls and document the steps in a runbook.</li>
-            <li>Resolve SIP/VoIP call-quality issues (call drops, one-way audio, registration failures, codec mismatches) by correlating call-flow traces with network conditions.</li>
-            <li>Isolate connectivity problems across TCP/UDP, DNS, DHCP, VPN, NAT, firewalls and SSL/TLS with Wireshark before escalating, so network engineering receives a narrowed-down cause rather than a vague symptom.</li>
-            <li>Trace server-side issues in Node.js and Java applications through logs, then confirm findings with SQL queries.</li>
-            <li>Separate client-side from server-side causes of REST API and HTTP integration failures using Postman and request/response analysis.</li>
-            <li>File reproducible bug reports in JIRA with logs, request/response samples and packet captures, and escalate to development and infrastructure teams with clear impact and steps to reproduce.</li>
-            <li>Document recurring issues and fixes in runbooks and knowledge-base articles so other engineers can resolve similar cases faster.</li>
+            <li>Close <b>180&ndash;200 tickets a month</b> (8&ndash;12 a day, higher during outages) across P1&ndash;P4 queues in Jira at <b>93&ndash;95% SLA adherence</b>.</li>
+            <li>Respond to P1 incidents (call drops, one-way audio, registration failures) within <b>15&ndash;20 minutes</b> with hourly customer updates, tracing SIP INVITE, provisional and final responses and RTP in Wireshark.</li>
+            <li>Resolve most P2 and P3 cases the same day (3&ndash;5 hours for firewall or NAT causes), isolating network connectivity faults with the network team and validating fixes with test calls.</li>
+            <li><b>Message deliverability and carrier escalations:</b> troubleshoot SMS, messaging and email delivery failures, routing issues and delays using message logs, bounce and rejection codes, blocklist checks, SPF, DKIM and DMARC validation, API responses and webhooks, and manage escalations with carrier and telecom partners until the issue is resolved.</li>
+            <li><b>Wholesale and reseller customers:</b> support wholesale and reseller customers running services on the platform, resolving complex requests and escalations end to end.</li>
+            <li>Separate client-side from server-side causes in REST API, SDK and cloud-solution integration failures using Postman, cURL, webhooks and request and response analysis; confirm findings with SQL queries (Snowflake).</li>
+          </ul>
+
+          <div class="sub">Selected cases</div>
+          <div class="cases">
+            <div class="case"><b>Cloud solutions (AWS)</b>Resolved 502 errors from a Node.js API on AWS EC2: CloudWatch showed CPU above 95% from a customer retry loop. Restarted PM2, added a rate limit and advised exponential backoff; API restored in 20&ndash;25 minutes (CPU about 40%, no data loss) and a retry-storm note added to the runbook.</div>
+            <div class="case"><b>SDK troubleshooting</b>Fixed a customer&rsquo;s 400 Invalid SIP URI error in a Node.js SDK (axios-based wrapper): phone numbers lacked a + country code. Reproduced it on the same SDK version and resolved it on a one-hour call by adding +91 and trimming spaces; the next 10 test calls passed, and I raised a ticket to add input validation to the SDK.</div>
+            <div class="case"><b>Email infrastructure (MUA/MTA)</b>Diagnosed a voicemail-to-email failure end to end: found SMTP 454 TLS handshake errors in Node.js logs, then confirmed in Wireshark that a customer firewall change was blocking STARTTLS on port 587; applied a port 465 workaround and an IP allowlist.</div>
+            <div class="case"><b>Telnet port checks</b>On a voicemail-to-email outage (timeouts to the customer&rsquo;s SMTP host on port 587), ran Telnet checks on ports 587 and 25, compared against a test from outside our network, and traced it to our egress firewall. Port 587 was opened, email flowed within 10 minutes, and the ticket closed in about 2 hours.</div>
+            <div class="case"><b>Bounce and authentication failure</b>Resolved password-reset emails bouncing for one domain (SMTP 550 5.7.1, then 535). Traced it to an expired SMTP app password using swaks and Telnet AUTH tests; a test email delivered in 30 seconds and all 15&ndash;20 queued emails went out within 5 minutes. Added a password-expiry check to the team checklist.</div>
+          </div>
+
+          <div class="sub">Collaboration &amp; knowledge</div>
+          <ul>
+            <li>Work directly with customers&rsquo; and partners&rsquo; developers, architects and support staff on complex, high-impact problems, acting as the voice of the company to customers and partners and as subject matter expert on APIs, SDKs, messaging and VoIP.</li>
+            <li>File reproducible Jira bugs with logs, request and response samples and packet captures; collaborate with the Product and Engineering teams on Slack and relay customer feedback to drive product improvements.</li>
+            <li>Contribute to internal and external knowledge bases, correcting errors and updating details, and keep up with industry shifts and standards; built troubleshooting workflows that improved efficiency while following standard processes and procedures and stopped repeat NAT-related cases, and surface recurring customer problems to my manager for process improvement.</li>
+            <li>Prioritize tasks by urgency, manage time across P1&ndash;P4 queues, stay effective under pressure during outages, de-escalate tense customer situations in a live environment on calls with diplomatic, concise feedback, and build working relationships with stakeholders at all levels across time zones.</li>
           </ul>
         </article>
 
         <article class="job">
           <h3>Software Support Associate</h3>
-          <div class="meta"><span>Global Management Services, Delhi</span><span class="when">Jun 2022 &ndash; Dec 2023</span></div>
+          <div class="meta"><span>Global Management Services &mdash; Delhi, India</span><span class="when">JUN 2022 &ndash; DEC 2023</span></div>
           <ul>
-            <li>Supported enterprise web applications built on JavaScript, Node.js and React.js, troubleshooting both client-side rendering issues and server-side logic.</li>
-            <li>Used Chrome DevTools, application logs and OOP fundamentals to trace bugs to their source and explain fixes to engineers and non-technical stakeholders.</li>
-            <li>Tested and validated RESTful services in Postman to determine whether issues came from the API contract or the calling application.</li>
-            <li>Queried application data with SQL during diagnosis and worked with network teams on latency and connectivity tickets.</li>
-            <li>Owned customer incidents end to end in JIRA and ServiceNow: logging, prioritizing, tracking to resolution and keeping customers updated.</li>
+            <li>Supported enterprise web applications (JavaScript, Node.js, React.js), troubleshooting rendering issues and server-side logic with Chrome DevTools and application logs.</li>
+            <li>Validated RESTful services in Postman and cURL to determine whether issues came from the API contract or the calling application.</li>
+            <li>Owned customer incidents end to end in Jira and ServiceNow: logging, prioritizing, tracking and keeping customers updated.</li>
+            <li>Queried application data with SQL and worked with network teams on latency and connectivity tickets involving TCP/UDP and SSL/TLS.</li>
           </ul>
         </article>
       </section>
 
-      <section class="reveal" style="--i:6">
-        <h2>Projects</h2>
+      <section class="reveal" style="--i:8">
+        <h2>Selected projects</h2>
 
         <article class="proj">
           <h3>VoIP Support Automation Toolkit</h3>
-          <div class="stack"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Wireshark</span><span class="tag">Postman</span></div>
-          <ul>
-            <li>Built a Python and SQL toolkit for VoIP support from public Wireshark SIP/RTP sample captures: a SIP log parser, SQL investigation queries, Postman API health checks, Wireshark filters and an incident-triage runbook. Uses public sample data only; no employer or customer data.</li>
-          </ul>
-          <a class="plink" href="https://github.com/sajidmanzoor730/voip-support-automation" target="_blank" rel="noopener">View on GitHub</a>
+          <div class="stack"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Wireshark</span><span class="tag">Postman</span><span class="tag">Webhooks</span></div>
+          <ul><li>Built a SIP log parser, SQL investigation queries, Postman API health checks, Wireshark filters and an incident triage runbook (a troubleshooting workflow) from public SIP and RTP sample captures. Public data only.</li></ul>
+          <a class="plink" href="https://github.com/sajidmanzoor730/voip-support-automation" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+        </article>
+
+        <article class="proj">
+          <h3>SMTP/IMAP Troubleshooting Toolkit &mdash; Email Infrastructure, MUA/MTA</h3>
+          <div class="stack"><span class="tag">Python</span><span class="tag">Wireshark</span><span class="tag">SMTP</span><span class="tag">IMAP</span><span class="tag">POP3</span><span class="tag">Telnet</span><span class="tag">TLS</span></div>
+          <ul><li>Built a dependency-free Python toolkit with SMTP and IMAP probes that act as a mail user agent (MUA) against mail transfer agents (MTA), plus a diagnosis engine that maps reply codes and TLS and socket errors to likely causes. A fault-injecting mock server reproduces nine failures (STARTTLS 454, 535, relay denied, greylisting, blackholed port) with 47 automated tests, runbooks and Wireshark filters. Test accounts only, no customer data.</li></ul>
+          <a class="plink" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">View on GitHub &rarr;</a>
         </article>
 
         <article class="proj">
           <h3>Helpdesk KPI Dashboard</h3>
           <div class="stack"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Streamlit</span></div>
-          <ul>
-            <li>Cleaned a raw ticket export (1,020 rows to 1,000 unique tickets) and built an interactive Streamlit dashboard reporting SLA adherence, CSAT and repeat-ticket rate on a synthetic practice dataset.</li>
-          </ul>
-          <a class="plink" href="https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard" target="_blank" rel="noopener">View on GitHub</a>
-        </article>
-
-        <article class="proj">
-          <h3>Microsoft Security Investigation Lab</h3>
-          <div class="stack"><span class="tag">Microsoft Defender concepts</span><span class="tag">Sentinel</span><span class="tag">KQL</span></div>
-          <ul>
-            <li>Practice lab investigating endpoint alerts: severity triage, suspicious-activity analysis, MITRE ATT&amp;CK mapping and incident reporting, using a clearly labelled practice dataset. No employer or customer data.</li>
-          </ul>
-          <a class="plink" href="https://github.com/sajidmanzoor730/microsoft-security-lab" target="_blank" rel="noopener">View on GitHub</a>
+          <ul><li>Cleaned a ticket export (1,020 rows to 1,000 unique tickets) and built a dashboard for SLA adherence, CSAT and repeat-ticket rate on a synthetic practice dataset.</li></ul>
+          <a class="plink" href="https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard" target="_blank" rel="noopener">View on GitHub &rarr;</a>
         </article>
       </section>
     </div>
 
     <aside class="side">
-      <section class="reveal" style="--i:5">
+      <section class="reveal" style="--i:6">
         <h2>Core skills</h2>
-        <div class="skill"><h3>Support &amp; troubleshooting</h3><div class="pills"><span class="pill">L2 support</span><span class="pill">Incident triage</span><span class="pill">Root-cause analysis</span><span class="pill">SLA queues</span><span class="pill">Escalation</span><span class="pill">De-escalation</span><span class="pill">Phone &amp; email</span><span class="pill">Case documentation</span></div></div>
-        <div class="skill"><h3>Web &amp; APIs</h3><div class="pills"><span class="pill">JavaScript</span><span class="pill">Node.js</span><span class="pill">React.js</span><span class="pill">Express.js</span><span class="pill">HTML5/CSS3</span><span class="pill">OOP</span><span class="pill">Chrome DevTools</span><span class="pill">REST APIs</span><span class="pill">HTTP</span><span class="pill">JSON</span><span class="pill">Postman</span></div></div>
-        <div class="skill"><h3>SQL</h3><div class="pills"><span class="pill">SQL</span><span class="pill">MySQL</span><span class="pill">Query writing</span><span class="pill">Data investigation</span></div></div>
-        <div class="skill"><h3>Networking</h3><div class="pills"><span class="pill">TCP/UDP</span><span class="pill">DNS</span><span class="pill">DHCP</span><span class="pill">VPN</span><span class="pill">NAT</span><span class="pill">Firewalls</span><span class="pill">SSL/TLS</span><span class="pill">Wireshark</span></div></div>
-        <div class="skill"><h3>VoIP &amp; telephony</h3><div class="pills"><span class="pill">SIP</span><span class="pill">RTP</span><span class="pill">IP PBX</span><span class="pill">Call flows</span><span class="pill">Registration issues</span><span class="pill">Codec mismatches</span><span class="pill">One-way audio</span><span class="pill">Call drops</span></div></div>
-        <div class="skill"><h3>Tools &amp; languages</h3><div class="pills"><span class="pill">JIRA</span><span class="pill">ServiceNow</span><span class="pill">Git</span><span class="pill">PuTTY</span><span class="pill">Java</span><span class="pill">Python</span></div></div>
+        <div class="skill"><h3>Technical support</h3><div class="pills"><span class="pill">L2 support</span><span class="pill">Client-facing support</span><span class="pill">Incident triage</span><span class="pill">Root-cause analysis</span><span class="pill">SLA management</span><span class="pill">Escalation management</span><span class="pill">De-escalation</span><span class="pill">Case documentation</span><span class="pill">Knowledge base</span><span class="pill">Runbooks</span><span class="pill">Process improvement</span></div></div>
+        <div class="skill"><h3>APIs &amp; web</h3><div class="pills"><span class="pill">REST APIs</span><span class="pill">APIs &amp; SDKs</span><span class="pill">Webhooks</span><span class="pill">cURL</span><span class="pill">Postman</span><span class="pill">HTTP</span><span class="pill">JSON</span><span class="pill">API debugging</span><span class="pill">Python</span><span class="pill">Java</span><span class="pill">JavaScript</span><span class="pill">Node.js</span><span class="pill">C++</span><span class="pill">React.js</span><span class="pill">Express.js</span><span class="pill">AWS EC2</span><span class="pill">CloudWatch</span><span class="pill">Twilio Messaging API (studied docs)</span></div></div>
+        <div class="skill"><h3>Messaging &amp; telecom</h3><div class="pills"><span class="pill">SMS delivery</span><span class="pill">Message deliverability</span><span class="pill">Carrier escalations</span><span class="pill">Wholesale &amp; reseller support</span><span class="pill">SIP</span><span class="pill">RTP</span><span class="pill">IP PBX</span><span class="pill">Call flow analysis</span><span class="pill">Registration issues</span><span class="pill">Codec mismatches</span><span class="pill">One-way audio</span><span class="pill">Call drops</span></div></div>
+        <div class="skill"><h3>Email (MUA/MTA)</h3><div class="pills"><span class="pill">MUA</span><span class="pill">MTA</span><span class="pill">Mail flow</span><span class="pill">SMTP</span><span class="pill">STARTTLS</span><span class="pill">SSL/TLS</span><span class="pill">IMAP</span><span class="pill">POP3</span><span class="pill">Telnet</span><span class="pill">swaks</span><span class="pill">Bounce codes</span><span class="pill">Blocklist checks</span><span class="pill">SPF</span><span class="pill">DKIM</span><span class="pill">DMARC</span><span class="pill">Email headers</span><span class="pill">Mail server logs</span></div></div>
+        <div class="skill"><h3>Networking</h3><div class="pills"><span class="pill">TCP/UDP</span><span class="pill">Connectivity troubleshooting</span><span class="pill">SSL/TLS</span><span class="pill">DNS</span><span class="pill">DHCP</span><span class="pill">VPN</span><span class="pill">NAT</span><span class="pill">Firewalls</span><span class="pill">Wireshark</span><span class="pill">Packet capture</span></div></div>
+        <div class="skill"><h3>Data &amp; tools</h3><div class="pills"><span class="pill">Jira</span><span class="pill">ServiceNow</span><span class="pill">Slack</span><span class="pill">SQL</span><span class="pill">Snowflake</span><span class="pill">MySQL</span><span class="pill">Git</span></div></div>
+        <div class="skill"><h3>Customer &amp; team</h3><div class="pills"><span class="pill">Written &amp; verbal communication</span><span class="pill">Phone, email &amp; chat</span><span class="pill">Task prioritization</span><span class="pill">Time management</span><span class="pill">Working under pressure</span><span class="pill">Stakeholder relationships</span><span class="pill">Feedback to Product &amp; Engineering</span></div></div>
       </section>
 
-      <section class="reveal" style="--i:6">
+      <section class="reveal" style="--i:7">
         <h2>Education</h2>
-        <div class="edu"><strong>Bachelor of Computer Applications (BCA)</strong><span>Amar Singh College &middot; 2021</span></div>
+        <div class="edu"><strong>Bachelor of Computer Applications (BCA)</strong><span>Amar Singh College &middot; 2021</span><span>Plus 4+ years of equivalent work experience</span></div>
+      </section>
+
+      <section class="reveal" style="--i:8">
+        <h2>Certifications</h2>
+        <div class="pills"><span class="pill">CCNA</span><span class="pill">Postman API</span><span class="pill">Technical Writing</span></div>
       </section>
     </aside>
   </div>
 </div>
 </main>
+<script>
+(function(){
+var bar=document.getElementById('bar'),tk=0;
+function f(){var h=document.documentElement.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?scrollY/h:0)+')'}
+addEventListener('scroll',function(){if(!tk)tk=requestAnimationFrame(function(){tk=0;f()})},{passive:true});
+addEventListener('resize',f);f();
+})();
+</script>
 </body>
 </html>
