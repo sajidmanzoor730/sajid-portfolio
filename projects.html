@@ -3,95 +3,285 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Projects | Sajid Manzoor | Technical Support Engineer</title>
+<meta name="description" content="Technical support projects by Sajid Manzoor: VoIP/SIP troubleshooting, SMTP/IMAP diagnostics, helpdesk reporting and security incident investigation.">
+<link rel="canonical" href="https://sajidmanzoor730.github.io/sajid-portfolio/projects.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sajid Manzoor">
+<meta property="og:url" content="https://sajidmanzoor730.github.io/sajid-portfolio/projects.html">
+<meta property="og:title" content="Projects | Sajid Manzoor">
+<meta property="og:description" content="VoIP/SIP troubleshooting, SMTP/IMAP diagnostics, helpdesk reporting and security incident investigation.">
+<meta property="og:image" content="https://sajidmanzoor730.github.io/sajid-portfolio/sajid.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#060914">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%235B83FF'/%3E%3Ctext x='16' y='22.5' font-size='17' font-family='Arial' font-weight='800' text-anchor='middle' fill='white'%3ESM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060914;--bg2:#0B1124;--card:#0D1430;--card2:#121B3F;--line:rgba(160,180,255,.14);--line2:rgba(160,180,255,.28);--text:#EAF0FF;--muted:#93A0C8;--blue:#5B83FF;--cyan:#35D3C6;--amber:#FFB547;--green:#3DDC97;--font:"Manrope","Segoe UI",Helvetica,Arial,sans-serif;--mono:"DM Mono",Consolas,monospace;--ease:cubic-bezier(.22,.8,.24,1)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:10px}
+.skip{position:absolute;left:12px;top:-60px;background:var(--amber);color:#111;padding:10px 16px;border-radius:10px;z-index:100;font-weight:700;text-decoration:none}
+.skip:focus{top:12px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+.bar{position:fixed;inset:0 0 auto 0;height:3px;z-index:60;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
+nav.stuck{background:rgba(7,11,26,.88);border-color:var(--line);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:18px;text-decoration:none}
+.logo b{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#06101F;font-size:14px}
+.links{display:flex;align-items:center;gap:4px}
+.links a{position:relative;text-decoration:none;color:var(--muted);font-weight:600;font-size:15px;padding:8px 12px;transition:color .25s}
+.links a:hover,.links a.on{color:var(--text)}
+.links a:not(.btn)::after{content:"";position:absolute;left:12px;right:12px;bottom:2px;height:2px;border-radius:2px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.links a:hover::after,.links a.on::after{transform:scaleX(1)}
+.links .btn{padding:10px 20px;font-size:15px;margin-left:8px;color:#fff}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:14px;font-weight:700;font-size:16px;text-decoration:none;border:1px solid transparent;transition:transform .3s var(--ease),background .25s,border-color .25s}
+.btn.pri{background:var(--blue);color:#fff}
+.btn.pri:hover{transform:translateY(-3px);background:#6F92FF}
+.btn.sec{border-color:var(--line2);color:var(--text)}
+.btn.sec:hover{transform:translateY(-3px);border-color:var(--text);background:rgba(255,255,255,.04)}
+.btn.sm{padding:10px 18px;font-size:15px}
+.navtoggle{display:none}
+.hero{position:relative;isolation:isolate;overflow:hidden;padding:150px 0 80px}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(900px 520px at 80% 6%,rgba(91,131,255,.22),transparent 65%),radial-gradient(700px 480px at 6% 80%,rgba(53,211,198,.12),transparent 65%)}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;opacity:.35;-webkit-mask:radial-gradient(ellipse 70% 70% at 70% 35%,#000 20%,transparent 75%);mask:radial-gradient(ellipse 70% 70% at 70% 35%,#000 20%,transparent 75%)}
+.aur{position:absolute;z-index:-1;border-radius:50%;filter:blur(70px)}
+.a1{width:420px;height:420px;left:-140px;top:300px;background:#2F4BD8;opacity:.3;animation:aur1 18s ease-in-out infinite alternate}
+.a2{width:440px;height:440px;right:-60px;top:-80px;background:#1AA5A0;opacity:.26;animation:aur2 22s ease-in-out infinite alternate}
+@keyframes aur1{to{transform:translate3d(120px,-60px,0) scale(1.15)}}
+@keyframes aur2{to{transform:translate3d(-140px,90px,0) scale(1.2)}}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border:1px solid var(--line2);border-radius:999px;font-size:14px;font-weight:600;color:var(--muted);background:rgba(255,255,255,.03);margin-bottom:26px;opacity:0;animation:fade .7s ease forwards .1s}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--green);animation:ping 2.2s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 10px rgba(61,220,151,0)}0%{box-shadow:0 0 0 0 rgba(61,220,151,.6)}}
+@keyframes fade{to{opacity:1}}
+h1{font-weight:800;font-size:clamp(40px,6vw,72px);line-height:1.03;letter-spacing:-.05em;margin:0 0 22px}
+h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .04em .12em}
+h1 .w i{display:inline-block;font-style:normal;transform:translateY(112%);animation:rise .9s var(--ease) forwards;animation-delay:calc(var(--i)*90ms + 200ms)}
+h1 .cy{color:var(--cyan)}
+  @keyframes rise{to{transform:none}}
+.lead{color:var(--muted);font-size:20px;max-width:34em;margin:0;opacity:0;animation:fade .8s ease forwards .7s}
+.jump{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px;opacity:0;animation:fade .8s ease forwards .9s}
+.jump a{padding:9px 16px;border-radius:999px;border:1px solid var(--line2);font-size:14px;font-weight:600;text-decoration:none;color:var(--muted);transition:color .25s,border-color .25s,background .25s}
+.jump a:hover{color:var(--text);border-color:var(--blue);background:rgba(91,131,255,.12)}
+.sec{padding:84px 0;position:relative;background:var(--bg2);border-block:1px solid var(--line)}
+.kicker{font:500 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+h2{font-weight:800;font-size:clamp(30px,4vw,44px);line-height:1.08;letter-spacing:-.035em;margin:0 0 14px;background:linear-gradient(180deg,#fff 40%,#9FB4FF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--muted);max-width:40em;margin:0 0 44px;font-size:19px}
+.list{display:grid;gap:22px}
+.proj{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:36px;padding:38px;border-radius:28px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(18,27,63,.7),rgba(8,12,30,.7));transition:transform .45s var(--ease),border-color .3s}
+.proj:hover{transform:translateY(-5px);border-color:var(--line2)}
+.proj::before{content:"";position:absolute;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;z-index:-1;background:radial-gradient(closest-side,rgba(91,131,255,.22),transparent);opacity:0;transform:translate3d(var(--mx,260px),var(--my,260px),0);transition:opacity .35s;pointer-events:none}
+.proj:hover::before{opacity:1}
+.num{font:500 13px var(--mono);letter-spacing:.14em;color:var(--cyan);margin-bottom:10px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.lab{font:600 12px var(--font);letter-spacing:0;padding:4px 12px;border-radius:999px;border:1px solid}
+.lab.best{color:var(--green);border-color:rgba(61,220,151,.4);background:rgba(61,220,151,.1)}
+.lab.res{color:#9FB4FF;border-color:rgba(159,180,255,.4);background:rgba(91,131,255,.12)}
+.lab.add{color:var(--amber);border-color:rgba(255,181,71,.4);background:rgba(255,181,71,.1)}
+.proj h3{font-weight:800;font-size:clamp(25px,2.8vw,32px);line-height:1.15;letter-spacing:-.03em;margin:0 0 12px}
+.proj p{margin:0 0 18px;color:var(--muted);font-size:17px}
+.tech{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.tech span{padding:6px 13px;border-radius:999px;border:1px solid var(--line2);font:500 13px var(--mono)}
+.pts{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:8px}
+.pts li{position:relative;padding-left:24px;color:#C4CEEA;font-size:16px}
+.pts li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--blue),var(--cyan))}
+.evi{margin:0 0 22px;padding:15px 18px;border-left:3px solid var(--amber);background:rgba(255,181,71,.06);border-radius:0 14px 14px 0;color:#CBD5EE;font-size:15px}
+.evi b{color:var(--text)}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.side{display:flex;flex-direction:column;justify-content:center;gap:14px}
+.shot{margin:0}
+.shot img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line2)}
+.shot figcaption{margin-top:8px;font-size:13px;color:var(--muted)}
+.panel{padding:22px;border-radius:20px;border:1px solid var(--line2);background:linear-gradient(145deg,#080D20,#10172B)}
+.panel h4{margin:0 0 14px;font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+.step{display:flex;align-items:center;gap:12px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--line);border-radius:12px;font-size:15px;font-weight:600}
+.step:last-child{margin-bottom:0}
+.step b{font:500 12px var(--mono);color:var(--cyan)}
+.step small{margin-left:auto;font:500 11px var(--mono);color:var(--muted);letter-spacing:.06em}
+.mini{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.mini div{padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)}
+.mini b{display:block;font-size:15px}
+.mini small{color:var(--muted);font-size:13px;line-height:1.4;display:block;margin-top:2px}
+.cp{position:relative;isolation:isolate;overflow:hidden;border-radius:32px;border:1px solid var(--line2);padding:60px 52px;background:linear-gradient(135deg,#0F1A4D,#0A1030 60%,#0B1F2E)}
+.cp::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(600px 340px at 90% 0%,rgba(91,131,255,.35),transparent 70%),radial-gradient(520px 320px at 0% 100%,rgba(53,211,198,.2),transparent 70%)}
+.cp h2{font-size:clamp(28px,4vw,46px);max-width:16em;-webkit-text-fill-color:#fff;background:none}
+.cp p{color:var(--muted);max-width:34em;margin:0 0 28px;font-size:18px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.pad{padding:88px 0}
+footer{padding:28px 0 44px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{text-decoration:none;margin-left:18px}
+footer a:hover{color:var(--text);text-decoration:underline}
+main,header,footer{position:relative;z-index:1}
+.js .rv{opacity:0;translate:0 30px;transition:opacity .8s ease var(--d,0s),translate .9s var(--ease) var(--d,0s)}
+.js .rv.in{opacity:1;translate:0 0}
+.off,.off *{animation-play-state:paused!important}
+@media (max-width:980px){
+  .wrap{padding:0 22px}.hero{padding:118px 0 60px}.sec{padding:64px 0}
+  .proj{grid-template-columns:1fr;padding:28px;gap:26px}
+  .navtoggle{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid var(--line2);border-radius:12px;background:rgba(255,255,255,.03);color:var(--text);font-size:20px;cursor:pointer}
+  .links{display:none;position:absolute;top:72px;left:22px;right:22px;z-index:55;flex-direction:column;align-items:stretch;gap:4px;padding:12px;background:var(--card);border:1px solid var(--line2);border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+  nav.open .links{display:flex}
+  nav.open .links a:not(.btn){display:block;padding:12px 14px}
+  nav.open .links .btn{margin:6px 0 0;justify-content:center}
+  .cp{padding:44px 26px}
+}
+@media (max-width:560px){.mini{grid-template-columns:1fr}.btns .btn,.cta .btn{width:100%;justify-content:center}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .pill,.lead,.jump{opacity:1}h1 .w i{transform:none}.js .rv{opacity:1;translate:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#projects">Skip to projects</a>
+<div class="bar" id="bar"></div>
+<nav id="nav" aria-label="Primary"><div class="wrap">
+  <a class="logo" href="index.html#top"><b>SM</b>Sajid Manzoor</a>
+  <div class="links"><a href="index.html#top">Home</a><a href="index.html#experience">Experience</a><a href="projects.html" class="on" aria-current="page">Projects</a><a href="index.html#skills">Skills</a><a href="resume.html">Resume</a><a class="btn pri" href="index.html#contact">Contact</a></div>
+</div></nav>
 
-<meta
-  name="description"
-  content="Sajid Manzoor — Data Analytics projects covering SQL, Python, Power BI, KPI reporting, data quality and operational analytics."
->
-
-<title>Sajid Manzoor | Technical Support Projects</title>
-
-<link rel="stylesheet" href="project.css">
-<style>.work-impact{margin:14px 0 0;padding:12px 14px;border-left:3px solid #5B83FF;background:#0B1124;color:#B3BFE3;font-size:12px;line-height:1.55}.work-impact strong{color:#DCE5FF}</style>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="modern.css"><meta name="theme-color" content="#060914"></head>
-
-<body><div class="bar" id="bar"></div><div class="spot" id="spot" aria-hidden="true"></div>
-
-<nav>
-  <div class="wrap navin">
-
-    <a class="brand" href="index.html">
-      Sajid Manzoor
-    </a>
-
-    <div class="links">
-      <a href="index.html">Home</a>
-      <a href="experience.html">Experience</a>
-      <a href="projects.html">Projects</a>
-      <a href="skills.html">Skills</a>
-      <a href="resume.html">Resume</a>
-      <a href="contact.html">Contact</a>
-    </div>
-
+<header class="hero">
+  <div class="aur a1"></div><div class="aur a2"></div>
+  <div class="wrap">
+    <div class="pill"><i></i>Technical Support · Troubleshooting · Operations</div>
+    <h1 aria-label="Projects"><span class="w" aria-hidden="true"><i class="cy" style="--i:0">Projects</i></span></h1>
+    <p class="lead">Four projects covering troubleshooting, protocol analysis, support operations and incident investigation, ordered by relevance to technical support.</p>
+    <div class="jump"><a href="#voip">VoIP toolkit</a><a href="#smtp">SMTP/IMAP lab</a><a href="#helpdesk">Helpdesk dashboard</a><a href="#security">Security lab</a></div>
   </div>
-</nav>
-
+</header>
 
 <main>
-<div class="wrap">
-  <div class="eyebrow">Technical Support · Troubleshooting · Operations</div>
-  <h1>Projects</h1>
-  <p class="lead">A focused portfolio of projects that demonstrate troubleshooting, protocol analysis, support operations and incident investigation. Ordered by relevance to technical support engineering.</p>
-  <section>
-    <div class="section-head"><div><h2>Technical Support &amp; Troubleshooting</h2><p class="section-description">The first three projects appear on my resume. The SMTP/IMAP lab is an additional project demonstrating practical email-protocol troubleshooting.</p></div></div>
-    <div class="grid">
-      <article class="card featured">
-        <div class="featured-label">#1 · Strongest technical support alignment · Resume project</div>
-        <div class="tags"><span class="tag">Python</span><span class="tag">SIP / RTP</span><span class="tag">Wireshark / TShark</span><span class="tag">SQL</span><span class="tag">Postman</span></div>
+<section class="sec" id="projects"><div class="wrap">
+  <div class="kicker rv">Technical support &amp; troubleshooting</div>
+  <h2 class="rv">What I've built</h2>
+  <p class="sub rv">Each project notes what its data and tests are based on, so you can see exactly what it does and does not claim.</p>
+
+  <div class="list">
+
+    <article class="proj rv" id="voip">
+      <div>
+        <div class="num">01 <span class="lab best">Strongest technical support alignment</span><span class="lab res">Resume project</span></div>
         <h3>VoIP Support Automation Toolkit</h3>
-        <p>A support-engineering workflow for investigating SIP/VoIP issues: parse SIP logs, inspect packet evidence, analyze RTP measurements, run API health checks, classify incidents and document evidence-based escalation paths.</p>
-        <div class="project-meta"><span>SIP registration cases</span><span>One-way audio investigation</span><span>RTP packet analysis</span><span>Automated tests</span></div>
-        <p class="work-impact"><strong>Evidence note:</strong> uses public Wireshark sample captures and documented examples, not production/customer incidents.</p>
-        <div class="actions"><a class="btn primary" href="voip-support-automation.html">View project details →</a><a class="btn secondary" href="https://github.com/sajidmanzoor730/voip-support-automation" target="_blank" rel="noopener">GitHub →</a></div>
-      </article>
-      <article class="card">
-        <div class="featured-label">#2 · Additional project · Email protocol troubleshooting</div>
-        <div class="tags"><span class="tag">Python</span><span class="tag">SMTP / IMAP</span><span class="tag">TLS</span><span class="tag">OAuth2</span><span class="tag">GitHub Actions</span></div>
+        <p>A workflow for investigating SIP/VoIP issues: parsing logs, inspecting packets, analysing RTP measurements, running API health checks, classifying incidents and documenting escalation paths.</p>
+        <div class="tech"><span>Python</span><span>SIP</span><span>RTP</span><span>Wireshark/TShark</span><span>SQL</span><span>Postman</span></div>
+        <ul class="pts"><li>SIP registration cases</li><li>One-way audio investigation</li><li>RTP packet analysis</li><li>Automated tests</li></ul>
+        <div class="evi"><b>Evidence note:</b> uses public Wireshark sample captures and documented examples, not production or customer incidents.</div>
+        <div class="btns"><a class="btn pri sm" href="voip-support-automation.html">View project details →</a><a class="btn sec sm" href="https://github.com/sajidmanzoor730/voip-support-automation" target="_blank" rel="noopener">GitHub →</a></div>
+      </div>
+      <div class="side">
+        <figure class="shot"><img src="voip-call-flow.jpg" alt="Wireshark call flow of a SIP call: INVITE, 100 Trying, 180 Ringing, 200 OK, ACK, then RTP in both directions" loading="lazy" width="1278" height="739"><figcaption>Wireshark call flow from a public SIP/RTP sample capture (addresses partly redacted).</figcaption></figure>
+      </div>
+    </article>
+
+    <article class="proj rv" id="smtp">
+      <div>
+        <div class="num">02 <span class="lab add">Additional project</span></div>
         <h3>SMTP/IMAP Troubleshooting Lab</h3>
-        <p>A zero-dependency diagnostic toolkit that identifies whether email connectivity failures originate in DNS, TCP, TLS, authentication or server policy. Includes protocol probes, fault-injecting mock servers, OAuth2/XOAUTH2 authentication and repeatable tests.</p>
-        <div class="project-meta"><span>SMTP + IMAP probes</span><span>Failure classification</span><span>OAuth2 / XOAUTH2</span><span>54 tests per Python version in latest CI</span></div>
-        <p class="work-impact"><strong>Scope note:</strong> automated tests use local mock servers. Gmail and Microsoft 365 provider smoke tests are available as an opt-in workflow and are not represented as completed provider validation.</p>
-        <div class="actions"><a class="btn primary" href="smtp-imap-troubleshooting-lab.html">View project details →</a><a class="btn secondary" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">GitHub →</a></div>
-      </article>
-      <article class="card">
-        <div class="tags"><span class="tag">#3 · Resume project</span><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Streamlit</span></div>
+        <p>A zero-dependency toolkit that identifies whether an email failure comes from DNS, TCP, TLS, authentication or server policy. It includes protocol probes, fault-injecting mock servers, OAuth2/XOAUTH2 support and repeatable tests.</p>
+        <div class="tech"><span>Python</span><span>SMTP/IMAP</span><span>TLS</span><span>OAuth2</span><span>GitHub Actions</span></div>
+        <ul class="pts"><li>SMTP + IMAP probes</li><li>Failure classification</li><li>OAuth2/XOAUTH2</li><li>54 tests per Python version in the latest checked CI run</li></ul>
+        <div class="evi"><b>Scope note:</b> automated tests use local mock servers. Gmail and Microsoft 365 smoke tests are an opt-in workflow and are not presented as completed provider validation.</div>
+        <div class="btns"><a class="btn pri sm" href="smtp-imap-troubleshooting-lab.html">View project details →</a><a class="btn sec sm" href="https://github.com/sajidmanzoor730/smtp-imap-troubleshooting-lab" target="_blank" rel="noopener">GitHub →</a></div>
+      </div>
+      <div class="side">
+        <div class="panel" role="img" aria-label="Diagnostic layers: DNS, TCP, TLS, authentication, policy">
+          <h4>Diagnostic layers</h4>
+          <div class="step"><b>01</b>DNS<small>RESOLVE</small></div>
+          <div class="step"><b>02</b>TCP<small>CONNECT</small></div>
+          <div class="step"><b>03</b>TLS<small>NEGOTIATE</small></div>
+          <div class="step"><b>04</b>Authentication<small>VERIFY</small></div>
+          <div class="step"><b>05</b>Policy<small>CLASSIFY</small></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="proj rv" id="helpdesk">
+      <div>
+        <div class="num">03 <span class="lab res">Resume project</span></div>
         <h3>Helpdesk KPI Dashboard</h3>
-        <p>A Python and Streamlit reporting workflow that loads published IT helpdesk summaries, validates source data and lets readers explore request types, contact channels, departments and survey summaries across fiscal years.</p>
-        <div class="project-meta"><span>Official public data</span><span>Fiscal-year filters</span><span>Source-aware reporting</span></div>
-        <p class="work-impact"><strong>Evidence note:</strong> the live dashboard uses aggregated Montgomery County Government MCG HelpIT public data; it does not claim ticket-level SLA or CSAT results from that source.</p>
-        <div class="actions"><a class="btn primary" href="helpdesk-kpi-dashboard.html">View project details →</a><a class="btn secondary" href="https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard" target="_blank" rel="noopener">GitHub →</a><a class="btn secondary" href="https://hedesk-dashboard.streamlit.app/" target="_blank" rel="noopener">Live dashboard →</a></div>
-      </article>
-      <article class="card">
-        <div class="tags"><span class="tag">#4 · Resume project</span><span class="tag">KQL</span><span class="tag">Microsoft Sentinel</span><span class="tag">Defender</span></div>
+        <p>A reporting workflow that loads published IT helpdesk summaries, validates the source data and lets readers explore request types, contact channels, departments and survey summaries by fiscal year.</p>
+        <div class="tech"><span>Python</span><span>Pandas</span><span>Streamlit</span></div>
+        <ul class="pts"><li>Official public data</li><li>Fiscal-year filters</li><li>Source-aware reporting</li></ul>
+        <div class="evi"><b>Evidence note:</b> uses aggregated Montgomery County Government MCG HelpIT public data and does not claim ticket-level SLA or CSAT results.</div>
+        <div class="btns"><a class="btn pri sm" href="helpdesk-kpi-dashboard.html">View project details →</a><a class="btn sec sm" href="https://github.com/sajidmanzoor730/helpdesk-kpi-dashboard" target="_blank" rel="noopener">GitHub →</a><a class="btn sec sm" href="https://hedesk-dashboard.streamlit.app/" target="_blank" rel="noopener">Live dashboard →</a></div>
+      </div>
+      <div class="side">
+        <div class="panel">
+          <h4>What it reports</h4>
+          <div class="mini"><div><b>Request types</b><small>Category breakdowns</small></div><div><b>Contact channels</b><small>How requests arrive</small></div><div><b>Departments</b><small>Where demand sits</small></div><div><b>Survey summaries</b><small>By fiscal year</small></div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="proj rv" id="security">
+      <div>
+        <div class="num">04 <span class="lab res">Resume project</span></div>
         <h3>Microsoft Security Investigation Lab</h3>
         <p>A practice investigation workflow covering endpoint-alert severity triage, suspicious-activity analysis, KQL queries, MITRE ATT&amp;CK mapping, response notes and escalation decisions.</p>
-        <div class="project-meta"><span>Alert triage</span><span>KQL templates</span><span>Evidence review</span><span>Escalation workflow</span></div>
-        <p class="work-impact"><strong>Evidence note:</strong> alert data and outcomes are illustrative lab material, not real Microsoft tenant incidents.</p>
-        <div class="actions"><a class="btn primary" href="microsoft-security-investigation.html">View project details →</a><a class="btn secondary" href="https://github.com/sajidmanzoor730/microsoft-security-lab" target="_blank" rel="noopener">GitHub →</a></div>
-      </article>
-    </div>
-  </section>
-</div>
+        <div class="tech"><span>KQL</span><span>Microsoft Sentinel</span><span>Defender</span></div>
+        <ul class="pts"><li>Alert triage</li><li>KQL templates</li><li>Evidence review</li><li>Escalation workflow</li></ul>
+        <div class="evi"><b>Evidence note:</b> alert data and outcomes are illustrative lab material, not real Microsoft tenant incidents.</div>
+        <div class="btns"><a class="btn pri sm" href="microsoft-security-investigation.html">View project details →</a><a class="btn sec sm" href="https://github.com/sajidmanzoor730/microsoft-security-lab" target="_blank" rel="noopener">GitHub →</a></div>
+      </div>
+      <div class="side">
+        <div class="panel">
+          <h4>Investigation flow</h4>
+          <div class="step"><b>01</b>Triage alert severity</div>
+          <div class="step"><b>02</b>Query with KQL</div>
+          <div class="step"><b>03</b>Map to MITRE ATT&amp;CK</div>
+          <div class="step"><b>04</b>Escalate or close</div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div></section>
+
+<section class="pad"><div class="wrap">
+  <div class="cp rv">
+    <h2>Want to talk about any of these?</h2>
+    <p>I'm interested in technical support roles where I can troubleshoot APIs, networks and VoIP issues, and explain the fix clearly.</p>
+    <div class="cta"><a class="btn pri" href="mailto:sajidmanzoor730@gmail.com">Email me</a><a class="btn sec" href="https://github.com/sajidmanzoor730" target="_blank" rel="noopener">GitHub profile</a><a class="btn sec" href="index.html#top">Back to portfolio</a></div>
+  </div>
+</div></section>
 </main>
 
+<footer><div class="wrap"><span>© 2026 Sajid Manzoor · Technical Support · Troubleshooting · Python · SQL</span><span><a href="index.html#top">Home</a><a href="index.html#experience">Experience</a><a href="index.html#skills">Skills</a><a href="resume.html">Resume</a></span></div></footer>
 
-<footer class="footer">
-
-  <div class="wrap">
-    © 2026 Sajid Manzoor · Technical Support · Troubleshooting · Python · SQL
-  </div>
-
-</footer>
-
-<script src="modern.js"></script></body>
+<script>
+(function(){
+var d=document,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,hover=matchMedia('(hover:hover)').matches;
+if(!reduce)d.documentElement.classList.add('js');
+if('IntersectionObserver' in window){
+  var rv=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');rv.unobserve(x.target)}})},{threshold:.1,rootMargin:'0px 0px -6% 0px'});
+  [].forEach.call(d.querySelectorAll('.rv'),function(e){rv.observe(e)});
+  var po=new IntersectionObserver(function(es){es.forEach(function(x){x.target.classList.toggle('off',!x.isIntersecting)})});
+  po.observe(d.querySelector('.hero'));
+}else{[].forEach.call(d.querySelectorAll('.rv'),function(e){e.classList.add('in')})}
+var bar=d.getElementById('bar'),nav=d.getElementById('nav');
+function onScroll(){
+  var h=d.documentElement.scrollHeight-innerHeight;
+  bar.style.transform='scaleX('+(h>0?scrollY/h:0)+')';
+  nav.classList.toggle('stuck',scrollY>8);
+}
+var tk=0;addEventListener('scroll',function(){if(!tk)tk=requestAnimationFrame(function(){tk=0;onScroll()})},{passive:true});
+addEventListener('resize',onScroll);onScroll();
+if(!reduce&&hover){
+  [].forEach.call(d.querySelectorAll('.proj'),function(t){t.addEventListener('pointermove',function(e){var r=t.getBoundingClientRect();t.style.setProperty('--mx',(e.clientX-r.left)+'px');t.style.setProperty('--my',(e.clientY-r.top)+'px')},{passive:true})});
+}
+var wr=nav.querySelector('.wrap'),menu=nav.querySelector('.links'),b=d.createElement('button');
+b.className='navtoggle';b.type='button';b.textContent='☰';b.setAttribute('aria-label','Open navigation');b.setAttribute('aria-expanded','false');
+function closeMenu(){nav.classList.remove('open');b.textContent='☰';b.setAttribute('aria-expanded','false')}
+b.addEventListener('click',function(){var o=nav.classList.toggle('open');b.textContent=o?'×':'☰';b.setAttribute('aria-expanded',String(o))});
+menu.addEventListener('click',function(e){if(e.target.closest('a'))closeMenu()});
+d.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu()});
+wr.insertBefore(b,menu);
+})();
+</script>
+</body>
 </html>
